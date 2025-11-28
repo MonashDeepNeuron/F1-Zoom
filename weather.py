@@ -1,4 +1,6 @@
 import requests
+import os
+import csv
 
 API_KEY = "419e6250c392ccd52db1c706da0cdca3"   # <-- replace with your key
 CITY = "Monza,IT"          # You can also use "London,UK" or lat/lon coordinates
@@ -6,8 +8,6 @@ URL = f"http://api.openweathermap.org/data/2.5/forecast?q={CITY}&appid={API_KEY}
 
 response = requests.get(URL)
 data = response.json()
-
-print(data)
 
 # Just take the first forecast entry (next 3 hours)
 forecast = data['list'][0]
@@ -35,3 +35,19 @@ print(f"Humidity: {humidity}%")
 print(f"Wind: {wind_speed} m/s, {wind_deg} degrees")
 print(f"Rain Probability: {rain_prob:.1f}%")
 print(f"Rain Intensity: {rain_intensity} mm/3h -> {rain_category}")
+
+csv_file = "weather_data.csv"
+
+with open(csv_file, mode='w', newline="") as file:
+    contents = csv.writer(file)
+
+    contents.writerow([
+    "city", "temperature", "humidity", "wind_speed", "wind_deg",
+    "rain_probability", "rain_intensity", "rain_category"
+    ])
+
+    # Write data row
+    contents.writerow([
+        CITY, temp, humidity, wind_speed, wind_deg,
+        rain_prob, rain_intensity, rain_category
+    ])        
