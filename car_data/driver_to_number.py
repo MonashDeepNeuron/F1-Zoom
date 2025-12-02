@@ -18,7 +18,9 @@ driver_to_number = {
     "MAG": 20,
     "HUL": 27,
     "TSU": 22,
-    "RIC": 3
+    "RIC": 3,
+    "BOR": 5,
+    "COL": 43
 }
 
 def get_number_from_driver(driver_code: str) -> int:

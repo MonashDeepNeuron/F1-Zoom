@@ -18,7 +18,8 @@ driver_to_team = {
     "MAG": "Haas",
     "HUL": "Haas",
     "TSU": "RB",
-    "RIC": "RB"
+    "RIC": "RB",
+    "BOR": "Sauber"
 }
 
 def get_team_from_driver(driver_code: str) -> str:

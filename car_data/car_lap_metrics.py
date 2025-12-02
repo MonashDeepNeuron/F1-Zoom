@@ -1,15 +1,90 @@
 from __future__ import annotations
+from py_compile import main
 
 import fastf1
+import os
 import pandas as pd
 import numpy as np
 import requests
 from dataclasses import dataclass
 from typing import List, Optional
 from datetime import timedelta
+import time
 
-from driver_to_team import get_team_from_driver
-from driver_to_number import get_number_from_driver, get_driver_from_number
+driver_to_number = {
+    "VER": 1, "NOR": 4, "SAI": 55, "PIA": 81, "ALO": 14,
+    "RUS": 63, "HAM": 44, "LEC": 16, "STR": 18, "TSU": 22,
+    "ALB": 23, "HUL": 27, "GAS": 10, "OCO": 31, "PER": 11,
+    "RIC": 3, "SAR": 2, "BOT": 77, "ZHO": 24, "MAG": 20,
+    "ANT": 12, "BEA": 87, "DOO": 7, "COL": 43, "LAW": 30,
+    "BOR": 5, "HAD": 6
+}
+
+# Season and race-aware team mapping
+def get_team_from_driver(driver_code: str, season: int, race_number: int = 1) -> str:
+    """
+    Get team for a driver based on season and race number.
+    
+    Args:
+        driver_code: Three-letter driver code
+        season: Year (2024 or 2025)
+        race_number: Race number in the season (1-24)
+    """
+    # 2024 teams
+    if season == 2024:
+        teams_2024 = {
+            "VER": "Red Bull", "PER": "Red Bull",
+            "HAM": "Mercedes", "RUS": "Mercedes",
+            "LEC": "Ferrari", "SAI": "Ferrari",
+            "BEA": "Ferrari" if race_number == 2 else "Haas",
+            "NOR": "McLaren", "PIA": "McLaren",
+            "ALO": "Aston Martin", "STR": "Aston Martin",
+            "GAS": "Alpine", "OCO": "Alpine", "DOO": "Alpine",
+            "ALB": "Williams",
+            "SAR": "Williams" if race_number <= 15 else None,
+            "COL": "Williams" if race_number >= 16 else None,
+            "BOT": "Sauber", "ZHO": "Sauber",
+            "MAG": "Haas", "HUL": "Haas",
+            "TSU": "RB",
+            "RIC": "RB" if race_number <= 18 else None,
+            "LAW": "RB" if race_number >= 19 else None,
+            "DOO": "Alpine",
+        }
+        return teams_2024.get(driver_code, "Unknown Team")
+    
+    # 2025 teams
+    elif season == 2025:
+        teams_2025 = {
+            "VER": "Red Bull",
+            "LAW": "Red Bull" if race_number <= 2 else "RB",  # Swapped at round 3
+            "TSU": "RB" if race_number <= 2 else "Red Bull",  # Swapped at round 3
+            "HAM": "Ferrari", "LEC": "Ferrari",
+            "RUS": "Mercedes", "ANT": "Mercedes",
+            "NOR": "McLaren", "PIA": "McLaren",
+            "ALO": "Aston Martin", "STR": "Aston Martin",
+            "GAS": "Alpine",
+            "DOO": "Alpine" if race_number <= 6 else None,  # First 6 races
+            "COL": "Alpine" if race_number >= 7 else None,  # From Imola (round 7)
+            "ALB": "Williams", "SAI": "Williams",
+            "BEA": "Haas", "OCO": "Haas",
+            "HUL": "Sauber", "BOR": "Sauber",
+            "HAD": "RB",  # Full season
+        }
+        return teams_2025.get(driver_code, "Unknown Team")
+    
+    return "Unknown Team"
+
+def get_driver_from_number(driver_number: int) -> str:
+    if driver_number not in driver_to_number.values() and driver_number == 38 or driver_number not in driver_to_number.values() and driver_number == 50:
+        return "BEA"
+    
+    if driver_number not in driver_to_number.values() and driver_number == 61:
+        return "DOO"
+    
+    for driver, number in driver_to_number.items():
+        if number == driver_number:
+            return driver
+    return "Unknown"
 
 columns = [
     "season", "race_name", "team", "driver",
@@ -49,6 +124,10 @@ class LapDataLoader:
     
     
     def __init__(self, cache_dir= "fastf1_cache", traffic_interval_threshold=3.0) -> None:
+        if not os.path.exists(cache_dir):
+            os.makedirs(cache_dir)
+            print(f"Created cache directory: {cache_dir}")
+        
         fastf1.Cache.enable_cache(cache_dir)
         self.traffic_interval_threshold = traffic_interval_threshold
     
@@ -60,6 +139,7 @@ class LapDataLoader:
         data = r.json()
         if not data:
             return pd.DataFrame()
+        time.sleep(10)
         return pd.DataFrame(data)
 
     def _get_race_name(self, meeting_key: int) -> str:
@@ -135,7 +215,7 @@ class LapDataLoader:
         return gap, in_traffic
     
     
-    def collect_session_lap_data(self, season, meeting_key, session_key="R") -> pd.DataFrame:
+    def collect_session_lap_data(self, season, meeting_key, race_index, session_key="R") -> pd.DataFrame:
 
         race_name = self._get_race_name(meeting_key)
         
@@ -147,10 +227,11 @@ class LapDataLoader:
 
         
         if not laps.empty:
-            laps["date_start"] = pd.to_datetime(laps["date_start"])
+            laps["date_start"] = pd.to_datetime(laps["date_start"], format='mixed', utc=True)
             
         if not intervals.empty:
-            intervals["date"] = pd.to_datetime(intervals["date"])
+            intervals["date"] = pd.to_datetime(intervals["date"], format='mixed', utc=True)
+
         
         records: List[LapRecord] = []
         
@@ -158,8 +239,9 @@ class LapDataLoader:
             # now we are storing the data for each drivers laps
             driver_laps = laps[laps['driver_number'] == driver_number].copy()
             
-            team_name = get_team_from_driver(driver_number)
-            driver_name = get_driver_from_number(driver_number)
+            driver_code = get_driver_from_number(driver_number) 
+            team_name = get_team_from_driver(driver_code, race_number=race_index, season=season)
+            driver_name = driver_code
             
             
             for _, lap in driver_laps.iterrows():
@@ -204,8 +286,108 @@ class LapDataLoader:
         df = pd.DataFrame([r.__dict__ for r in records])
         df = df[columns]
 
-        return df        
+        return df
+      
+def main(end_race_name: Optional[str] = "Las Vegas") -> pd.DataFrame:
+    """
+    Collect all race data from 2024 up until a specified race in 2025.
+    """
+    loader = LapDataLoader()
+    all_data = []
+    
+    # Get all meetings for 2024 and 2025
+    for year in [2024, 2025]:
+        print(f"\nCollecting {year} season data...")
+        
+        # Fetch all meetings for the year
+        meetings_url = f"{BASE_URL}/meetings"
+        response = requests.get(meetings_url, params={"year": year}, timeout=10)
+        response.raise_for_status()
+        meetings = response.json()
+        
+        race_index = 1
+        
+        for meeting in meetings:
+            circuit_name = meeting["circuit_short_name"]
+            meeting_key = meeting["meeting_key"]
+            
+            print(f"Processing: {circuit_name} (meeting_key={meeting_key})")
+            
+            # Get the race session for this meeting
+            sessions_url = f"{BASE_URL}/sessions"
+            session_response = requests.get(
+                sessions_url,
+                params={"meeting_key": meeting_key, "session_name": "Race"},
+                timeout=10
+            )
+            session_response.raise_for_status()
+            sessions = session_response.json()
+            
+            if not sessions:
+                print(f"  No race session found for {circuit_name}, skipping...")
+                continue
+            
+            session_key = sessions[0]["session_key"]
+            
+            # Collect lap data for this race
+            try:
+                race_data = loader.collect_session_lap_data(
+                    season=year,
+                    meeting_key=meeting_key,
+                    session_key=session_key,
+                    race_index=race_index
+                )
                 
+                race_index += 1
+                
+                time.sleep(1)
+                
+                if not race_data.empty:
+                    all_data.append(race_data)
+                    print(f"  Collected {len(race_data)} laps")
+                else:
+                    print(f"  No lap data available")
+                    
+            except Exception as e:
+                print(f"  Error collecting data: {e}")
+                continue
+            
+            # Stop if we've reached the target race in 2025
+            if year == 2025 and end_race_name and circuit_name == end_race_name:
+                print(f"\nReached {end_race_name} in 2025. Stopping collection.")
+                break
+        
+        # If we stopped mid-2025, don't continue
+        if year == 2025 and end_race_name and any(
+            meeting["circuit_short_name"] == end_race_name for meeting in meetings
+        ):
+            break
+    
+    # Combine all race data
+    if all_data:
+        combined_df = pd.concat(all_data, ignore_index=True)
+        print(f"\nCollection complete: {len(combined_df)} total laps from {len(all_data)} races")
+        return combined_df
+    else:
+        print("\nNo data collected")
+        return pd.DataFrame()
+
+
+if __name__ == "__main__":
+    # Example usage: Collect data up to Qatar 2025
+    df = main(end_race_name="Lusail")
+    
+    # Save to CSV
+    if not df.empty:
+        df.to_csv("f1_race_data_2024_2025.csv", index=False)
+        print(f"\nData saved to f1_race_data_2024_2025.csv")
+        
+        # Display summary
+        print("\nData Summary:")
+        print(f"Seasons: {df['season'].unique()}")
+        print(f"Races: {df['race_name'].nunique()}")
+        print(f"Teams: {df['team'].nunique()}")
+        print(f"Drivers: {df['driver'].nunique()}")         
             
             
             
