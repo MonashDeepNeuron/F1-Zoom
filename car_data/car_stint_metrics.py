@@ -11,6 +11,8 @@ from typing import List, Optional
 from datetime import timedelta
 import time
 
+# pick_driver is deprecated - need to fix this for future versions
+
 # data frame columns
 
 # we would have 1 row for:
@@ -343,7 +345,7 @@ class carStintLoader:
                 round_num = 0
             
             # Calculate pace metrics
-            pace_metrics = self._calculate_pace_metrics(stint_laps)
+            pace_metrics = self.calculate_pace_metrics(stint_laps)
             
             # Calculate traffic metrics
             traffic_metrics = self._calculate_traffic_metrics(stint_laps)
@@ -397,7 +399,7 @@ if __name__ == "__main__":
     
     # Process stints from CSV
     stint_data = loader.process_stints(
-        csv_path='lap_data.csv',
+        csv_path='f1_race_data_2024_2025.csv',
         include_telemetry=True,  # Set to False for faster processing without telemetry
         seasons=[2024]  # Process only 2024, or None for all seasons
     )
