@@ -10,7 +10,6 @@
 # avg stint length
 
 from __future__ import annotations
-from py_compile import main
 
 import fastf1
 import os
@@ -18,7 +17,7 @@ import pandas as pd
 import numpy as np
 import requests
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import List, Optional, Dict
 from datetime import timedelta
 import time
 from collections import defaultdict
@@ -64,10 +63,10 @@ columns = [
     "clean_air_pace_advantage",      # clean_air_avg_pace - avg_race_pace
 
     # Reliability
-    "mechanical_dnf_count",
+    # "mechanical_dnf_count", move to season summary
 
     # Pit Crew
-    "avg_pitstop_time"
+    # "avg_pitstop_time", move to season summary
 ]
 
 
@@ -298,15 +297,164 @@ class TeamRaceSummaryLoader:
         else:
             metrics['avg_interval_to_car_ahead'] = np.nan
         
-        # Clean air pace advantage
-        if 'avg_race_pace' in metrics and 'clean_air_avg_race_pace' in metrics:
-            if not np.isnan(metrics['clean_air_avg_race_pace']) and not np.isnan(metrics['avg_race_pace']):
-                # Note: clean air should be faster (lower time), so this will be negative
-                metrics['clean_air_pace_advantage'] = (metrics['clean_air_avg_race_pace'] - 
-                                                       metrics['avg_race_pace'])
-            else:
-                metrics['clean_air_pace_advantage'] = np.nan
-        else:
-            metrics['clean_air_pace_advantage'] = np.nan
+        # Clean air pace advantage will be calculated in generate_summary
+        # after combining pace and traffic metrics
+        metrics['clean_air_pace_advantage'] = np.nan
         
         return metrics
+    
+    def _calculate_rankings(self, race_summary: pd.DataFrame) -> pd.DataFrame:
+        """
+        Calculate rankings for top_speed and cornering_speed within each race.
+        Rankings are calculated per (season, race_name) group.
+        Rank 1 = best (highest value).
+        """
+        race_summary = race_summary.copy()
+        
+        # Group by season and race_name to calculate rankings within each race
+        for (season, race_name), group in race_summary.groupby(['season', 'race_name']):
+            # Top speed ranking (higher is better, rank 1 = highest)
+            valid_top_speed = group['top_speed'].notna()
+            if valid_top_speed.sum() > 0:
+                race_summary.loc[group.index, 'top_speed_rank'] = (
+                    group.loc[valid_top_speed, 'top_speed']
+                    .rank(ascending=False, method='min')
+                    .astype(float)
+                )
+            
+            # Corner speed ranking (higher is better, rank 1 = highest)
+            valid_corner_speed = group['cornering_speed'].notna()
+            if valid_corner_speed.sum() > 0:
+                race_summary.loc[group.index, 'corner_speed_rank'] = (
+                    group.loc[valid_corner_speed, 'cornering_speed']
+                    .rank(ascending=False, method='min')
+                    .astype(float)
+                )
+            
+            # Drag index = top_speed_rank - corner_speed_rank
+            # Positive = more drag (high top speed rank but low corner speed rank)
+            # Negative = less drag (low top speed rank but high corner speed rank)
+            valid_ranks = (
+                race_summary.loc[group.index, 'top_speed_rank'].notna() &
+                race_summary.loc[group.index, 'corner_speed_rank'].notna()
+            )
+            if valid_ranks.sum() > 0:
+                race_summary.loc[group.index[valid_ranks], 'drag_index'] = (
+                    race_summary.loc[group.index[valid_ranks], 'top_speed_rank'] -
+                    race_summary.loc[group.index[valid_ranks], 'corner_speed_rank']
+                )
+        
+        return race_summary
+    
+    def generate_summary(self, stint_csv_path: str) -> pd.DataFrame:
+        """
+        Generate team-level race summary from stint data.
+        
+        Args:
+            stint_csv_path: Path to stint_analysis.csv
+            
+        Returns:
+            DataFrame with one row per team per race
+        """
+        # Load stint data
+        print(f"Loading stint data from {stint_csv_path}...")
+        stint_df = self.load_stint_data(stint_csv_path)
+        print(f"Loaded {len(stint_df)} stint records")
+        
+        # Group by season, race_name, and team
+        summary_records = []
+        
+        for (season, race_name, team), team_stints in stint_df.groupby(['season', 'race_name', 'team']):
+            # Get metadata from first row (should be same for all rows in group)
+            first_row = team_stints.iloc[0]
+            round_num = first_row.get('round', np.nan)
+            circuit_type = first_row.get('circuit_type', np.nan)
+            
+            # Calculate all metrics
+            pace_metrics = self._calculate_pace_metrics(team_stints)
+            speed_metrics = self._calculate_speed_metrics(team_stints)
+            tyre_metrics = self._calculate_tyre_metrics(team_stints)
+            pu_metrics = self._calculate_pu_metrics(team_stints)
+            
+            # Traffic metrics
+            traffic_metrics = self._calculate_traffic_metrics(team_stints)
+            
+            # Calculate clean_air_pace_advantage (requires both pace and traffic metrics)
+            if not np.isnan(pace_metrics.get('clean_air_avg_race_pace', np.nan)) and \
+               not np.isnan(pace_metrics.get('avg_race_pace', np.nan)):
+                # Note: clean air should be faster (lower time), so this will be negative
+                traffic_metrics['clean_air_pace_advantage'] = (
+                    pace_metrics['clean_air_avg_race_pace'] - 
+                    pace_metrics['avg_race_pace']
+                )
+            else:
+                traffic_metrics['clean_air_pace_advantage'] = np.nan
+            
+            # Combine all metrics
+            record = {
+                'season': season,
+                'race_name': race_name,
+                'round': round_num,
+                'circuit_type': circuit_type,
+                'team': team,
+                **pace_metrics,
+                **speed_metrics,
+                **tyre_metrics,
+                **pu_metrics,
+                **traffic_metrics
+            }
+            
+            summary_records.append(record)
+        
+        # Create DataFrame
+        summary_df = pd.DataFrame(summary_records)
+        
+        # Ensure all columns from the columns list are present
+        for col in columns:
+            if col not in summary_df.columns:
+                summary_df[col] = np.nan
+        
+        # Reorder columns to match the defined order
+        summary_df = summary_df[columns]
+        
+        # Calculate rankings
+        print("Calculating rankings...")
+        summary_df = self._calculate_rankings(summary_df)
+        
+        # Sort by season, round, team for consistency
+        summary_df = summary_df.sort_values(['season', 'round', 'team']).reset_index(drop=True)
+        
+        print(f"Generated summary with {len(summary_df)} team-race records")
+        return summary_df
+    
+    def save_summary(self, summary_df: pd.DataFrame, output_path: str):
+        """Save summary DataFrame to CSV."""
+        summary_df.to_csv(output_path, index=False)
+        print(f"Saved summary to {output_path}")
+
+
+def main(stint_csv_path: str = "stint_analysis.csv", 
+         output_csv_path: str = "car_race_summary.csv",
+         cache_dir: str = "fastf1_cache"):
+    """
+    Main function to generate team race summary.
+    
+    Args:
+        stint_csv_path: Path to input stint_analysis.csv
+        output_csv_path: Path to output car_race_summary.csv
+        cache_dir: Directory for FastF1 cache
+    """
+    loader = TeamRaceSummaryLoader(cache_dir=cache_dir)
+    summary_df = loader.generate_summary(stint_csv_path)
+    loader.save_summary(summary_df, output_csv_path)
+    return summary_df
+
+
+if __name__ == "__main__":
+    import sys
+    
+    # Allow command line arguments
+    stint_path = sys.argv[1] if len(sys.argv) > 1 else "stint_analysis.csv"
+    output_path = sys.argv[2] if len(sys.argv) > 2 else "car_race_summary.csv"
+    
+    main(stint_csv_path="stint_analysis.csv", output_csv_path="car_race_summary.csv")

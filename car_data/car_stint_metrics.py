@@ -55,42 +55,44 @@ columns = [
 
 class carStintLoader:
     
-    def __init__(self, cache_dir= "fastf1_cache", traffic_interval_threshold=3.0) -> None:
+    def __init__(self, cache_dir="fastf1_cache", traffic_interval_threshold=3.0) -> None:
         if not os.path.exists(cache_dir):
             os.makedirs(cache_dir)
             print(f"Created cache directory: {cache_dir}")
         
         fastf1.Cache.enable_cache(cache_dir)
         self.traffic_interval_threshold = traffic_interval_threshold
-    
-    
-    def _map_circuit_to_type(self, circuit_name: str) -> str:
-        """returns "Street" or "Permanent" """
-        return {
-            "Sakhir" : "Street",
-            "Jeddah" : "Street",
-            "Melbourne" : "Street",
-            "Suzuka" : "Permanent",
-            "Shanghai" : "Permanent",
-            "Miami" : "Street",
-            "Imola" : "Permanent",
-            "Monte Carlo" : "Street",
-            "Montreal" : "Street",
-            "Catalunya" : "Permanent",
-            "Spielberg" : "Permanent",
-            "Silverstone" : "Permanent",
-            "Hungaroring" : "Permanent",
-            "Spa-Francorchamps" : "Permanent",
-            "Zandvoort" : "Permanent",
-            "Monza" : "Permanent",
-            "Baku" : "Street",
-            "Singapore" : "Street",
-            "Austin" : "Permanent",
-            "Mexico City" : "Permanent",
-            "Interlagos" : "Permanent",
-            "Jeddah" : "Street",
-            "lusail" : "Street",
+        
+        # Build the circuit type map directly
+        self.circuit_type_map = {
+            "Sakhir": "Permanent",
+            "Jeddah": "Street",
+            "Melbourne": "Street",
+            "Suzuka": "Permanent",
+            "Shanghai": "Permanent",
+            "Miami": "Street",
+            "Imola": "Permanent",
+            "Monte Carlo": "Street",
+            "Montreal": "Street",
+            "Catalunya": "Permanent",
+            "Spielberg": "Permanent",
+            "Silverstone": "Permanent",
+            "Hungaroring": "Permanent",
+            "Spa-Francorchamps": "Permanent",
+            "Zandvoort": "Permanent",
+            "Monza": "Permanent",
+            "Baku": "Street",
+            "Singapore": "Street",
+            "Austin": "Permanent",
+            "Mexico City": "Permanent",
+            "Interlagos": "Permanent",
+            "Las Vegas": "Street",
+            "Lusail": "Permanent",
+            "Yas Marina": "Permanent",
         }
+    
+    def _map_circuit_to_type(self, race_name: str) -> str:
+        return self.circuit_type_map.get(race_name, "Unknown")
     
     def load_lap_csv(self, csv_path: str) -> pd.DataFrame:
         df = pd.read_csv(csv_path)
@@ -350,6 +352,9 @@ class carStintLoader:
             # Calculate traffic metrics
             traffic_metrics = self._calculate_traffic_metrics(stint_laps)
             
+            circuit_type = self._map_circuit_to_type(race_name)
+            print("This is the circuit type:", circuit_type)
+            
             # Calculate telemetry metrics
             if include_telemetry:
                 lap_numbers = stint_laps['lap_number'].tolist()
@@ -401,7 +406,7 @@ if __name__ == "__main__":
     stint_data = loader.process_stints(
         csv_path='f1_race_data_2024_2025.csv',
         include_telemetry=True,  # Set to False for faster processing without telemetry
-        seasons=[2024]  # Process only 2024, or None for all seasons
+        seasons=None 
     )
     
     # Save results

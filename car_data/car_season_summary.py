@@ -10,3 +10,4 @@ columns = [
     # Composite metric
     "car_rank",
 ]
+
