@@ -1,0 +1,888 @@
+season,driver,race_name,round,circuit_type,team,fp1_pos,fp2_pos,fp3_pos,sprint_qualifying_pos,sprint_race_pos,qualifying_pos,race_pos,race_dnf_status,race_classified_position,weighted_performance_score
+2024,ALB,Sakhir,1,Permanent,Williams,13.0,11.0,15.0,,,,,Lapped,15,9.5
+2024,ALO,Sakhir,1,Permanent,Aston Martin,5.0,3.0,2.0,,,,,,,1.9000000000000001
+2024,BOT,Sakhir,1,Permanent,Sauber,10.0,17.0,17.0,,,,,Lapped,19,11.200000000000001
+2024,GAS,Sakhir,1,Permanent,Alpine,18.0,16.0,20.0,,,,,Lapped,18,13.0
+2024,HAM,Sakhir,1,Permanent,Mercedes,9.0,1.0,12.0,,,,,,,5.9
+2024,HUL,Sakhir,1,Permanent,Haas,20.0,7.0,9.0,,,,,Lapped,16,7.0
+2024,LEC,Sakhir,1,Permanent,Ferrari,8.0,9.0,4.0,,,,,,,4.2
+2024,MAG,Sakhir,1,Permanent,Haas,19.0,14.0,14.0,,,,,Lapped,12,10.3
+2024,NOR,Sakhir,1,Permanent,McLaren,2.0,20.0,5.0,,,,,,,6.2
+2024,OCO,Sakhir,1,Permanent,Alpine,17.0,18.0,18.0,,,,,Lapped,17,12.5
+2024,PER,Sakhir,1,Permanent,Red Bull,12.0,10.0,8.0,,,,,,,6.4
+2024,PIA,Sakhir,1,Permanent,McLaren,3.0,5.0,7.0,,,,,,,4.1000000000000005
+2024,RIC,Sakhir,1,Permanent,RB,1.0,12.0,11.0,,,,,Lapped,13,6.9
+2024,RUS,Sakhir,1,Permanent,Mercedes,7.0,2.0,6.0,,,,,,,3.5000000000000004
+2024,SAI,Sakhir,1,Permanent,Ferrari,11.0,4.0,1.0,,,,,,,2.3000000000000003
+2024,SAR,Sakhir,1,Permanent,Williams,16.0,13.0,19.0,,,,,Lapped,20,11.8
+2024,STR,Sakhir,1,Permanent,Aston Martin,14.0,8.0,10.0,,,,,,,7.0
+2024,TSU,Sakhir,1,Permanent,RB,4.0,15.0,13.0,,,,,Lapped,14,8.6
+2024,VER,Sakhir,1,Permanent,Red Bull,6.0,6.0,3.0,,,,,,,3.0000000000000004
+2024,ZHO,Sakhir,1,Permanent,Sauber,15.0,19.0,16.0,,,,,Lapped,11,11.700000000000001
+2024,ALB,Jeddah,2,Street,Williams,10.0,14.0,17.0,,,,,,,10.600000000000001
+2024,ALO,Jeddah,2,Street,Aston Martin,2.0,1.0,6.0,,,,,,,2.8000000000000003
+2024,BEA,Jeddah,2,Street,Ferrari,,,10.0,,,,,,,4.0
+2024,BOT,Jeddah,2,Street,Sauber,11.0,20.0,18.0,,,,,Lapped,17,12.3
+2024,HAM,Jeddah,2,Street,Mercedes,8.0,8.0,9.0,,,,,,,6.0
+2024,HUL,Jeddah,2,Street,Haas,19.0,18.0,15.0,,,,,,,11.5
+2024,LEC,Jeddah,2,Street,Ferrari,5.0,4.0,2.0,,,,,,,2.1
+2024,MAG,Jeddah,2,Street,Haas,20.0,17.0,11.0,,,,,,,9.8
+2024,NOR,Jeddah,2,Street,McLaren,7.0,12.0,5.0,,,,,,,5.1000000000000005
+2024,OCO,Jeddah,2,Street,Alpine,13.0,15.0,14.0,,,,,Lapped,13,9.9
+2024,PER,Jeddah,2,Street,Red Bull,3.0,5.0,3.0,,,,,,,2.5
+2024,PIA,Jeddah,2,Street,McLaren,15.0,10.0,8.0,,,,,,,6.7
+2024,RIC,Jeddah,2,Street,RB,12.0,19.0,16.0,,,,,Lapped,16,11.4
+2024,RUS,Jeddah,2,Street,Mercedes,4.0,2.0,4.0,,,,,,,2.4000000000000004
+2024,SAR,Jeddah,2,Street,Williams,14.0,16.0,,,,,,Lapped,14,4.6000000000000005
+2024,STR,Jeddah,2,Street,Aston Martin,9.0,6.0,7.0,,,,,Retired,R,4.9
+2024,TSU,Jeddah,2,Street,RB,16.0,11.0,13.0,,,,,Lapped,15,9.0
+2024,VER,Jeddah,2,Street,Red Bull,1.0,3.0,1.0,,,,,,,1.1
+2024,ZHO,Jeddah,2,Street,Sauber,18.0,13.0,19.0,,,,,Lapped,18,12.0
+2024,ALB,Catalunya,3,Permanent,Williams,12.0,,13.0,,,,,Lapped,11,6.4
+2024,ALB,Melbourne,3,Street,Williams,12.0,,13.0,,,,,Lapped,11,6.4
+2024,ALO,Catalunya,3,Permanent,Aston Martin,18.0,5.0,6.0,,,,,,,5.2
+2024,ALO,Melbourne,3,Street,Aston Martin,18.0,5.0,6.0,,,,,,,5.2
+2024,BOT,Catalunya,3,Permanent,Sauber,20.0,14.0,12.0,,,,,Lapped,14,9.600000000000001
+2024,BOT,Melbourne,3,Street,Sauber,20.0,14.0,12.0,,,,,Lapped,14,9.600000000000001
+2024,GAS,Catalunya,3,Permanent,Alpine,17.0,15.0,19.0,,,,,Lapped,13,12.3
+2024,GAS,Melbourne,3,Street,Alpine,17.0,15.0,19.0,,,,,Lapped,13,12.3
+2024,HAM,Catalunya,3,Permanent,Mercedes,9.0,18.0,4.0,,,,,Retired,R,6.1
+2024,HAM,Melbourne,3,Street,Mercedes,9.0,18.0,4.0,,,,,Retired,R,6.1
+2024,HUL,Catalunya,3,Permanent,Haas,16.0,16.0,16.0,,,,,,,11.200000000000001
+2024,HUL,Melbourne,3,Street,Haas,16.0,16.0,16.0,,,,,,,11.200000000000001
+2024,LEC,Catalunya,3,Permanent,Ferrari,4.0,1.0,1.0,,,,,,,1.0
+2024,LEC,Melbourne,3,Street,Ferrari,4.0,1.0,1.0,,,,,,,1.0
+2024,MAG,Catalunya,3,Permanent,Haas,13.0,19.0,17.0,,,,,Lapped,10,11.900000000000002
+2024,MAG,Melbourne,3,Street,Haas,13.0,19.0,17.0,,,,,Lapped,10,11.900000000000002
+2024,NOR,Catalunya,3,Permanent,McLaren,1.0,9.0,10.0,,,,,,,5.9
+2024,NOR,Melbourne,3,Street,McLaren,1.0,9.0,10.0,,,,,,,5.9
+2024,OCO,Catalunya,3,Permanent,Alpine,15.0,17.0,15.0,,,,,Lapped,16,10.9
+2024,OCO,Melbourne,3,Street,Alpine,15.0,17.0,15.0,,,,,Lapped,16,10.9
+2024,PER,Catalunya,3,Permanent,Red Bull,6.0,8.0,7.0,,,,,,,5.0
+2024,PER,Melbourne,3,Street,Red Bull,6.0,8.0,7.0,,,,,,,5.0
+2024,PIA,Catalunya,3,Permanent,McLaren,10.0,7.0,8.0,,,,,,,5.6000000000000005
+2024,PIA,Melbourne,3,Street,McLaren,10.0,7.0,8.0,,,,,,,5.6000000000000005
+2024,RIC,Catalunya,3,Permanent,RB,11.0,12.0,18.0,,,,,Lapped,12,10.700000000000001
+2024,RIC,Melbourne,3,Street,RB,11.0,12.0,18.0,,,,,Lapped,12,10.700000000000001
+2024,RUS,Catalunya,3,Permanent,Mercedes,3.0,6.0,5.0,,,,,Retired,17,3.5
+2024,RUS,Melbourne,3,Street,Mercedes,3.0,6.0,5.0,,,,,Retired,17,3.5
+2024,SAI,Catalunya,3,Permanent,Ferrari,8.0,3.0,3.0,,,,,,,2.6000000000000005
+2024,SAI,Melbourne,3,Street,Ferrari,8.0,3.0,3.0,,,,,,,2.6000000000000005
+2024,SAR,Catalunya,3,Permanent,Williams,14.0,13.0,,,,,,,,4.0
+2024,STR,Catalunya,3,Permanent,Aston Martin,7.0,4.0,9.0,,,,,,,5.1
+2024,STR,Melbourne,3,Street,Aston Martin,7.0,4.0,9.0,,,,,,,5.1
+2024,TSU,Catalunya,3,Permanent,RB,5.0,10.0,11.0,,,,,,,6.9
+2024,TSU,Melbourne,3,Street,RB,5.0,10.0,11.0,,,,,,,6.9
+2024,VER,Catalunya,3,Permanent,Red Bull,2.0,2.0,2.0,,,,,Retired,R,1.4000000000000001
+2024,VER,Melbourne,3,Street,Red Bull,2.0,2.0,2.0,,,,,Retired,R,1.4000000000000001
+2024,ZHO,Catalunya,3,Permanent,Sauber,19.0,11.0,14.0,,,,,Lapped,15,9.700000000000001
+2024,ZHO,Melbourne,3,Street,Sauber,19.0,11.0,14.0,,,,,Lapped,15,9.700000000000001
+2024,ALO,Suzuka,4,Permanent,Aston Martin,7.0,,5.0,,,,,,,2.7
+2024,BOT,Suzuka,4,Permanent,Sauber,14.0,9.0,12.0,,,,,Lapped,14,8.0
+2024,GAS,Suzuka,4,Permanent,Alpine,17.0,,17.0,,,,,Lapped,16,8.5
+2024,HAM,Suzuka,4,Permanent,Mercedes,5.0,2.0,4.0,,,,,,,2.5
+2024,HUL,Suzuka,4,Permanent,Haas,13.0,8.0,16.0,,,,,Lapped,11,9.3
+2024,LEC,Suzuka,4,Permanent,Ferrari,6.0,3.0,10.0,,,,,,,5.2
+2024,MAG,Suzuka,4,Permanent,Haas,19.0,,20.0,,,,,Lapped,13,9.9
+2024,NOR,Suzuka,4,Permanent,McLaren,10.0,6.0,6.0,,,,,,,4.6000000000000005
+2024,OCO,Suzuka,4,Permanent,Alpine,11.0,10.0,14.0,,,,,Lapped,15,8.700000000000001
+2024,PER,Suzuka,4,Permanent,Red Bull,2.0,,2.0,,,,,,,1.0
+2024,PIA,Suzuka,4,Permanent,McLaren,8.0,1.0,8.0,,,,,,,4.2
+2024,RUS,Suzuka,4,Permanent,Mercedes,4.0,,3.0,,,,,,,1.6
+2024,SAI,Suzuka,4,Permanent,Ferrari,3.0,7.0,7.0,,,,,,,4.5
+2024,SAR,Suzuka,4,Permanent,Williams,20.0,,19.0,,,,,Lapped,17,9.600000000000001
+2024,STR,Suzuka,4,Permanent,Aston Martin,15.0,,18.0,,,,,Lapped,12,8.7
+2024,TSU,Suzuka,4,Permanent,RB,9.0,4.0,9.0,,,,,Lapped,10,5.300000000000001
+2024,VER,Suzuka,4,Permanent,Red Bull,1.0,,1.0,,,,,,,0.5
+2024,ZHO,Suzuka,4,Permanent,Sauber,18.0,11.0,15.0,,,,,Retired,R,10.0
+2024,ALB,Shanghai,5,Permanent,Williams,8.0,,,,,,,,,0.8
+2024,ALO,Shanghai,5,Permanent,Aston Martin,19.0,,,,,,,,,1.9000000000000001
+2024,BOT,Shanghai,5,Permanent,Sauber,10.0,,,,,,,Retired,R,1.0
+2024,GAS,Shanghai,5,Permanent,Alpine,20.0,,,,,,,,,2.0
+2024,HAM,Shanghai,5,Permanent,Mercedes,18.0,,,,,,,,,1.8
+2024,HUL,Shanghai,5,Permanent,Haas,5.0,,,,,,,,,0.5
+2024,LEC,Shanghai,5,Permanent,Ferrari,13.0,,,,,,,,,1.3
+2024,MAG,Shanghai,5,Permanent,Haas,6.0,,,,,,,,,0.6000000000000001
+2024,NOR,Shanghai,5,Permanent,McLaren,16.0,,,,,,,,,1.6
+2024,OCO,Shanghai,5,Permanent,Alpine,7.0,,,,,,,,,0.7000000000000001
+2024,PER,Shanghai,5,Permanent,Red Bull,4.0,,,,,,,,,0.4
+2024,PIA,Shanghai,5,Permanent,McLaren,2.0,,,,,,,,,0.2
+2024,RIC,Shanghai,5,Permanent,RB,9.0,,,,,,,Retired,R,0.9
+2024,RUS,Shanghai,5,Permanent,Mercedes,17.0,,,,,,,,,1.7000000000000002
+2024,SAI,Shanghai,5,Permanent,Ferrari,14.0,,,,,,,,,1.4000000000000001
+2024,SAR,Shanghai,5,Permanent,Williams,15.0,,,,,,,,,1.5
+2024,STR,Shanghai,5,Permanent,Aston Martin,1.0,,,,,,,,,0.1
+2024,TSU,Shanghai,5,Permanent,RB,12.0,,,,,,,Retired,R,1.2000000000000002
+2024,VER,Shanghai,5,Permanent,Red Bull,3.0,,,,,,,,,0.30000000000000004
+2024,ZHO,Shanghai,5,Permanent,Sauber,11.0,,,,,,,,,1.1
+2024,ALB,Miami,6,Street,Williams,14.0,,,,,,,,,1.4000000000000001
+2024,ALO,Miami,6,Street,Aston Martin,19.0,,,,,,,,,1.9000000000000001
+2024,BOT,Miami,6,Street,Sauber,17.0,,,,,,,,,1.7000000000000002
+2024,GAS,Miami,6,Street,Alpine,10.0,,,,,,,,,1.0
+2024,HAM,Miami,6,Street,Mercedes,7.0,,,,,,,,,0.7000000000000001
+2024,HUL,Miami,6,Street,Haas,13.0,,,,,,,,,1.3
+2024,LEC,Miami,6,Street,Ferrari,20.0,,,,,,,,,2.0
+2024,MAG,Miami,6,Street,Haas,12.0,,,,,,,,,1.2000000000000002
+2024,NOR,Miami,6,Street,McLaren,16.0,,,,,,,,,1.6
+2024,OCO,Miami,6,Street,Alpine,9.0,,,,,,,,,0.9
+2024,PER,Miami,6,Street,Red Bull,6.0,,,,,,,,,0.6000000000000001
+2024,PIA,Miami,6,Street,McLaren,2.0,,,,,,,,,0.2
+2024,RIC,Miami,6,Street,RB,11.0,,,,,,,,,1.1
+2024,RUS,Miami,6,Street,Mercedes,4.0,,,,,,,,,0.4
+2024,SAI,Miami,6,Street,Ferrari,3.0,,,,,,,,,0.30000000000000004
+2024,SAR,Miami,6,Street,Williams,18.0,,,,,,,Retired,R,1.8
+2024,STR,Miami,6,Street,Aston Martin,5.0,,,,,,,,,0.5
+2024,TSU,Miami,6,Street,RB,8.0,,,,,,,,,0.8
+2024,VER,Miami,6,Street,Red Bull,1.0,,,,,,,,,0.1
+2024,ZHO,Miami,6,Street,Sauber,15.0,,,,,,,,,1.5
+2024,ALB,Imola,7,Permanent,Williams,19.0,18.0,7.0,,,,,Retired,R,8.3
+2024,ALO,Imola,7,Permanent,Aston Martin,10.0,10.0,18.0,,,,,Lapped,19,10.2
+2024,BOT,Imola,7,Permanent,Sauber,16.0,16.0,14.0,,,,,Lapped,18,10.400000000000002
+2024,GAS,Imola,7,Permanent,Alpine,11.0,15.0,19.0,,,,,Lapped,16,11.7
+2024,HAM,Imola,7,Permanent,Mercedes,7.0,4.0,17.0,,,,,,,8.3
+2024,HUL,Imola,7,Permanent,Haas,20.0,9.0,10.0,,,,,Lapped,11,7.8
+2024,LEC,Imola,7,Permanent,Ferrari,1.0,1.0,4.0,,,,,,,1.9000000000000001
+2024,MAG,Imola,7,Permanent,Haas,,17.0,16.0,,,,,Lapped,12,9.8
+2024,NOR,Imola,7,Permanent,McLaren,8.0,12.0,2.0,,,,,,,4.0
+2024,OCO,Imola,7,Permanent,Alpine,14.0,14.0,8.0,,,,,Lapped,14,7.4
+2024,PER,Imola,7,Permanent,Red Bull,4.0,8.0,12.0,,,,,,,6.800000000000001
+2024,PIA,Imola,7,Permanent,McLaren,9.0,2.0,1.0,,,,,,,1.7000000000000002
+2024,RIC,Imola,7,Permanent,RB,13.0,11.0,11.0,,,,,Lapped,13,7.9
+2024,RUS,Imola,7,Permanent,Mercedes,2.0,5.0,5.0,,,,,,,3.2
+2024,SAI,Imola,7,Permanent,Ferrari,3.0,6.0,3.0,,,,,,,2.7
+2024,SAR,Imola,7,Permanent,Williams,18.0,20.0,15.0,,,,,Lapped,17,11.8
+2024,STR,Imola,7,Permanent,Aston Martin,12.0,13.0,9.0,,,,,,,7.4
+2024,TSU,Imola,7,Permanent,RB,6.0,3.0,13.0,,,,,Lapped,10,6.4
+2024,VER,Imola,7,Permanent,Red Bull,5.0,7.0,6.0,,,,,,,4.300000000000001
+2024,ZHO,Imola,7,Permanent,Sauber,17.0,19.0,20.0,,,,,Lapped,15,13.5
+2024,ALB,Monte Carlo,9,Street,Williams,,9.0,18.0,,,,,Retired,R,9.0
+2024,ALB,Montreal,9,Street,Williams,,9.0,18.0,,,,,Retired,R,9.0
+2024,ALO,Monte Carlo,9,Street,Aston Martin,15.0,1.0,8.0,,,,,,,4.9
+2024,ALO,Montreal,9,Street,Aston Martin,15.0,1.0,8.0,,,,,,,4.9
+2024,BOT,Monte Carlo,9,Street,Sauber,8.0,14.0,13.0,,,,,,,8.8
+2024,BOT,Montreal,9,Street,Sauber,8.0,14.0,13.0,,,,,,,8.8
+2024,GAS,Monte Carlo,9,Street,Alpine,7.0,19.0,16.0,,,,,,,10.9
+2024,GAS,Montreal,9,Street,Alpine,7.0,19.0,16.0,,,,,,,10.9
+2024,HAM,Monte Carlo,9,Street,Mercedes,4.0,7.0,1.0,,,,,,,2.2
+2024,HAM,Montreal,9,Street,Mercedes,4.0,7.0,1.0,,,,,,,2.2
+2024,HUL,Montreal,9,Street,Haas,14.0,15.0,17.0,,,,,,,11.200000000000001
+2024,LEC,Monte Carlo,9,Street,Ferrari,3.0,4.0,10.0,,,,,Retired,R,5.1
+2024,LEC,Montreal,9,Street,Ferrari,3.0,4.0,10.0,,,,,Retired,R,5.1
+2024,MAG,Montreal,9,Street,Haas,13.0,6.0,11.0,,,,,,,6.9
+2024,NOR,Monte Carlo,9,Street,McLaren,1.0,20.0,7.0,,,,,,,6.9
+2024,NOR,Montreal,9,Street,McLaren,1.0,20.0,7.0,,,,,,,6.9
+2024,OCO,Montreal,9,Street,Alpine,,11.0,19.0,,,,,,,9.8
+2024,PER,Montreal,9,Street,Red Bull,9.0,10.0,9.0,,,,,Retired,R,6.5
+2024,PIA,Monte Carlo,9,Street,McLaren,6.0,16.0,5.0,,,,,,,5.800000000000001
+2024,PIA,Montreal,9,Street,McLaren,6.0,16.0,5.0,,,,,,,5.800000000000001
+2024,RIC,Monte Carlo,9,Street,RB,11.0,5.0,6.0,,,,,,,4.5
+2024,RIC,Montreal,9,Street,RB,11.0,5.0,6.0,,,,,,,4.5
+2024,RUS,Monte Carlo,9,Street,Mercedes,10.0,2.0,3.0,,,,,,,2.6
+2024,RUS,Montreal,9,Street,Mercedes,10.0,2.0,3.0,,,,,,,2.6
+2024,SAI,Monte Carlo,9,Street,Ferrari,2.0,13.0,12.0,,,,,Retired,R,7.600000000000001
+2024,SAI,Montreal,9,Street,Ferrari,2.0,13.0,12.0,,,,,Retired,R,7.600000000000001
+2024,SAR,Monte Carlo,9,Street,Williams,16.0,12.0,14.0,,,,,Retired,R,9.600000000000001
+2024,SAR,Montreal,9,Street,Williams,16.0,12.0,14.0,,,,,Retired,R,9.600000000000001
+2024,STR,Monte Carlo,9,Street,Aston Martin,17.0,3.0,4.0,,,,,,,3.9000000000000004
+2024,STR,Montreal,9,Street,Aston Martin,17.0,3.0,4.0,,,,,,,3.9000000000000004
+2024,TSU,Monte Carlo,9,Street,RB,12.0,8.0,15.0,,,,,,,8.8
+2024,TSU,Montreal,9,Street,RB,12.0,8.0,15.0,,,,,,,8.8
+2024,VER,Monte Carlo,9,Street,Red Bull,5.0,18.0,2.0,,,,,,,4.8999999999999995
+2024,VER,Montreal,9,Street,Red Bull,5.0,18.0,2.0,,,,,,,4.8999999999999995
+2024,ZHO,Monte Carlo,9,Street,Sauber,,17.0,20.0,,,,,Lapped,15,11.4
+2024,ZHO,Montreal,9,Street,Sauber,,17.0,20.0,,,,,Lapped,15,11.4
+2024,ALB,Spielberg,11,Permanent,Williams,18.0,,,,,,,Lapped,15,1.8
+2024,ALO,Spielberg,11,Permanent,Aston Martin,10.0,,,,,,,Lapped,18,1.0
+2024,BOT,Spielberg,11,Permanent,Sauber,15.0,,,,,,,Lapped,16,1.5
+2024,GAS,Spielberg,11,Permanent,Alpine,11.0,,,,,,,,,1.1
+2024,HAM,Spielberg,11,Permanent,Mercedes,5.0,,,,,,,,,0.5
+2024,HUL,Spielberg,11,Permanent,Haas,17.0,,,,,,,,,1.7000000000000002
+2024,LEC,Spielberg,11,Permanent,Ferrari,3.0,,,,,,,,,0.30000000000000004
+2024,MAG,Spielberg,11,Permanent,Haas,19.0,,,,,,,,,1.9000000000000001
+2024,NOR,Spielberg,11,Permanent,McLaren,13.0,,,,,,,Lapped,20,1.3
+2024,OCO,Spielberg,11,Permanent,Alpine,6.0,,,,,,,,,0.6000000000000001
+2024,PER,Spielberg,11,Permanent,Red Bull,12.0,,,,,,,,,1.2000000000000002
+2024,PIA,Spielberg,11,Permanent,McLaren,2.0,,,,,,,,,0.2
+2024,RIC,Spielberg,11,Permanent,RB,16.0,,,,,,,,,1.6
+2024,RUS,Spielberg,11,Permanent,Mercedes,8.0,,,,,,,,,0.8
+2024,SAI,Spielberg,11,Permanent,Ferrari,4.0,,,,,,,,,0.4
+2024,SAR,Spielberg,11,Permanent,Williams,20.0,,,,,,,Lapped,19,2.0
+2024,STR,Spielberg,11,Permanent,Aston Martin,7.0,,,,,,,Lapped,13,0.7000000000000001
+2024,TSU,Spielberg,11,Permanent,RB,9.0,,,,,,,Lapped,14,0.9
+2024,VER,Spielberg,11,Permanent,Red Bull,1.0,,,,,,,,,0.1
+2024,ZHO,Spielberg,11,Permanent,Sauber,14.0,,,,,,,Lapped,17,1.4000000000000001
+2024,ALB,Silverstone,12,Permanent,Williams,16.0,13.0,11.0,,,,,,,8.600000000000001
+2024,ALO,Silverstone,12,Permanent,Aston Martin,6.0,11.0,8.0,,,,,,,6.0
+2024,BOT,Silverstone,12,Permanent,Sauber,12.0,12.0,15.0,,,,,Lapped,15,9.600000000000001
+2024,HAM,Silverstone,12,Permanent,Mercedes,7.0,6.0,2.0,,,,,,,2.7
+2024,HUL,Silverstone,12,Permanent,Haas,11.0,4.0,10.0,,,,,,,5.9
+2024,LEC,Silverstone,12,Permanent,Ferrari,8.0,5.0,6.0,,,,,Lapped,14,4.2
+2024,MAG,Silverstone,12,Permanent,Haas,,20.0,17.0,,,,,,,10.8
+2024,NOR,Silverstone,12,Permanent,McLaren,1.0,1.0,3.0,,,,,,,1.5000000000000002
+2024,OCO,Silverstone,12,Permanent,Alpine,10.0,15.0,16.0,,,,,Lapped,16,10.4
+2024,PER,Silverstone,12,Permanent,Red Bull,,3.0,9.0,,,,,Lapped,17,4.2
+2024,PIA,Silverstone,12,Permanent,McLaren,3.0,2.0,7.0,,,,,,,3.5000000000000004
+2024,RIC,Silverstone,12,Permanent,RB,13.0,19.0,18.0,,,,,Lapped,13,12.3
+2024,RUS,Silverstone,12,Permanent,Mercedes,5.0,10.0,1.0,,,,,Retired,R,2.9
+2024,SAI,Silverstone,12,Permanent,Ferrari,9.0,8.0,4.0,,,,,,,4.1
+2024,SAR,Silverstone,12,Permanent,Williams,,17.0,13.0,,,,,,,8.600000000000001
+2024,STR,Silverstone,12,Permanent,Aston Martin,2.0,9.0,12.0,,,,,,,6.800000000000001
+2024,TSU,Silverstone,12,Permanent,RB,20.0,16.0,14.0,,,,,,,10.8
+2024,VER,Silverstone,12,Permanent,Red Bull,4.0,7.0,5.0,,,,,,,3.8000000000000003
+2024,ZHO,Silverstone,12,Permanent,Sauber,15.0,18.0,19.0,,,,,Lapped,18,12.7
+2024,ALB,Hungaroring,13,Permanent,Williams,14.0,9.0,7.0,,,,,Lapped,14,6.0
+2024,ALO,Hungaroring,13,Permanent,Aston Martin,13.0,10.0,14.0,,,,,,,8.9
+2024,BOT,Hungaroring,13,Permanent,Sauber,15.0,11.0,12.0,,,,,Lapped,16,8.5
+2024,GAS,Hungaroring,13,Permanent,Alpine,17.0,16.0,18.0,,,,,Retired,R,12.100000000000001
+2024,HAM,Hungaroring,13,Permanent,Mercedes,10.0,7.0,10.0,,,,,,,6.4
+2024,HUL,Hungaroring,13,Permanent,Haas,,15.0,8.0,,,,,Lapped,13,6.2
+2024,LEC,Hungaroring,13,Permanent,Ferrari,3.0,18.0,11.0,,,,,,,8.3
+2024,MAG,Hungaroring,13,Permanent,Haas,19.0,6.0,19.0,,,,,Lapped,15,10.700000000000001
+2024,NOR,Hungaroring,13,Permanent,McLaren,6.0,1.0,1.0,,,,,,,1.2000000000000002
+2024,OCO,Hungaroring,13,Permanent,Alpine,18.0,14.0,20.0,,,,,Lapped,18,12.600000000000001
+2024,PER,Hungaroring,13,Permanent,Red Bull,11.0,4.0,13.0,,,,,,,7.1000000000000005
+2024,PIA,Hungaroring,13,Permanent,McLaren,7.0,13.0,2.0,,,,,,,4.1000000000000005
+2024,RIC,Hungaroring,13,Permanent,RB,12.0,8.0,6.0,,,,,Lapped,12,5.200000000000001
+2024,RUS,Hungaroring,13,Permanent,Mercedes,4.0,5.0,4.0,,,,,,,3.0
+2024,SAI,Hungaroring,13,Permanent,Ferrari,1.0,3.0,5.0,,,,,,,2.7
+2024,SAR,Hungaroring,13,Permanent,Williams,16.0,12.0,16.0,,,,,Lapped,17,10.4
+2024,STR,Hungaroring,13,Permanent,Aston Martin,9.0,17.0,15.0,,,,,,,10.3
+2024,TSU,Hungaroring,13,Permanent,RB,8.0,19.0,9.0,,,,,,,8.200000000000001
+2024,VER,Hungaroring,13,Permanent,Red Bull,2.0,2.0,3.0,,,,,,,1.8000000000000003
+2024,ZHO,Hungaroring,13,Permanent,Sauber,5.0,20.0,17.0,,,,,Lapped,19,11.3
+2024,ALB,Spa-Francorchamps,14,Permanent,Williams,3.0,17.0,11.0,,,,,,,8.100000000000001
+2024,ALO,Spa-Francorchamps,14,Permanent,Aston Martin,12.0,12.0,13.0,,,,,,,8.8
+2024,BOT,Spa-Francorchamps,14,Permanent,Sauber,14.0,13.0,8.0,,,,,,,7.2
+2024,GAS,Spa-Francorchamps,14,Permanent,Alpine,11.0,15.0,3.0,,,,,,,5.3
+2024,HAM,Spa-Francorchamps,14,Permanent,Mercedes,5.0,10.0,9.0,,,,,,,6.1
+2024,HUL,Spa-Francorchamps,14,Permanent,Haas,17.0,16.0,12.0,,,,,,,9.700000000000001
+2024,LEC,Spa-Francorchamps,14,Permanent,Ferrari,6.0,4.0,6.0,,,,,,,3.8000000000000007
+2024,MAG,Spa-Francorchamps,14,Permanent,Haas,18.0,8.0,18.0,,,,,,,10.600000000000001
+2024,NOR,Spa-Francorchamps,14,Permanent,McLaren,8.0,1.0,4.0,,,,,,,2.6
+2024,OCO,Spa-Francorchamps,14,Permanent,Alpine,,7.0,5.0,,,,,,,3.4000000000000004
+2024,PER,Spa-Francorchamps,14,Permanent,Red Bull,7.0,9.0,10.0,,,,,,,6.5
+2024,PIA,Spa-Francorchamps,14,Permanent,McLaren,2.0,2.0,2.0,,,,,,,1.4000000000000001
+2024,RIC,Spa-Francorchamps,14,Permanent,RB,13.0,14.0,14.0,,,,,,,9.700000000000001
+2024,RUS,Spa-Francorchamps,14,Permanent,Mercedes,4.0,6.0,,,,,,Disqualified,20,1.6
+2024,SAI,Spa-Francorchamps,14,Permanent,Ferrari,9.0,5.0,,,,,,,,1.9
+2024,SAR,Spa-Francorchamps,14,Permanent,Williams,15.0,18.0,17.0,,,,,,,11.9
+2024,STR,Spa-Francorchamps,14,Permanent,Aston Martin,10.0,11.0,7.0,,,,,,,6.0
+2024,TSU,Spa-Francorchamps,14,Permanent,RB,16.0,20.0,15.0,,,,,,,11.6
+2024,VER,Spa-Francorchamps,14,Permanent,Red Bull,1.0,3.0,1.0,,,,,,,1.1
+2024,ZHO,Spa-Francorchamps,14,Permanent,Sauber,19.0,19.0,16.0,,,,,Retired,R,12.100000000000001
+2024,ALB,Zandvoort,15,Permanent,Williams,6.0,10.0,14.0,,,,,Lapped,14,8.200000000000001
+2024,ALO,Zandvoort,15,Permanent,Aston Martin,15.0,6.0,5.0,,,,,Lapped,10,4.7
+2024,ALO,Interlagos,15,Permanent,Aston Martin,15.0,6.0,5.0,,,,,Lapped,10,4.7
+2024,BEA,Interlagos,15,Permanent,Haas,,,,,,,,,,
+2024,BOT,Zandvoort,15,Permanent,Sauber,,18.0,3.0,,,,,Lapped,19,4.800000000000001
+2024,BOT,Interlagos,15,Permanent,Sauber,,18.0,3.0,,,,,Lapped,19,4.800000000000001
+2024,COL,Interlagos,15,Permanent,Williams,,,,,,,,,,
+2024,GAS,Zandvoort,15,Permanent,Alpine,20.0,14.0,1.0,,,,,Lapped,9,5.200000000000001
+2024,GAS,Interlagos,15,Permanent,Alpine,20.0,14.0,1.0,,,,,Lapped,9,5.200000000000001
+2024,HAM,Zandvoort,15,Permanent,Mercedes,3.0,3.0,15.0,,,,,,,6.9
+2024,HAM,Interlagos,15,Permanent,Mercedes,3.0,3.0,15.0,,,,,,,6.9
+2024,HUL,Zandvoort,15,Permanent,Haas,8.0,20.0,9.0,,,,,Lapped,11,8.4
+2024,HUL,Interlagos,15,Permanent,Haas,8.0,20.0,9.0,,,,,Lapped,11,8.4
+2024,LAW,Interlagos,15,Permanent,RB,,,,,,,,,,
+2024,LEC,Zandvoort,15,Permanent,Ferrari,13.0,9.0,16.0,,,,,,,9.5
+2024,LEC,Interlagos,15,Permanent,Ferrari,13.0,9.0,16.0,,,,,,,9.5
+2024,MAG,Zandvoort,15,Permanent,Haas,9.0,8.0,2.0,,,,,Lapped,18,3.3
+2024,NOR,Zandvoort,15,Permanent,McLaren,1.0,4.0,4.0,,,,,,,2.5
+2024,NOR,Interlagos,15,Permanent,McLaren,1.0,4.0,4.0,,,,,,,2.5
+2024,OCO,Zandvoort,15,Permanent,Alpine,18.0,17.0,6.0,,,,,Lapped,15,7.6000000000000005
+2024,OCO,Interlagos,15,Permanent,Alpine,18.0,17.0,6.0,,,,,Lapped,15,7.6000000000000005
+2024,PER,Zandvoort,15,Permanent,Red Bull,12.0,12.0,,,,,,,,3.6000000000000005
+2024,PER,Interlagos,15,Permanent,Red Bull,12.0,12.0,,,,,,,,3.6000000000000005
+2024,PIA,Zandvoort,15,Permanent,McLaren,7.0,2.0,7.0,,,,,,,3.9000000000000004
+2024,PIA,Interlagos,15,Permanent,McLaren,7.0,2.0,7.0,,,,,,,3.9000000000000004
+2024,RIC,Zandvoort,15,Permanent,RB,19.0,13.0,18.0,,,,,Lapped,12,11.7
+2024,RUS,Zandvoort,15,Permanent,Mercedes,5.0,1.0,13.0,,,,,,,5.9
+2024,RUS,Interlagos,15,Permanent,Mercedes,5.0,1.0,13.0,,,,,,,5.9
+2024,SAI,Zandvoort,15,Permanent,Ferrari,4.0,19.0,10.0,,,,,,,8.2
+2024,SAI,Interlagos,15,Permanent,Ferrari,4.0,19.0,10.0,,,,,,,8.2
+2024,SAR,Zandvoort,15,Permanent,Williams,17.0,15.0,12.0,,,,,Lapped,16,9.5
+2024,STR,Zandvoort,15,Permanent,Aston Martin,11.0,11.0,8.0,,,,,Lapped,13,6.5
+2024,TSU,Zandvoort,15,Permanent,RB,14.0,7.0,,,,,,Lapped,17,2.8000000000000003
+2024,TSU,Interlagos,15,Permanent,RB,14.0,7.0,,,,,,Lapped,17,2.8000000000000003
+2024,VER,Zandvoort,15,Permanent,Red Bull,2.0,5.0,17.0,,,,,,,8.0
+2024,VER,Interlagos,15,Permanent,Red Bull,2.0,5.0,17.0,,,,,,,8.0
+2024,ZHO,Zandvoort,15,Permanent,Sauber,10.0,16.0,11.0,,,,,Lapped,20,8.600000000000001
+2024,ZHO,Interlagos,15,Permanent,Sauber,10.0,16.0,11.0,,,,,Lapped,20,8.600000000000001
+2024,ALB,Monza,16,Permanent,Williams,8.0,13.0,8.0,,,,,,,6.6000000000000005
+2024,ALO,Monza,16,Permanent,Aston Martin,10.0,9.0,11.0,,,,,,,7.2
+2024,BOT,Monza,16,Permanent,Sauber,5.0,11.0,19.0,,,,,Lapped,16,10.3
+2024,COL,Monza,16,Permanent,Williams,18.0,17.0,9.0,,,,,,,8.8
+2024,GAS,Monza,16,Permanent,Alpine,14.0,18.0,14.0,,,,,Lapped,15,10.600000000000001
+2024,HAM,Monza,16,Permanent,Mercedes,7.0,1.0,1.0,,,,,,,1.3000000000000003
+2024,HUL,Monza,16,Permanent,Haas,19.0,7.0,10.0,,,,,Lapped,17,7.300000000000001
+2024,LEC,Monza,16,Permanent,Ferrari,2.0,5.0,3.0,,,,,,,2.4000000000000004
+2024,MAG,Monza,16,Permanent,Haas,11.0,12.0,16.0,,,,,,,9.9
+2024,NOR,Monza,16,Permanent,McLaren,3.0,2.0,5.0,,,,,,,2.7
+2024,OCO,Monza,16,Permanent,Alpine,17.0,19.0,17.0,,,,,Lapped,14,12.3
+2024,PER,Monza,16,Permanent,Red Bull,9.0,15.0,18.0,,,,,,,11.1
+2024,PIA,Monza,16,Permanent,McLaren,6.0,4.0,4.0,,,,,,,3.0
+2024,RIC,Monza,16,Permanent,RB,12.0,8.0,12.0,,,,,,,7.600000000000001
+2024,RUS,Monza,16,Permanent,Mercedes,,6.0,2.0,,,,,,,2.0
+2024,SAI,Monza,16,Permanent,Ferrari,4.0,3.0,7.0,,,,,,,3.8000000000000003
+2024,STR,Monza,16,Permanent,Aston Martin,16.0,10.0,15.0,,,,,Lapped,19,9.6
+2024,TSU,Monza,16,Permanent,RB,13.0,16.0,13.0,,,,,Retired,R,9.7
+2024,VER,Monza,16,Permanent,Red Bull,1.0,14.0,6.0,,,,,,,5.300000000000001
+2024,ZHO,Monza,16,Permanent,Sauber,15.0,20.0,20.0,,,,,Lapped,18,13.5
+2024,ALB,Baku,17,Street,Williams,17.0,13.0,8.0,,,,,,,7.500000000000001
+2024,ALO,Baku,17,Street,Aston Martin,7.0,12.0,11.0,,,,,,,7.500000000000001
+2024,BEA,Baku,17,Street,Haas,11.0,10.0,,,,,,,,3.1
+2024,BOT,Baku,17,Street,Sauber,14.0,15.0,17.0,,,,,Lapped,16,11.200000000000001
+2024,COL,Baku,17,Street,Williams,16.0,14.0,9.0,,,,,,,8.0
+2024,GAS,Baku,17,Street,Alpine,18.0,18.0,15.0,,,,,,,11.4
+2024,HAM,Baku,17,Street,Mercedes,2.0,3.0,10.0,,,,,,,4.8
+2024,HUL,Baku,17,Street,Haas,12.0,8.0,16.0,,,,,,,9.200000000000001
+2024,LEC,Baku,17,Street,Ferrari,9.0,1.0,2.0,,,,,,,1.9000000000000001
+2024,NOR,Baku,17,Street,McLaren,4.0,17.0,3.0,,,,,,,5.0
+2024,OCO,Baku,17,Street,Alpine,,19.0,,,,,,Lapped,15,3.8000000000000003
+2024,PER,Baku,17,Street,Red Bull,3.0,2.0,7.0,,,,,Retired,17,3.5000000000000004
+2024,PIA,Baku,17,Street,McLaren,6.0,5.0,4.0,,,,,,,3.2
+2024,RIC,Baku,17,Street,RB,10.0,16.0,14.0,,,,,,,9.8
+2024,RUS,Baku,17,Street,Mercedes,8.0,9.0,1.0,,,,,,,3.0
+2024,SAI,Baku,17,Street,Ferrari,5.0,4.0,6.0,,,,,Retired,18,3.7
+2024,STR,Baku,17,Street,Aston Martin,13.0,7.0,13.0,,,,,Retired,19,7.9
+2024,TSU,Baku,17,Street,RB,15.0,11.0,12.0,,,,,Retired,R,8.5
+2024,VER,Baku,17,Street,Red Bull,1.0,6.0,5.0,,,,,,,3.3000000000000003
+2024,ZHO,Baku,17,Street,Sauber,19.0,20.0,18.0,,,,,,,13.100000000000001
+2024,ALB,Singapore,18,Street,Williams,8.0,9.0,8.0,,,,,Retired,R,5.800000000000001
+2024,ALB,Yas Marina Circuit,18,Unknown,Williams,8.0,9.0,8.0,,,,,Retired,R,5.800000000000001
+2024,ALO,Singapore,18,Street,Aston Martin,9.0,12.0,10.0,,,,,Lapped,8,7.300000000000001
+2024,ALO,Yas Marina Circuit,18,Unknown,Aston Martin,9.0,12.0,10.0,,,,,Lapped,8,7.300000000000001
+2024,BOT,Singapore,18,Street,Sauber,18.0,20.0,19.0,,,,,Lapped,16,13.4
+2024,BOT,Yas Marina Circuit,18,Unknown,Sauber,18.0,20.0,19.0,,,,,Lapped,16,13.4
+2024,COL,Singapore,18,Street,Williams,11.0,16.0,9.0,,,,,Lapped,11,7.9
+2024,COL,Yas Marina Circuit,18,Unknown,Williams,11.0,16.0,9.0,,,,,Lapped,11,7.9
+2024,DOO,Yas Marina Circuit,18,Unknown,Alpine,,,,,,,,,,
+2024,GAS,Singapore,18,Street,Alpine,13.0,18.0,14.0,,,,,Lapped,17,10.5
+2024,GAS,Yas Marina Circuit,18,Unknown,Alpine,13.0,18.0,14.0,,,,,Lapped,17,10.5
+2024,HAM,Singapore,18,Street,Mercedes,12.0,11.0,7.0,,,,,,,6.200000000000001
+2024,HAM,Yas Marina Circuit,18,Unknown,Mercedes,12.0,11.0,7.0,,,,,,,6.200000000000001
+2024,HUL,Singapore,18,Street,Haas,20.0,10.0,12.0,,,,,Lapped,9,8.8
+2024,HUL,Yas Marina Circuit,18,Unknown,Haas,20.0,10.0,12.0,,,,,Lapped,9,8.8
+2024,LAW,Yas Marina Circuit,18,Unknown,RB,,,,,,,,,,
+2024,LEC,Singapore,18,Street,Ferrari,1.0,2.0,5.0,,,,,,,2.5
+2024,LEC,Yas Marina Circuit,18,Unknown,Ferrari,1.0,2.0,5.0,,,,,,,2.5
+2024,MAG,Singapore,18,Street,Haas,17.0,13.0,13.0,,,,,Retired,19,9.5
+2024,MAG,Yas Marina Circuit,18,Unknown,Haas,17.0,13.0,13.0,,,,,Retired,19,9.5
+2024,NOR,Singapore,18,Street,McLaren,2.0,1.0,1.0,,,,,,,0.8
+2024,NOR,Yas Marina Circuit,18,Unknown,McLaren,2.0,1.0,1.0,,,,,,,0.8
+2024,OCO,Singapore,18,Street,Alpine,10.0,17.0,16.0,,,,,Lapped,13,10.8
+2024,PER,Singapore,18,Street,Red Bull,14.0,8.0,15.0,,,,,Lapped,10,9.0
+2024,PIA,Singapore,18,Street,McLaren,6.0,5.0,3.0,,,,,,,2.8000000000000003
+2024,PIA,Yas Marina Circuit,18,Unknown,McLaren,6.0,5.0,3.0,,,,,,,2.8000000000000003
+2024,RIC,Singapore,18,Street,RB,7.0,6.0,17.0,,,,,Lapped,18,8.700000000000001
+2024,RUS,Singapore,18,Street,Mercedes,16.0,7.0,2.0,,,,,,,3.8
+2024,RUS,Yas Marina Circuit,18,Unknown,Mercedes,16.0,7.0,2.0,,,,,,,3.8
+2024,SAI,Singapore,18,Street,Ferrari,3.0,3.0,6.0,,,,,,,3.3000000000000007
+2024,SAI,Yas Marina Circuit,18,Unknown,Ferrari,3.0,3.0,6.0,,,,,,,3.3000000000000007
+2024,STR,Singapore,18,Street,Aston Martin,15.0,14.0,18.0,,,,,Lapped,14,11.5
+2024,STR,Yas Marina Circuit,18,Unknown,Aston Martin,15.0,14.0,18.0,,,,,Lapped,14,11.5
+2024,TSU,Singapore,18,Street,RB,5.0,4.0,11.0,,,,,Lapped,12,5.7
+2024,TSU,Yas Marina Circuit,18,Unknown,RB,5.0,4.0,11.0,,,,,Lapped,12,5.7
+2024,VER,Singapore,18,Street,Red Bull,4.0,15.0,4.0,,,,,,,5.0
+2024,VER,Yas Marina Circuit,18,Unknown,Red Bull,4.0,15.0,4.0,,,,,,,5.0
+2024,ZHO,Singapore,18,Street,Sauber,19.0,19.0,20.0,,,,,Lapped,15,13.7
+2024,ZHO,Yas Marina Circuit,18,Unknown,Sauber,19.0,19.0,20.0,,,,,Lapped,15,13.7
+2024,ALB,Austin,19,Permanent,Williams,14.0,,,,,,,Lapped,16,1.4000000000000001
+2024,ALO,Austin,19,Permanent,Aston Martin,9.0,,,,,,,Lapped,13,0.9
+2024,BOT,Austin,19,Permanent,Sauber,18.0,,,,,,,Lapped,17,1.8
+2024,COL,Austin,19,Permanent,Williams,19.0,,,,,,,,,1.9000000000000001
+2024,GAS,Austin,19,Permanent,Alpine,12.0,,,,,,,,,1.2000000000000002
+2024,HUL,Austin,19,Permanent,Haas,11.0,,,,,,,,,1.1
+2024,LAW,Austin,19,Permanent,RB,13.0,,,,,,,,,1.3
+2024,LEC,Austin,19,Permanent,Ferrari,2.0,,,,,,,,,0.2
+2024,MAG,Austin,19,Permanent,Haas,8.0,,,,,,,,,0.8
+2024,NOR,Austin,19,Permanent,McLaren,4.0,,,,,,,,,0.4
+2024,OCO,Austin,19,Permanent,Alpine,17.0,,,,,,,Lapped,18,1.7000000000000002
+2024,PER,Austin,19,Permanent,Red Bull,16.0,,,,,,,,,1.6
+2024,PIA,Austin,19,Permanent,McLaren,5.0,,,,,,,,,0.5
+2024,RUS,Austin,19,Permanent,Mercedes,7.0,,,,,,,,,0.7000000000000001
+2024,SAI,Austin,19,Permanent,Ferrari,1.0,,,,,,,,,0.1
+2024,STR,Austin,19,Permanent,Aston Martin,15.0,,,,,,,Lapped,15,1.5
+2024,TSU,Austin,19,Permanent,RB,10.0,,,,,,,Lapped,14,1.0
+2024,VER,Austin,19,Permanent,Red Bull,3.0,,,,,,,,,0.30000000000000004
+2024,ZHO,Austin,19,Permanent,Sauber,20.0,,,,,,,Lapped,19,2.0
+2024,ALO,Mexico City,20,Permanent,Aston Martin,,11.0,15.0,,,,,Retired,R,8.2
+2024,BOT,Mexico City,20,Permanent,Sauber,8.0,8.0,12.0,,,,,Lapped,14,7.200000000000001
+2024,COL,Mexico City,20,Permanent,Williams,11.0,15.0,13.0,,,,,Lapped,12,9.3
+2024,GAS,Mexico City,20,Permanent,Alpine,15.0,16.0,20.0,,,,,Lapped,10,12.7
+2024,HAM,Mexico City,20,Permanent,Mercedes,,7.0,5.0,,,,,,,3.4000000000000004
+2024,HUL,Mexico City,20,Permanent,Haas,5.0,12.0,16.0,,,,,Lapped,9,9.3
+2024,LAW,Mexico City,20,Permanent,RB,9.0,10.0,10.0,,,,,Lapped,16,6.9
+2024,LEC,Mexico City,20,Permanent,Ferrari,,4.0,6.0,,,,,,,3.2
+2024,MAG,Mexico City,20,Permanent,Haas,14.0,6.0,9.0,,,,,,,6.200000000000001
+2024,NOR,Mexico City,20,Permanent,McLaren,,5.0,2.0,,,,,,,1.8
+2024,OCO,Mexico City,20,Permanent,Alpine,7.0,13.0,18.0,,,,,Lapped,13,10.5
+2024,PER,Mexico City,20,Permanent,Red Bull,10.0,9.0,14.0,,,,,Lapped,17,8.4
+2024,PIA,Mexico City,20,Permanent,McLaren,6.0,2.0,1.0,,,,,,,1.4
+2024,RUS,Mexico City,20,Permanent,Mercedes,1.0,18.0,8.0,,,,,,,6.9
+2024,SAI,Mexico City,20,Permanent,Ferrari,2.0,1.0,3.0,,,,,,,1.6
+2024,STR,Mexico City,20,Permanent,Aston Martin,16.0,14.0,17.0,,,,,Lapped,11,11.200000000000001
+2024,VER,Mexico City,20,Permanent,Red Bull,4.0,,4.0,,,,,,,2.0
+2024,ZHO,Mexico City,20,Permanent,Sauber,,17.0,19.0,,,,,Lapped,15,11.0
+2024,ALB,Las Vegas,22,Street,Williams,13.0,20.0,7.0,,,,,Retired,R,8.1
+2024,ALO,Las Vegas,22,Street,Aston Martin,7.0,14.0,15.0,,,,,,,9.5
+2024,BOT,Las Vegas,22,Street,Sauber,16.0,11.0,17.0,,,,,Lapped,18,10.600000000000001
+2024,COL,Las Vegas,22,Street,Williams,17.0,18.0,8.0,,,,,,,8.5
+2024,GAS,Las Vegas,22,Street,Alpine,9.0,6.0,10.0,,,,,Retired,R,6.1
+2024,HAM,Las Vegas,22,Street,Mercedes,1.0,1.0,6.0,,,,,,,2.7
+2024,HUL,Las Vegas,22,Street,Haas,15.0,9.0,11.0,,,,,,,7.7
+2024,LAW,Las Vegas,22,Street,RB,20.0,15.0,18.0,,,,,,,12.2
+2024,LEC,Las Vegas,22,Street,Ferrari,4.0,5.0,12.0,,,,,,,6.200000000000001
+2024,MAG,Las Vegas,22,Street,Haas,11.0,7.0,9.0,,,,,,,6.1
+2024,NOR,Las Vegas,22,Street,McLaren,3.0,2.0,4.0,,,,,,,2.3000000000000003
+2024,OCO,Las Vegas,22,Street,Alpine,14.0,12.0,14.0,,,,,Lapped,17,9.400000000000002
+2024,PER,Las Vegas,22,Street,Red Bull,10.0,19.0,13.0,,,,,,,10.0
+2024,PIA,Las Vegas,22,Street,McLaren,8.0,8.0,2.0,,,,,,,3.2
+2024,RUS,Las Vegas,22,Street,Mercedes,2.0,3.0,1.0,,,,,,,1.2000000000000002
+2024,SAI,Las Vegas,22,Street,Ferrari,6.0,4.0,3.0,,,,,,,2.6000000000000005
+2024,STR,Las Vegas,22,Street,Aston Martin,12.0,13.0,19.0,,,,,,,11.4
+2024,TSU,Las Vegas,22,Street,RB,19.0,10.0,16.0,,,,,,,10.3
+2024,VER,Las Vegas,22,Street,Red Bull,5.0,17.0,5.0,,,,,,,5.9
+2024,ZHO,Las Vegas,22,Street,Sauber,18.0,16.0,20.0,,,,,,,13.0
+2024,ALB,Lusail,23,Permanent,Williams,9.0,,,,,,,Lapped,15,0.9
+2024,ALO,Lusail,23,Permanent,Aston Martin,12.0,,,,,,,,,1.2000000000000002
+2024,BOT,Lusail,23,Permanent,Sauber,6.0,,,,,,,,,0.6000000000000001
+2024,GAS,Lusail,23,Permanent,Alpine,15.0,,,,,,,,,1.5
+2024,HAM,Lusail,23,Permanent,Mercedes,10.0,,,,,,,,,1.0
+2024,HUL,Lusail,23,Permanent,Haas,13.0,,,,,,,Retired,R,1.3
+2024,LAW,Lusail,23,Permanent,RB,14.0,,,,,,,,,1.4000000000000001
+2024,LEC,Lusail,23,Permanent,Ferrari,1.0,,,,,,,,,0.1
+2024,MAG,Lusail,23,Permanent,Haas,16.0,,,,,,,,,1.6
+2024,NOR,Lusail,23,Permanent,McLaren,2.0,,,,,,,,,0.2
+2024,PER,Lusail,23,Permanent,Red Bull,18.0,,,,,,,Retired,R,1.8
+2024,PIA,Lusail,23,Permanent,McLaren,3.0,,,,,,,,,0.30000000000000004
+2024,RUS,Lusail,23,Permanent,Mercedes,8.0,,,,,,,,,0.8
+2024,SAI,Lusail,23,Permanent,Ferrari,4.0,,,,,,,,,0.4
+2024,STR,Lusail,23,Permanent,Aston Martin,7.0,,,,,,,Retired,R,0.7000000000000001
+2024,TSU,Lusail,23,Permanent,RB,5.0,,,,,,,,,0.5
+2024,VER,Lusail,23,Permanent,Red Bull,11.0,,,,,,,,,1.1
+2024,ZHO,Lusail,23,Permanent,Sauber,17.0,,,,,,,,,1.7000000000000002
+2025,ALB,Catalunya,1,Permanent,Williams,6.0,11.0,7.0,,,,,,,5.6000000000000005
+2025,ALB,Melbourne,1,Street,Williams,6.0,11.0,7.0,,,,,,,5.6000000000000005
+2025,ALO,Catalunya,1,Permanent,Aston Martin,8.0,13.0,17.0,,,,,Retired,R,10.200000000000001
+2025,ALO,Melbourne,1,Street,Aston Martin,8.0,13.0,17.0,,,,,Retired,R,10.200000000000001
+2025,ANT,Catalunya,1,Permanent,Mercedes,14.0,16.0,5.0,,,,,,,6.6000000000000005
+2025,ANT,Melbourne,1,Street,Mercedes,14.0,16.0,5.0,,,,,,,6.6000000000000005
+2025,BEA,Catalunya,1,Permanent,Haas,20.0,,,,,,,,,2.0
+2025,BEA,Melbourne,1,Street,Haas,20.0,,,,,,,,,2.0
+2025,BOR,Catalunya,1,Permanent,Sauber,15.0,18.0,11.0,,,,,Retired,R,9.5
+2025,BOR,Melbourne,1,Street,Sauber,15.0,18.0,11.0,,,,,Retired,R,9.5
+2025,COL,Catalunya,1,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Catalunya,1,Permanent,Alpine,17.0,15.0,12.0,,,,,,,9.5
+2025,GAS,Melbourne,1,Street,Alpine,17.0,15.0,12.0,,,,,,,9.5
+2025,HAD,Catalunya,1,Permanent,RB,9.0,6.0,13.0,,,,,Retired,R,7.300000000000001
+2025,HAM,Catalunya,1,Permanent,Ferrari,12.0,5.0,8.0,,,,,,,5.4
+2025,HAM,Melbourne,1,Street,Ferrari,12.0,5.0,8.0,,,,,,,5.4
+2025,HUL,Catalunya,1,Permanent,Sauber,18.0,8.0,16.0,,,,,,,9.8
+2025,HUL,Melbourne,1,Street,Sauber,18.0,8.0,16.0,,,,,,,9.8
+2025,LAW,Catalunya,1,Permanent,RB,16.0,17.0,,,,,,Retired,R,5.0
+2025,LAW,Melbourne,1,Street,Red Bull,16.0,17.0,,,,,,Retired,R,5.0
+2025,LEC,Catalunya,1,Permanent,Ferrari,3.0,1.0,4.0,,,,,,,2.1
+2025,LEC,Melbourne,1,Street,Ferrari,3.0,1.0,4.0,,,,,,,2.1
+2025,NOR,Catalunya,1,Permanent,McLaren,1.0,3.0,10.0,,,,,,,4.7
+2025,NOR,Melbourne,1,Street,McLaren,1.0,3.0,10.0,,,,,,,4.7
+2025,OCO,Catalunya,1,Permanent,Haas,19.0,19.0,18.0,,,,,,,12.9
+2025,OCO,Melbourne,1,Street,Haas,19.0,19.0,18.0,,,,,,,12.9
+2025,PIA,Catalunya,1,Permanent,McLaren,4.0,2.0,1.0,,,,,,,1.2000000000000002
+2025,PIA,Melbourne,1,Street,McLaren,4.0,2.0,1.0,,,,,,,1.2000000000000002
+2025,RUS,Catalunya,1,Permanent,Mercedes,7.0,10.0,2.0,,,,,,,3.5
+2025,RUS,Melbourne,1,Street,Mercedes,7.0,10.0,2.0,,,,,,,3.5
+2025,SAI,Catalunya,1,Permanent,Williams,2.0,12.0,6.0,,,,,Retired,R,5.000000000000001
+2025,STR,Melbourne,1,Street,Aston Martin,10.0,9.0,14.0,,,,,,,8.4
+2025,TSU,Catalunya,1,Permanent,Red Bull,11.0,4.0,9.0,,,,,,,5.5
+2025,TSU,Melbourne,1,Street,RB,11.0,4.0,9.0,,,,,,,5.5
+2025,VER,Catalunya,1,Permanent,Red Bull,5.0,7.0,3.0,,,,,,,3.1000000000000005
+2025,VER,Melbourne,1,Street,Red Bull,5.0,7.0,3.0,,,,,,,3.1000000000000005
+2025,ALB,Shanghai,2,Permanent,Williams,7.0,,,,,,,,,0.7000000000000001
+2025,ALO,Shanghai,2,Permanent,Aston Martin,8.0,,,,,,,Retired,R,0.8
+2025,ANT,Shanghai,2,Permanent,Mercedes,9.0,,,,,,,,,0.9
+2025,BEA,Shanghai,2,Permanent,Haas,11.0,,,,,,,,,1.1
+2025,BOR,Shanghai,2,Permanent,Sauber,19.0,,,,,,,Lapped,14,1.9000000000000001
+2025,DOO,Shanghai,2,Permanent,Alpine,20.0,,,,,,,,,2.0
+2025,GAS,Shanghai,2,Permanent,Alpine,14.0,,,,,,,Disqualified,D,1.4000000000000001
+2025,HAD,Shanghai,2,Permanent,RB,17.0,,,,,,,,,1.7000000000000002
+2025,HAM,Shanghai,2,Permanent,Ferrari,4.0,,,,,,,Disqualified,D,0.4
+2025,HUL,Shanghai,2,Permanent,Sauber,6.0,,,,,,,Lapped,15,0.6000000000000001
+2025,LAW,Shanghai,2,Permanent,Red Bull,18.0,,,,,,,,,1.8
+2025,LEC,Shanghai,2,Permanent,Ferrari,2.0,,,,,,,Disqualified,D,0.2
+2025,NOR,Shanghai,2,Permanent,McLaren,1.0,,,,,,,,,0.1
+2025,OCO,Shanghai,2,Permanent,Haas,13.0,,,,,,,,,1.3
+2025,PIA,Shanghai,2,Permanent,McLaren,3.0,,,,,,,,,0.30000000000000004
+2025,RUS,Shanghai,2,Permanent,Mercedes,5.0,,,,,,,,,0.5
+2025,SAI,Shanghai,2,Permanent,Williams,15.0,,,,,,,,,1.5
+2025,STR,Shanghai,2,Permanent,Aston Martin,12.0,,,,,,,,,1.2000000000000002
+2025,TSU,Shanghai,2,Permanent,RB,10.0,,,,,,,Lapped,16,1.0
+2025,VER,Shanghai,2,Permanent,Red Bull,16.0,,,,,,,,,1.6
+2025,ALB,Suzuka,3,Permanent,Williams,11.0,11.0,7.0,,,,,,,6.1000000000000005
+2025,ALO,Suzuka,3,Permanent,Aston Martin,7.0,17.0,15.0,,,,,,,10.100000000000001
+2025,ANT,Suzuka,3,Permanent,Mercedes,9.0,16.0,13.0,,,,,,,9.3
+2025,BEA,Suzuka,3,Permanent,Haas,18.0,15.0,16.0,,,,,,,11.2
+2025,BOR,Suzuka,3,Permanent,Sauber,20.0,13.0,17.0,,,,,,,11.4
+2025,DOO,Suzuka,3,Permanent,Alpine,,20.0,14.0,,,,,,,9.600000000000001
+2025,GAS,Suzuka,3,Permanent,Alpine,14.0,9.0,8.0,,,,,,,6.4
+2025,HAD,Suzuka,3,Permanent,RB,8.0,3.0,10.0,,,,,,,5.4
+2025,HAM,Suzuka,3,Permanent,Ferrari,4.0,4.0,6.0,,,,,,,3.6000000000000005
+2025,HUL,Suzuka,3,Permanent,Sauber,17.0,12.0,20.0,,,,,,,12.100000000000001
+2025,LAW,Suzuka,3,Permanent,RB,13.0,5.0,12.0,,,,,,,7.1000000000000005
+2025,LEC,Suzuka,3,Permanent,Ferrari,3.0,7.0,4.0,,,,,,,3.3000000000000003
+2025,NOR,Suzuka,3,Permanent,McLaren,1.0,2.0,1.0,,,,,,,0.9
+2025,OCO,Suzuka,3,Permanent,Haas,19.0,14.0,18.0,,,,,,,11.9
+2025,PIA,Suzuka,3,Permanent,McLaren,15.0,1.0,2.0,,,,,,,2.5
+2025,RUS,Suzuka,3,Permanent,Mercedes,2.0,6.0,3.0,,,,,,,2.6000000000000005
+2025,SAI,Suzuka,3,Permanent,Williams,10.0,10.0,11.0,,,,,,,7.4
+2025,STR,Suzuka,3,Permanent,Aston Martin,16.0,19.0,19.0,,,,,Lapped,20,13.0
+2025,TSU,Suzuka,3,Permanent,Red Bull,6.0,18.0,9.0,,,,,,,7.800000000000001
+2025,VER,Suzuka,3,Permanent,Red Bull,5.0,8.0,5.0,,,,,,,4.1
+2025,ALB,Sakhir,4,Permanent,Williams,4.0,11.0,15.0,,,,,,,8.6
+2025,ALO,Sakhir,4,Permanent,Aston Martin,,15.0,14.0,,,,,,,8.600000000000001
+2025,ANT,Sakhir,4,Permanent,Mercedes,20.0,5.0,5.0,,,,,,,5.0
+2025,BEA,Sakhir,4,Permanent,Haas,,9.0,16.0,,,,,,,8.200000000000001
+2025,BOR,Sakhir,4,Permanent,Sauber,11.0,13.0,18.0,,,,,,,10.9
+2025,DOO,Sakhir,4,Permanent,Alpine,7.0,14.0,12.0,,,,,,,8.3
+2025,GAS,Sakhir,4,Permanent,Alpine,2.0,17.0,6.0,,,,,,,6.000000000000001
+2025,HAD,Sakhir,4,Permanent,RB,12.0,6.0,7.0,,,,,,,5.200000000000001
+2025,HAM,Sakhir,4,Permanent,Ferrari,3.0,8.0,10.0,,,,,,,5.9
+2025,HUL,Sakhir,4,Permanent,Sauber,6.0,20.0,19.0,,,,,Disqualified,D,12.2
+2025,LAW,Sakhir,4,Permanent,RB,8.0,12.0,13.0,,,,,,,8.4
+2025,LEC,Sakhir,4,Permanent,Ferrari,,4.0,3.0,,,,,,,2.0
+2025,NOR,Sakhir,4,Permanent,McLaren,1.0,2.0,2.0,,,,,,,1.3
+2025,OCO,Sakhir,4,Permanent,Haas,5.0,16.0,11.0,,,,,,,8.100000000000001
+2025,PIA,Sakhir,4,Permanent,McLaren,10.0,1.0,1.0,,,,,,,1.6
+2025,RUS,Sakhir,4,Permanent,Mercedes,,3.0,4.0,,,,,,,2.2
+2025,SAI,Sakhir,4,Permanent,Williams,,10.0,9.0,,,,,Retired,R,5.6
+2025,STR,Sakhir,4,Permanent,Aston Martin,15.0,19.0,17.0,,,,,,,12.100000000000001
+2025,TSU,Sakhir,4,Permanent,Red Bull,9.0,18.0,20.0,,,,,,,12.5
+2025,VER,Sakhir,4,Permanent,Red Bull,,7.0,8.0,,,,,,,4.6000000000000005
+2025,ALB,Jeddah,5,Street,Williams,5.0,10.0,6.0,,,,,,,4.9
+2025,ALO,Jeddah,5,Street,Aston Martin,14.0,15.0,14.0,,,,,,,10.0
+2025,ANT,Jeddah,5,Street,Mercedes,13.0,11.0,10.0,,,,,,,7.5
+2025,BEA,Jeddah,5,Street,Haas,18.0,16.0,16.0,,,,,,,11.4
+2025,BOR,Jeddah,5,Street,Sauber,20.0,,19.0,,,,,Lapped,18,9.600000000000001
+2025,DOO,Jeddah,5,Street,Alpine,16.0,17.0,15.0,,,,,Lapped,17,11.0
+2025,HAD,Jeddah,5,Street,RB,15.0,12.0,11.0,,,,,,,8.3
+2025,HAM,Jeddah,5,Street,Ferrari,8.0,13.0,12.0,,,,,,,8.200000000000001
+2025,HUL,Jeddah,5,Street,Sauber,12.0,9.0,17.0,,,,,Lapped,15,9.8
+2025,LAW,Jeddah,5,Street,RB,11.0,14.0,13.0,,,,,,,9.100000000000001
+2025,LEC,Jeddah,5,Street,Ferrari,3.0,4.0,5.0,,,,,,,3.1
+2025,NOR,Jeddah,5,Street,McLaren,2.0,1.0,1.0,,,,,,,0.8
+2025,OCO,Jeddah,5,Street,Haas,19.0,19.0,18.0,,,,,,,12.9
+2025,PIA,Jeddah,5,Street,McLaren,4.0,2.0,2.0,,,,,,,1.6
+2025,RUS,Jeddah,5,Street,Mercedes,6.0,7.0,3.0,,,,,,,3.2
+2025,SAI,Jeddah,5,Street,Williams,7.0,5.0,7.0,,,,,,,4.5
+2025,STR,Jeddah,5,Street,Aston Martin,17.0,18.0,20.0,,,,,Lapped,16,13.3
+2025,VER,Jeddah,5,Street,Red Bull,9.0,3.0,4.0,,,,,,,3.1
+2025,ALB,Imola,7,Permanent,Williams,,,,,,,,,,
+2025,ALO,Imola,7,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Imola,7,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Imola,7,Permanent,Haas,,,,,,,,,,
+2025,BOR,Imola,7,Permanent,Sauber,,,,,,,,,,
+2025,GAS,Imola,7,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Imola,7,Permanent,RB,,,,,,,,,,
+2025,HAM,Imola,7,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Imola,7,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Imola,7,Permanent,RB,,,,,,,,,,
+2025,LEC,Imola,7,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Imola,7,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Imola,7,Permanent,Haas,,,,,,,,,,
+2025,PIA,Imola,7,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Imola,7,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Imola,7,Permanent,Williams,,,,,,,,,,
+2025,STR,Imola,7,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Imola,7,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Imola,7,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Monte Carlo,10,Street,Williams,,,,,,,,,,
+2025,ALB,Montreal,10,Street,Williams,,,,,,,,,,
+2025,ALO,Monte Carlo,10,Street,Aston Martin,,,,,,,,,,
+2025,ALO,Montreal,10,Street,Aston Martin,,,,,,,,,,
+2025,ANT,Monte Carlo,10,Street,Mercedes,,,,,,,,,,
+2025,ANT,Montreal,10,Street,Mercedes,,,,,,,,,,
+2025,BEA,Monte Carlo,10,Street,Haas,,,,,,,,,,
+2025,BEA,Montreal,10,Street,Haas,,,,,,,,,,
+2025,BOR,Monte Carlo,10,Street,Sauber,,,,,,,,,,
+2025,BOR,Montreal,10,Street,Sauber,,,,,,,,,,
+2025,COL,Monte Carlo,10,Street,Alpine,,,,,,,,,,
+2025,COL,Montreal,10,Street,Alpine,,,,,,,,,,
+2025,GAS,Monte Carlo,10,Street,Alpine,,,,,,,,,,
+2025,GAS,Montreal,10,Street,Alpine,,,,,,,,,,
+2025,HAD,Monte Carlo,10,Street,RB,,,,,,,,,,
+2025,HAD,Montreal,10,Street,RB,,,,,,,,,,
+2025,HAM,Monte Carlo,10,Street,Ferrari,,,,,,,,,,
+2025,HAM,Montreal,10,Street,Ferrari,,,,,,,,,,
+2025,HUL,Monte Carlo,10,Street,Sauber,,,,,,,,,,
+2025,HUL,Montreal,10,Street,Sauber,,,,,,,,,,
+2025,LAW,Monte Carlo,10,Street,RB,,,,,,,,,,
+2025,LAW,Montreal,10,Street,RB,,,,,,,,,,
+2025,LEC,Monte Carlo,10,Street,Ferrari,,,,,,,,,,
+2025,LEC,Montreal,10,Street,Ferrari,,,,,,,,,,
+2025,NOR,Monte Carlo,10,Street,McLaren,,,,,,,,,,
+2025,NOR,Montreal,10,Street,McLaren,,,,,,,,,,
+2025,OCO,Monte Carlo,10,Street,Haas,,,,,,,,,,
+2025,OCO,Montreal,10,Street,Haas,,,,,,,,,,
+2025,PIA,Monte Carlo,10,Street,McLaren,,,,,,,,,,
+2025,PIA,Montreal,10,Street,McLaren,,,,,,,,,,
+2025,RUS,Monte Carlo,10,Street,Mercedes,,,,,,,,,,
+2025,RUS,Montreal,10,Street,Mercedes,,,,,,,,,,
+2025,SAI,Monte Carlo,10,Street,Williams,,,,,,,,,,
+2025,SAI,Montreal,10,Street,Williams,,,,,,,,,,
+2025,STR,Monte Carlo,10,Street,Aston Martin,,,,,,,,,,
+2025,STR,Montreal,10,Street,Aston Martin,,,,,,,,,,
+2025,TSU,Monte Carlo,10,Street,Red Bull,,,,,,,,,,
+2025,TSU,Montreal,10,Street,Red Bull,,,,,,,,,,
+2025,VER,Monte Carlo,10,Street,Red Bull,,,,,,,,,,
+2025,VER,Montreal,10,Street,Red Bull,,,,,,,,,,
+2025,ALB,Spielberg,11,Permanent,Williams,,,,,,,,,,
+2025,ALO,Spielberg,11,Permanent,Aston Martin,,,,,,,,,,
+2025,BEA,Spielberg,11,Permanent,Haas,,,,,,,,,,
+2025,BOR,Spielberg,11,Permanent,Sauber,,,,,,,,,,
+2025,COL,Spielberg,11,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Spielberg,11,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Spielberg,11,Permanent,RB,,,,,,,,,,
+2025,HAM,Spielberg,11,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Spielberg,11,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Spielberg,11,Permanent,RB,,,,,,,,,,
+2025,LEC,Spielberg,11,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Spielberg,11,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Spielberg,11,Permanent,Haas,,,,,,,,,,
+2025,PIA,Spielberg,11,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Spielberg,11,Permanent,Mercedes,,,,,,,,,,
+2025,STR,Spielberg,11,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Spielberg,11,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Silverstone,12,Permanent,Williams,,,,,,,,,,
+2025,ALO,Silverstone,12,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Silverstone,12,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Silverstone,12,Permanent,Haas,,,,,,,,,,
+2025,BOR,Silverstone,12,Permanent,Sauber,,,,,,,,,,
+2025,GAS,Silverstone,12,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Silverstone,12,Permanent,RB,,,,,,,,,,
+2025,HAM,Silverstone,12,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Silverstone,12,Permanent,Sauber,,,,,,,,,,
+2025,LEC,Silverstone,12,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Silverstone,12,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Silverstone,12,Permanent,Haas,,,,,,,,,,
+2025,PIA,Silverstone,12,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Silverstone,12,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Silverstone,12,Permanent,Williams,,,,,,,,,,
+2025,STR,Silverstone,12,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Silverstone,12,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Silverstone,12,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Spa-Francorchamps,13,Permanent,Williams,,,,,,,,,,
+2025,ALO,Spa-Francorchamps,13,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Spa-Francorchamps,13,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Spa-Francorchamps,13,Permanent,Haas,,,,,,,,,,
+2025,BOR,Spa-Francorchamps,13,Permanent,Sauber,,,,,,,,,,
+2025,COL,Spa-Francorchamps,13,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Spa-Francorchamps,13,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Spa-Francorchamps,13,Permanent,RB,,,,,,,,,,
+2025,HAM,Spa-Francorchamps,13,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Spa-Francorchamps,13,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Spa-Francorchamps,13,Permanent,RB,,,,,,,,,,
+2025,LEC,Spa-Francorchamps,13,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Spa-Francorchamps,13,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Spa-Francorchamps,13,Permanent,Haas,,,,,,,,,,
+2025,PIA,Spa-Francorchamps,13,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Spa-Francorchamps,13,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Spa-Francorchamps,13,Permanent,Williams,,,,,,,,,,
+2025,STR,Spa-Francorchamps,13,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Spa-Francorchamps,13,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Spa-Francorchamps,13,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Hungaroring,14,Permanent,Williams,,,,,,,,,,
+2025,ALO,Hungaroring,14,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Hungaroring,14,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Hungaroring,14,Permanent,Haas,,,,,,,,,,
+2025,BOR,Hungaroring,14,Permanent,Sauber,,,,,,,,,,
+2025,COL,Hungaroring,14,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Hungaroring,14,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Hungaroring,14,Permanent,RB,,,,,,,,,,
+2025,HAM,Hungaroring,14,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Hungaroring,14,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Hungaroring,14,Permanent,RB,,,,,,,,,,
+2025,LEC,Hungaroring,14,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Hungaroring,14,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Hungaroring,14,Permanent,Haas,,,,,,,,,,
+2025,PIA,Hungaroring,14,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Hungaroring,14,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Hungaroring,14,Permanent,Williams,,,,,,,,,,
+2025,STR,Hungaroring,14,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Hungaroring,14,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Hungaroring,14,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Interlagos,15,Permanent,Williams,,,,,,,,,,
+2025,ALB,Zandvoort,15,Permanent,Williams,,,,,,,,,,
+2025,ALO,Interlagos,15,Permanent,Aston Martin,,,,,,,,,,
+2025,ALO,Zandvoort,15,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Interlagos,15,Permanent,Mercedes,,,,,,,,,,
+2025,ANT,Zandvoort,15,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Interlagos,15,Permanent,Haas,,,,,,,,,,
+2025,BEA,Zandvoort,15,Permanent,Haas,,,,,,,,,,
+2025,BOR,Zandvoort,15,Permanent,Sauber,,,,,,,,,,
+2025,COL,Interlagos,15,Permanent,Alpine,,,,,,,,,,
+2025,COL,Zandvoort,15,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Interlagos,15,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Zandvoort,15,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Interlagos,15,Permanent,RB,,,,,,,,,,
+2025,HAD,Zandvoort,15,Permanent,RB,,,,,,,,,,
+2025,HAM,Interlagos,15,Permanent,Ferrari,,,,,,,,,,
+2025,HAM,Zandvoort,15,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Interlagos,15,Permanent,Sauber,,,,,,,,,,
+2025,HUL,Zandvoort,15,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Interlagos,15,Permanent,RB,,,,,,,,,,
+2025,LAW,Zandvoort,15,Permanent,RB,,,,,,,,,,
+2025,LEC,Interlagos,15,Permanent,Ferrari,,,,,,,,,,
+2025,LEC,Zandvoort,15,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Interlagos,15,Permanent,McLaren,,,,,,,,,,
+2025,NOR,Zandvoort,15,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Interlagos,15,Permanent,Haas,,,,,,,,,,
+2025,OCO,Zandvoort,15,Permanent,Haas,,,,,,,,,,
+2025,PIA,Interlagos,15,Permanent,McLaren,,,,,,,,,,
+2025,PIA,Zandvoort,15,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Interlagos,15,Permanent,Mercedes,,,,,,,,,,
+2025,RUS,Zandvoort,15,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Interlagos,15,Permanent,Williams,,,,,,,,,,
+2025,SAI,Zandvoort,15,Permanent,Williams,,,,,,,,,,
+2025,STR,Interlagos,15,Permanent,Aston Martin,,,,,,,,,,
+2025,STR,Zandvoort,15,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Interlagos,15,Permanent,Red Bull,,,,,,,,,,
+2025,TSU,Zandvoort,15,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Interlagos,15,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Zandvoort,15,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Monza,16,Permanent,Williams,,,,,,,,,,
+2025,ALO,Monza,16,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Monza,16,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Monza,16,Permanent,Haas,,,,,,,,,,
+2025,BOR,Monza,16,Permanent,Sauber,,,,,,,,,,
+2025,COL,Monza,16,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Monza,16,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Monza,16,Permanent,RB,,,,,,,,,,
+2025,HAM,Monza,16,Permanent,Ferrari,,,,,,,,,,
+2025,LAW,Monza,16,Permanent,RB,,,,,,,,,,
+2025,LEC,Monza,16,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Monza,16,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Monza,16,Permanent,Haas,,,,,,,,,,
+2025,PIA,Monza,16,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Monza,16,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Monza,16,Permanent,Williams,,,,,,,,,,
+2025,STR,Monza,16,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Monza,16,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Monza,16,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Baku,17,Street,Williams,,,,,,,,,,
+2025,ALO,Baku,17,Street,Aston Martin,,,,,,,,,,
+2025,ANT,Baku,17,Street,Mercedes,,,,,,,,,,
+2025,BEA,Baku,17,Street,Haas,,,,,,,,,,
+2025,BOR,Baku,17,Street,Sauber,,,,,,,,,,
+2025,COL,Baku,17,Street,Alpine,,,,,,,,,,
+2025,GAS,Baku,17,Street,Alpine,,,,,,,,,,
+2025,HAD,Baku,17,Street,RB,,,,,,,,,,
+2025,HAM,Baku,17,Street,Ferrari,,,,,,,,,,
+2025,HUL,Baku,17,Street,Sauber,,,,,,,,,,
+2025,LAW,Baku,17,Street,RB,,,,,,,,,,
+2025,LEC,Baku,17,Street,Ferrari,,,,,,,,,,
+2025,NOR,Baku,17,Street,McLaren,,,,,,,,,,
+2025,OCO,Baku,17,Street,Haas,,,,,,,,,,
+2025,RUS,Baku,17,Street,Mercedes,,,,,,,,,,
+2025,SAI,Baku,17,Street,Williams,,,,,,,,,,
+2025,STR,Baku,17,Street,Aston Martin,,,,,,,,,,
+2025,TSU,Baku,17,Street,Red Bull,,,,,,,,,,
+2025,VER,Baku,17,Street,Red Bull,,,,,,,,,,
+2025,ALB,Singapore,18,Street,Williams,,,,,,,,,,
+2025,ALO,Singapore,18,Street,Aston Martin,,,,,,,,,,
+2025,ANT,Singapore,18,Street,Mercedes,,,,,,,,,,
+2025,BEA,Singapore,18,Street,Haas,,,,,,,,,,
+2025,BOR,Singapore,18,Street,Sauber,,,,,,,,,,
+2025,COL,Singapore,18,Street,Alpine,,,,,,,,,,
+2025,GAS,Singapore,18,Street,Alpine,,,,,,,,,,
+2025,HAD,Singapore,18,Street,RB,,,,,,,,,,
+2025,HAM,Singapore,18,Street,Ferrari,,,,,,,,,,
+2025,HUL,Singapore,18,Street,Sauber,,,,,,,,,,
+2025,LAW,Singapore,18,Street,RB,,,,,,,,,,
+2025,LEC,Singapore,18,Street,Ferrari,,,,,,,,,,
+2025,NOR,Singapore,18,Street,McLaren,,,,,,,,,,
+2025,OCO,Singapore,18,Street,Haas,,,,,,,,,,
+2025,PIA,Singapore,18,Street,McLaren,,,,,,,,,,
+2025,RUS,Singapore,18,Street,Mercedes,,,,,,,,,,
+2025,SAI,Singapore,18,Street,Williams,,,,,,,,,,
+2025,STR,Singapore,18,Street,Aston Martin,,,,,,,,,,
+2025,TSU,Singapore,18,Street,Red Bull,,,,,,,,,,
+2025,VER,Singapore,18,Street,Red Bull,,,,,,,,,,
+2025,ALB,Austin,19,Permanent,Williams,,,,,,,,,,
+2025,ALO,Austin,19,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Austin,19,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Austin,19,Permanent,Haas,,,,,,,,,,
+2025,BOR,Austin,19,Permanent,Sauber,,,,,,,,,,
+2025,COL,Austin,19,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Austin,19,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Austin,19,Permanent,RB,,,,,,,,,,
+2025,HAM,Austin,19,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Austin,19,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Austin,19,Permanent,RB,,,,,,,,,,
+2025,LEC,Austin,19,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Austin,19,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Austin,19,Permanent,Haas,,,,,,,,,,
+2025,PIA,Austin,19,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Austin,19,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Austin,19,Permanent,Williams,,,,,,,,,,
+2025,STR,Austin,19,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Austin,19,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Austin,19,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Mexico City,20,Permanent,Williams,,,,,,,,,,
+2025,ALO,Mexico City,20,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Mexico City,20,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Mexico City,20,Permanent,Haas,,,,,,,,,,
+2025,BOR,Mexico City,20,Permanent,Sauber,,,,,,,,,,
+2025,COL,Mexico City,20,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Mexico City,20,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Mexico City,20,Permanent,RB,,,,,,,,,,
+2025,HAM,Mexico City,20,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Mexico City,20,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Mexico City,20,Permanent,RB,,,,,,,,,,
+2025,LEC,Mexico City,20,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Mexico City,20,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Mexico City,20,Permanent,Haas,,,,,,,,,,
+2025,PIA,Mexico City,20,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Mexico City,20,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Mexico City,20,Permanent,Williams,,,,,,,,,,
+2025,STR,Mexico City,20,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Mexico City,20,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Mexico City,20,Permanent,Red Bull,,,,,,,,,,
+2025,ALB,Las Vegas,22,Street,Williams,,,,,,,,,,
+2025,ALO,Las Vegas,22,Street,Aston Martin,,,,,,,,,,
+2025,ANT,Las Vegas,22,Street,Mercedes,,,,,,,,,,
+2025,BEA,Las Vegas,22,Street,Haas,,,,,,,,,,
+2025,BOR,Las Vegas,22,Street,Sauber,,,,,,,,,,
+2025,COL,Las Vegas,22,Street,Alpine,,,,,,,,,,
+2025,GAS,Las Vegas,22,Street,Alpine,,,,,,,,,,
+2025,HAD,Las Vegas,22,Street,RB,,,,,,,,,,
+2025,HAM,Las Vegas,22,Street,Ferrari,,,,,,,,,,
+2025,HUL,Las Vegas,22,Street,Sauber,,,,,,,,,,
+2025,LAW,Las Vegas,22,Street,RB,,,,,,,,,,
+2025,LEC,Las Vegas,22,Street,Ferrari,,,,,,,,,,
+2025,NOR,Las Vegas,22,Street,McLaren,,,,,,,,,,
+2025,OCO,Las Vegas,22,Street,Haas,,,,,,,,,,
+2025,PIA,Las Vegas,22,Street,McLaren,,,,,,,,,,
+2025,RUS,Las Vegas,22,Street,Mercedes,,,,,,,,,,
+2025,SAI,Las Vegas,22,Street,Williams,,,,,,,,,,
+2025,TSU,Las Vegas,22,Street,Red Bull,,,,,,,,,,
+2025,VER,Las Vegas,22,Street,Red Bull,,,,,,,,,,
+2025,ALB,Lusail,23,Permanent,Williams,,,,,,,,,,
+2025,ALO,Lusail,23,Permanent,Aston Martin,,,,,,,,,,
+2025,ANT,Lusail,23,Permanent,Mercedes,,,,,,,,,,
+2025,BEA,Lusail,23,Permanent,Haas,,,,,,,,,,
+2025,BOR,Lusail,23,Permanent,Sauber,,,,,,,,,,
+2025,COL,Lusail,23,Permanent,Alpine,,,,,,,,,,
+2025,GAS,Lusail,23,Permanent,Alpine,,,,,,,,,,
+2025,HAD,Lusail,23,Permanent,RB,,,,,,,,,,
+2025,HAM,Lusail,23,Permanent,Ferrari,,,,,,,,,,
+2025,HUL,Lusail,23,Permanent,Sauber,,,,,,,,,,
+2025,LAW,Lusail,23,Permanent,RB,,,,,,,,,,
+2025,LEC,Lusail,23,Permanent,Ferrari,,,,,,,,,,
+2025,NOR,Lusail,23,Permanent,McLaren,,,,,,,,,,
+2025,OCO,Lusail,23,Permanent,Haas,,,,,,,,,,
+2025,PIA,Lusail,23,Permanent,McLaren,,,,,,,,,,
+2025,RUS,Lusail,23,Permanent,Mercedes,,,,,,,,,,
+2025,SAI,Lusail,23,Permanent,Williams,,,,,,,,,,
+2025,STR,Lusail,23,Permanent,Aston Martin,,,,,,,,,,
+2025,TSU,Lusail,23,Permanent,Red Bull,,,,,,,,,,
+2025,VER,Lusail,23,Permanent,Red Bull,,,,,,,,,,
