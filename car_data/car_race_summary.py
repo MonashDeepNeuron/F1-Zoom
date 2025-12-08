@@ -1,4 +1,4 @@
-# one row, per team per race, summarising the driver-lvel stint / lap data
+# one row, per driver per race, summarising the driver-level stint / lap data
 
 # race pace rank
 # qualifying pace rank
@@ -23,7 +23,7 @@ import time
 from collections import defaultdict
 
 columns = [
-    "season", "race_name", "round", "circuit_type",
+    "season", "driver", "race_name", "round", "circuit_type",
     "team",
 
     # Pace
@@ -72,7 +72,7 @@ columns = [
 
 class TeamRaceSummaryLoader:
     """
-    Create team-level race summaries from stint data and FastF1 session data.
+    Create driver-level race summaries from stint data and FastF1 session data.
     """
     
     def __init__(self, cache_dir="fastf1_cache"):
@@ -125,14 +125,14 @@ class TeamRaceSummaryLoader:
             print(f"Error loading {session_type} session for {season} {race_name}: {e}")
             return None
     
-    def _calculate_pace_metrics(self, team_stints: pd.DataFrame) -> Dict:
+    def _calculate_pace_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         metrics = {}
         
         # Average race pace (weighted by stint length)
-        if 'avg_laptime' in team_stints.columns and 'stint_length_laps' in team_stints.columns:
-            total_laps = team_stints['stint_length_laps'].sum()
+        if 'avg_laptime' in driver_stints.columns and 'stint_length_laps' in driver_stints.columns:
+            total_laps = driver_stints['stint_length_laps'].sum()
             if total_laps > 0:
-                weighted_pace = (team_stints['avg_laptime'] * team_stints['stint_length_laps']).sum()
+                weighted_pace = (driver_stints['avg_laptime'] * driver_stints['stint_length_laps']).sum()
                 metrics['avg_race_pace'] = weighted_pace / total_laps
             else:
                 metrics['avg_race_pace'] = np.nan
@@ -142,8 +142,8 @@ class TeamRaceSummaryLoader:
         
         
         # Clean air average race pace
-        if 'clean_air_avg_laptime' in team_stints.columns and 'stint_length_laps' in team_stints.columns:
-            clean_stints = team_stints[team_stints['clean_air_avg_laptime'].notna()]
+        if 'clean_air_avg_laptime' in driver_stints.columns and 'stint_length_laps' in driver_stints.columns:
+            clean_stints = driver_stints[driver_stints['clean_air_avg_laptime'].notna()]
             if len(clean_stints) > 0:
                 total_clean_laps = clean_stints['stint_length_laps'].sum()
                 if total_clean_laps > 0:
@@ -161,18 +161,18 @@ class TeamRaceSummaryLoader:
     
     
     
-    def _calculate_speed_metrics(self, team_stints: pd.DataFrame) -> Dict:
+    def _calculate_speed_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         metrics = {}
         
         # Top speed (max across all stints)
-        if 'max_speed' in team_stints.columns:
-            metrics['top_speed'] = team_stints['max_speed'].max()
+        if 'max_speed' in driver_stints.columns:
+            metrics['top_speed'] = driver_stints['max_speed'].max()
         else:
             metrics['top_speed'] = np.nan
         
         # Cornering speed (average of minimum corner speeds)
-        if 'min_corner_speed' in team_stints.columns:
-            valid_corner_speeds = team_stints['min_corner_speed'].dropna()
+        if 'min_corner_speed' in driver_stints.columns:
+            valid_corner_speeds = driver_stints['min_corner_speed'].dropna()
             if len(valid_corner_speeds) > 0:
                 metrics['cornering_speed'] = valid_corner_speeds.mean()
             else:
@@ -180,25 +180,25 @@ class TeamRaceSummaryLoader:
         else:
             metrics['cornering_speed'] = np.nan
         
-        # Rankings will be calculated later across all teams
+        # Rankings will be calculated later across all drivers
         metrics['top_speed_rank'] = np.nan
         metrics['corner_speed_rank'] = np.nan
         metrics['drag_index'] = np.nan
         
         return metrics
     
-    def _calculate_tyre_metrics(self, team_stints: pd.DataFrame) -> Dict:
+    def _calculate_tyre_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         metrics = {}
         
         # Average stint length
-        if 'stint_length_laps' in team_stints.columns:
-            metrics['avg_stint_length'] = team_stints['stint_length_laps'].mean()
+        if 'stint_length_laps' in driver_stints.columns:
+            metrics['avg_stint_length'] = driver_stints['stint_length_laps'].mean()
         else:
             metrics['avg_stint_length'] = np.nan
         
         # Count stints by compound
-        if 'compound' in team_stints.columns:
-            compound_counts = team_stints['compound'].value_counts()
+        if 'compound' in driver_stints.columns:
+            compound_counts = driver_stints['compound'].value_counts()
             metrics['stints_soft'] = compound_counts.get('SOFT', 0)
             metrics['stints_medium'] = compound_counts.get('MEDIUM', 0)
             metrics['stints_hard'] = compound_counts.get('HARD', 0)
@@ -210,8 +210,8 @@ class TeamRaceSummaryLoader:
         # Degradation slopes per compound
         for compound in ['SOFT', 'MEDIUM', 'HARD']:
             col_name = f'deg_{compound.lower()}_slope'
-            if 'compound' in team_stints.columns and 'laptime_slope_per_lap' in team_stints.columns:
-                compound_stints = team_stints[team_stints['compound'] == compound]
+            if 'compound' in driver_stints.columns and 'laptime_slope_per_lap' in driver_stints.columns:
+                compound_stints = driver_stints[driver_stints['compound'] == compound]
                 if len(compound_stints) > 0:
                     metrics[col_name] = compound_stints['laptime_slope_per_lap'].mean()
                 else:
@@ -222,8 +222,8 @@ class TeamRaceSummaryLoader:
         # Drop-off per compound (delta from first to last lap)
         for compound in ['SOFT', 'MEDIUM', 'HARD']:
             col_name = f'dropoff_{compound.lower()}'
-            if 'compound' in team_stints.columns and 'delta_laptime_first_to_last' in team_stints.columns:
-                compound_stints = team_stints[team_stints['compound'] == compound]
+            if 'compound' in driver_stints.columns and 'delta_laptime_first_to_last' in driver_stints.columns:
+                compound_stints = driver_stints[driver_stints['compound'] == compound]
                 if len(compound_stints) > 0:
                     metrics[col_name] = compound_stints['delta_laptime_first_to_last'].mean()
                 else:
@@ -233,12 +233,12 @@ class TeamRaceSummaryLoader:
         
         return metrics
     
-    def _calculate_pu_metrics(self, team_stints: pd.DataFrame) -> Dict:
+    def _calculate_pu_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         metrics = {}
         
         # Weighted average throttle percentage
-        if 'avg_throttle_pct' in team_stints.columns and 'stint_length_laps' in team_stints.columns:
-            valid_stints = team_stints[team_stints['avg_throttle_pct'].notna()]
+        if 'avg_throttle_pct' in driver_stints.columns and 'stint_length_laps' in driver_stints.columns:
+            valid_stints = driver_stints[driver_stints['avg_throttle_pct'].notna()]
             if len(valid_stints) > 0:
                 total_laps = valid_stints['stint_length_laps'].sum()
                 if total_laps > 0:
@@ -253,8 +253,8 @@ class TeamRaceSummaryLoader:
             metrics['avg_throttle_pct'] = np.nan
         
         # Weighted average speed
-        if 'avg_speed' in team_stints.columns and 'stint_length_laps' in team_stints.columns:
-            valid_stints = team_stints[team_stints['avg_speed'].notna()]
+        if 'avg_speed' in driver_stints.columns and 'stint_length_laps' in driver_stints.columns:
+            valid_stints = driver_stints[driver_stints['avg_speed'].notna()]
             if len(valid_stints) > 0:
                 total_laps = valid_stints['stint_length_laps'].sum()
                 if total_laps > 0:
@@ -271,16 +271,16 @@ class TeamRaceSummaryLoader:
         return metrics
     
     
-    def _calculate_traffic_metrics(self, team_stints: pd.DataFrame) -> Dict:
+    def _calculate_traffic_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         """Calculate traffic and clean air metrics."""
         metrics = {}
         
         # Traffic lap percentage (weighted)
-        if 'traffic_lap_pct' in team_stints.columns and 'stint_length_laps' in team_stints.columns:
-            total_laps = team_stints['stint_length_laps'].sum()
+        if 'traffic_lap_pct' in driver_stints.columns and 'stint_length_laps' in driver_stints.columns:
+            total_laps = driver_stints['stint_length_laps'].sum()
             if total_laps > 0:
-                weighted_traffic = (team_stints['traffic_lap_pct'] * 
-                                   team_stints['stint_length_laps']).sum()
+                weighted_traffic = (driver_stints['traffic_lap_pct'] * 
+                                   driver_stints['stint_length_laps']).sum()
                 metrics['traffic_lap_pct'] = weighted_traffic / total_laps
             else:
                 metrics['traffic_lap_pct'] = np.nan
@@ -288,8 +288,8 @@ class TeamRaceSummaryLoader:
             metrics['traffic_lap_pct'] = np.nan
         
         # Average interval to car ahead
-        if 'avg_interval_to_car_ahead' in team_stints.columns:
-            valid_intervals = team_stints['avg_interval_to_car_ahead'].dropna()
+        if 'avg_interval_to_car_ahead' in driver_stints.columns:
+            valid_intervals = driver_stints['avg_interval_to_car_ahead'].dropna()
             if len(valid_intervals) > 0:
                 metrics['avg_interval_to_car_ahead'] = valid_intervals.mean()
             else:
@@ -348,36 +348,37 @@ class TeamRaceSummaryLoader:
     
     def generate_summary(self, stint_csv_path: str) -> pd.DataFrame:
         """
-        Generate team-level race summary from stint data.
+        Generate driver-level race summary from stint data.
         
         Args:
             stint_csv_path: Path to stint_analysis.csv
             
         Returns:
-            DataFrame with one row per team per race
+            DataFrame with one row per driver per race
         """
         # Load stint data
         print(f"Loading stint data from {stint_csv_path}...")
         stint_df = self.load_stint_data(stint_csv_path)
         print(f"Loaded {len(stint_df)} stint records")
         
-        # Group by season, race_name, and team
+        # Group by season, race_name, and driver
         summary_records = []
         
-        for (season, race_name, team), team_stints in stint_df.groupby(['season', 'race_name', 'team']):
+        for (season, race_name, driver), driver_stints in stint_df.groupby(['season', 'race_name', 'driver']):
             # Get metadata from first row (should be same for all rows in group)
-            first_row = team_stints.iloc[0]
+            first_row = driver_stints.iloc[0]
             round_num = first_row.get('round', np.nan)
             circuit_type = first_row.get('circuit_type', np.nan)
+            team = first_row.get('team', np.nan)
             
             # Calculate all metrics
-            pace_metrics = self._calculate_pace_metrics(team_stints)
-            speed_metrics = self._calculate_speed_metrics(team_stints)
-            tyre_metrics = self._calculate_tyre_metrics(team_stints)
-            pu_metrics = self._calculate_pu_metrics(team_stints)
+            pace_metrics = self._calculate_pace_metrics(driver_stints)
+            speed_metrics = self._calculate_speed_metrics(driver_stints)
+            tyre_metrics = self._calculate_tyre_metrics(driver_stints)
+            pu_metrics = self._calculate_pu_metrics(driver_stints)
             
             # Traffic metrics
-            traffic_metrics = self._calculate_traffic_metrics(team_stints)
+            traffic_metrics = self._calculate_traffic_metrics(driver_stints)
             
             # Calculate clean_air_pace_advantage (requires both pace and traffic metrics)
             if not np.isnan(pace_metrics.get('clean_air_avg_race_pace', np.nan)) and \
@@ -393,6 +394,7 @@ class TeamRaceSummaryLoader:
             # Combine all metrics
             record = {
                 'season': season,
+                'driver': driver,
                 'race_name': race_name,
                 'round': round_num,
                 'circuit_type': circuit_type,
@@ -421,10 +423,10 @@ class TeamRaceSummaryLoader:
         print("Calculating rankings...")
         summary_df = self._calculate_rankings(summary_df)
         
-        # Sort by season, round, team for consistency
-        summary_df = summary_df.sort_values(['season', 'round', 'team']).reset_index(drop=True)
+        # Sort by season, round, driver for consistency
+        summary_df = summary_df.sort_values(['season', 'round', 'driver']).reset_index(drop=True)
         
-        print(f"Generated summary with {len(summary_df)} team-race records")
+        print(f"Generated summary with {len(summary_df)} driver-race records")
         return summary_df
     
     def save_summary(self, summary_df: pd.DataFrame, output_path: str):
@@ -437,7 +439,7 @@ def main(stint_csv_path: str = "stint_analysis.csv",
          output_csv_path: str = "car_race_summary.csv",
          cache_dir: str = "fastf1_cache"):
     """
-    Main function to generate team race summary.
+    Main function to generate driver race summary.
     
     Args:
         stint_csv_path: Path to input stint_analysis.csv
@@ -457,4 +459,4 @@ if __name__ == "__main__":
     stint_path = sys.argv[1] if len(sys.argv) > 1 else "stint_analysis.csv"
     output_path = sys.argv[2] if len(sys.argv) > 2 else "car_race_summary.csv"
     
-    main(stint_csv_path="stint_analysis.csv", output_csv_path="car_race_summary.csv")
+    main(stint_csv_path="stint_analysis.csv", output_csv_path="driver_race_summary.csv")
