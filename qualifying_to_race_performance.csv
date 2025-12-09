@@ -1,888 +1,576 @@
-season,driver,race_name,round,circuit_type,team,fp1_pos,fp2_pos,fp3_pos,sprint_qualifying_pos,sprint_race_pos,qualifying_pos,race_pos,race_dnf_status,race_classified_position,weighted_performance_score
-2024,ALB,Sakhir,1,Permanent,Williams,13.0,11.0,15.0,,,,,Lapped,15,9.5
-2024,ALO,Sakhir,1,Permanent,Aston Martin,5.0,3.0,2.0,,,,,,,1.9000000000000001
-2024,BOT,Sakhir,1,Permanent,Sauber,10.0,17.0,17.0,,,,,Lapped,19,11.200000000000001
-2024,GAS,Sakhir,1,Permanent,Alpine,18.0,16.0,20.0,,,,,Lapped,18,13.0
-2024,HAM,Sakhir,1,Permanent,Mercedes,9.0,1.0,12.0,,,,,,,5.9
-2024,HUL,Sakhir,1,Permanent,Haas,20.0,7.0,9.0,,,,,Lapped,16,7.0
-2024,LEC,Sakhir,1,Permanent,Ferrari,8.0,9.0,4.0,,,,,,,4.2
-2024,MAG,Sakhir,1,Permanent,Haas,19.0,14.0,14.0,,,,,Lapped,12,10.3
-2024,NOR,Sakhir,1,Permanent,McLaren,2.0,20.0,5.0,,,,,,,6.2
-2024,OCO,Sakhir,1,Permanent,Alpine,17.0,18.0,18.0,,,,,Lapped,17,12.5
-2024,PER,Sakhir,1,Permanent,Red Bull,12.0,10.0,8.0,,,,,,,6.4
-2024,PIA,Sakhir,1,Permanent,McLaren,3.0,5.0,7.0,,,,,,,4.1000000000000005
-2024,RIC,Sakhir,1,Permanent,RB,1.0,12.0,11.0,,,,,Lapped,13,6.9
-2024,RUS,Sakhir,1,Permanent,Mercedes,7.0,2.0,6.0,,,,,,,3.5000000000000004
-2024,SAI,Sakhir,1,Permanent,Ferrari,11.0,4.0,1.0,,,,,,,2.3000000000000003
-2024,SAR,Sakhir,1,Permanent,Williams,16.0,13.0,19.0,,,,,Lapped,20,11.8
-2024,STR,Sakhir,1,Permanent,Aston Martin,14.0,8.0,10.0,,,,,,,7.0
-2024,TSU,Sakhir,1,Permanent,RB,4.0,15.0,13.0,,,,,Lapped,14,8.6
-2024,VER,Sakhir,1,Permanent,Red Bull,6.0,6.0,3.0,,,,,,,3.0000000000000004
-2024,ZHO,Sakhir,1,Permanent,Sauber,15.0,19.0,16.0,,,,,Lapped,11,11.700000000000001
-2024,ALB,Jeddah,2,Street,Williams,10.0,14.0,17.0,,,,,,,10.600000000000001
-2024,ALO,Jeddah,2,Street,Aston Martin,2.0,1.0,6.0,,,,,,,2.8000000000000003
-2024,BEA,Jeddah,2,Street,Ferrari,,,10.0,,,,,,,4.0
-2024,BOT,Jeddah,2,Street,Sauber,11.0,20.0,18.0,,,,,Lapped,17,12.3
-2024,HAM,Jeddah,2,Street,Mercedes,8.0,8.0,9.0,,,,,,,6.0
-2024,HUL,Jeddah,2,Street,Haas,19.0,18.0,15.0,,,,,,,11.5
-2024,LEC,Jeddah,2,Street,Ferrari,5.0,4.0,2.0,,,,,,,2.1
-2024,MAG,Jeddah,2,Street,Haas,20.0,17.0,11.0,,,,,,,9.8
-2024,NOR,Jeddah,2,Street,McLaren,7.0,12.0,5.0,,,,,,,5.1000000000000005
-2024,OCO,Jeddah,2,Street,Alpine,13.0,15.0,14.0,,,,,Lapped,13,9.9
-2024,PER,Jeddah,2,Street,Red Bull,3.0,5.0,3.0,,,,,,,2.5
-2024,PIA,Jeddah,2,Street,McLaren,15.0,10.0,8.0,,,,,,,6.7
-2024,RIC,Jeddah,2,Street,RB,12.0,19.0,16.0,,,,,Lapped,16,11.4
-2024,RUS,Jeddah,2,Street,Mercedes,4.0,2.0,4.0,,,,,,,2.4000000000000004
-2024,SAR,Jeddah,2,Street,Williams,14.0,16.0,,,,,,Lapped,14,4.6000000000000005
-2024,STR,Jeddah,2,Street,Aston Martin,9.0,6.0,7.0,,,,,Retired,R,4.9
-2024,TSU,Jeddah,2,Street,RB,16.0,11.0,13.0,,,,,Lapped,15,9.0
-2024,VER,Jeddah,2,Street,Red Bull,1.0,3.0,1.0,,,,,,,1.1
-2024,ZHO,Jeddah,2,Street,Sauber,18.0,13.0,19.0,,,,,Lapped,18,12.0
-2024,ALB,Catalunya,3,Permanent,Williams,12.0,,13.0,,,,,Lapped,11,6.4
-2024,ALB,Melbourne,3,Street,Williams,12.0,,13.0,,,,,Lapped,11,6.4
-2024,ALO,Catalunya,3,Permanent,Aston Martin,18.0,5.0,6.0,,,,,,,5.2
-2024,ALO,Melbourne,3,Street,Aston Martin,18.0,5.0,6.0,,,,,,,5.2
-2024,BOT,Catalunya,3,Permanent,Sauber,20.0,14.0,12.0,,,,,Lapped,14,9.600000000000001
-2024,BOT,Melbourne,3,Street,Sauber,20.0,14.0,12.0,,,,,Lapped,14,9.600000000000001
-2024,GAS,Catalunya,3,Permanent,Alpine,17.0,15.0,19.0,,,,,Lapped,13,12.3
-2024,GAS,Melbourne,3,Street,Alpine,17.0,15.0,19.0,,,,,Lapped,13,12.3
-2024,HAM,Catalunya,3,Permanent,Mercedes,9.0,18.0,4.0,,,,,Retired,R,6.1
-2024,HAM,Melbourne,3,Street,Mercedes,9.0,18.0,4.0,,,,,Retired,R,6.1
-2024,HUL,Catalunya,3,Permanent,Haas,16.0,16.0,16.0,,,,,,,11.200000000000001
-2024,HUL,Melbourne,3,Street,Haas,16.0,16.0,16.0,,,,,,,11.200000000000001
-2024,LEC,Catalunya,3,Permanent,Ferrari,4.0,1.0,1.0,,,,,,,1.0
-2024,LEC,Melbourne,3,Street,Ferrari,4.0,1.0,1.0,,,,,,,1.0
-2024,MAG,Catalunya,3,Permanent,Haas,13.0,19.0,17.0,,,,,Lapped,10,11.900000000000002
-2024,MAG,Melbourne,3,Street,Haas,13.0,19.0,17.0,,,,,Lapped,10,11.900000000000002
-2024,NOR,Catalunya,3,Permanent,McLaren,1.0,9.0,10.0,,,,,,,5.9
-2024,NOR,Melbourne,3,Street,McLaren,1.0,9.0,10.0,,,,,,,5.9
-2024,OCO,Catalunya,3,Permanent,Alpine,15.0,17.0,15.0,,,,,Lapped,16,10.9
-2024,OCO,Melbourne,3,Street,Alpine,15.0,17.0,15.0,,,,,Lapped,16,10.9
-2024,PER,Catalunya,3,Permanent,Red Bull,6.0,8.0,7.0,,,,,,,5.0
-2024,PER,Melbourne,3,Street,Red Bull,6.0,8.0,7.0,,,,,,,5.0
-2024,PIA,Catalunya,3,Permanent,McLaren,10.0,7.0,8.0,,,,,,,5.6000000000000005
-2024,PIA,Melbourne,3,Street,McLaren,10.0,7.0,8.0,,,,,,,5.6000000000000005
-2024,RIC,Catalunya,3,Permanent,RB,11.0,12.0,18.0,,,,,Lapped,12,10.700000000000001
-2024,RIC,Melbourne,3,Street,RB,11.0,12.0,18.0,,,,,Lapped,12,10.700000000000001
-2024,RUS,Catalunya,3,Permanent,Mercedes,3.0,6.0,5.0,,,,,Retired,17,3.5
-2024,RUS,Melbourne,3,Street,Mercedes,3.0,6.0,5.0,,,,,Retired,17,3.5
-2024,SAI,Catalunya,3,Permanent,Ferrari,8.0,3.0,3.0,,,,,,,2.6000000000000005
-2024,SAI,Melbourne,3,Street,Ferrari,8.0,3.0,3.0,,,,,,,2.6000000000000005
-2024,SAR,Catalunya,3,Permanent,Williams,14.0,13.0,,,,,,,,4.0
-2024,STR,Catalunya,3,Permanent,Aston Martin,7.0,4.0,9.0,,,,,,,5.1
-2024,STR,Melbourne,3,Street,Aston Martin,7.0,4.0,9.0,,,,,,,5.1
-2024,TSU,Catalunya,3,Permanent,RB,5.0,10.0,11.0,,,,,,,6.9
-2024,TSU,Melbourne,3,Street,RB,5.0,10.0,11.0,,,,,,,6.9
-2024,VER,Catalunya,3,Permanent,Red Bull,2.0,2.0,2.0,,,,,Retired,R,1.4000000000000001
-2024,VER,Melbourne,3,Street,Red Bull,2.0,2.0,2.0,,,,,Retired,R,1.4000000000000001
-2024,ZHO,Catalunya,3,Permanent,Sauber,19.0,11.0,14.0,,,,,Lapped,15,9.700000000000001
-2024,ZHO,Melbourne,3,Street,Sauber,19.0,11.0,14.0,,,,,Lapped,15,9.700000000000001
-2024,ALO,Suzuka,4,Permanent,Aston Martin,7.0,,5.0,,,,,,,2.7
-2024,BOT,Suzuka,4,Permanent,Sauber,14.0,9.0,12.0,,,,,Lapped,14,8.0
-2024,GAS,Suzuka,4,Permanent,Alpine,17.0,,17.0,,,,,Lapped,16,8.5
-2024,HAM,Suzuka,4,Permanent,Mercedes,5.0,2.0,4.0,,,,,,,2.5
-2024,HUL,Suzuka,4,Permanent,Haas,13.0,8.0,16.0,,,,,Lapped,11,9.3
-2024,LEC,Suzuka,4,Permanent,Ferrari,6.0,3.0,10.0,,,,,,,5.2
-2024,MAG,Suzuka,4,Permanent,Haas,19.0,,20.0,,,,,Lapped,13,9.9
-2024,NOR,Suzuka,4,Permanent,McLaren,10.0,6.0,6.0,,,,,,,4.6000000000000005
-2024,OCO,Suzuka,4,Permanent,Alpine,11.0,10.0,14.0,,,,,Lapped,15,8.700000000000001
-2024,PER,Suzuka,4,Permanent,Red Bull,2.0,,2.0,,,,,,,1.0
-2024,PIA,Suzuka,4,Permanent,McLaren,8.0,1.0,8.0,,,,,,,4.2
-2024,RUS,Suzuka,4,Permanent,Mercedes,4.0,,3.0,,,,,,,1.6
-2024,SAI,Suzuka,4,Permanent,Ferrari,3.0,7.0,7.0,,,,,,,4.5
-2024,SAR,Suzuka,4,Permanent,Williams,20.0,,19.0,,,,,Lapped,17,9.600000000000001
-2024,STR,Suzuka,4,Permanent,Aston Martin,15.0,,18.0,,,,,Lapped,12,8.7
-2024,TSU,Suzuka,4,Permanent,RB,9.0,4.0,9.0,,,,,Lapped,10,5.300000000000001
-2024,VER,Suzuka,4,Permanent,Red Bull,1.0,,1.0,,,,,,,0.5
-2024,ZHO,Suzuka,4,Permanent,Sauber,18.0,11.0,15.0,,,,,Retired,R,10.0
-2024,ALB,Shanghai,5,Permanent,Williams,8.0,,,,,,,,,0.8
-2024,ALO,Shanghai,5,Permanent,Aston Martin,19.0,,,,,,,,,1.9000000000000001
-2024,BOT,Shanghai,5,Permanent,Sauber,10.0,,,,,,,Retired,R,1.0
-2024,GAS,Shanghai,5,Permanent,Alpine,20.0,,,,,,,,,2.0
-2024,HAM,Shanghai,5,Permanent,Mercedes,18.0,,,,,,,,,1.8
-2024,HUL,Shanghai,5,Permanent,Haas,5.0,,,,,,,,,0.5
-2024,LEC,Shanghai,5,Permanent,Ferrari,13.0,,,,,,,,,1.3
-2024,MAG,Shanghai,5,Permanent,Haas,6.0,,,,,,,,,0.6000000000000001
-2024,NOR,Shanghai,5,Permanent,McLaren,16.0,,,,,,,,,1.6
-2024,OCO,Shanghai,5,Permanent,Alpine,7.0,,,,,,,,,0.7000000000000001
-2024,PER,Shanghai,5,Permanent,Red Bull,4.0,,,,,,,,,0.4
-2024,PIA,Shanghai,5,Permanent,McLaren,2.0,,,,,,,,,0.2
-2024,RIC,Shanghai,5,Permanent,RB,9.0,,,,,,,Retired,R,0.9
-2024,RUS,Shanghai,5,Permanent,Mercedes,17.0,,,,,,,,,1.7000000000000002
-2024,SAI,Shanghai,5,Permanent,Ferrari,14.0,,,,,,,,,1.4000000000000001
-2024,SAR,Shanghai,5,Permanent,Williams,15.0,,,,,,,,,1.5
-2024,STR,Shanghai,5,Permanent,Aston Martin,1.0,,,,,,,,,0.1
-2024,TSU,Shanghai,5,Permanent,RB,12.0,,,,,,,Retired,R,1.2000000000000002
-2024,VER,Shanghai,5,Permanent,Red Bull,3.0,,,,,,,,,0.30000000000000004
-2024,ZHO,Shanghai,5,Permanent,Sauber,11.0,,,,,,,,,1.1
-2024,ALB,Miami,6,Street,Williams,14.0,,,,,,,,,1.4000000000000001
-2024,ALO,Miami,6,Street,Aston Martin,19.0,,,,,,,,,1.9000000000000001
-2024,BOT,Miami,6,Street,Sauber,17.0,,,,,,,,,1.7000000000000002
-2024,GAS,Miami,6,Street,Alpine,10.0,,,,,,,,,1.0
-2024,HAM,Miami,6,Street,Mercedes,7.0,,,,,,,,,0.7000000000000001
-2024,HUL,Miami,6,Street,Haas,13.0,,,,,,,,,1.3
-2024,LEC,Miami,6,Street,Ferrari,20.0,,,,,,,,,2.0
-2024,MAG,Miami,6,Street,Haas,12.0,,,,,,,,,1.2000000000000002
-2024,NOR,Miami,6,Street,McLaren,16.0,,,,,,,,,1.6
-2024,OCO,Miami,6,Street,Alpine,9.0,,,,,,,,,0.9
-2024,PER,Miami,6,Street,Red Bull,6.0,,,,,,,,,0.6000000000000001
-2024,PIA,Miami,6,Street,McLaren,2.0,,,,,,,,,0.2
-2024,RIC,Miami,6,Street,RB,11.0,,,,,,,,,1.1
-2024,RUS,Miami,6,Street,Mercedes,4.0,,,,,,,,,0.4
-2024,SAI,Miami,6,Street,Ferrari,3.0,,,,,,,,,0.30000000000000004
-2024,SAR,Miami,6,Street,Williams,18.0,,,,,,,Retired,R,1.8
-2024,STR,Miami,6,Street,Aston Martin,5.0,,,,,,,,,0.5
-2024,TSU,Miami,6,Street,RB,8.0,,,,,,,,,0.8
-2024,VER,Miami,6,Street,Red Bull,1.0,,,,,,,,,0.1
-2024,ZHO,Miami,6,Street,Sauber,15.0,,,,,,,,,1.5
-2024,ALB,Imola,7,Permanent,Williams,19.0,18.0,7.0,,,,,Retired,R,8.3
-2024,ALO,Imola,7,Permanent,Aston Martin,10.0,10.0,18.0,,,,,Lapped,19,10.2
-2024,BOT,Imola,7,Permanent,Sauber,16.0,16.0,14.0,,,,,Lapped,18,10.400000000000002
-2024,GAS,Imola,7,Permanent,Alpine,11.0,15.0,19.0,,,,,Lapped,16,11.7
-2024,HAM,Imola,7,Permanent,Mercedes,7.0,4.0,17.0,,,,,,,8.3
-2024,HUL,Imola,7,Permanent,Haas,20.0,9.0,10.0,,,,,Lapped,11,7.8
-2024,LEC,Imola,7,Permanent,Ferrari,1.0,1.0,4.0,,,,,,,1.9000000000000001
-2024,MAG,Imola,7,Permanent,Haas,,17.0,16.0,,,,,Lapped,12,9.8
-2024,NOR,Imola,7,Permanent,McLaren,8.0,12.0,2.0,,,,,,,4.0
-2024,OCO,Imola,7,Permanent,Alpine,14.0,14.0,8.0,,,,,Lapped,14,7.4
-2024,PER,Imola,7,Permanent,Red Bull,4.0,8.0,12.0,,,,,,,6.800000000000001
-2024,PIA,Imola,7,Permanent,McLaren,9.0,2.0,1.0,,,,,,,1.7000000000000002
-2024,RIC,Imola,7,Permanent,RB,13.0,11.0,11.0,,,,,Lapped,13,7.9
-2024,RUS,Imola,7,Permanent,Mercedes,2.0,5.0,5.0,,,,,,,3.2
-2024,SAI,Imola,7,Permanent,Ferrari,3.0,6.0,3.0,,,,,,,2.7
-2024,SAR,Imola,7,Permanent,Williams,18.0,20.0,15.0,,,,,Lapped,17,11.8
-2024,STR,Imola,7,Permanent,Aston Martin,12.0,13.0,9.0,,,,,,,7.4
-2024,TSU,Imola,7,Permanent,RB,6.0,3.0,13.0,,,,,Lapped,10,6.4
-2024,VER,Imola,7,Permanent,Red Bull,5.0,7.0,6.0,,,,,,,4.300000000000001
-2024,ZHO,Imola,7,Permanent,Sauber,17.0,19.0,20.0,,,,,Lapped,15,13.5
-2024,ALB,Monte Carlo,9,Street,Williams,,9.0,18.0,,,,,Retired,R,9.0
-2024,ALB,Montreal,9,Street,Williams,,9.0,18.0,,,,,Retired,R,9.0
-2024,ALO,Monte Carlo,9,Street,Aston Martin,15.0,1.0,8.0,,,,,,,4.9
-2024,ALO,Montreal,9,Street,Aston Martin,15.0,1.0,8.0,,,,,,,4.9
-2024,BOT,Monte Carlo,9,Street,Sauber,8.0,14.0,13.0,,,,,,,8.8
-2024,BOT,Montreal,9,Street,Sauber,8.0,14.0,13.0,,,,,,,8.8
-2024,GAS,Monte Carlo,9,Street,Alpine,7.0,19.0,16.0,,,,,,,10.9
-2024,GAS,Montreal,9,Street,Alpine,7.0,19.0,16.0,,,,,,,10.9
-2024,HAM,Monte Carlo,9,Street,Mercedes,4.0,7.0,1.0,,,,,,,2.2
-2024,HAM,Montreal,9,Street,Mercedes,4.0,7.0,1.0,,,,,,,2.2
-2024,HUL,Montreal,9,Street,Haas,14.0,15.0,17.0,,,,,,,11.200000000000001
-2024,LEC,Monte Carlo,9,Street,Ferrari,3.0,4.0,10.0,,,,,Retired,R,5.1
-2024,LEC,Montreal,9,Street,Ferrari,3.0,4.0,10.0,,,,,Retired,R,5.1
-2024,MAG,Montreal,9,Street,Haas,13.0,6.0,11.0,,,,,,,6.9
-2024,NOR,Monte Carlo,9,Street,McLaren,1.0,20.0,7.0,,,,,,,6.9
-2024,NOR,Montreal,9,Street,McLaren,1.0,20.0,7.0,,,,,,,6.9
-2024,OCO,Montreal,9,Street,Alpine,,11.0,19.0,,,,,,,9.8
-2024,PER,Montreal,9,Street,Red Bull,9.0,10.0,9.0,,,,,Retired,R,6.5
-2024,PIA,Monte Carlo,9,Street,McLaren,6.0,16.0,5.0,,,,,,,5.800000000000001
-2024,PIA,Montreal,9,Street,McLaren,6.0,16.0,5.0,,,,,,,5.800000000000001
-2024,RIC,Monte Carlo,9,Street,RB,11.0,5.0,6.0,,,,,,,4.5
-2024,RIC,Montreal,9,Street,RB,11.0,5.0,6.0,,,,,,,4.5
-2024,RUS,Monte Carlo,9,Street,Mercedes,10.0,2.0,3.0,,,,,,,2.6
-2024,RUS,Montreal,9,Street,Mercedes,10.0,2.0,3.0,,,,,,,2.6
-2024,SAI,Monte Carlo,9,Street,Ferrari,2.0,13.0,12.0,,,,,Retired,R,7.600000000000001
-2024,SAI,Montreal,9,Street,Ferrari,2.0,13.0,12.0,,,,,Retired,R,7.600000000000001
-2024,SAR,Monte Carlo,9,Street,Williams,16.0,12.0,14.0,,,,,Retired,R,9.600000000000001
-2024,SAR,Montreal,9,Street,Williams,16.0,12.0,14.0,,,,,Retired,R,9.600000000000001
-2024,STR,Monte Carlo,9,Street,Aston Martin,17.0,3.0,4.0,,,,,,,3.9000000000000004
-2024,STR,Montreal,9,Street,Aston Martin,17.0,3.0,4.0,,,,,,,3.9000000000000004
-2024,TSU,Monte Carlo,9,Street,RB,12.0,8.0,15.0,,,,,,,8.8
-2024,TSU,Montreal,9,Street,RB,12.0,8.0,15.0,,,,,,,8.8
-2024,VER,Monte Carlo,9,Street,Red Bull,5.0,18.0,2.0,,,,,,,4.8999999999999995
-2024,VER,Montreal,9,Street,Red Bull,5.0,18.0,2.0,,,,,,,4.8999999999999995
-2024,ZHO,Monte Carlo,9,Street,Sauber,,17.0,20.0,,,,,Lapped,15,11.4
-2024,ZHO,Montreal,9,Street,Sauber,,17.0,20.0,,,,,Lapped,15,11.4
-2024,ALB,Spielberg,11,Permanent,Williams,18.0,,,,,,,Lapped,15,1.8
-2024,ALO,Spielberg,11,Permanent,Aston Martin,10.0,,,,,,,Lapped,18,1.0
-2024,BOT,Spielberg,11,Permanent,Sauber,15.0,,,,,,,Lapped,16,1.5
-2024,GAS,Spielberg,11,Permanent,Alpine,11.0,,,,,,,,,1.1
-2024,HAM,Spielberg,11,Permanent,Mercedes,5.0,,,,,,,,,0.5
-2024,HUL,Spielberg,11,Permanent,Haas,17.0,,,,,,,,,1.7000000000000002
-2024,LEC,Spielberg,11,Permanent,Ferrari,3.0,,,,,,,,,0.30000000000000004
-2024,MAG,Spielberg,11,Permanent,Haas,19.0,,,,,,,,,1.9000000000000001
-2024,NOR,Spielberg,11,Permanent,McLaren,13.0,,,,,,,Lapped,20,1.3
-2024,OCO,Spielberg,11,Permanent,Alpine,6.0,,,,,,,,,0.6000000000000001
-2024,PER,Spielberg,11,Permanent,Red Bull,12.0,,,,,,,,,1.2000000000000002
-2024,PIA,Spielberg,11,Permanent,McLaren,2.0,,,,,,,,,0.2
-2024,RIC,Spielberg,11,Permanent,RB,16.0,,,,,,,,,1.6
-2024,RUS,Spielberg,11,Permanent,Mercedes,8.0,,,,,,,,,0.8
-2024,SAI,Spielberg,11,Permanent,Ferrari,4.0,,,,,,,,,0.4
-2024,SAR,Spielberg,11,Permanent,Williams,20.0,,,,,,,Lapped,19,2.0
-2024,STR,Spielberg,11,Permanent,Aston Martin,7.0,,,,,,,Lapped,13,0.7000000000000001
-2024,TSU,Spielberg,11,Permanent,RB,9.0,,,,,,,Lapped,14,0.9
-2024,VER,Spielberg,11,Permanent,Red Bull,1.0,,,,,,,,,0.1
-2024,ZHO,Spielberg,11,Permanent,Sauber,14.0,,,,,,,Lapped,17,1.4000000000000001
-2024,ALB,Silverstone,12,Permanent,Williams,16.0,13.0,11.0,,,,,,,8.600000000000001
-2024,ALO,Silverstone,12,Permanent,Aston Martin,6.0,11.0,8.0,,,,,,,6.0
-2024,BOT,Silverstone,12,Permanent,Sauber,12.0,12.0,15.0,,,,,Lapped,15,9.600000000000001
-2024,HAM,Silverstone,12,Permanent,Mercedes,7.0,6.0,2.0,,,,,,,2.7
-2024,HUL,Silverstone,12,Permanent,Haas,11.0,4.0,10.0,,,,,,,5.9
-2024,LEC,Silverstone,12,Permanent,Ferrari,8.0,5.0,6.0,,,,,Lapped,14,4.2
-2024,MAG,Silverstone,12,Permanent,Haas,,20.0,17.0,,,,,,,10.8
-2024,NOR,Silverstone,12,Permanent,McLaren,1.0,1.0,3.0,,,,,,,1.5000000000000002
-2024,OCO,Silverstone,12,Permanent,Alpine,10.0,15.0,16.0,,,,,Lapped,16,10.4
-2024,PER,Silverstone,12,Permanent,Red Bull,,3.0,9.0,,,,,Lapped,17,4.2
-2024,PIA,Silverstone,12,Permanent,McLaren,3.0,2.0,7.0,,,,,,,3.5000000000000004
-2024,RIC,Silverstone,12,Permanent,RB,13.0,19.0,18.0,,,,,Lapped,13,12.3
-2024,RUS,Silverstone,12,Permanent,Mercedes,5.0,10.0,1.0,,,,,Retired,R,2.9
-2024,SAI,Silverstone,12,Permanent,Ferrari,9.0,8.0,4.0,,,,,,,4.1
-2024,SAR,Silverstone,12,Permanent,Williams,,17.0,13.0,,,,,,,8.600000000000001
-2024,STR,Silverstone,12,Permanent,Aston Martin,2.0,9.0,12.0,,,,,,,6.800000000000001
-2024,TSU,Silverstone,12,Permanent,RB,20.0,16.0,14.0,,,,,,,10.8
-2024,VER,Silverstone,12,Permanent,Red Bull,4.0,7.0,5.0,,,,,,,3.8000000000000003
-2024,ZHO,Silverstone,12,Permanent,Sauber,15.0,18.0,19.0,,,,,Lapped,18,12.7
-2024,ALB,Hungaroring,13,Permanent,Williams,14.0,9.0,7.0,,,,,Lapped,14,6.0
-2024,ALO,Hungaroring,13,Permanent,Aston Martin,13.0,10.0,14.0,,,,,,,8.9
-2024,BOT,Hungaroring,13,Permanent,Sauber,15.0,11.0,12.0,,,,,Lapped,16,8.5
-2024,GAS,Hungaroring,13,Permanent,Alpine,17.0,16.0,18.0,,,,,Retired,R,12.100000000000001
-2024,HAM,Hungaroring,13,Permanent,Mercedes,10.0,7.0,10.0,,,,,,,6.4
-2024,HUL,Hungaroring,13,Permanent,Haas,,15.0,8.0,,,,,Lapped,13,6.2
-2024,LEC,Hungaroring,13,Permanent,Ferrari,3.0,18.0,11.0,,,,,,,8.3
-2024,MAG,Hungaroring,13,Permanent,Haas,19.0,6.0,19.0,,,,,Lapped,15,10.700000000000001
-2024,NOR,Hungaroring,13,Permanent,McLaren,6.0,1.0,1.0,,,,,,,1.2000000000000002
-2024,OCO,Hungaroring,13,Permanent,Alpine,18.0,14.0,20.0,,,,,Lapped,18,12.600000000000001
-2024,PER,Hungaroring,13,Permanent,Red Bull,11.0,4.0,13.0,,,,,,,7.1000000000000005
-2024,PIA,Hungaroring,13,Permanent,McLaren,7.0,13.0,2.0,,,,,,,4.1000000000000005
-2024,RIC,Hungaroring,13,Permanent,RB,12.0,8.0,6.0,,,,,Lapped,12,5.200000000000001
-2024,RUS,Hungaroring,13,Permanent,Mercedes,4.0,5.0,4.0,,,,,,,3.0
-2024,SAI,Hungaroring,13,Permanent,Ferrari,1.0,3.0,5.0,,,,,,,2.7
-2024,SAR,Hungaroring,13,Permanent,Williams,16.0,12.0,16.0,,,,,Lapped,17,10.4
-2024,STR,Hungaroring,13,Permanent,Aston Martin,9.0,17.0,15.0,,,,,,,10.3
-2024,TSU,Hungaroring,13,Permanent,RB,8.0,19.0,9.0,,,,,,,8.200000000000001
-2024,VER,Hungaroring,13,Permanent,Red Bull,2.0,2.0,3.0,,,,,,,1.8000000000000003
-2024,ZHO,Hungaroring,13,Permanent,Sauber,5.0,20.0,17.0,,,,,Lapped,19,11.3
-2024,ALB,Spa-Francorchamps,14,Permanent,Williams,3.0,17.0,11.0,,,,,,,8.100000000000001
-2024,ALO,Spa-Francorchamps,14,Permanent,Aston Martin,12.0,12.0,13.0,,,,,,,8.8
-2024,BOT,Spa-Francorchamps,14,Permanent,Sauber,14.0,13.0,8.0,,,,,,,7.2
-2024,GAS,Spa-Francorchamps,14,Permanent,Alpine,11.0,15.0,3.0,,,,,,,5.3
-2024,HAM,Spa-Francorchamps,14,Permanent,Mercedes,5.0,10.0,9.0,,,,,,,6.1
-2024,HUL,Spa-Francorchamps,14,Permanent,Haas,17.0,16.0,12.0,,,,,,,9.700000000000001
-2024,LEC,Spa-Francorchamps,14,Permanent,Ferrari,6.0,4.0,6.0,,,,,,,3.8000000000000007
-2024,MAG,Spa-Francorchamps,14,Permanent,Haas,18.0,8.0,18.0,,,,,,,10.600000000000001
-2024,NOR,Spa-Francorchamps,14,Permanent,McLaren,8.0,1.0,4.0,,,,,,,2.6
-2024,OCO,Spa-Francorchamps,14,Permanent,Alpine,,7.0,5.0,,,,,,,3.4000000000000004
-2024,PER,Spa-Francorchamps,14,Permanent,Red Bull,7.0,9.0,10.0,,,,,,,6.5
-2024,PIA,Spa-Francorchamps,14,Permanent,McLaren,2.0,2.0,2.0,,,,,,,1.4000000000000001
-2024,RIC,Spa-Francorchamps,14,Permanent,RB,13.0,14.0,14.0,,,,,,,9.700000000000001
-2024,RUS,Spa-Francorchamps,14,Permanent,Mercedes,4.0,6.0,,,,,,Disqualified,20,1.6
-2024,SAI,Spa-Francorchamps,14,Permanent,Ferrari,9.0,5.0,,,,,,,,1.9
-2024,SAR,Spa-Francorchamps,14,Permanent,Williams,15.0,18.0,17.0,,,,,,,11.9
-2024,STR,Spa-Francorchamps,14,Permanent,Aston Martin,10.0,11.0,7.0,,,,,,,6.0
-2024,TSU,Spa-Francorchamps,14,Permanent,RB,16.0,20.0,15.0,,,,,,,11.6
-2024,VER,Spa-Francorchamps,14,Permanent,Red Bull,1.0,3.0,1.0,,,,,,,1.1
-2024,ZHO,Spa-Francorchamps,14,Permanent,Sauber,19.0,19.0,16.0,,,,,Retired,R,12.100000000000001
-2024,ALB,Zandvoort,15,Permanent,Williams,6.0,10.0,14.0,,,,,Lapped,14,8.200000000000001
-2024,ALO,Zandvoort,15,Permanent,Aston Martin,15.0,6.0,5.0,,,,,Lapped,10,4.7
-2024,ALO,Interlagos,15,Permanent,Aston Martin,15.0,6.0,5.0,,,,,Lapped,10,4.7
-2024,BEA,Interlagos,15,Permanent,Haas,,,,,,,,,,
-2024,BOT,Zandvoort,15,Permanent,Sauber,,18.0,3.0,,,,,Lapped,19,4.800000000000001
-2024,BOT,Interlagos,15,Permanent,Sauber,,18.0,3.0,,,,,Lapped,19,4.800000000000001
-2024,COL,Interlagos,15,Permanent,Williams,,,,,,,,,,
-2024,GAS,Zandvoort,15,Permanent,Alpine,20.0,14.0,1.0,,,,,Lapped,9,5.200000000000001
-2024,GAS,Interlagos,15,Permanent,Alpine,20.0,14.0,1.0,,,,,Lapped,9,5.200000000000001
-2024,HAM,Zandvoort,15,Permanent,Mercedes,3.0,3.0,15.0,,,,,,,6.9
-2024,HAM,Interlagos,15,Permanent,Mercedes,3.0,3.0,15.0,,,,,,,6.9
-2024,HUL,Zandvoort,15,Permanent,Haas,8.0,20.0,9.0,,,,,Lapped,11,8.4
-2024,HUL,Interlagos,15,Permanent,Haas,8.0,20.0,9.0,,,,,Lapped,11,8.4
-2024,LAW,Interlagos,15,Permanent,RB,,,,,,,,,,
-2024,LEC,Zandvoort,15,Permanent,Ferrari,13.0,9.0,16.0,,,,,,,9.5
-2024,LEC,Interlagos,15,Permanent,Ferrari,13.0,9.0,16.0,,,,,,,9.5
-2024,MAG,Zandvoort,15,Permanent,Haas,9.0,8.0,2.0,,,,,Lapped,18,3.3
-2024,NOR,Zandvoort,15,Permanent,McLaren,1.0,4.0,4.0,,,,,,,2.5
-2024,NOR,Interlagos,15,Permanent,McLaren,1.0,4.0,4.0,,,,,,,2.5
-2024,OCO,Zandvoort,15,Permanent,Alpine,18.0,17.0,6.0,,,,,Lapped,15,7.6000000000000005
-2024,OCO,Interlagos,15,Permanent,Alpine,18.0,17.0,6.0,,,,,Lapped,15,7.6000000000000005
-2024,PER,Zandvoort,15,Permanent,Red Bull,12.0,12.0,,,,,,,,3.6000000000000005
-2024,PER,Interlagos,15,Permanent,Red Bull,12.0,12.0,,,,,,,,3.6000000000000005
-2024,PIA,Zandvoort,15,Permanent,McLaren,7.0,2.0,7.0,,,,,,,3.9000000000000004
-2024,PIA,Interlagos,15,Permanent,McLaren,7.0,2.0,7.0,,,,,,,3.9000000000000004
-2024,RIC,Zandvoort,15,Permanent,RB,19.0,13.0,18.0,,,,,Lapped,12,11.7
-2024,RUS,Zandvoort,15,Permanent,Mercedes,5.0,1.0,13.0,,,,,,,5.9
-2024,RUS,Interlagos,15,Permanent,Mercedes,5.0,1.0,13.0,,,,,,,5.9
-2024,SAI,Zandvoort,15,Permanent,Ferrari,4.0,19.0,10.0,,,,,,,8.2
-2024,SAI,Interlagos,15,Permanent,Ferrari,4.0,19.0,10.0,,,,,,,8.2
-2024,SAR,Zandvoort,15,Permanent,Williams,17.0,15.0,12.0,,,,,Lapped,16,9.5
-2024,STR,Zandvoort,15,Permanent,Aston Martin,11.0,11.0,8.0,,,,,Lapped,13,6.5
-2024,TSU,Zandvoort,15,Permanent,RB,14.0,7.0,,,,,,Lapped,17,2.8000000000000003
-2024,TSU,Interlagos,15,Permanent,RB,14.0,7.0,,,,,,Lapped,17,2.8000000000000003
-2024,VER,Zandvoort,15,Permanent,Red Bull,2.0,5.0,17.0,,,,,,,8.0
-2024,VER,Interlagos,15,Permanent,Red Bull,2.0,5.0,17.0,,,,,,,8.0
-2024,ZHO,Zandvoort,15,Permanent,Sauber,10.0,16.0,11.0,,,,,Lapped,20,8.600000000000001
-2024,ZHO,Interlagos,15,Permanent,Sauber,10.0,16.0,11.0,,,,,Lapped,20,8.600000000000001
-2024,ALB,Monza,16,Permanent,Williams,8.0,13.0,8.0,,,,,,,6.6000000000000005
-2024,ALO,Monza,16,Permanent,Aston Martin,10.0,9.0,11.0,,,,,,,7.2
-2024,BOT,Monza,16,Permanent,Sauber,5.0,11.0,19.0,,,,,Lapped,16,10.3
-2024,COL,Monza,16,Permanent,Williams,18.0,17.0,9.0,,,,,,,8.8
-2024,GAS,Monza,16,Permanent,Alpine,14.0,18.0,14.0,,,,,Lapped,15,10.600000000000001
-2024,HAM,Monza,16,Permanent,Mercedes,7.0,1.0,1.0,,,,,,,1.3000000000000003
-2024,HUL,Monza,16,Permanent,Haas,19.0,7.0,10.0,,,,,Lapped,17,7.300000000000001
-2024,LEC,Monza,16,Permanent,Ferrari,2.0,5.0,3.0,,,,,,,2.4000000000000004
-2024,MAG,Monza,16,Permanent,Haas,11.0,12.0,16.0,,,,,,,9.9
-2024,NOR,Monza,16,Permanent,McLaren,3.0,2.0,5.0,,,,,,,2.7
-2024,OCO,Monza,16,Permanent,Alpine,17.0,19.0,17.0,,,,,Lapped,14,12.3
-2024,PER,Monza,16,Permanent,Red Bull,9.0,15.0,18.0,,,,,,,11.1
-2024,PIA,Monza,16,Permanent,McLaren,6.0,4.0,4.0,,,,,,,3.0
-2024,RIC,Monza,16,Permanent,RB,12.0,8.0,12.0,,,,,,,7.600000000000001
-2024,RUS,Monza,16,Permanent,Mercedes,,6.0,2.0,,,,,,,2.0
-2024,SAI,Monza,16,Permanent,Ferrari,4.0,3.0,7.0,,,,,,,3.8000000000000003
-2024,STR,Monza,16,Permanent,Aston Martin,16.0,10.0,15.0,,,,,Lapped,19,9.6
-2024,TSU,Monza,16,Permanent,RB,13.0,16.0,13.0,,,,,Retired,R,9.7
-2024,VER,Monza,16,Permanent,Red Bull,1.0,14.0,6.0,,,,,,,5.300000000000001
-2024,ZHO,Monza,16,Permanent,Sauber,15.0,20.0,20.0,,,,,Lapped,18,13.5
-2024,ALB,Baku,17,Street,Williams,17.0,13.0,8.0,,,,,,,7.500000000000001
-2024,ALO,Baku,17,Street,Aston Martin,7.0,12.0,11.0,,,,,,,7.500000000000001
-2024,BEA,Baku,17,Street,Haas,11.0,10.0,,,,,,,,3.1
-2024,BOT,Baku,17,Street,Sauber,14.0,15.0,17.0,,,,,Lapped,16,11.200000000000001
-2024,COL,Baku,17,Street,Williams,16.0,14.0,9.0,,,,,,,8.0
-2024,GAS,Baku,17,Street,Alpine,18.0,18.0,15.0,,,,,,,11.4
-2024,HAM,Baku,17,Street,Mercedes,2.0,3.0,10.0,,,,,,,4.8
-2024,HUL,Baku,17,Street,Haas,12.0,8.0,16.0,,,,,,,9.200000000000001
-2024,LEC,Baku,17,Street,Ferrari,9.0,1.0,2.0,,,,,,,1.9000000000000001
-2024,NOR,Baku,17,Street,McLaren,4.0,17.0,3.0,,,,,,,5.0
-2024,OCO,Baku,17,Street,Alpine,,19.0,,,,,,Lapped,15,3.8000000000000003
-2024,PER,Baku,17,Street,Red Bull,3.0,2.0,7.0,,,,,Retired,17,3.5000000000000004
-2024,PIA,Baku,17,Street,McLaren,6.0,5.0,4.0,,,,,,,3.2
-2024,RIC,Baku,17,Street,RB,10.0,16.0,14.0,,,,,,,9.8
-2024,RUS,Baku,17,Street,Mercedes,8.0,9.0,1.0,,,,,,,3.0
-2024,SAI,Baku,17,Street,Ferrari,5.0,4.0,6.0,,,,,Retired,18,3.7
-2024,STR,Baku,17,Street,Aston Martin,13.0,7.0,13.0,,,,,Retired,19,7.9
-2024,TSU,Baku,17,Street,RB,15.0,11.0,12.0,,,,,Retired,R,8.5
-2024,VER,Baku,17,Street,Red Bull,1.0,6.0,5.0,,,,,,,3.3000000000000003
-2024,ZHO,Baku,17,Street,Sauber,19.0,20.0,18.0,,,,,,,13.100000000000001
-2024,ALB,Singapore,18,Street,Williams,8.0,9.0,8.0,,,,,Retired,R,5.800000000000001
-2024,ALB,Yas Marina Circuit,18,Unknown,Williams,8.0,9.0,8.0,,,,,Retired,R,5.800000000000001
-2024,ALO,Singapore,18,Street,Aston Martin,9.0,12.0,10.0,,,,,Lapped,8,7.300000000000001
-2024,ALO,Yas Marina Circuit,18,Unknown,Aston Martin,9.0,12.0,10.0,,,,,Lapped,8,7.300000000000001
-2024,BOT,Singapore,18,Street,Sauber,18.0,20.0,19.0,,,,,Lapped,16,13.4
-2024,BOT,Yas Marina Circuit,18,Unknown,Sauber,18.0,20.0,19.0,,,,,Lapped,16,13.4
-2024,COL,Singapore,18,Street,Williams,11.0,16.0,9.0,,,,,Lapped,11,7.9
-2024,COL,Yas Marina Circuit,18,Unknown,Williams,11.0,16.0,9.0,,,,,Lapped,11,7.9
-2024,DOO,Yas Marina Circuit,18,Unknown,Alpine,,,,,,,,,,
-2024,GAS,Singapore,18,Street,Alpine,13.0,18.0,14.0,,,,,Lapped,17,10.5
-2024,GAS,Yas Marina Circuit,18,Unknown,Alpine,13.0,18.0,14.0,,,,,Lapped,17,10.5
-2024,HAM,Singapore,18,Street,Mercedes,12.0,11.0,7.0,,,,,,,6.200000000000001
-2024,HAM,Yas Marina Circuit,18,Unknown,Mercedes,12.0,11.0,7.0,,,,,,,6.200000000000001
-2024,HUL,Singapore,18,Street,Haas,20.0,10.0,12.0,,,,,Lapped,9,8.8
-2024,HUL,Yas Marina Circuit,18,Unknown,Haas,20.0,10.0,12.0,,,,,Lapped,9,8.8
-2024,LAW,Yas Marina Circuit,18,Unknown,RB,,,,,,,,,,
-2024,LEC,Singapore,18,Street,Ferrari,1.0,2.0,5.0,,,,,,,2.5
-2024,LEC,Yas Marina Circuit,18,Unknown,Ferrari,1.0,2.0,5.0,,,,,,,2.5
-2024,MAG,Singapore,18,Street,Haas,17.0,13.0,13.0,,,,,Retired,19,9.5
-2024,MAG,Yas Marina Circuit,18,Unknown,Haas,17.0,13.0,13.0,,,,,Retired,19,9.5
-2024,NOR,Singapore,18,Street,McLaren,2.0,1.0,1.0,,,,,,,0.8
-2024,NOR,Yas Marina Circuit,18,Unknown,McLaren,2.0,1.0,1.0,,,,,,,0.8
-2024,OCO,Singapore,18,Street,Alpine,10.0,17.0,16.0,,,,,Lapped,13,10.8
-2024,PER,Singapore,18,Street,Red Bull,14.0,8.0,15.0,,,,,Lapped,10,9.0
-2024,PIA,Singapore,18,Street,McLaren,6.0,5.0,3.0,,,,,,,2.8000000000000003
-2024,PIA,Yas Marina Circuit,18,Unknown,McLaren,6.0,5.0,3.0,,,,,,,2.8000000000000003
-2024,RIC,Singapore,18,Street,RB,7.0,6.0,17.0,,,,,Lapped,18,8.700000000000001
-2024,RUS,Singapore,18,Street,Mercedes,16.0,7.0,2.0,,,,,,,3.8
-2024,RUS,Yas Marina Circuit,18,Unknown,Mercedes,16.0,7.0,2.0,,,,,,,3.8
-2024,SAI,Singapore,18,Street,Ferrari,3.0,3.0,6.0,,,,,,,3.3000000000000007
-2024,SAI,Yas Marina Circuit,18,Unknown,Ferrari,3.0,3.0,6.0,,,,,,,3.3000000000000007
-2024,STR,Singapore,18,Street,Aston Martin,15.0,14.0,18.0,,,,,Lapped,14,11.5
-2024,STR,Yas Marina Circuit,18,Unknown,Aston Martin,15.0,14.0,18.0,,,,,Lapped,14,11.5
-2024,TSU,Singapore,18,Street,RB,5.0,4.0,11.0,,,,,Lapped,12,5.7
-2024,TSU,Yas Marina Circuit,18,Unknown,RB,5.0,4.0,11.0,,,,,Lapped,12,5.7
-2024,VER,Singapore,18,Street,Red Bull,4.0,15.0,4.0,,,,,,,5.0
-2024,VER,Yas Marina Circuit,18,Unknown,Red Bull,4.0,15.0,4.0,,,,,,,5.0
-2024,ZHO,Singapore,18,Street,Sauber,19.0,19.0,20.0,,,,,Lapped,15,13.7
-2024,ZHO,Yas Marina Circuit,18,Unknown,Sauber,19.0,19.0,20.0,,,,,Lapped,15,13.7
-2024,ALB,Austin,19,Permanent,Williams,14.0,,,,,,,Lapped,16,1.4000000000000001
-2024,ALO,Austin,19,Permanent,Aston Martin,9.0,,,,,,,Lapped,13,0.9
-2024,BOT,Austin,19,Permanent,Sauber,18.0,,,,,,,Lapped,17,1.8
-2024,COL,Austin,19,Permanent,Williams,19.0,,,,,,,,,1.9000000000000001
-2024,GAS,Austin,19,Permanent,Alpine,12.0,,,,,,,,,1.2000000000000002
-2024,HUL,Austin,19,Permanent,Haas,11.0,,,,,,,,,1.1
-2024,LAW,Austin,19,Permanent,RB,13.0,,,,,,,,,1.3
-2024,LEC,Austin,19,Permanent,Ferrari,2.0,,,,,,,,,0.2
-2024,MAG,Austin,19,Permanent,Haas,8.0,,,,,,,,,0.8
-2024,NOR,Austin,19,Permanent,McLaren,4.0,,,,,,,,,0.4
-2024,OCO,Austin,19,Permanent,Alpine,17.0,,,,,,,Lapped,18,1.7000000000000002
-2024,PER,Austin,19,Permanent,Red Bull,16.0,,,,,,,,,1.6
-2024,PIA,Austin,19,Permanent,McLaren,5.0,,,,,,,,,0.5
-2024,RUS,Austin,19,Permanent,Mercedes,7.0,,,,,,,,,0.7000000000000001
-2024,SAI,Austin,19,Permanent,Ferrari,1.0,,,,,,,,,0.1
-2024,STR,Austin,19,Permanent,Aston Martin,15.0,,,,,,,Lapped,15,1.5
-2024,TSU,Austin,19,Permanent,RB,10.0,,,,,,,Lapped,14,1.0
-2024,VER,Austin,19,Permanent,Red Bull,3.0,,,,,,,,,0.30000000000000004
-2024,ZHO,Austin,19,Permanent,Sauber,20.0,,,,,,,Lapped,19,2.0
-2024,ALO,Mexico City,20,Permanent,Aston Martin,,11.0,15.0,,,,,Retired,R,8.2
-2024,BOT,Mexico City,20,Permanent,Sauber,8.0,8.0,12.0,,,,,Lapped,14,7.200000000000001
-2024,COL,Mexico City,20,Permanent,Williams,11.0,15.0,13.0,,,,,Lapped,12,9.3
-2024,GAS,Mexico City,20,Permanent,Alpine,15.0,16.0,20.0,,,,,Lapped,10,12.7
-2024,HAM,Mexico City,20,Permanent,Mercedes,,7.0,5.0,,,,,,,3.4000000000000004
-2024,HUL,Mexico City,20,Permanent,Haas,5.0,12.0,16.0,,,,,Lapped,9,9.3
-2024,LAW,Mexico City,20,Permanent,RB,9.0,10.0,10.0,,,,,Lapped,16,6.9
-2024,LEC,Mexico City,20,Permanent,Ferrari,,4.0,6.0,,,,,,,3.2
-2024,MAG,Mexico City,20,Permanent,Haas,14.0,6.0,9.0,,,,,,,6.200000000000001
-2024,NOR,Mexico City,20,Permanent,McLaren,,5.0,2.0,,,,,,,1.8
-2024,OCO,Mexico City,20,Permanent,Alpine,7.0,13.0,18.0,,,,,Lapped,13,10.5
-2024,PER,Mexico City,20,Permanent,Red Bull,10.0,9.0,14.0,,,,,Lapped,17,8.4
-2024,PIA,Mexico City,20,Permanent,McLaren,6.0,2.0,1.0,,,,,,,1.4
-2024,RUS,Mexico City,20,Permanent,Mercedes,1.0,18.0,8.0,,,,,,,6.9
-2024,SAI,Mexico City,20,Permanent,Ferrari,2.0,1.0,3.0,,,,,,,1.6
-2024,STR,Mexico City,20,Permanent,Aston Martin,16.0,14.0,17.0,,,,,Lapped,11,11.200000000000001
-2024,VER,Mexico City,20,Permanent,Red Bull,4.0,,4.0,,,,,,,2.0
-2024,ZHO,Mexico City,20,Permanent,Sauber,,17.0,19.0,,,,,Lapped,15,11.0
-2024,ALB,Las Vegas,22,Street,Williams,13.0,20.0,7.0,,,,,Retired,R,8.1
-2024,ALO,Las Vegas,22,Street,Aston Martin,7.0,14.0,15.0,,,,,,,9.5
-2024,BOT,Las Vegas,22,Street,Sauber,16.0,11.0,17.0,,,,,Lapped,18,10.600000000000001
-2024,COL,Las Vegas,22,Street,Williams,17.0,18.0,8.0,,,,,,,8.5
-2024,GAS,Las Vegas,22,Street,Alpine,9.0,6.0,10.0,,,,,Retired,R,6.1
-2024,HAM,Las Vegas,22,Street,Mercedes,1.0,1.0,6.0,,,,,,,2.7
-2024,HUL,Las Vegas,22,Street,Haas,15.0,9.0,11.0,,,,,,,7.7
-2024,LAW,Las Vegas,22,Street,RB,20.0,15.0,18.0,,,,,,,12.2
-2024,LEC,Las Vegas,22,Street,Ferrari,4.0,5.0,12.0,,,,,,,6.200000000000001
-2024,MAG,Las Vegas,22,Street,Haas,11.0,7.0,9.0,,,,,,,6.1
-2024,NOR,Las Vegas,22,Street,McLaren,3.0,2.0,4.0,,,,,,,2.3000000000000003
-2024,OCO,Las Vegas,22,Street,Alpine,14.0,12.0,14.0,,,,,Lapped,17,9.400000000000002
-2024,PER,Las Vegas,22,Street,Red Bull,10.0,19.0,13.0,,,,,,,10.0
-2024,PIA,Las Vegas,22,Street,McLaren,8.0,8.0,2.0,,,,,,,3.2
-2024,RUS,Las Vegas,22,Street,Mercedes,2.0,3.0,1.0,,,,,,,1.2000000000000002
-2024,SAI,Las Vegas,22,Street,Ferrari,6.0,4.0,3.0,,,,,,,2.6000000000000005
-2024,STR,Las Vegas,22,Street,Aston Martin,12.0,13.0,19.0,,,,,,,11.4
-2024,TSU,Las Vegas,22,Street,RB,19.0,10.0,16.0,,,,,,,10.3
-2024,VER,Las Vegas,22,Street,Red Bull,5.0,17.0,5.0,,,,,,,5.9
-2024,ZHO,Las Vegas,22,Street,Sauber,18.0,16.0,20.0,,,,,,,13.0
-2024,ALB,Lusail,23,Permanent,Williams,9.0,,,,,,,Lapped,15,0.9
-2024,ALO,Lusail,23,Permanent,Aston Martin,12.0,,,,,,,,,1.2000000000000002
-2024,BOT,Lusail,23,Permanent,Sauber,6.0,,,,,,,,,0.6000000000000001
-2024,GAS,Lusail,23,Permanent,Alpine,15.0,,,,,,,,,1.5
-2024,HAM,Lusail,23,Permanent,Mercedes,10.0,,,,,,,,,1.0
-2024,HUL,Lusail,23,Permanent,Haas,13.0,,,,,,,Retired,R,1.3
-2024,LAW,Lusail,23,Permanent,RB,14.0,,,,,,,,,1.4000000000000001
-2024,LEC,Lusail,23,Permanent,Ferrari,1.0,,,,,,,,,0.1
-2024,MAG,Lusail,23,Permanent,Haas,16.0,,,,,,,,,1.6
-2024,NOR,Lusail,23,Permanent,McLaren,2.0,,,,,,,,,0.2
-2024,PER,Lusail,23,Permanent,Red Bull,18.0,,,,,,,Retired,R,1.8
-2024,PIA,Lusail,23,Permanent,McLaren,3.0,,,,,,,,,0.30000000000000004
-2024,RUS,Lusail,23,Permanent,Mercedes,8.0,,,,,,,,,0.8
-2024,SAI,Lusail,23,Permanent,Ferrari,4.0,,,,,,,,,0.4
-2024,STR,Lusail,23,Permanent,Aston Martin,7.0,,,,,,,Retired,R,0.7000000000000001
-2024,TSU,Lusail,23,Permanent,RB,5.0,,,,,,,,,0.5
-2024,VER,Lusail,23,Permanent,Red Bull,11.0,,,,,,,,,1.1
-2024,ZHO,Lusail,23,Permanent,Sauber,17.0,,,,,,,,,1.7000000000000002
-2025,ALB,Catalunya,1,Permanent,Williams,6.0,11.0,7.0,,,,,,,5.6000000000000005
-2025,ALB,Melbourne,1,Street,Williams,6.0,11.0,7.0,,,,,,,5.6000000000000005
-2025,ALO,Catalunya,1,Permanent,Aston Martin,8.0,13.0,17.0,,,,,Retired,R,10.200000000000001
-2025,ALO,Melbourne,1,Street,Aston Martin,8.0,13.0,17.0,,,,,Retired,R,10.200000000000001
-2025,ANT,Catalunya,1,Permanent,Mercedes,14.0,16.0,5.0,,,,,,,6.6000000000000005
-2025,ANT,Melbourne,1,Street,Mercedes,14.0,16.0,5.0,,,,,,,6.6000000000000005
-2025,BEA,Catalunya,1,Permanent,Haas,20.0,,,,,,,,,2.0
-2025,BEA,Melbourne,1,Street,Haas,20.0,,,,,,,,,2.0
-2025,BOR,Catalunya,1,Permanent,Sauber,15.0,18.0,11.0,,,,,Retired,R,9.5
-2025,BOR,Melbourne,1,Street,Sauber,15.0,18.0,11.0,,,,,Retired,R,9.5
-2025,COL,Catalunya,1,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Catalunya,1,Permanent,Alpine,17.0,15.0,12.0,,,,,,,9.5
-2025,GAS,Melbourne,1,Street,Alpine,17.0,15.0,12.0,,,,,,,9.5
-2025,HAD,Catalunya,1,Permanent,RB,9.0,6.0,13.0,,,,,Retired,R,7.300000000000001
-2025,HAM,Catalunya,1,Permanent,Ferrari,12.0,5.0,8.0,,,,,,,5.4
-2025,HAM,Melbourne,1,Street,Ferrari,12.0,5.0,8.0,,,,,,,5.4
-2025,HUL,Catalunya,1,Permanent,Sauber,18.0,8.0,16.0,,,,,,,9.8
-2025,HUL,Melbourne,1,Street,Sauber,18.0,8.0,16.0,,,,,,,9.8
-2025,LAW,Catalunya,1,Permanent,RB,16.0,17.0,,,,,,Retired,R,5.0
-2025,LAW,Melbourne,1,Street,Red Bull,16.0,17.0,,,,,,Retired,R,5.0
-2025,LEC,Catalunya,1,Permanent,Ferrari,3.0,1.0,4.0,,,,,,,2.1
-2025,LEC,Melbourne,1,Street,Ferrari,3.0,1.0,4.0,,,,,,,2.1
-2025,NOR,Catalunya,1,Permanent,McLaren,1.0,3.0,10.0,,,,,,,4.7
-2025,NOR,Melbourne,1,Street,McLaren,1.0,3.0,10.0,,,,,,,4.7
-2025,OCO,Catalunya,1,Permanent,Haas,19.0,19.0,18.0,,,,,,,12.9
-2025,OCO,Melbourne,1,Street,Haas,19.0,19.0,18.0,,,,,,,12.9
-2025,PIA,Catalunya,1,Permanent,McLaren,4.0,2.0,1.0,,,,,,,1.2000000000000002
-2025,PIA,Melbourne,1,Street,McLaren,4.0,2.0,1.0,,,,,,,1.2000000000000002
-2025,RUS,Catalunya,1,Permanent,Mercedes,7.0,10.0,2.0,,,,,,,3.5
-2025,RUS,Melbourne,1,Street,Mercedes,7.0,10.0,2.0,,,,,,,3.5
-2025,SAI,Catalunya,1,Permanent,Williams,2.0,12.0,6.0,,,,,Retired,R,5.000000000000001
-2025,STR,Melbourne,1,Street,Aston Martin,10.0,9.0,14.0,,,,,,,8.4
-2025,TSU,Catalunya,1,Permanent,Red Bull,11.0,4.0,9.0,,,,,,,5.5
-2025,TSU,Melbourne,1,Street,RB,11.0,4.0,9.0,,,,,,,5.5
-2025,VER,Catalunya,1,Permanent,Red Bull,5.0,7.0,3.0,,,,,,,3.1000000000000005
-2025,VER,Melbourne,1,Street,Red Bull,5.0,7.0,3.0,,,,,,,3.1000000000000005
-2025,ALB,Shanghai,2,Permanent,Williams,7.0,,,,,,,,,0.7000000000000001
-2025,ALO,Shanghai,2,Permanent,Aston Martin,8.0,,,,,,,Retired,R,0.8
-2025,ANT,Shanghai,2,Permanent,Mercedes,9.0,,,,,,,,,0.9
-2025,BEA,Shanghai,2,Permanent,Haas,11.0,,,,,,,,,1.1
-2025,BOR,Shanghai,2,Permanent,Sauber,19.0,,,,,,,Lapped,14,1.9000000000000001
-2025,DOO,Shanghai,2,Permanent,Alpine,20.0,,,,,,,,,2.0
-2025,GAS,Shanghai,2,Permanent,Alpine,14.0,,,,,,,Disqualified,D,1.4000000000000001
-2025,HAD,Shanghai,2,Permanent,RB,17.0,,,,,,,,,1.7000000000000002
-2025,HAM,Shanghai,2,Permanent,Ferrari,4.0,,,,,,,Disqualified,D,0.4
-2025,HUL,Shanghai,2,Permanent,Sauber,6.0,,,,,,,Lapped,15,0.6000000000000001
-2025,LAW,Shanghai,2,Permanent,Red Bull,18.0,,,,,,,,,1.8
-2025,LEC,Shanghai,2,Permanent,Ferrari,2.0,,,,,,,Disqualified,D,0.2
-2025,NOR,Shanghai,2,Permanent,McLaren,1.0,,,,,,,,,0.1
-2025,OCO,Shanghai,2,Permanent,Haas,13.0,,,,,,,,,1.3
-2025,PIA,Shanghai,2,Permanent,McLaren,3.0,,,,,,,,,0.30000000000000004
-2025,RUS,Shanghai,2,Permanent,Mercedes,5.0,,,,,,,,,0.5
-2025,SAI,Shanghai,2,Permanent,Williams,15.0,,,,,,,,,1.5
-2025,STR,Shanghai,2,Permanent,Aston Martin,12.0,,,,,,,,,1.2000000000000002
-2025,TSU,Shanghai,2,Permanent,RB,10.0,,,,,,,Lapped,16,1.0
-2025,VER,Shanghai,2,Permanent,Red Bull,16.0,,,,,,,,,1.6
-2025,ALB,Suzuka,3,Permanent,Williams,11.0,11.0,7.0,,,,,,,6.1000000000000005
-2025,ALO,Suzuka,3,Permanent,Aston Martin,7.0,17.0,15.0,,,,,,,10.100000000000001
-2025,ANT,Suzuka,3,Permanent,Mercedes,9.0,16.0,13.0,,,,,,,9.3
-2025,BEA,Suzuka,3,Permanent,Haas,18.0,15.0,16.0,,,,,,,11.2
-2025,BOR,Suzuka,3,Permanent,Sauber,20.0,13.0,17.0,,,,,,,11.4
-2025,DOO,Suzuka,3,Permanent,Alpine,,20.0,14.0,,,,,,,9.600000000000001
-2025,GAS,Suzuka,3,Permanent,Alpine,14.0,9.0,8.0,,,,,,,6.4
-2025,HAD,Suzuka,3,Permanent,RB,8.0,3.0,10.0,,,,,,,5.4
-2025,HAM,Suzuka,3,Permanent,Ferrari,4.0,4.0,6.0,,,,,,,3.6000000000000005
-2025,HUL,Suzuka,3,Permanent,Sauber,17.0,12.0,20.0,,,,,,,12.100000000000001
-2025,LAW,Suzuka,3,Permanent,RB,13.0,5.0,12.0,,,,,,,7.1000000000000005
-2025,LEC,Suzuka,3,Permanent,Ferrari,3.0,7.0,4.0,,,,,,,3.3000000000000003
-2025,NOR,Suzuka,3,Permanent,McLaren,1.0,2.0,1.0,,,,,,,0.9
-2025,OCO,Suzuka,3,Permanent,Haas,19.0,14.0,18.0,,,,,,,11.9
-2025,PIA,Suzuka,3,Permanent,McLaren,15.0,1.0,2.0,,,,,,,2.5
-2025,RUS,Suzuka,3,Permanent,Mercedes,2.0,6.0,3.0,,,,,,,2.6000000000000005
-2025,SAI,Suzuka,3,Permanent,Williams,10.0,10.0,11.0,,,,,,,7.4
-2025,STR,Suzuka,3,Permanent,Aston Martin,16.0,19.0,19.0,,,,,Lapped,20,13.0
-2025,TSU,Suzuka,3,Permanent,Red Bull,6.0,18.0,9.0,,,,,,,7.800000000000001
-2025,VER,Suzuka,3,Permanent,Red Bull,5.0,8.0,5.0,,,,,,,4.1
-2025,ALB,Sakhir,4,Permanent,Williams,4.0,11.0,15.0,,,,,,,8.6
-2025,ALO,Sakhir,4,Permanent,Aston Martin,,15.0,14.0,,,,,,,8.600000000000001
-2025,ANT,Sakhir,4,Permanent,Mercedes,20.0,5.0,5.0,,,,,,,5.0
-2025,BEA,Sakhir,4,Permanent,Haas,,9.0,16.0,,,,,,,8.200000000000001
-2025,BOR,Sakhir,4,Permanent,Sauber,11.0,13.0,18.0,,,,,,,10.9
-2025,DOO,Sakhir,4,Permanent,Alpine,7.0,14.0,12.0,,,,,,,8.3
-2025,GAS,Sakhir,4,Permanent,Alpine,2.0,17.0,6.0,,,,,,,6.000000000000001
-2025,HAD,Sakhir,4,Permanent,RB,12.0,6.0,7.0,,,,,,,5.200000000000001
-2025,HAM,Sakhir,4,Permanent,Ferrari,3.0,8.0,10.0,,,,,,,5.9
-2025,HUL,Sakhir,4,Permanent,Sauber,6.0,20.0,19.0,,,,,Disqualified,D,12.2
-2025,LAW,Sakhir,4,Permanent,RB,8.0,12.0,13.0,,,,,,,8.4
-2025,LEC,Sakhir,4,Permanent,Ferrari,,4.0,3.0,,,,,,,2.0
-2025,NOR,Sakhir,4,Permanent,McLaren,1.0,2.0,2.0,,,,,,,1.3
-2025,OCO,Sakhir,4,Permanent,Haas,5.0,16.0,11.0,,,,,,,8.100000000000001
-2025,PIA,Sakhir,4,Permanent,McLaren,10.0,1.0,1.0,,,,,,,1.6
-2025,RUS,Sakhir,4,Permanent,Mercedes,,3.0,4.0,,,,,,,2.2
-2025,SAI,Sakhir,4,Permanent,Williams,,10.0,9.0,,,,,Retired,R,5.6
-2025,STR,Sakhir,4,Permanent,Aston Martin,15.0,19.0,17.0,,,,,,,12.100000000000001
-2025,TSU,Sakhir,4,Permanent,Red Bull,9.0,18.0,20.0,,,,,,,12.5
-2025,VER,Sakhir,4,Permanent,Red Bull,,7.0,8.0,,,,,,,4.6000000000000005
-2025,ALB,Jeddah,5,Street,Williams,5.0,10.0,6.0,,,,,,,4.9
-2025,ALO,Jeddah,5,Street,Aston Martin,14.0,15.0,14.0,,,,,,,10.0
-2025,ANT,Jeddah,5,Street,Mercedes,13.0,11.0,10.0,,,,,,,7.5
-2025,BEA,Jeddah,5,Street,Haas,18.0,16.0,16.0,,,,,,,11.4
-2025,BOR,Jeddah,5,Street,Sauber,20.0,,19.0,,,,,Lapped,18,9.600000000000001
-2025,DOO,Jeddah,5,Street,Alpine,16.0,17.0,15.0,,,,,Lapped,17,11.0
-2025,HAD,Jeddah,5,Street,RB,15.0,12.0,11.0,,,,,,,8.3
-2025,HAM,Jeddah,5,Street,Ferrari,8.0,13.0,12.0,,,,,,,8.200000000000001
-2025,HUL,Jeddah,5,Street,Sauber,12.0,9.0,17.0,,,,,Lapped,15,9.8
-2025,LAW,Jeddah,5,Street,RB,11.0,14.0,13.0,,,,,,,9.100000000000001
-2025,LEC,Jeddah,5,Street,Ferrari,3.0,4.0,5.0,,,,,,,3.1
-2025,NOR,Jeddah,5,Street,McLaren,2.0,1.0,1.0,,,,,,,0.8
-2025,OCO,Jeddah,5,Street,Haas,19.0,19.0,18.0,,,,,,,12.9
-2025,PIA,Jeddah,5,Street,McLaren,4.0,2.0,2.0,,,,,,,1.6
-2025,RUS,Jeddah,5,Street,Mercedes,6.0,7.0,3.0,,,,,,,3.2
-2025,SAI,Jeddah,5,Street,Williams,7.0,5.0,7.0,,,,,,,4.5
-2025,STR,Jeddah,5,Street,Aston Martin,17.0,18.0,20.0,,,,,Lapped,16,13.3
-2025,VER,Jeddah,5,Street,Red Bull,9.0,3.0,4.0,,,,,,,3.1
-2025,ALB,Imola,7,Permanent,Williams,,,,,,,,,,
-2025,ALO,Imola,7,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Imola,7,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Imola,7,Permanent,Haas,,,,,,,,,,
-2025,BOR,Imola,7,Permanent,Sauber,,,,,,,,,,
-2025,GAS,Imola,7,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Imola,7,Permanent,RB,,,,,,,,,,
-2025,HAM,Imola,7,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Imola,7,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Imola,7,Permanent,RB,,,,,,,,,,
-2025,LEC,Imola,7,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Imola,7,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Imola,7,Permanent,Haas,,,,,,,,,,
-2025,PIA,Imola,7,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Imola,7,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Imola,7,Permanent,Williams,,,,,,,,,,
-2025,STR,Imola,7,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Imola,7,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Imola,7,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Monte Carlo,10,Street,Williams,,,,,,,,,,
-2025,ALB,Montreal,10,Street,Williams,,,,,,,,,,
-2025,ALO,Monte Carlo,10,Street,Aston Martin,,,,,,,,,,
-2025,ALO,Montreal,10,Street,Aston Martin,,,,,,,,,,
-2025,ANT,Monte Carlo,10,Street,Mercedes,,,,,,,,,,
-2025,ANT,Montreal,10,Street,Mercedes,,,,,,,,,,
-2025,BEA,Monte Carlo,10,Street,Haas,,,,,,,,,,
-2025,BEA,Montreal,10,Street,Haas,,,,,,,,,,
-2025,BOR,Monte Carlo,10,Street,Sauber,,,,,,,,,,
-2025,BOR,Montreal,10,Street,Sauber,,,,,,,,,,
-2025,COL,Monte Carlo,10,Street,Alpine,,,,,,,,,,
-2025,COL,Montreal,10,Street,Alpine,,,,,,,,,,
-2025,GAS,Monte Carlo,10,Street,Alpine,,,,,,,,,,
-2025,GAS,Montreal,10,Street,Alpine,,,,,,,,,,
-2025,HAD,Monte Carlo,10,Street,RB,,,,,,,,,,
-2025,HAD,Montreal,10,Street,RB,,,,,,,,,,
-2025,HAM,Monte Carlo,10,Street,Ferrari,,,,,,,,,,
-2025,HAM,Montreal,10,Street,Ferrari,,,,,,,,,,
-2025,HUL,Monte Carlo,10,Street,Sauber,,,,,,,,,,
-2025,HUL,Montreal,10,Street,Sauber,,,,,,,,,,
-2025,LAW,Monte Carlo,10,Street,RB,,,,,,,,,,
-2025,LAW,Montreal,10,Street,RB,,,,,,,,,,
-2025,LEC,Monte Carlo,10,Street,Ferrari,,,,,,,,,,
-2025,LEC,Montreal,10,Street,Ferrari,,,,,,,,,,
-2025,NOR,Monte Carlo,10,Street,McLaren,,,,,,,,,,
-2025,NOR,Montreal,10,Street,McLaren,,,,,,,,,,
-2025,OCO,Monte Carlo,10,Street,Haas,,,,,,,,,,
-2025,OCO,Montreal,10,Street,Haas,,,,,,,,,,
-2025,PIA,Monte Carlo,10,Street,McLaren,,,,,,,,,,
-2025,PIA,Montreal,10,Street,McLaren,,,,,,,,,,
-2025,RUS,Monte Carlo,10,Street,Mercedes,,,,,,,,,,
-2025,RUS,Montreal,10,Street,Mercedes,,,,,,,,,,
-2025,SAI,Monte Carlo,10,Street,Williams,,,,,,,,,,
-2025,SAI,Montreal,10,Street,Williams,,,,,,,,,,
-2025,STR,Monte Carlo,10,Street,Aston Martin,,,,,,,,,,
-2025,STR,Montreal,10,Street,Aston Martin,,,,,,,,,,
-2025,TSU,Monte Carlo,10,Street,Red Bull,,,,,,,,,,
-2025,TSU,Montreal,10,Street,Red Bull,,,,,,,,,,
-2025,VER,Monte Carlo,10,Street,Red Bull,,,,,,,,,,
-2025,VER,Montreal,10,Street,Red Bull,,,,,,,,,,
-2025,ALB,Spielberg,11,Permanent,Williams,,,,,,,,,,
-2025,ALO,Spielberg,11,Permanent,Aston Martin,,,,,,,,,,
-2025,BEA,Spielberg,11,Permanent,Haas,,,,,,,,,,
-2025,BOR,Spielberg,11,Permanent,Sauber,,,,,,,,,,
-2025,COL,Spielberg,11,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Spielberg,11,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Spielberg,11,Permanent,RB,,,,,,,,,,
-2025,HAM,Spielberg,11,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Spielberg,11,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Spielberg,11,Permanent,RB,,,,,,,,,,
-2025,LEC,Spielberg,11,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Spielberg,11,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Spielberg,11,Permanent,Haas,,,,,,,,,,
-2025,PIA,Spielberg,11,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Spielberg,11,Permanent,Mercedes,,,,,,,,,,
-2025,STR,Spielberg,11,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Spielberg,11,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Silverstone,12,Permanent,Williams,,,,,,,,,,
-2025,ALO,Silverstone,12,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Silverstone,12,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Silverstone,12,Permanent,Haas,,,,,,,,,,
-2025,BOR,Silverstone,12,Permanent,Sauber,,,,,,,,,,
-2025,GAS,Silverstone,12,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Silverstone,12,Permanent,RB,,,,,,,,,,
-2025,HAM,Silverstone,12,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Silverstone,12,Permanent,Sauber,,,,,,,,,,
-2025,LEC,Silverstone,12,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Silverstone,12,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Silverstone,12,Permanent,Haas,,,,,,,,,,
-2025,PIA,Silverstone,12,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Silverstone,12,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Silverstone,12,Permanent,Williams,,,,,,,,,,
-2025,STR,Silverstone,12,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Silverstone,12,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Silverstone,12,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Spa-Francorchamps,13,Permanent,Williams,,,,,,,,,,
-2025,ALO,Spa-Francorchamps,13,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Spa-Francorchamps,13,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Spa-Francorchamps,13,Permanent,Haas,,,,,,,,,,
-2025,BOR,Spa-Francorchamps,13,Permanent,Sauber,,,,,,,,,,
-2025,COL,Spa-Francorchamps,13,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Spa-Francorchamps,13,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Spa-Francorchamps,13,Permanent,RB,,,,,,,,,,
-2025,HAM,Spa-Francorchamps,13,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Spa-Francorchamps,13,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Spa-Francorchamps,13,Permanent,RB,,,,,,,,,,
-2025,LEC,Spa-Francorchamps,13,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Spa-Francorchamps,13,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Spa-Francorchamps,13,Permanent,Haas,,,,,,,,,,
-2025,PIA,Spa-Francorchamps,13,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Spa-Francorchamps,13,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Spa-Francorchamps,13,Permanent,Williams,,,,,,,,,,
-2025,STR,Spa-Francorchamps,13,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Spa-Francorchamps,13,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Spa-Francorchamps,13,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Hungaroring,14,Permanent,Williams,,,,,,,,,,
-2025,ALO,Hungaroring,14,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Hungaroring,14,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Hungaroring,14,Permanent,Haas,,,,,,,,,,
-2025,BOR,Hungaroring,14,Permanent,Sauber,,,,,,,,,,
-2025,COL,Hungaroring,14,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Hungaroring,14,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Hungaroring,14,Permanent,RB,,,,,,,,,,
-2025,HAM,Hungaroring,14,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Hungaroring,14,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Hungaroring,14,Permanent,RB,,,,,,,,,,
-2025,LEC,Hungaroring,14,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Hungaroring,14,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Hungaroring,14,Permanent,Haas,,,,,,,,,,
-2025,PIA,Hungaroring,14,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Hungaroring,14,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Hungaroring,14,Permanent,Williams,,,,,,,,,,
-2025,STR,Hungaroring,14,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Hungaroring,14,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Hungaroring,14,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Interlagos,15,Permanent,Williams,,,,,,,,,,
-2025,ALB,Zandvoort,15,Permanent,Williams,,,,,,,,,,
-2025,ALO,Interlagos,15,Permanent,Aston Martin,,,,,,,,,,
-2025,ALO,Zandvoort,15,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Interlagos,15,Permanent,Mercedes,,,,,,,,,,
-2025,ANT,Zandvoort,15,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Interlagos,15,Permanent,Haas,,,,,,,,,,
-2025,BEA,Zandvoort,15,Permanent,Haas,,,,,,,,,,
-2025,BOR,Zandvoort,15,Permanent,Sauber,,,,,,,,,,
-2025,COL,Interlagos,15,Permanent,Alpine,,,,,,,,,,
-2025,COL,Zandvoort,15,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Interlagos,15,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Zandvoort,15,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Interlagos,15,Permanent,RB,,,,,,,,,,
-2025,HAD,Zandvoort,15,Permanent,RB,,,,,,,,,,
-2025,HAM,Interlagos,15,Permanent,Ferrari,,,,,,,,,,
-2025,HAM,Zandvoort,15,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Interlagos,15,Permanent,Sauber,,,,,,,,,,
-2025,HUL,Zandvoort,15,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Interlagos,15,Permanent,RB,,,,,,,,,,
-2025,LAW,Zandvoort,15,Permanent,RB,,,,,,,,,,
-2025,LEC,Interlagos,15,Permanent,Ferrari,,,,,,,,,,
-2025,LEC,Zandvoort,15,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Interlagos,15,Permanent,McLaren,,,,,,,,,,
-2025,NOR,Zandvoort,15,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Interlagos,15,Permanent,Haas,,,,,,,,,,
-2025,OCO,Zandvoort,15,Permanent,Haas,,,,,,,,,,
-2025,PIA,Interlagos,15,Permanent,McLaren,,,,,,,,,,
-2025,PIA,Zandvoort,15,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Interlagos,15,Permanent,Mercedes,,,,,,,,,,
-2025,RUS,Zandvoort,15,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Interlagos,15,Permanent,Williams,,,,,,,,,,
-2025,SAI,Zandvoort,15,Permanent,Williams,,,,,,,,,,
-2025,STR,Interlagos,15,Permanent,Aston Martin,,,,,,,,,,
-2025,STR,Zandvoort,15,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Interlagos,15,Permanent,Red Bull,,,,,,,,,,
-2025,TSU,Zandvoort,15,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Interlagos,15,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Zandvoort,15,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Monza,16,Permanent,Williams,,,,,,,,,,
-2025,ALO,Monza,16,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Monza,16,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Monza,16,Permanent,Haas,,,,,,,,,,
-2025,BOR,Monza,16,Permanent,Sauber,,,,,,,,,,
-2025,COL,Monza,16,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Monza,16,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Monza,16,Permanent,RB,,,,,,,,,,
-2025,HAM,Monza,16,Permanent,Ferrari,,,,,,,,,,
-2025,LAW,Monza,16,Permanent,RB,,,,,,,,,,
-2025,LEC,Monza,16,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Monza,16,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Monza,16,Permanent,Haas,,,,,,,,,,
-2025,PIA,Monza,16,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Monza,16,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Monza,16,Permanent,Williams,,,,,,,,,,
-2025,STR,Monza,16,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Monza,16,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Monza,16,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Baku,17,Street,Williams,,,,,,,,,,
-2025,ALO,Baku,17,Street,Aston Martin,,,,,,,,,,
-2025,ANT,Baku,17,Street,Mercedes,,,,,,,,,,
-2025,BEA,Baku,17,Street,Haas,,,,,,,,,,
-2025,BOR,Baku,17,Street,Sauber,,,,,,,,,,
-2025,COL,Baku,17,Street,Alpine,,,,,,,,,,
-2025,GAS,Baku,17,Street,Alpine,,,,,,,,,,
-2025,HAD,Baku,17,Street,RB,,,,,,,,,,
-2025,HAM,Baku,17,Street,Ferrari,,,,,,,,,,
-2025,HUL,Baku,17,Street,Sauber,,,,,,,,,,
-2025,LAW,Baku,17,Street,RB,,,,,,,,,,
-2025,LEC,Baku,17,Street,Ferrari,,,,,,,,,,
-2025,NOR,Baku,17,Street,McLaren,,,,,,,,,,
-2025,OCO,Baku,17,Street,Haas,,,,,,,,,,
-2025,RUS,Baku,17,Street,Mercedes,,,,,,,,,,
-2025,SAI,Baku,17,Street,Williams,,,,,,,,,,
-2025,STR,Baku,17,Street,Aston Martin,,,,,,,,,,
-2025,TSU,Baku,17,Street,Red Bull,,,,,,,,,,
-2025,VER,Baku,17,Street,Red Bull,,,,,,,,,,
-2025,ALB,Singapore,18,Street,Williams,,,,,,,,,,
-2025,ALO,Singapore,18,Street,Aston Martin,,,,,,,,,,
-2025,ANT,Singapore,18,Street,Mercedes,,,,,,,,,,
-2025,BEA,Singapore,18,Street,Haas,,,,,,,,,,
-2025,BOR,Singapore,18,Street,Sauber,,,,,,,,,,
-2025,COL,Singapore,18,Street,Alpine,,,,,,,,,,
-2025,GAS,Singapore,18,Street,Alpine,,,,,,,,,,
-2025,HAD,Singapore,18,Street,RB,,,,,,,,,,
-2025,HAM,Singapore,18,Street,Ferrari,,,,,,,,,,
-2025,HUL,Singapore,18,Street,Sauber,,,,,,,,,,
-2025,LAW,Singapore,18,Street,RB,,,,,,,,,,
-2025,LEC,Singapore,18,Street,Ferrari,,,,,,,,,,
-2025,NOR,Singapore,18,Street,McLaren,,,,,,,,,,
-2025,OCO,Singapore,18,Street,Haas,,,,,,,,,,
-2025,PIA,Singapore,18,Street,McLaren,,,,,,,,,,
-2025,RUS,Singapore,18,Street,Mercedes,,,,,,,,,,
-2025,SAI,Singapore,18,Street,Williams,,,,,,,,,,
-2025,STR,Singapore,18,Street,Aston Martin,,,,,,,,,,
-2025,TSU,Singapore,18,Street,Red Bull,,,,,,,,,,
-2025,VER,Singapore,18,Street,Red Bull,,,,,,,,,,
-2025,ALB,Austin,19,Permanent,Williams,,,,,,,,,,
-2025,ALO,Austin,19,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Austin,19,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Austin,19,Permanent,Haas,,,,,,,,,,
-2025,BOR,Austin,19,Permanent,Sauber,,,,,,,,,,
-2025,COL,Austin,19,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Austin,19,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Austin,19,Permanent,RB,,,,,,,,,,
-2025,HAM,Austin,19,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Austin,19,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Austin,19,Permanent,RB,,,,,,,,,,
-2025,LEC,Austin,19,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Austin,19,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Austin,19,Permanent,Haas,,,,,,,,,,
-2025,PIA,Austin,19,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Austin,19,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Austin,19,Permanent,Williams,,,,,,,,,,
-2025,STR,Austin,19,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Austin,19,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Austin,19,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Mexico City,20,Permanent,Williams,,,,,,,,,,
-2025,ALO,Mexico City,20,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Mexico City,20,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Mexico City,20,Permanent,Haas,,,,,,,,,,
-2025,BOR,Mexico City,20,Permanent,Sauber,,,,,,,,,,
-2025,COL,Mexico City,20,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Mexico City,20,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Mexico City,20,Permanent,RB,,,,,,,,,,
-2025,HAM,Mexico City,20,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Mexico City,20,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Mexico City,20,Permanent,RB,,,,,,,,,,
-2025,LEC,Mexico City,20,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Mexico City,20,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Mexico City,20,Permanent,Haas,,,,,,,,,,
-2025,PIA,Mexico City,20,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Mexico City,20,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Mexico City,20,Permanent,Williams,,,,,,,,,,
-2025,STR,Mexico City,20,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Mexico City,20,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Mexico City,20,Permanent,Red Bull,,,,,,,,,,
-2025,ALB,Las Vegas,22,Street,Williams,,,,,,,,,,
-2025,ALO,Las Vegas,22,Street,Aston Martin,,,,,,,,,,
-2025,ANT,Las Vegas,22,Street,Mercedes,,,,,,,,,,
-2025,BEA,Las Vegas,22,Street,Haas,,,,,,,,,,
-2025,BOR,Las Vegas,22,Street,Sauber,,,,,,,,,,
-2025,COL,Las Vegas,22,Street,Alpine,,,,,,,,,,
-2025,GAS,Las Vegas,22,Street,Alpine,,,,,,,,,,
-2025,HAD,Las Vegas,22,Street,RB,,,,,,,,,,
-2025,HAM,Las Vegas,22,Street,Ferrari,,,,,,,,,,
-2025,HUL,Las Vegas,22,Street,Sauber,,,,,,,,,,
-2025,LAW,Las Vegas,22,Street,RB,,,,,,,,,,
-2025,LEC,Las Vegas,22,Street,Ferrari,,,,,,,,,,
-2025,NOR,Las Vegas,22,Street,McLaren,,,,,,,,,,
-2025,OCO,Las Vegas,22,Street,Haas,,,,,,,,,,
-2025,PIA,Las Vegas,22,Street,McLaren,,,,,,,,,,
-2025,RUS,Las Vegas,22,Street,Mercedes,,,,,,,,,,
-2025,SAI,Las Vegas,22,Street,Williams,,,,,,,,,,
-2025,TSU,Las Vegas,22,Street,Red Bull,,,,,,,,,,
-2025,VER,Las Vegas,22,Street,Red Bull,,,,,,,,,,
-2025,ALB,Lusail,23,Permanent,Williams,,,,,,,,,,
-2025,ALO,Lusail,23,Permanent,Aston Martin,,,,,,,,,,
-2025,ANT,Lusail,23,Permanent,Mercedes,,,,,,,,,,
-2025,BEA,Lusail,23,Permanent,Haas,,,,,,,,,,
-2025,BOR,Lusail,23,Permanent,Sauber,,,,,,,,,,
-2025,COL,Lusail,23,Permanent,Alpine,,,,,,,,,,
-2025,GAS,Lusail,23,Permanent,Alpine,,,,,,,,,,
-2025,HAD,Lusail,23,Permanent,RB,,,,,,,,,,
-2025,HAM,Lusail,23,Permanent,Ferrari,,,,,,,,,,
-2025,HUL,Lusail,23,Permanent,Sauber,,,,,,,,,,
-2025,LAW,Lusail,23,Permanent,RB,,,,,,,,,,
-2025,LEC,Lusail,23,Permanent,Ferrari,,,,,,,,,,
-2025,NOR,Lusail,23,Permanent,McLaren,,,,,,,,,,
-2025,OCO,Lusail,23,Permanent,Haas,,,,,,,,,,
-2025,PIA,Lusail,23,Permanent,McLaren,,,,,,,,,,
-2025,RUS,Lusail,23,Permanent,Mercedes,,,,,,,,,,
-2025,SAI,Lusail,23,Permanent,Williams,,,,,,,,,,
-2025,STR,Lusail,23,Permanent,Aston Martin,,,,,,,,,,
-2025,TSU,Lusail,23,Permanent,Red Bull,,,,,,,,,,
-2025,VER,Lusail,23,Permanent,Red Bull,,,,,,,,,,
+season,race_name,driver,team,fp1_pos,fp1_time_fastest_lap,fp2_pos,fp2_time_fastest_lap,fp3_pos,fp3_time_fastest_lap,Qualifying_Final_Grid_Position,Q1_fastest_lap,Q2_fastest_lap,Q3_fastest_lap,Race_Finishing_Position,fastest_lap
+2024,Abu Dhabi Grand Prix,ALB,Williams,,,9.0,1:24.269,12.0,1:24.378,16.0,1:23.820,,,11.0,1:29.438
+2024,Abu Dhabi Grand Prix,ALO,Aston Martin,11.0,1:25.504,16.0,1:24.573,15.0,1:24.453,8.0,1:23.793,1:23.268,1:23.195,9.0,1:27.947
+2024,Abu Dhabi Grand Prix,BOT,Kick Sauber,,,,,,,9.0,1:23.480,1:23.340,1:23.203,18.0,1:29.481
+2024,Abu Dhabi Grand Prix,BOT,Sauber,13.0,1:25.611,7.0,1:24.230,16.0,1:24.478,,,,,,
+2024,Abu Dhabi Grand Prix,COL,Williams,7.0,1:25.382,20.0,1:25.265,20.0,1:24.766,19.0,1:23.912,,,19.0,1:29.411
+2024,Abu Dhabi Grand Prix,DOO,Alpine,19.0,1:26.304,19.0,1:24.960,14.0,1:24.433,20.0,1:24.105,,,15.0,1:29.120
+2024,Abu Dhabi Grand Prix,GAS,Alpine,5.0,1:25.332,12.0,1:24.516,13.0,1:24.408,6.0,1:23.548,1:23.085,1:22.983,7.0,1:29.212
+2024,Abu Dhabi Grand Prix,HAM,Mercedes,3.0,1:24.805,5.0,1:24.118,3.0,1:23.822,18.0,1:23.887,,,4.0,1:27.278
+2024,Abu Dhabi Grand Prix,HUL,Haas,6.0,1:25.373,3.0,1:23.978,7.0,1:24.093,,,,,,
+2024,Abu Dhabi Grand Prix,HUL,Haas F1 Team,,,,,,,4.0,1:23.721,1:23.040,1:22.885,8.0,1:29.152
+2024,Abu Dhabi Grand Prix,LAW,RB,12.0,1:25.563,11.0,1:24.503,17.0,1:24.519,12.0,1:23.733,1:23.471,,17.0,1:28.751
+2024,Abu Dhabi Grand Prix,LEC,Ferrari,1.0,1:24.320,6.0,1:24.200,9.0,1:24.097,14.0,1:23.302,1:23.832,,3.0,1:28.018
+2024,Abu Dhabi Grand Prix,MAG,Haas,8.0,1:25.444,8.0,1:24.234,8.0,1:24.093,,,,,,
+2024,Abu Dhabi Grand Prix,MAG,Haas F1 Team,,,,,,,15.0,1:23.632,1:23.876,,16.0,1:25.637
+2024,Abu Dhabi Grand Prix,NOR,McLaren,2.0,1:24.542,1.0,1:23.516,2.0,1:23.626,1.0,1:23.682,1:23.097,1:22.594,1.0,1:27.438
+2024,Abu Dhabi Grand Prix,PER,Red Bull,10.0,1:25.483,14.0,1:24.555,10.0,1:24.283,,,,,,
+2024,Abu Dhabi Grand Prix,PER,Red Bull Racing,,,,,,,10.0,1:23.558,1:23.379,1:23.263,20.0,
+2024,Abu Dhabi Grand Prix,PIA,McLaren,,,2.0,1:23.751,1.0,1:23.433,2.0,1:23.640,1:23.198,1:22.804,10.0,1:27.689
+2024,Abu Dhabi Grand Prix,RUS,Mercedes,4.0,1:25.165,13.0,1:24.534,6.0,1:24.075,7.0,1:23.677,1:23.283,1:23.132,5.0,1:28.194
+2024,Abu Dhabi Grand Prix,SAI,Ferrari,,,4.0,1:24.099,5.0,1:23.870,3.0,1:23.486,1:22.984,1:22.823,2.0,1:27.765
+2024,Abu Dhabi Grand Prix,STR,Aston Martin,,,18.0,1:24.686,18.0,1:24.531,13.0,1:23.728,1:23.784,,14.0,1:28.603
+2024,Abu Dhabi Grand Prix,TSU,RB,,,10.0,1:24.496,11.0,1:24.343,11.0,1:23.734,1:23.418,,12.0,1:29.200
+2024,Abu Dhabi Grand Prix,VER,Red Bull,,,17.0,1:24.597,4.0,1:23.843,,,,,,
+2024,Abu Dhabi Grand Prix,VER,Red Bull Racing,,,,,,,5.0,1:23.516,1:22.998,1:22.944,6.0,1:27.765
+2024,Abu Dhabi Grand Prix,ZHO,Kick Sauber,,,,,,,17.0,1:23.879,,,13.0,1:27.981
+2024,Abu Dhabi Grand Prix,ZHO,Sauber,16.0,1:25.921,15.0,1:24.557,19.0,1:24.668,,,,,,
+2024,Australian Grand Prix,ALB,Williams,12.0,1:19.442,,,13.0,1:17.759,12.0,1:17.129,1:17.167,,11.0,1:21.617
+2024,Australian Grand Prix,ALO,Aston Martin,18.0,1:19.715,5.0,1:17.912,6.0,1:16.996,10.0,1:16.990,1:16.709,1:17.552,8.0,1:20.492
+2024,Australian Grand Prix,BOT,Kick Sauber,,,,,,,13.0,1:17.543,1:17.340,,14.0,1:21.421
+2024,Australian Grand Prix,BOT,Sauber,20.0,1:20.013,14.0,1:18.584,12.0,1:17.751,,,,,,
+2024,Australian Grand Prix,GAS,Alpine,17.0,1:19.621,15.0,1:18.691,19.0,1:18.390,17.0,1:17.981,,,13.0,1:21.090
+2024,Australian Grand Prix,HAM,Mercedes,9.0,1:18.771,18.0,1:18.834,4.0,1:16.805,11.0,1:17.498,1:16.959,,18.0,1:22.444
+2024,Australian Grand Prix,HUL,Haas,16.0,1:19.603,16.0,1:18.701,16.0,1:17.941,,,,,,
+2024,Australian Grand Prix,HUL,Haas F1 Team,,,,,,,16.0,1:17.975,,,9.0,1:21.144
+2024,Australian Grand Prix,LEC,Ferrari,4.0,1:18.599,1.0,1:17.277,1.0,1:16.713,5.0,1:16.983,1:16.304,1:16.435,2.0,1:19.813
+2024,Australian Grand Prix,MAG,Haas,13.0,1:19.489,19.0,1:19.275,17.0,1:17.960,,,,,,
+2024,Australian Grand Prix,MAG,Haas F1 Team,,,,,,,14.0,1:17.709,1:17.427,,10.0,1:21.081
+2024,Australian Grand Prix,NOR,McLaren,1.0,1:18.563,9.0,1:18.155,10.0,1:17.489,4.0,1:17.430,1:16.750,1:16.314,3.0,1:19.915
+2024,Australian Grand Prix,OCO,Alpine,15.0,1:19.561,17.0,1:18.704,15.0,1:17.920,15.0,1:17.617,1:17.697,,16.0,1:21.353
+2024,Australian Grand Prix,PER,Red Bull,6.0,1:18.641,8.0,1:18.090,7.0,1:17.013,,,,,,
+2024,Australian Grand Prix,PER,Red Bull Racing,,,,,,,3.0,1:16.805,1:16.631,1:16.274,5.0,1:20.388
+2024,Australian Grand Prix,PIA,McLaren,10.0,1:18.918,7.0,1:18.076,8.0,1:17.087,6.0,1:17.368,1:16.600,1:16.572,4.0,1:20.198
+2024,Australian Grand Prix,RIC,RB,11.0,1:19.274,12.0,1:18.534,18.0,1:17.962,18.0,1:18.084,,,12.0,1:21.239
+2024,Australian Grand Prix,RUS,Mercedes,3.0,1:18.596,6.0,1:17.950,5.0,1:16.885,7.0,1:17.061,1:16.900,1:16.724,17.0,1:20.284
+2024,Australian Grand Prix,SAI,Ferrari,8.0,1:18.686,3.0,1:17.706,3.0,1:16.790,2.0,1:16.730,1:16.188,1:16.185,1.0,1:20.031
+2024,Australian Grand Prix,STR,Aston Martin,7.0,1:18.667,4.0,1:17.822,9.0,1:17.340,9.0,1:17.376,1:16.780,1:17.072,6.0,1:20.930
+2024,Australian Grand Prix,TSU,RB,5.0,1:18.620,10.0,1:18.188,11.0,1:17.673,8.0,1:17.355,1:16.790,1:16.787,7.0,1:21.134
+2024,Australian Grand Prix,VER,Red Bull,2.0,1:18.581,2.0,1:17.658,2.0,1:16.733,,,,,,
+2024,Australian Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:16.819,1:16.387,1:15.915,19.0,1:23.114
+2024,Australian Grand Prix,ZHO,Kick Sauber,,,,,,,19.0,1:18.188,,,15.0,1:21.326
+2024,Australian Grand Prix,ZHO,Sauber,19.0,1:19.989,11.0,1:18.421,14.0,1:17.876,,,,,,
+2024,Azerbaijan Grand Prix,ALB,Williams,17.0,1:47.954,13.0,1:44.736,8.0,1:43.194,10.0,1:42.899,1:42.840,1:42.858,7.0,1:46.947
+2024,Azerbaijan Grand Prix,ALO,Aston Martin,7.0,1:46.451,12.0,1:44.683,11.0,1:43.474,8.0,1:43.471,1:42.426,1:42.368,6.0,1:47.057
+2024,Azerbaijan Grand Prix,BEA,Haas F1 Team,,,,,,,11.0,1:43.471,1:42.968,,10.0,1:47.048
+2024,Azerbaijan Grand Prix,BOT,Kick Sauber,,,,,,,17.0,1:43.617,,,16.0,1:48.418
+2024,Azerbaijan Grand Prix,BOT,Sauber,14.0,1:47.640,15.0,1:44.784,17.0,1:44.186,,,,,,
+2024,Azerbaijan Grand Prix,COL,Williams,16.0,1:47.900,14.0,1:44.748,9.0,1:43.237,9.0,1:43.138,1:42.472,1:42.530,8.0,1:47.274
+2024,Azerbaijan Grand Prix,GAS,Alpine,18.0,1:48.712,18.0,1:45.391,15.0,1:43.876,15.0,,1:43.179,,12.0,1:48.018
+2024,Azerbaijan Grand Prix,HAM,Mercedes,2.0,1:45.858,3.0,1:43.549,10.0,1:43.301,7.0,1:43.088,1:42.765,1:42.289,9.0,1:47.236
+2024,Azerbaijan Grand Prix,HUL,Haas,12.0,1:47.135,8.0,1:44.474,16.0,1:44.164,,,,,,
+2024,Azerbaijan Grand Prix,HUL,Haas F1 Team,,,,,,,13.0,1:43.100,1:43.191,,11.0,1:47.691
+2024,Azerbaijan Grand Prix,LEC,Ferrari,9.0,1:46.608,1.0,1:43.483,2.0,1:42.527,1.0,1:42.775,1:42.055,1:41.364,2.0,1:47.066
+2024,Azerbaijan Grand Prix,NOR,McLaren,4.0,1:46.027,17.0,1:45.156,3.0,1:42.736,16.0,1:43.608,,,4.0,1:45.254
+2024,Azerbaijan Grand Prix,OCO,Alpine,,,,,,,19.0,1:44.504,,,15.0,1:48.831
+2024,Azerbaijan Grand Prix,PER,Red Bull,3.0,1:45.921,2.0,1:43.489,7.0,1:43.024,,,,,,
+2024,Azerbaijan Grand Prix,PER,Red Bull Racing,,,,,,,4.0,1:43.212,1:42.263,1:41.813,17.0,1:47.013
+2024,Azerbaijan Grand Prix,PIA,McLaren,6.0,1:46.281,5.0,1:43.983,4.0,1:42.748,2.0,1:43.033,1:42.597,1:41.686,1.0,1:47.060
+2024,Azerbaijan Grand Prix,RIC,RB,10.0,1:46.686,16.0,1:45.055,14.0,1:43.870,15.0,1:43.546,,,13.0,1:48.379
+2024,Azerbaijan Grand Prix,RUS,Mercedes,8.0,1:46.516,9.0,1:44.536,1.0,1:42.513,5.0,1:43.138,1:42.328,1:41.873,3.0,1:46.628
+2024,Azerbaijan Grand Prix,SAI,Ferrari,5.0,1:46.173,4.0,1:43.950,6.0,1:42.968,3.0,1:43.356,1:42.503,1:41.805,18.0,1:46.865
+2024,Azerbaijan Grand Prix,STR,Aston Martin,13.0,1:47.183,7.0,1:44.093,13.0,1:43.570,14.0,1:43.370,1:43.403,,19.0,1:48.147
+2024,Azerbaijan Grand Prix,TSU,RB,15.0,1:47.707,11.0,1:44.644,12.0,1:43.503,12.0,1:43.337,1:43.034,,20.0,1:50.887
+2024,Azerbaijan Grand Prix,VER,Red Bull,1.0,1:45.546,6.0,1:44.028,5.0,1:42.861,,,,,,
+2024,Azerbaijan Grand Prix,VER,Red Bull Racing,,,,,,,6.0,1:43.096,1:42.042,1:42.022,5.0,1:46.798
+2024,Azerbaijan Grand Prix,ZHO,Kick Sauber,,,,,,,18.0,1:44.245,,,14.0,1:47.644
+2024,Azerbaijan Grand Prix,ZHO,Sauber,19.0,1:49.052,20.0,1:45.947,18.0,1:44.868,,,,,,
+2024,Bahrain Grand Prix,ALB,Williams,13.0,1:33.582,11.0,1:31.332,15.0,1:31.965,13.0,1:30.397,1:30.221,,15.0,1:35.722
+2024,Bahrain Grand Prix,ALO,Aston Martin,5.0,1:33.192,3.0,1:30.659,2.0,1:30.965,6.0,1:30.179,1:29.801,1:29.542,9.0,1:34.198
+2024,Bahrain Grand Prix,BOT,Kick Sauber,,,,,,,16.0,1:30.756,,,19.0,1:36.201
+2024,Bahrain Grand Prix,BOT,Sauber,10.0,1:33.353,17.0,1:32.001,17.0,1:32.096,,,,,,
+2024,Bahrain Grand Prix,GAS,Alpine,18.0,1:35.144,16.0,1:31.950,20.0,1:32.382,20.0,1:30.947,,,18.0,1:34.805
+2024,Bahrain Grand Prix,HAM,Mercedes,9.0,1:33.302,1.0,1:30.373,12.0,1:31.451,9.0,1:30.450,1:29.718,1:29.709,7.0,1:34.721
+2024,Bahrain Grand Prix,HUL,Haas,20.0,1:37.938,7.0,1:30.884,9.0,1:31.278,,,,,,
+2024,Bahrain Grand Prix,HUL,Haas F1 Team,,,,,,,10.0,1:30.566,1:29.850,1:30.501,16.0,1:34.834
+2024,Bahrain Grand Prix,LEC,Ferrari,8.0,1:33.268,9.0,1:31.112,4.0,1:31.093,2.0,1:30.242,1:29.165,1:29.406,4.0,1:34.090
+2024,Bahrain Grand Prix,MAG,Haas,19.0,1:37.477,14.0,1:31.763,14.0,1:31.671,,,,,,
+2024,Bahrain Grand Prix,MAG,Haas F1 Team,,,,,,,15.0,1:30.646,1:30.528,,12.0,1:35.569
+2024,Bahrain Grand Prix,NOR,McLaren,2.0,1:32.900,20.0,1:32.608,5.0,1:31.117,7.0,1:30.143,1:29.941,1:29.614,6.0,1:34.475
+2024,Bahrain Grand Prix,OCO,Alpine,17.0,1:34.807,18.0,1:32.027,18.0,1:32.123,19.0,1:30.793,,,17.0,1:36.225
+2024,Bahrain Grand Prix,PER,Red Bull,12.0,1:33.412,10.0,1:31.114,8.0,1:31.248,,,,,,
+2024,Bahrain Grand Prix,PER,Red Bull Racing,,,,,,,5.0,1:30.221,1:29.932,1:29.537,2.0,1:34.364
+2024,Bahrain Grand Prix,PIA,McLaren,3.0,1:33.112,5.0,1:30.784,7.0,1:31.209,8.0,1:30.531,1:30.121,1:29.683,8.0,1:34.774
+2024,Bahrain Grand Prix,RIC,RB,1.0,1:32.868,12.0,1:31.516,11.0,1:31.448,14.0,1:30.561,1:30.278,,13.0,1:35.162
+2024,Bahrain Grand Prix,RUS,Mercedes,7.0,1:33.251,2.0,1:30.579,6.0,1:31.189,3.0,1:30.349,1:29.921,1:29.484,5.0,1:35.064
+2024,Bahrain Grand Prix,SAI,Ferrari,11.0,1:33.385,4.0,1:30.769,1.0,1:30.823,4.0,1:29.909,1:29.572,1:29.507,3.0,1:34.507
+2024,Bahrain Grand Prix,SAR,Williams,16.0,1:34.212,13.0,1:31.715,19.0,1:32.125,18.0,1:30.769,,,20.0,1:34.734
+2024,Bahrain Grand Prix,STR,Aston Martin,14.0,1:33.867,8.0,1:30.891,10.0,1:31.396,12.0,1:29.965,1:30.200,,10.0,1:35.632
+2024,Bahrain Grand Prix,TSU,RB,4.0,1:33.183,15.0,1:31.881,13.0,1:31.631,11.0,1:30.480,1:30.129,,14.0,1:35.832
+2024,Bahrain Grand Prix,VER,Red Bull,6.0,1:33.237,6.0,1:30.850,3.0,1:31.061,,,,,,
+2024,Bahrain Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:30.031,1:29.373,1:29.179,1.0,1:32.608
+2024,Bahrain Grand Prix,ZHO,Kick Sauber,,,,,,,17.0,1:30.757,,,11.0,1:35.457
+2024,Bahrain Grand Prix,ZHO,Sauber,15.0,1:33.923,19.0,1:32.048,16.0,1:32.000,,,,,,
+2024,British Grand Prix,ALB,Williams,16.0,1:28.649,13.0,1:27.644,11.0,1:39.602,9.0,1:31.135,1:26.933,1:26.640,9.0,1:29.718
+2024,British Grand Prix,ALO,Aston Martin,6.0,1:27.793,11.0,1:27.371,8.0,1:38.939,10.0,1:31.263,1:26.730,1:26.917,8.0,1:29.709
+2024,British Grand Prix,BOT,Kick Sauber,,,,,,,16.0,1:32.430,,,15.0,1:31.277
+2024,British Grand Prix,BOT,Sauber,12.0,1:28.254,12.0,1:27.381,15.0,1:40.242,,,,,,
+2024,British Grand Prix,GAS,Alpine,,,,,,,20.0,1:39.804,,,20.0,
+2024,British Grand Prix,HAM,Mercedes,7.0,1:27.858,6.0,1:27.201,3.0,1:37.563,2.0,1:29.546,1:26.769,1:25.989,1.0,1:29.438
+2024,British Grand Prix,HUL,Haas,11.0,1:28.081,4.0,1:26.989,10.0,1:39.340,,,,,,
+2024,British Grand Prix,HUL,Haas F1 Team,,,,,,,6.0,1:31.929,1:26.846,1:26.337,6.0,1:29.835
+2024,British Grand Prix,LEC,Ferrari,8.0,1:27.903,5.0,1:27.150,7.0,1:38.453,11.0,1:30.495,1:27.096,,14.0,1:29.748
+2024,British Grand Prix,MAG,Haas,,,20.0,1:28.121,17.0,1:40.539,,,,,,
+2024,British Grand Prix,MAG,Haas F1 Team,,,,,,,17.0,1:32.905,,,12.0,1:30.093
+2024,British Grand Prix,NOR,McLaren,1.0,1:27.420,1.0,1:26.549,4.0,1:37.713,3.0,1:31.596,1:26.558,1:26.030,3.0,1:29.262
+2024,British Grand Prix,OCO,Alpine,10.0,1:27.974,15.0,1:27.742,16.0,1:40.430,18.0,1:34.557,,,16.0,1:30.875
+2024,British Grand Prix,PER,Red Bull,,,3.0,1:26.983,9.0,1:39.284,,,,,,
+2024,British Grand Prix,PER,Red Bull Racing,,,,,,,19.0,1:38.347,,,17.0,1:29.706
+2024,British Grand Prix,PIA,McLaren,3.0,1:27.631,2.0,1:26.879,1.0,1:36.653,5.0,1:30.894,1:26.733,1:26.236,4.0,1:28.748
+2024,British Grand Prix,RIC,RB,13.0,1:28.477,19.0,1:27.915,18.0,1:40.822,15.0,1:31.290,1:27.948,,13.0,1:30.734
+2024,British Grand Prix,RUS,Mercedes,5.0,1:27.737,10.0,1:27.293,2.0,1:37.528,1.0,1:30.105,1:26.722,1:25.819,19.0,1:31.298
+2024,British Grand Prix,SAI,Ferrari,9.0,1:27.924,8.0,1:27.248,5.0,1:38.138,7.0,1:30.557,1:26.843,1:26.509,5.0,1:28.293
+2024,British Grand Prix,SAR,Williams,,,17.0,1:27.808,13.0,1:39.701,12.0,1:31.608,1:27.174,,11.0,1:29.971
+2024,British Grand Prix,STR,Aston Martin,2.0,1:27.554,9.0,1:27.274,12.0,1:39.700,8.0,1:31.409,1:26.938,1:26.584,7.0,1:29.897
+2024,British Grand Prix,TSU,RB,20.0,1:29.864,16.0,1:27.745,14.0,1:39.819,13.0,1:30.993,1:27.269,,10.0,1:30.228
+2024,British Grand Prix,VER,Red Bull,4.0,1:27.728,7.0,1:27.233,6.0,1:38.393,,,,,,
+2024,British Grand Prix,VER,Red Bull Racing,,,,,,,4.0,1:31.341,1:26.796,1:26.203,2.0,1:28.951
+2024,British Grand Prix,ZHO,Kick Sauber,,,,,,,14.0,1:31.189,1:27.867,,18.0,1:31.013
+2024,British Grand Prix,ZHO,Sauber,15.0,1:28.590,18.0,1:27.813,19.0,1:41.784,,,,,,
+2024,Canadian Grand Prix,ALB,Williams,,,9.0,1:16.977,18.0,1:13.879,10.0,1:12.896,1:12.484,1:12.796,17.0,1:19.358
+2024,Canadian Grand Prix,ALO,Aston Martin,,,1.0,1:15.810,8.0,1:13.340,6.0,1:13.117,1:12.635,1:12.227,6.0,1:16.302
+2024,Canadian Grand Prix,BOT,Kick Sauber,,,,,,,17.0,1:13.365,,,13.0,1:17.250
+2024,Canadian Grand Prix,BOT,Sauber,8.0,1:27.670,14.0,1:17.816,13.0,1:13.641,,,,,,
+2024,Canadian Grand Prix,GAS,Alpine,7.0,1:27.584,19.0,1:20.789,16.0,1:13.736,15.0,1:13.289,1:12.939,,9.0,1:17.013
+2024,Canadian Grand Prix,HAM,Mercedes,4.0,1:25.969,7.0,1:16.908,1.0,1:12.549,7.0,1:12.850,1:11.978,1:12.280,4.0,1:14.855
+2024,Canadian Grand Prix,HUL,Haas,,,15.0,1:17.903,17.0,1:13.777,,,,,,
+2024,Canadian Grand Prix,HUL,Haas F1 Team,,,,,,,19.0,1:13.977,,,11.0,1:16.683
+2024,Canadian Grand Prix,LEC,Ferrari,3.0,1:25.305,4.0,1:16.555,10.0,1:13.349,11.0,1:13.106,1:12.691,,19.0,1:26.012
+2024,Canadian Grand Prix,MAG,Haas,13.0,1:29.052,6.0,1:16.772,11.0,1:13.438,,,,,,
+2024,Canadian Grand Prix,MAG,Haas F1 Team,,,,,,,14.0,1:13.216,1:12.915,,12.0,1:16.498
+2024,Canadian Grand Prix,NOR,McLaren,1.0,1:24.435,20.0,1:20.843,7.0,1:13.293,3.0,1:12.959,1:12.200,1:12.021,2.0,1:15.558
+2024,Canadian Grand Prix,OCO,Alpine,,,11.0,1:17.417,19.0,1:14.075,18.0,1:13.435,,,10.0,1:17.012
+2024,Canadian Grand Prix,PER,Red Bull,9.0,1:28.058,10.0,1:17.040,9.0,1:13.341,,,,,,
+2024,Canadian Grand Prix,PER,Red Bull Racing,,,,,,,16.0,1:13.325,,,18.0,1:18.819
+2024,Canadian Grand Prix,PIA,McLaren,6.0,1:26.754,16.0,1:19.007,5.0,1:13.266,4.0,1:12.906,1:12.462,1:12.102,5.0,1:16.246
+2024,Canadian Grand Prix,RIC,RB,11.0,1:28.581,5.0,1:16.730,6.0,1:13.278,5.0,1:13.239,1:12.572,1:12.177,8.0,1:17.075
+2024,Canadian Grand Prix,RUS,Mercedes,10.0,1:28.540,2.0,1:16.272,3.0,1:12.956,1.0,1:13.013,1:11.742,1:12.000,3.0,1:14.894
+2024,Canadian Grand Prix,SAI,Ferrari,2.0,1:24.763,13.0,1:17.721,12.0,1:13.569,12.0,1:13.037,1:12.727,,16.0,1:18.956
+2024,Canadian Grand Prix,SAR,Williams,,,12.0,1:17.495,14.0,1:13.662,13.0,1:13.063,1:12.736,,20.0,1:26.483
+2024,Canadian Grand Prix,STR,Aston Martin,,,3.0,1:16.463,4.0,1:13.025,9.0,1:13.087,1:12.659,1:12.700,7.0,1:16.762
+2024,Canadian Grand Prix,TSU,RB,12.0,1:28.722,8.0,1:16.950,15.0,1:13.715,8.0,1:12.748,1:12.302,1:12.414,14.0,1:17.308
+2024,Canadian Grand Prix,VER,Red Bull,5.0,1:26.501,18.0,1:19.311,2.0,1:12.923,,,,,,
+2024,Canadian Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:12.359,1:12.549,1:12.000,1.0,1:15.569
+2024,Canadian Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,1:14.292,,,15.0,1:17.325
+2024,Dutch Grand Prix,ALB,Williams,6.0,1:13.159,10.0,1:11.549,14.0,1:24.007,10.0,,1:10.768,1:10.653,14.0,1:14.433
+2024,Dutch Grand Prix,ALO,Aston Martin,15.0,1:14.466,6.0,1:11.356,5.0,1:21.460,7.0,1:11.492,1:10.844,1:10.632,10.0,1:14.757
+2024,Dutch Grand Prix,BOT,Kick Sauber,,,,,,,17.0,1:12.168,,,19.0,1:15.822
+2024,Dutch Grand Prix,BOT,Sauber,,,18.0,1:12.206,3.0,1:21.155,,,,,,
+2024,Dutch Grand Prix,GAS,Alpine,,,14.0,1:11.644,1.0,1:20.311,9.0,1:11.718,1:10.814,1:10.977,9.0,1:14.855
+2024,Dutch Grand Prix,HAM,Mercedes,3.0,1:13.006,3.0,1:10.813,15.0,1:24.097,11.0,1:11.375,1:10.947,,8.0,1:13.878
+2024,Dutch Grand Prix,HUL,Haas,8.0,1:13.563,20.0,1:13.296,9.0,1:22.353,,,,,,
+2024,Dutch Grand Prix,HUL,Haas F1 Team,,,,,,,13.0,1:11.831,1:11.215,,11.0,1:15.656
+2024,Dutch Grand Prix,LEC,Ferrari,13.0,1:14.305,9.0,1:11.442,16.0,1:24.158,6.0,1:11.370,1:10.688,1:10.581,3.0,1:14.584
+2024,Dutch Grand Prix,MAG,Haas,9.0,1:13.596,8.0,1:11.430,2.0,1:20.450,,,,,,
+2024,Dutch Grand Prix,MAG,Haas F1 Team,,,,,,,14.0,1:11.629,1:11.295,,18.0,1:14.953
+2024,Dutch Grand Prix,NOR,McLaren,1.0,1:12.322,4.0,1:10.960,4.0,1:21.387,1.0,1:11.376,1:10.495,1:09.673,1.0,1:13.816
+2024,Dutch Grand Prix,OCO,Alpine,18.0,1:15.796,17.0,1:12.061,6.0,1:21.643,16.0,1:11.995,,,15.0,1:15.390
+2024,Dutch Grand Prix,PER,Red Bull Racing,,,,,,,5.0,1:11.006,1:10.677,1:10.415,6.0,1:14.587
+2024,Dutch Grand Prix,PIA,McLaren,7.0,1:13.230,2.0,1:10.763,7.0,1:21.849,3.0,1:11.540,1:10.504,1:10.171,4.0,1:14.236
+2024,Dutch Grand Prix,RIC,RB,19.0,1:16.230,13.0,1:11.629,18.0,1:25.433,15.0,1:11.942,,,12.0,1:15.221
+2024,Dutch Grand Prix,RUS,Mercedes,5.0,1:13.141,1.0,1:10.701,13.0,1:23.957,4.0,1:11.049,1:10.552,1:10.243,7.0,1:13.927
+2024,Dutch Grand Prix,SAI,Ferrari,4.0,1:13.073,19.0,1:13.108,10.0,1:22.588,10.0,1:11.326,1:10.914,,5.0,1:14.117
+2024,Dutch Grand Prix,SAR,Williams,17.0,1:15.605,15.0,1:11.817,12.0,1:23.287,20.0,,,,16.0,1:15.539
+2024,Dutch Grand Prix,STR,Aston Martin,11.0,1:14.150,11.0,1:11.575,8.0,1:21.941,8.0,1:11.518,1:10.661,1:10.856,13.0,1:15.254
+2024,Dutch Grand Prix,TSU,RB,,,,,,,12.0,1:11.602,1:10.954,,17.0,1:15.552
+2024,Dutch Grand Prix,VER,Red Bull,2.0,1:12.522,5.0,1:10.986,17.0,1:24.359,,,,,,
+2024,Dutch Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:11.393,1:10.811,1:10.028,2.0,1:14.751
+2024,Dutch Grand Prix,ZHO,Kick Sauber,,,,,,,18.0,1:13.260,,,20.0,1:15.724
+2024,Dutch Grand Prix,ZHO,Sauber,10.0,1:13.965,16.0,1:11.933,11.0,1:23.239,,,,,,
+2024,Emilia Romagna Grand Prix,ALB,Williams,19.0,1:20.049,18.0,1:17.135,7.0,1:16.469,14.0,1:16.524,1:16.200,,20.0,1:21.274
+2024,Emilia Romagna Grand Prix,ALO,Aston Martin,10.0,1:17.867,10.0,1:16.837,18.0,1:17.338,19.0,1:16.917,,,19.0,1:19.004
+2024,Emilia Romagna Grand Prix,BOT,Kick Sauber,,,,,,,16.0,1:16.626,,,18.0,1:21.454
+2024,Emilia Romagna Grand Prix,BOT,Sauber,16.0,1:18.826,16.0,1:17.087,14.0,1:16.694,,,,,,
+2024,Emilia Romagna Grand Prix,GAS,Alpine,11.0,1:17.905,15.0,1:17.063,19.0,1:17.361,15.0,1:16.015,1:16.381,,16.0,1:21.370
+2024,Emilia Romagna Grand Prix,HAM,Mercedes,7.0,1:17.408,4.0,1:16.296,17.0,1:16.959,8.0,1:16.603,1:15.677,1:15.504,6.0,1:20.331
+2024,Emilia Romagna Grand Prix,HUL,Haas,20.0,1:21.058,9.0,1:16.825,10.0,1:16.546,,,,,,
+2024,Emilia Romagna Grand Prix,HUL,Haas F1 Team,,,,,,,10.0,1:15.840,1:15.569,1:15.980,11.0,1:21.700
+2024,Emilia Romagna Grand Prix,LEC,Ferrari,1.0,1:16.989,1.0,1:15.906,4.0,1:16.087,4.0,1:15.822,1:15.328,1:14.969,3.0,1:19.935
+2024,Emilia Romagna Grand Prix,MAG,Haas,,,17.0,1:17.129,16.0,1:16.923,,,,,,
+2024,Emilia Romagna Grand Prix,MAG,Haas F1 Team,,,,,,,18.0,1:16.853,,,12.0,1:21.009
+2024,Emilia Romagna Grand Prix,NOR,McLaren,8.0,1:17.602,12.0,1:16.980,2.0,1:15.828,3.0,1:15.915,1:15.370,1:14.837,2.0,1:19.993
+2024,Emilia Romagna Grand Prix,OCO,Alpine,14.0,1:18.611,14.0,1:17.007,8.0,1:16.480,12.0,1:16.361,1:15.906,,14.0,1:21.304
+2024,Emilia Romagna Grand Prix,PER,Red Bull,4.0,1:17.233,8.0,1:16.552,12.0,1:16.631,,,,,,
+2024,Emilia Romagna Grand Prix,PER,Red Bull Racing,,,,,,,11.0,1:16.403,1:15.706,,8.0,1:19.686
+2024,Emilia Romagna Grand Prix,PIA,McLaren,9.0,1:17.807,2.0,1:16.097,1.0,1:15.528,2.0,1:15.939,1:15.406,1:14.819,4.0,1:19.906
+2024,Emilia Romagna Grand Prix,RIC,RB,13.0,1:18.141,11.0,1:16.966,11.0,1:16.560,9.0,1:16.060,1:15.691,1:15.674,13.0,1:21.569
+2024,Emilia Romagna Grand Prix,RUS,Mercedes,2.0,1:17.093,5.0,1:16.311,5.0,1:16.094,6.0,1:16.106,1:15.671,1:15.233,7.0,1:18.588
+2024,Emilia Romagna Grand Prix,SAI,Ferrari,3.0,1:17.120,6.0,1:16.423,3.0,1:16.066,5.0,1:16.015,1:15.512,1:15.233,5.0,1:20.219
+2024,Emilia Romagna Grand Prix,SAR,Williams,18.0,1:19.900,20.0,1:17.847,15.0,1:16.793,20.0,,,,17.0,1:21.228
+2024,Emilia Romagna Grand Prix,STR,Aston Martin,12.0,1:18.072,13.0,1:16.990,9.0,1:16.543,13.0,1:16.457,1:15.992,,9.0,1:20.569
+2024,Emilia Romagna Grand Prix,TSU,RB,6.0,1:17.388,3.0,1:16.286,13.0,1:16.668,7.0,1:15.894,1:15.358,1:15.465,10.0,1:20.936
+2024,Emilia Romagna Grand Prix,VER,Red Bull,5.0,1:17.239,7.0,1:16.447,6.0,1:16.365,,,,,,
+2024,Emilia Romagna Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:15.762,1:15.176,1:14.745,1.0,1:20.365
+2024,Emilia Romagna Grand Prix,ZHO,Kick Sauber,,,,,,,17.0,1:16.834,,,15.0,1:21.016
+2024,Emilia Romagna Grand Prix,ZHO,Sauber,17.0,1:19.129,19.0,1:17.605,20.0,1:17.891,,,,,,
+2024,Hungarian Grand Prix,ALB,Williams,14.0,1:19.793,9.0,1:18.513,7.0,1:16.661,13.0,1:17.280,1:16.429,,14.0,1:23.930
+2024,Hungarian Grand Prix,ALO,Aston Martin,13.0,1:19.686,10.0,1:18.519,14.0,1:17.001,7.0,1:17.623,1:16.117,1:16.043,11.0,1:23.063
+2024,Hungarian Grand Prix,BOT,Kick Sauber,,,,,,,12.0,1:17.486,1:16.384,,16.0,1:22.792
+2024,Hungarian Grand Prix,BOT,Sauber,15.0,1:19.804,11.0,1:18.585,12.0,1:16.804,,,,,,
+2024,Hungarian Grand Prix,GAS,Alpine,17.0,1:19.975,16.0,1:18.888,18.0,1:17.498,20.0,1:18.165,,,20.0,1:23.340
+2024,Hungarian Grand Prix,HAM,Mercedes,10.0,1:19.287,7.0,1:18.362,10.0,1:16.786,5.0,1:17.087,1:16.307,1:15.853,3.0,1:22.153
+2024,Hungarian Grand Prix,HUL,Haas,,,15.0,1:18.790,8.0,1:16.695,,,,,,
+2024,Hungarian Grand Prix,HUL,Haas F1 Team,,,,,,,11.0,1:17.361,1:16.316,,13.0,1:23.460
+2024,Hungarian Grand Prix,LEC,Ferrari,3.0,1:19.010,18.0,1:19.286,11.0,1:16.802,6.0,1:17.436,1:15.891,1:15.905,4.0,1:22.182
+2024,Hungarian Grand Prix,MAG,Haas,19.0,1:20.295,6.0,1:18.314,19.0,1:17.507,,,,,,
+2024,Hungarian Grand Prix,MAG,Haas F1 Team,,,,,,,15.0,1:17.850,1:16.548,,15.0,1:23.552
+2024,Hungarian Grand Prix,NOR,McLaren,6.0,1:19.210,1.0,1:17.787,1.0,1:16.097,1.0,1:17.754,1:15.540,1:15.227,2.0,1:21.712
+2024,Hungarian Grand Prix,OCO,Alpine,18.0,1:20.022,14.0,1:18.754,20.0,1:17.575,19.0,1:18.049,,,18.0,1:21.609
+2024,Hungarian Grand Prix,PER,Red Bull,11.0,1:19.439,4.0,1:18.254,13.0,1:16.953,,,,,,
+2024,Hungarian Grand Prix,PER,Red Bull Racing,,,,,,,16.0,1:17.885,,,7.0,1:21.096
+2024,Hungarian Grand Prix,PIA,McLaren,7.0,1:19.248,13.0,1:18.617,2.0,1:16.141,2.0,1:17.504,1:15.784,1:15.248,1.0,1:21.715
+2024,Hungarian Grand Prix,RIC,RB,12.0,1:19.578,8.0,1:18.370,6.0,1:16.652,9.0,1:17.049,1:16.201,1:16.447,12.0,1:22.640
+2024,Hungarian Grand Prix,RUS,Mercedes,4.0,1:19.137,5.0,1:18.293,4.0,1:16.563,17.0,1:17.968,,,8.0,1:20.305
+2024,Hungarian Grand Prix,SAI,Ferrari,1.0,1:18.712,3.0,1:18.185,5.0,1:16.638,4.0,1:17.243,1:15.885,1:15.695,6.0,1:21.441
+2024,Hungarian Grand Prix,SAR,Williams,16.0,1:19.885,12.0,1:18.611,16.0,1:17.168,14.0,1:17.769,1:16.543,,17.0,1:20.561
+2024,Hungarian Grand Prix,STR,Aston Martin,9.0,1:19.265,17.0,1:19.179,15.0,1:17.084,8.0,1:17.405,1:16.075,1:16.243,10.0,1:22.337
+2024,Hungarian Grand Prix,TSU,RB,8.0,1:19.260,19.0,1:19.605,9.0,1:16.743,10.0,1:17.436,1:16.120,1:16.477,9.0,1:23.533
+2024,Hungarian Grand Prix,VER,Red Bull,2.0,1:18.989,2.0,1:18.031,3.0,1:16.379,,,,,,
+2024,Hungarian Grand Prix,VER,Red Bull Racing,,,,,,,3.0,1:17.087,1:15.769,1:15.272,5.0,1:20.908
+2024,Hungarian Grand Prix,ZHO,Kick Sauber,,,,,,,18.0,1:18.037,,,19.0,1:23.486
+2024,Hungarian Grand Prix,ZHO,Sauber,5.0,1:19.180,20.0,1:20.066,17.0,1:17.290,,,,,,
+2024,Italian Grand Prix,ALB,Williams,8.0,1:22.219,13.0,1:21.591,8.0,1:20.596,9.0,1:20.542,1:20.313,1:20.299,9.0,1:23.918
+2024,Italian Grand Prix,ALO,Aston Martin,10.0,1:22.314,9.0,1:21.316,11.0,1:20.968,11.0,1:20.617,1:20.421,,11.0,1:22.944
+2024,Italian Grand Prix,BOT,Kick Sauber,,,,,,,19.0,1:21.100,,,16.0,1:23.608
+2024,Italian Grand Prix,BOT,Sauber,5.0,1:22.126,11.0,1:21.460,19.0,1:21.356,,,,,,
+2024,Italian Grand Prix,COL,Williams,18.0,1:22.879,17.0,1:21.784,9.0,1:20.905,18.0,1:21.061,,,12.0,1:23.727
+2024,Italian Grand Prix,GAS,Alpine,14.0,1:22.763,18.0,1:21.819,14.0,1:21.155,14.0,1:20.748,1:20.737,,15.0,1:23.754
+2024,Italian Grand Prix,HAM,Mercedes,7.0,1:22.213,1.0,1:20.737,1.0,1:20.117,6.0,1:20.477,1:19.641,1:19.513,5.0,1:21.512
+2024,Italian Grand Prix,HUL,Haas,19.0,1:23.156,7.0,1:21.140,10.0,1:20.942,,,,,,
+2024,Italian Grand Prix,HUL,Haas F1 Team,,,,,,,10.0,1:20.781,1:20.411,1:20.338,17.0,1:23.275
+2024,Italian Grand Prix,LEC,Ferrari,2.0,1:21.903,5.0,1:20.891,3.0,1:20.225,4.0,1:20.073,1:20.007,1:19.460,1.0,1:23.225
+2024,Italian Grand Prix,MAG,Haas,11.0,1:22.572,12.0,1:21.498,16.0,1:21.207,,,,,,
+2024,Italian Grand Prix,MAG,Haas F1 Team,,,,,,,13.0,1:20.855,1:20.697,,10.0,1:23.436
+2024,Italian Grand Prix,NOR,McLaren,3.0,1:21.917,2.0,1:20.740,5.0,1:20.262,1.0,1:19.911,1:19.727,1:19.326,3.0,1:21.432
+2024,Italian Grand Prix,OCO,Alpine,17.0,1:22.879,19.0,1:21.867,17.0,1:21.257,15.0,1:20.763,1:20.766,,14.0,1:24.343
+2024,Italian Grand Prix,PER,Red Bull,9.0,1:22.311,15.0,1:21.677,18.0,1:21.287,,,,,,
+2024,Italian Grand Prix,PER,Red Bull Racing,,,,,,,8.0,1:20.597,1:20.215,1:20.061,8.0,1:22.971
+2024,Italian Grand Prix,PIA,McLaren,6.0,1:22.198,4.0,1:20.858,4.0,1:20.251,2.0,1:20.075,1:19.808,1:19.436,2.0,1:21.942
+2024,Italian Grand Prix,RIC,RB,12.0,1:22.605,8.0,1:21.299,12.0,1:21.076,12.0,1:20.900,1:20.478,,13.0,1:24.218
+2024,Italian Grand Prix,RUS,Mercedes,,,6.0,1:21.085,2.0,1:20.209,3.0,1:20.168,1:19.876,1:19.439,7.0,1:22.036
+2024,Italian Grand Prix,SAI,Ferrari,4.0,1:22.126,3.0,1:20.840,7.0,1:20.462,5.0,1:20.149,1:19.799,1:19.466,4.0,1:23.218
+2024,Italian Grand Prix,STR,Aston Martin,16.0,1:22.864,10.0,1:21.362,15.0,1:21.156,17.0,1:21.013,,,19.0,1:22.231
+2024,Italian Grand Prix,TSU,RB,13.0,1:22.713,16.0,1:21.734,13.0,1:21.141,16.0,1:20.944,,,20.0,1:26.197
+2024,Italian Grand Prix,VER,Red Bull,1.0,1:21.676,14.0,1:21.609,6.0,1:20.367,,,,,,
+2024,Italian Grand Prix,VER,Red Bull Racing,,,,,,,7.0,1:20.225,1:19.662,1:20.022,6.0,1:21.745
+2024,Italian Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,1:21.444,,,18.0,1:25.091
+2024,Italian Grand Prix,ZHO,Sauber,15.0,1:22.853,20.0,1:22.222,20.0,1:22.034,,,,,,
+2024,Japanese Grand Prix,ALB,Williams,12.0,1:31.942,,,11.0,1:30.533,14.0,1:29.962,1:29.713,,20.0,
+2024,Japanese Grand Prix,ALO,Aston Martin,7.0,1:30.599,,,5.0,1:30.081,5.0,1:29.254,1:29.081,1:28.686,6.0,1:34.725
+2024,Japanese Grand Prix,BOT,Kick Sauber,,,,,,,13.0,1:29.602,1:29.593,,14.0,1:36.608
+2024,Japanese Grand Prix,BOT,Sauber,14.0,1:32.054,,,12.0,1:30.546,,,,,,
+2024,Japanese Grand Prix,GAS,Alpine,17.0,1:32.277,,,17.0,1:31.141,17.0,1:30.118,,,16.0,1:36.641
+2024,Japanese Grand Prix,HAM,Mercedes,5.0,1:30.543,2.0,1:35.225,4.0,1:30.037,7.0,1:29.661,1:28.887,1:28.766,9.0,1:33.951
+2024,Japanese Grand Prix,HUL,Haas,13.0,1:31.957,,,16.0,1:31.138,,,,,,
+2024,Japanese Grand Prix,HUL,Haas F1 Team,,,,,,,12.0,1:29.820,1:29.493,,11.0,1:35.325
+2024,Japanese Grand Prix,LEC,Ferrari,6.0,1:30.558,3.0,1:38.760,10.0,1:30.382,8.0,1:29.337,1:29.195,1:28.786,4.0,1:35.043
+2024,Japanese Grand Prix,MAG,Haas,19.0,1:32.802,,,20.0,1:31.462,,,,,,
+2024,Japanese Grand Prix,MAG,Haas F1 Team,,,,,,,18.0,1:30.131,,,13.0,1:36.653
+2024,Japanese Grand Prix,NOR,McLaren,10.0,1:31.239,,,6.0,1:30.137,3.0,1:29.536,1:28.939,1:28.489,5.0,1:35.186
+2024,Japanese Grand Prix,OCO,Alpine,11.0,1:31.935,,,14.0,1:31.022,15.0,1:29.811,1:29.816,,15.0,1:36.231
+2024,Japanese Grand Prix,PER,Red Bull,2.0,1:30.236,,,2.0,1:29.831,,,,,,
+2024,Japanese Grand Prix,PER,Red Bull Racing,,,,,,,2.0,1:29.302,1:28.751,1:28.263,2.0,1:33.944
+2024,Japanese Grand Prix,PIA,McLaren,8.0,1:31.165,1.0,1:34.724,8.0,1:30.225,6.0,1:29.424,1:29.147,1:28.760,8.0,1:34.802
+2024,Japanese Grand Prix,RIC,RB,,,,,13.0,1:30.682,11.0,1:29.727,1:29.471,,19.0,
+2024,Japanese Grand Prix,RUS,Mercedes,4.0,1:30.530,,,3.0,1:29.918,9.0,1:29.799,1:29.140,1:29.007,7.0,1:34.403
+2024,Japanese Grand Prix,SAI,Ferrari,3.0,1:30.269,,,7.0,1:30.171,4.0,1:29.513,1:29.099,1:28.682,3.0,1:33.840
+2024,Japanese Grand Prix,SAR,Williams,20.0,1:33.203,,,19.0,1:31.451,19.0,1:30.138,,,17.0,1:34.900
+2024,Japanese Grand Prix,STR,Aston Martin,15.0,1:32.055,,,18.0,1:31.341,16.0,1:30.024,,,12.0,1:35.798
+2024,Japanese Grand Prix,TSU,RB,9.0,1:31.230,4.0,1:40.945,9.0,1:30.340,10.0,1:29.775,1:29.417,1:29.412,10.0,1:36.341
+2024,Japanese Grand Prix,VER,Red Bull,1.0,1:30.055,,,1.0,1:29.563,,,,,,
+2024,Japanese Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:28.865,1:28.739,1:28.197,1.0,1:33.706
+2024,Japanese Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,1:30.143,,,18.0,1:37.159
+2024,Japanese Grand Prix,ZHO,Sauber,18.0,1:32.638,,,15.0,1:31.066,,,,,,
+2024,Las Vegas Grand Prix,ALB,Williams,13.0,1:36.947,20.0,1:39.629,7.0,1:34.406,18.0,1:34.424,,,19.0,1:38.007
+2024,Las Vegas Grand Prix,ALO,Aston Martin,7.0,1:36.262,14.0,1:35.439,15.0,1:35.938,17.0,1:34.257,,,11.0,1:36.552
+2024,Las Vegas Grand Prix,BOT,Kick Sauber,,,,,,,19.0,1:34.430,,,18.0,1:36.600
+2024,Las Vegas Grand Prix,BOT,Sauber,16.0,1:37.765,11.0,1:35.019,17.0,1:36.412,,,,,,
+2024,Las Vegas Grand Prix,COL,Williams,17.0,1:38.025,18.0,1:35.867,8.0,1:34.722,14.0,1:33.745,1:33.748,,14.0,1:36.867
+2024,Las Vegas Grand Prix,GAS,Alpine,9.0,1:36.477,6.0,1:34.650,10.0,1:34.905,3.0,1:33.691,1:32.879,1:32.664,20.0,1:38.313
+2024,Las Vegas Grand Prix,HAM,Mercedes,1.0,1:35.001,1.0,1:33.825,6.0,1:34.340,10.0,1:33.224,1:32.566,1:48.105,2.0,1:35.480
+2024,Las Vegas Grand Prix,HUL,Haas,15.0,1:37.200,9.0,1:34.817,11.0,1:34.908,,,,,,
+2024,Las Vegas Grand Prix,HUL,Haas F1 Team,,,,,,,9.0,1:33.920,1:33.114,1:33.061,8.0,1:36.584
+2024,Las Vegas Grand Prix,LAW,RB,20.0,1:38.730,15.0,1:35.671,18.0,1:36.543,15.0,1:34.087,1:34.257,,16.0,1:36.980
+2024,Las Vegas Grand Prix,LEC,Ferrari,4.0,1:36.007,5.0,1:34.313,12.0,1:34.941,4.0,1:33.445,1:33.016,1:32.783,4.0,1:35.674
+2024,Las Vegas Grand Prix,MAG,Haas,11.0,1:36.811,7.0,1:34.686,9.0,1:34.882,,,,,,
+2024,Las Vegas Grand Prix,MAG,Haas F1 Team,,,,,,,12.0,1:33.990,1:33.296,,12.0,1:36.557
+2024,Las Vegas Grand Prix,NOR,McLaren,3.0,1:35.953,2.0,1:33.835,4.0,1:34.007,6.0,1:33.591,1:33.099,1:33.007,6.0,1:34.876
+2024,Las Vegas Grand Prix,OCO,Alpine,14.0,1:37.152,12.0,1:35.221,14.0,1:35.459,11.0,1:33.968,1:33.221,,17.0,1:36.510
+2024,Las Vegas Grand Prix,PER,Red Bull,10.0,1:36.536,19.0,1:36.055,13.0,1:35.061,,,,,,
+2024,Las Vegas Grand Prix,PER,Red Bull Racing,,,,,,,16.0,1:34.155,,,10.0,1:36.325
+2024,Las Vegas Grand Prix,PIA,McLaren,8.0,1:36.450,8.0,1:34.798,2.0,1:33.784,8.0,1:33.450,1:33.024,1:33.033,7.0,1:36.597
+2024,Las Vegas Grand Prix,RUS,Mercedes,2.0,1:35.397,3.0,1:34.015,1.0,1:33.569,1.0,1:33.186,1:32.778,1:32.311,1.0,1:35.716
+2024,Las Vegas Grand Prix,SAI,Ferrari,6.0,1:36.218,4.0,1:34.105,3.0,1:33.918,2.0,1:33.483,1:32.710,1:32.409,3.0,1:35.875
+2024,Las Vegas Grand Prix,STR,Aston Martin,12.0,1:36.816,13.0,1:35.251,19.0,1:36.950,20.0,1:34.483,,,15.0,1:37.179
+2024,Las Vegas Grand Prix,TSU,RB,19.0,1:38.573,10.0,1:34.996,16.0,1:36.215,7.0,1:33.789,1:33.088,1:33.028,9.0,1:36.956
+2024,Las Vegas Grand Prix,VER,Red Bull,5.0,1:36.037,17.0,1:35.834,5.0,1:34.137,,,,,,
+2024,Las Vegas Grand Prix,VER,Red Bull Racing,,,,,,,5.0,1:33.299,1:33.084,1:32.796,5.0,1:36.248
+2024,Las Vegas Grand Prix,ZHO,Kick Sauber,,,,,,,13.0,1:34.078,1:33.566,,13.0,1:36.323
+2024,Las Vegas Grand Prix,ZHO,Sauber,18.0,1:38.349,16.0,1:35.765,20.0,1:36.987,,,,,,
+2024,Mexico City Grand Prix,ALB,Williams,17.0,1:19.811,,,11.0,1:17.510,9.0,1:17.188,1:16.987,1:17.064,19.0,
+2024,Mexico City Grand Prix,ALO,Aston Martin,,,11.0,1:18.578,15.0,1:17.798,13.0,1:17.307,1:17.168,,18.0,1:22.721
+2024,Mexico City Grand Prix,BOT,Kick Sauber,,,,,,,15.0,1:17.393,1:17.816,,14.0,1:21.084
+2024,Mexico City Grand Prix,BOT,Sauber,8.0,1:19.048,8.0,1:18.350,12.0,1:17.638,,,,,,
+2024,Mexico City Grand Prix,COL,Williams,11.0,1:19.108,15.0,1:18.908,13.0,1:17.712,16.0,1:17.558,,,12.0,1:20.090
+2024,Mexico City Grand Prix,GAS,Alpine,15.0,1:19.340,16.0,1:18.941,20.0,1:18.453,8.0,1:17.149,1:17.048,1:16.891,10.0,1:21.274
+2024,Mexico City Grand Prix,HAM,Mercedes,,,7.0,1:18.278,5.0,1:17.060,6.0,1:17.305,1:16.972,1:16.650,4.0,1:20.370
+2024,Mexico City Grand Prix,HUL,Haas,5.0,1:18.903,12.0,1:18.620,16.0,1:17.819,,,,,,
+2024,Mexico City Grand Prix,HUL,Haas F1 Team,,,,,,,10.0,1:17.186,1:16.995,1:17.364,9.0,1:20.748
+2024,Mexico City Grand Prix,LAW,RB,9.0,1:19.093,10.0,1:18.560,10.0,1:17.493,12.0,1:17.379,1:17.162,,16.0,1:19.501
+2024,Mexico City Grand Prix,LEC,Ferrari,,,4.0,1:17.887,6.0,1:17.231,4.0,1:16.971,1:16.641,1:16.265,3.0,1:18.335
+2024,Mexico City Grand Prix,MAG,Haas,14.0,1:19.334,6.0,1:18.239,9.0,1:17.474,,,,,,
+2024,Mexico City Grand Prix,MAG,Haas F1 Team,,,,,,,7.0,1:17.125,1:17.003,1:16.885,7.0,1:20.637
+2024,Mexico City Grand Prix,NOR,McLaren,,,5.0,1:17.947,2.0,1:16.551,3.0,1:16.504,1:16.301,1:16.260,2.0,1:19.691
+2024,Mexico City Grand Prix,OCO,Alpine,7.0,1:18.995,13.0,1:18.656,18.0,1:18.323,19.0,1:17.617,,,13.0,1:20.659
+2024,Mexico City Grand Prix,PER,Red Bull,10.0,1:19.093,9.0,1:18.391,14.0,1:17.787,,,,,,
+2024,Mexico City Grand Prix,PER,Red Bull Racing,,,,,,,18.0,1:17.611,,,17.0,1:19.209
+2024,Mexico City Grand Prix,PIA,McLaren,6.0,1:18.957,2.0,1:17.876,1.0,1:16.492,17.0,1:17.596,,,8.0,1:20.063
+2024,Mexico City Grand Prix,RUS,Mercedes,1.0,1:17.998,18.0,1:19.040,8.0,1:17.340,5.0,1:17.194,1:16.936,1:16.355,5.0,1:20.730
+2024,Mexico City Grand Prix,SAI,Ferrari,2.0,1:18.314,1.0,1:17.698,3.0,1:16.831,1.0,1:16.778,1:16.515,1:15.945,1.0,1:20.137
+2024,Mexico City Grand Prix,STR,Aston Martin,16.0,1:19.599,14.0,1:18.890,17.0,1:17.900,14.0,1:17.406,1:17.293,,11.0,1:21.311
+2024,Mexico City Grand Prix,TSU,RB,3.0,1:18.698,3.0,1:17.878,7.0,1:17.302,11.0,1:17.182,1:17.129,,20.0,
+2024,Mexico City Grand Prix,VER,Red Bull,4.0,1:18.838,,,4.0,1:17.003,,,,,,
+2024,Mexico City Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:16.802,1:16.513,1:16.171,6.0,1:20.871
+2024,Mexico City Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,1:18.072,,,15.0,1:21.552
+2024,Mexico City Grand Prix,ZHO,Sauber,,,17.0,1:18.980,19.0,1:18.427,,,,,,
+2024,Monaco Grand Prix,ALB,Williams,15.0,1:13.424,9.0,1:12.257,12.0,1:12.180,9.0,1:11.623,1:11.215,1:10.947,9.0,1:17.060
+2024,Monaco Grand Prix,ALO,Aston Martin,6.0,1:12.775,3.0,1:11.753,10.0,1:12.087,14.0,1:12.019,,,11.0,1:17.938
+2024,Monaco Grand Prix,BOT,Kick Sauber,,,,,,,17.0,1:12.512,,,13.0,1:16.561
+2024,Monaco Grand Prix,GAS,Alpine,20.0,1:15.573,17.0,1:12.750,11.0,1:12.144,10.0,1:11.713,1:10.896,1:11.311,10.0,1:15.625
+2024,Monaco Grand Prix,HAM,Mercedes,1.0,1:12.168,2.0,1:11.465,3.0,1:11.709,7.0,1:11.528,1:11.055,1:10.620,7.0,1:14.165
+2024,Monaco Grand Prix,HUL,Haas,16.0,1:13.575,15.0,1:12.569,13.0,1:12.191,,,,,,
+2024,Monaco Grand Prix,HUL,Haas F1 Team,,,,,,,14.0,1:11.876,1:11.439,,19.0,
+2024,Monaco Grand Prix,LEC,Ferrari,5.0,1:12.397,1.0,1:11.278,1.0,1:11.368,1.0,1:11.584,1:10.825,1:10.269,1.0,1:15.162
+2024,Monaco Grand Prix,MAG,Haas,14.0,1:13.390,13.0,1:12.472,14.0,1:12.215,,,,,,
+2024,Monaco Grand Prix,MAG,Haas F1 Team,,,,,,,15.0,1:11.831,1:11.724,,20.0,
+2024,Monaco Grand Prix,NOR,McLaren,4.0,1:12.396,5.0,1:11.953,8.0,1:11.987,4.0,1:11.760,1:10.731,1:10.542,4.0,1:15.742
+2024,Monaco Grand Prix,OCO,Alpine,18.0,1:14.159,14.0,1:12.554,16.0,1:12.471,11.0,1:11.887,1:11.284,,17.0,
+2024,Monaco Grand Prix,PER,Red Bull,12.0,1:13.228,8.0,1:12.099,5.0,1:11.923,,,,,,
+2024,Monaco Grand Prix,PER,Red Bull Racing,,,,,,,16.0,1:12.060,,,18.0,
+2024,Monaco Grand Prix,PIA,McLaren,2.0,1:12.197,12.0,1:12.365,4.0,1:11.900,2.0,1:11.500,1:10.756,1:10.424,2.0,1:16.281
+2024,Monaco Grand Prix,RIC,RB,9.0,1:12.900,16.0,1:12.576,18.0,1:12.828,12.0,1:11.784,1:11.481,,12.0,1:17.171
+2024,Monaco Grand Prix,RUS,Mercedes,3.0,1:12.295,10.0,1:12.260,6.0,1:11.968,5.0,1:11.492,1:10.929,1:10.543,5.0,1:15.227
+2024,Monaco Grand Prix,SAI,Ferrari,10.0,1:12.953,6.0,1:11.962,7.0,1:11.978,3.0,1:11.543,1:11.075,1:10.518,3.0,1:14.725
+2024,Monaco Grand Prix,SAR,Williams,17.0,1:14.150,18.0,1:12.790,17.0,1:12.703,15.0,1:12.019,,,15.0,1:15.525
+2024,Monaco Grand Prix,STR,Aston Martin,7.0,1:12.789,7.0,1:12.061,15.0,1:12.331,13.0,1:11.727,1:11.563,,14.0,1:16.709
+2024,Monaco Grand Prix,TSU,RB,8.0,1:12.875,11.0,1:12.349,9.0,1:11.990,8.0,1:11.852,1:11.105,1:10.858,8.0,1:14.719
+2024,Monaco Grand Prix,VER,Red Bull,11.0,1:12.983,4.0,1:11.813,2.0,1:11.566,,,,,,
+2024,Monaco Grand Prix,VER,Red Bull Racing,,,,,,,6.0,1:11.710,1:10.745,1:10.566,6.0,1:14.569
+2024,Monaco Grand Prix,ZHO,Kick Sauber,,,,,,,18.0,1:13.028,,,16.0,1:14.718
+2024,Monaco Grand Prix,ZHO,Sauber,19.0,1:14.569,20.0,1:13.772,19.0,1:13.829,,,,,,
+2024,Pre-Season Testing,ALB,Williams,8.0,1:32.450,9.0,1:31.650,8.0,1:30.948,11.0,1:30.679,1:30.474,,20.0,1:36.888
+2024,Pre-Season Testing,ALO,Aston Martin,9.0,1:32.609,12.0,1:31.750,10.0,1:31.081,7.0,1:30.683,1:30.450,1:30.213,8.0,1:37.740
+2024,Pre-Season Testing,BOT,Kick Sauber,,,,,,,19.0,1:31.572,,,16.0,1:37.524
+2024,Pre-Season Testing,BOT,Sauber,18.0,1:33.484,20.0,1:32.786,19.0,1:32.097,,,,,,
+2024,Pre-Season Testing,COL,Williams,,,,,,,12.0,1:30.703,1:30.480,,11.0,1:37.262
+2024,Pre-Season Testing,COL,,11.0,1:32.617,16.0,1:32.057,9.0,1:30.989,,,,,,
+2024,Pre-Season Testing,GAS,Alpine,13.0,1:32.694,18.0,1:32.221,14.0,1:31.367,18.0,1:31.311,,,17.0,1:36.927
+2024,Pre-Season Testing,HAM,Mercedes,12.0,1:32.679,11.0,1:31.709,7.0,1:30.864,3.0,1:30.393,1:29.929,1:29.840,6.0,1:37.393
+2024,Pre-Season Testing,HUL,Haas,20.0,1:33.796,10.0,1:31.667,12.0,1:31.186,,,,,,
+2024,Pre-Season Testing,HUL,Haas F1 Team,,,,,,,6.0,1:30.724,1:30.150,1:30.114,9.0,1:37.469
+2024,Pre-Season Testing,LEC,Ferrari,1.0,1:31.763,2.0,1:30.784,5.0,1:30.558,9.0,1:30.786,1:29.746,,5.0,1:35.370
+2024,Pre-Season Testing,MAG,Haas,17.0,1:33.376,13.0,1:31.793,13.0,1:31.265,,,,,,
+2024,Pre-Season Testing,MAG,Haas F1 Team,,,,,,,14.0,1:30.828,1:30.653,,19.0,1:34.754
+2024,Pre-Season Testing,NOR,McLaren,2.0,1:31.838,1.0,1:30.727,1.0,1:29.646,1.0,1:30.001,1:30.007,1:29.525,1.0,1:34.924
+2024,Pre-Season Testing,OCO,Alpine,10.0,1:32.614,17.0,1:32.118,16.0,1:31.558,15.0,1:30.957,1:30.769,,13.0,1:37.963
+2024,Pre-Season Testing,PER,Red Bull,14.0,1:32.766,8.0,1:31.597,15.0,1:31.439,,,,,,
+2024,Pre-Season Testing,PER,Red Bull Racing,,,,,,,13.0,1:30.623,1:30.578,,10.0,1:37.477
+2024,Pre-Season Testing,PIA,McLaren,6.0,1:32.368,5.0,1:31.474,3.0,1:30.430,5.0,1:30.257,1:29.640,1:29.953,3.0,1:35.745
+2024,Pre-Season Testing,RIC,RB,7.0,1:32.375,6.0,1:31.477,17.0,1:31.561,16.0,1:31.084,,,18.0,1:34.486
+2024,Pre-Season Testing,RUS,Mercedes,16.0,1:33.334,7.0,1:31.487,2.0,1:30.125,4.0,1:30.811,1:30.153,1:29.867,4.0,1:37.046
+2024,Pre-Season Testing,SAI,Ferrari,3.0,1:31.951,3.0,1:31.355,6.0,1:30.807,10.0,1:30.670,1:30.108,,7.0,1:36.561
+2024,Pre-Season Testing,STR,Aston Martin,15.0,1:32.778,14.0,1:31.956,18.0,1:31.718,17.0,1:31.093,,,14.0,1:37.850
+2024,Pre-Season Testing,TSU,RB,5.0,1:32.263,4.0,1:31.468,11.0,1:31.114,8.0,1:30.715,1:30.289,1:30.353,12.0,1:36.393
+2024,Pre-Season Testing,VER,Red Bull,4.0,1:32.096,15.0,1:32.021,4.0,1:30.540,,,,,,
+2024,Pre-Season Testing,VER,Red Bull Racing,,,,,,,2.0,1:30.156,1:29.680,1:29.727,2.0,1:35.966
+2024,Pre-Season Testing,ZHO,Kick Sauber,,,,,,,20.0,1:32.054,,,15.0,1:37.460
+2024,Pre-Season Testing,ZHO,Sauber,19.0,1:33.584,19.0,1:32.358,20.0,1:32.652,,,,,,
+2024,Saudi Arabian Grand Prix,ALB,Williams,10.0,1:30.746,14.0,1:29.789,17.0,1:29.808,12.0,1:29.106,1:28.980,,11.0,1:32.307
+2024,Saudi Arabian Grand Prix,ALO,Aston Martin,2.0,1:29.844,1.0,1:28.826,6.0,1:29.037,4.0,1:28.706,1:28.121,1:27.846,5.0,1:32.387
+2024,Saudi Arabian Grand Prix,BEA,Ferrari,,,,,10.0,1:29.305,11.0,1:28.983,1:28.641,,7.0,1:32.186
+2024,Saudi Arabian Grand Prix,BOT,Kick Sauber,,,,,,,16.0,1:29.179,,,17.0,1:32.706
+2024,Saudi Arabian Grand Prix,BOT,Sauber,11.0,1:30.783,20.0,1:30.153,18.0,1:30.082,,,,,,
+2024,Saudi Arabian Grand Prix,GAS,Alpine,17.0,1:31.046,9.0,1:29.528,12.0,1:29.546,18.0,1:29.478,,,20.0,2:01.453
+2024,Saudi Arabian Grand Prix,HAM,Mercedes,8.0,1:30.236,8.0,1:29.504,9.0,1:29.268,8.0,1:28.993,1:28.605,1:28.459,9.0,1:31.745
+2024,Saudi Arabian Grand Prix,HUL,Haas,19.0,1:31.411,18.0,1:30.076,15.0,1:29.674,,,,,,
+2024,Saudi Arabian Grand Prix,HUL,Haas F1 Team,,,,,,,15.0,1:29.055,,,10.0,1:32.365
+2024,Saudi Arabian Grand Prix,LEC,Ferrari,5.0,1:30.030,4.0,1:29.180,2.0,1:28.608,2.0,1:28.317,1:28.111,1:27.790,3.0,1:31.632
+2024,Saudi Arabian Grand Prix,MAG,Haas,20.0,1:31.576,17.0,1:29.984,11.0,1:29.484,,,,,,
+2024,Saudi Arabian Grand Prix,MAG,Haas F1 Team,,,,,,,13.0,1:29.069,1:29.019,,12.0,1:32.337
+2024,Saudi Arabian Grand Prix,NOR,McLaren,7.0,1:30.230,12.0,1:29.757,5.0,1:28.971,6.0,1:28.805,1:28.478,1:28.132,8.0,1:31.944
+2024,Saudi Arabian Grand Prix,OCO,Alpine,13.0,1:30.944,15.0,1:29.900,14.0,1:29.575,17.0,1:29.474,,,13.0,1:33.480
+2024,Saudi Arabian Grand Prix,PER,Red Bull,3.0,1:29.867,5.0,1:29.299,3.0,1:28.906,,,,,,
+2024,Saudi Arabian Grand Prix,PER,Red Bull Racing,,,,,,,3.0,1:28.638,1:28.466,1:27.807,2.0,1:32.272
+2024,Saudi Arabian Grand Prix,PIA,McLaren,15.0,1:30.977,10.0,1:29.593,8.0,1:29.212,5.0,1:28.754,1:28.343,1:28.088,4.0,1:32.310
+2024,Saudi Arabian Grand Prix,RIC,RB,12.0,1:30.917,19.0,1:30.087,16.0,1:29.739,14.0,1:29.064,1:29.025,,16.0,1:33.322
+2024,Saudi Arabian Grand Prix,RUS,Mercedes,4.0,1:29.938,2.0,1:29.057,4.0,1:28.963,7.0,1:28.748,1:28.447,1:28.316,6.0,1:32.254
+2024,Saudi Arabian Grand Prix,SAR,Williams,,,,,,,19.0,1:29.525,,,14.0,1:33.025
+2024,Saudi Arabian Grand Prix,STR,Aston Martin,9.0,1:30.579,6.0,1:29.335,7.0,1:29.126,10.0,1:28.250,1:28.578,1:28.572,19.0,1:35.560
+2024,Saudi Arabian Grand Prix,TSU,RB,16.0,1:31.036,11.0,1:29.665,13.0,1:29.572,9.0,1:28.987,1:28.563,1:28.546,15.0,1:33.522
+2024,Saudi Arabian Grand Prix,VER,Red Bull,1.0,1:29.659,3.0,1:29.158,1.0,1:28.412,,,,,,
+2024,Saudi Arabian Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:28.171,1:28.033,1:27.471,1.0,1:31.772
+2024,Saudi Arabian Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,,,,18.0,1:32.207
+2024,Saudi Arabian Grand Prix,ZHO,Sauber,18.0,1:31.131,13.0,1:29.777,19.0,1:30.739,,,,,,
+2024,Singapore Grand Prix,ALB,Williams,8.0,1:32.450,9.0,1:31.650,8.0,1:30.948,11.0,1:30.679,1:30.474,,20.0,1:36.888
+2024,Singapore Grand Prix,ALO,Aston Martin,9.0,1:32.609,12.0,1:31.750,10.0,1:31.081,7.0,1:30.683,1:30.450,1:30.213,8.0,1:37.740
+2024,Singapore Grand Prix,BOT,Kick Sauber,,,,,,,19.0,1:31.572,,,16.0,1:37.524
+2024,Singapore Grand Prix,BOT,Sauber,18.0,1:33.484,20.0,1:32.786,19.0,1:32.097,,,,,,
+2024,Singapore Grand Prix,COL,Williams,11.0,1:32.617,16.0,1:32.057,9.0,1:30.989,12.0,1:30.703,1:30.480,,11.0,1:37.262
+2024,Singapore Grand Prix,GAS,Alpine,13.0,1:32.694,18.0,1:32.221,14.0,1:31.367,18.0,1:31.311,,,17.0,1:36.927
+2024,Singapore Grand Prix,HAM,Mercedes,12.0,1:32.679,11.0,1:31.709,7.0,1:30.864,3.0,1:30.393,1:29.929,1:29.840,6.0,1:37.393
+2024,Singapore Grand Prix,HUL,Haas,20.0,1:33.796,10.0,1:31.667,12.0,1:31.186,,,,,,
+2024,Singapore Grand Prix,HUL,Haas F1 Team,,,,,,,6.0,1:30.724,1:30.150,1:30.114,9.0,1:37.469
+2024,Singapore Grand Prix,LEC,Ferrari,1.0,1:31.763,2.0,1:30.784,5.0,1:30.558,9.0,1:30.786,1:29.746,,5.0,1:35.370
+2024,Singapore Grand Prix,MAG,Haas,17.0,1:33.376,13.0,1:31.793,13.0,1:31.265,,,,,,
+2024,Singapore Grand Prix,MAG,Haas F1 Team,,,,,,,14.0,1:30.828,1:30.653,,19.0,1:34.754
+2024,Singapore Grand Prix,NOR,McLaren,2.0,1:31.838,1.0,1:30.727,1.0,1:29.646,1.0,1:30.001,1:30.007,1:29.525,1.0,1:34.924
+2024,Singapore Grand Prix,OCO,Alpine,10.0,1:32.614,17.0,1:32.118,16.0,1:31.558,15.0,1:30.957,1:30.769,,13.0,1:37.963
+2024,Singapore Grand Prix,PER,Red Bull,14.0,1:32.766,8.0,1:31.597,15.0,1:31.439,,,,,,
+2024,Singapore Grand Prix,PER,Red Bull Racing,,,,,,,13.0,1:30.623,1:30.578,,10.0,1:37.477
+2024,Singapore Grand Prix,PIA,McLaren,6.0,1:32.368,5.0,1:31.474,3.0,1:30.430,5.0,1:30.257,1:29.640,1:29.953,3.0,1:35.745
+2024,Singapore Grand Prix,RIC,RB,7.0,1:32.375,6.0,1:31.477,17.0,1:31.561,16.0,1:31.084,,,18.0,1:34.486
+2024,Singapore Grand Prix,RUS,Mercedes,16.0,1:33.334,7.0,1:31.487,2.0,1:30.125,4.0,1:30.811,1:30.153,1:29.867,4.0,1:37.046
+2024,Singapore Grand Prix,SAI,Ferrari,3.0,1:31.951,3.0,1:31.355,6.0,1:30.807,10.0,1:30.670,1:30.108,,7.0,1:36.561
+2024,Singapore Grand Prix,STR,Aston Martin,15.0,1:32.778,14.0,1:31.956,18.0,1:31.718,17.0,1:31.093,,,14.0,1:37.850
+2024,Singapore Grand Prix,TSU,RB,5.0,1:32.263,4.0,1:31.468,11.0,1:31.114,8.0,1:30.715,1:30.289,1:30.353,12.0,1:36.393
+2024,Singapore Grand Prix,VER,Red Bull,4.0,1:32.096,15.0,1:32.021,4.0,1:30.540,,,,,,
+2024,Singapore Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:30.156,1:29.680,1:29.727,2.0,1:35.966
+2024,Singapore Grand Prix,ZHO,Kick Sauber,,,,,,,20.0,1:32.054,,,15.0,1:37.460
+2024,Singapore Grand Prix,ZHO,Sauber,19.0,1:33.584,19.0,1:32.358,20.0,1:32.652,,,,,,
+2024,Spanish Grand Prix,ALB,Williams,10.0,1:15.417,19.0,1:14.807,8.0,1:13.753,19.0,1:13.153,,,18.0,1:19.132
+2024,Spanish Grand Prix,ALO,Aston Martin,9.0,1:15.221,14.0,1:14.090,9.0,1:13.786,11.0,1:12.504,1:12.128,,12.0,1:18.334
+2024,Spanish Grand Prix,BOT,Kick Sauber,,,,,,,12.0,1:12.757,1:12.227,,16.0,1:19.608
+2024,Spanish Grand Prix,BOT,Sauber,12.0,1:15.471,10.0,1:13.924,14.0,1:14.024,,,,,,
+2024,Spanish Grand Prix,GAS,Alpine,13.0,1:15.483,4.0,1:13.442,12.0,1:13.963,7.0,1:12.650,1:12.078,1:11.856,9.0,1:19.045
+2024,Spanish Grand Prix,HAM,Mercedes,7.0,1:14.911,1.0,1:13.263,6.0,1:13.358,3.0,1:12.143,1:11.792,1:11.700,3.0,1:17.808
+2024,Spanish Grand Prix,HUL,Haas,,,12.0,1:14.052,13.0,1:13.974,,,,,,
+2024,Spanish Grand Prix,HUL,Haas F1 Team,,,,,,,13.0,1:12.707,1:12.310,,11.0,1:18.608
+2024,Spanish Grand Prix,LEC,Ferrari,11.0,1:15.433,6.0,1:13.596,3.0,1:13.049,5.0,1:12.257,1:12.037,1:11.730,5.0,1:17.897
+2024,Spanish Grand Prix,MAG,Haas,17.0,1:15.644,11.0,1:14.021,15.0,1:14.073,,,,,,
+2024,Spanish Grand Prix,MAG,Haas F1 Team,,,,,,,16.0,1:12.936,,,17.0,1:19.805
+2024,Spanish Grand Prix,NOR,McLaren,1.0,1:14.227,3.0,1:13.319,2.0,1:13.043,1.0,1:12.385,1:11.871,1:11.382,2.0,1:17.114
+2024,Spanish Grand Prix,OCO,Alpine,8.0,1:15.085,9.0,1:13.766,11.0,1:13.950,9.0,1:12.691,1:12.108,1:12.125,10.0,1:18.981
+2024,Spanish Grand Prix,PER,Red Bull,5.0,1:14.691,13.0,1:14.081,7.0,1:13.722,,,,,,
+2024,Spanish Grand Prix,PER,Red Bull Racing,,,,,,,8.0,1:12.477,1:12.054,1:12.061,8.0,1:17.784
+2024,Spanish Grand Prix,PIA,McLaren,6.0,1:14.867,7.0,1:13.621,10.0,1:13.906,10.0,1:12.459,1:12.010,,7.0,1:17.873
+2024,Spanish Grand Prix,RIC,RB,15.0,1:15.579,16.0,1:14.257,16.0,1:14.161,18.0,1:13.075,,,15.0,1:19.450
+2024,Spanish Grand Prix,RUS,Mercedes,4.0,1:14.614,8.0,1:13.721,5.0,1:13.164,4.0,1:12.456,1:11.811,1:11.703,4.0,1:18.290
+2024,Spanish Grand Prix,SAI,Ferrari,3.0,1:14.572,2.0,1:13.286,1.0,1:13.013,6.0,1:12.403,1:11.873,1:11.736,6.0,1:18.539
+2024,Spanish Grand Prix,SAR,Williams,18.0,1:15.751,20.0,1:15.069,20.0,1:14.728,20.0,1:13.509,,,20.0,1:20.171
+2024,Spanish Grand Prix,STR,Aston Martin,14.0,1:15.512,18.0,1:14.402,17.0,1:14.254,14.0,1:12.881,1:12.371,,14.0,1:19.317
+2024,Spanish Grand Prix,TSU,RB,20.0,1:15.915,15.0,1:14.210,18.0,1:14.420,17.0,1:12.984,,,19.0,1:19.447
+2024,Spanish Grand Prix,VER,Red Bull,2.0,1:14.251,5.0,1:13.504,4.0,1:13.087,,,,,,
+2024,Spanish Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:12.305,1:11.653,1:11.403,1.0,1:17.775
+2024,Spanish Grand Prix,ZHO,Kick Sauber,,,,,,,15.0,1:12.879,1:12.737,,13.0,1:18.771
+2024,Spanish Grand Prix,ZHO,Sauber,16.0,1:15.615,17.0,1:14.344,19.0,1:14.572,,,,,,
+2025,Australian Grand Prix,ALB,Williams,6.0,1:17.712,12.0,1:17.302,7.0,1:16.257,6.0,1:16.245,1:16.016,1:15.736,5.0,1:24.596
+2025,Australian Grand Prix,ALO,Aston Martin,8.0,1:17.736,13.0,1:17.329,17.0,1:17.269,12.0,1:16.287,1:16.453,,17.0,1:28.819
+2025,Australian Grand Prix,ANT,Mercedes,14.0,1:18.390,16.0,1:17.634,5.0,1:16.206,16.0,1:16.525,,,4.0,1:24.900
+2025,Australian Grand Prix,BEA,Haas F1 Team,,,,,,,20.0,,,,14.0,1:27.602
+2025,Australian Grand Prix,BOR,Kick Sauber,,,,,,,15.0,1:16.516,1:17.519,,16.0,1:24.191
+2025,Australian Grand Prix,BOR,Sauber,15.0,1:18.438,18.0,1:17.846,11.0,1:16.706,,,,,,
+2025,Australian Grand Prix,DOO,Alpine,13.0,1:18.231,14.0,1:17.394,15.0,1:16.992,14.0,1:16.314,1:16.862,,19.0,
+2025,Australian Grand Prix,GAS,Alpine,17.0,1:18.504,15.0,1:17.492,12.0,1:16.718,9.0,1:16.328,1:16.111,1:15.980,11.0,1:25.019
+2025,Australian Grand Prix,HAD,RB,9.0,1:17.846,6.0,1:17.019,13.0,1:16.731,,,,,,
+2025,Australian Grand Prix,HAD,Racing Bulls,,,,,,,11.0,1:16.353,1:16.174,,20.0,
+2025,Australian Grand Prix,HAM,Ferrari,12.0,1:18.070,5.0,1:16.858,8.0,1:16.378,8.0,1:16.212,1:15.918,1:15.972,10.0,1:24.218
+2025,Australian Grand Prix,HUL,Kick Sauber,,,,,,,17.0,1:16.578,,,7.0,1:25.242
+2025,Australian Grand Prix,HUL,Sauber,18.0,1:18.585,8.0,1:17.161,16.0,1:17.146,,,,,,
+2025,Australian Grand Prix,LAW,Red Bull Racing,,,,,,,18.0,1:17.093,,,15.0,1:22.969
+2025,Australian Grand Prix,LEC,Ferrari,3.0,1:17.460,1.0,1:16.438,4.0,1:16.188,7.0,1:16.028,1:15.826,1:15.754,8.0,1:25.271
+2025,Australian Grand Prix,NOR,McLaren,1.0,1:17.251,3.0,1:16.579,10.0,1:16.596,1.0,1:15.912,1:15.415,1:15.096,1.0,1:22.167
+2025,Australian Grand Prix,OCO,Haas,19.0,1:19.138,19.0,1:18.034,18.0,1:17.373,,,,,,
+2025,Australian Grand Prix,OCO,Haas F1 Team,,,,,,,19.0,1:17.147,,,13.0,1:26.763
+2025,Australian Grand Prix,PIA,McLaren,4.0,1:17.670,2.0,1:16.563,1.0,1:15.921,2.0,1:16.061,1:15.468,1:15.180,9.0,1:23.242
+2025,Australian Grand Prix,RUS,Mercedes,7.0,1:17.715,10.0,1:17.281,2.0,1:15.959,4.0,1:15.971,1:15.798,1:15.546,3.0,1:25.064
+2025,Australian Grand Prix,SAI,Williams,2.0,1:17.400,11.0,1:17.302,6.0,1:16.251,10.0,1:16.359,1:15.930,1:16.061,18.0,
+2025,Australian Grand Prix,STR,Aston Martin,10.0,1:18.057,9.0,1:17.278,14.0,1:16.947,13.0,1:16.368,1:16.483,,6.0,1:25.537
+2025,Australian Grand Prix,TSU,RB,11.0,1:18.061,4.0,1:16.784,9.0,1:16.454,,,,,,
+2025,Australian Grand Prix,TSU,Racing Bulls,,,,,,,5.0,1:16.224,1:16.009,1:15.670,12.0,1:24.194
+2025,Australian Grand Prix,VER,Red Bull,5.0,1:17.695,7.0,1:17.063,3.0,1:16.001,,,,,,
+2025,Australian Grand Prix,VER,Red Bull Racing,,,,,,,3.0,1:16.018,1:15.564,1:15.480,2.0,1:23.081
+2025,Japanese Grand Prix,ALB,Williams,11.0,1:29.391,11.0,1:29.022,7.0,1:28.554,9.0,1:28.218,1:27.783,1:27.614,9.0,1:31.125
+2025,Japanese Grand Prix,ALO,Aston Martin,7.0,1:29.221,17.0,1:29.977,15.0,1:29.772,13.0,1:28.337,1:27.897,,11.0,1:31.769
+2025,Japanese Grand Prix,ANT,Mercedes,9.0,1:29.284,16.0,1:29.733,13.0,1:29.126,6.0,1:27.968,1:27.638,1:27.555,6.0,1:30.965
+2025,Japanese Grand Prix,BEA,Haas,18.0,1:30.076,15.0,1:29.653,16.0,1:30.084,,,,,,
+2025,Japanese Grand Prix,BEA,Haas F1 Team,,,,,,,10.0,1:28.227,1:27.710,1:27.867,10.0,1:32.006
+2025,Japanese Grand Prix,BOR,Kick Sauber,,,,,,,17.0,1:28.621,,,19.0,1:32.034
+2025,Japanese Grand Prix,BOR,Sauber,20.0,1:30.147,13.0,1:29.334,17.0,1:30.134,,,,,,
+2025,Japanese Grand Prix,DOO,Alpine,,,20.0,1:31.659,14.0,1:29.766,19.0,1:28.876,,,15.0,1:32.685
+2025,Japanese Grand Prix,GAS,Alpine,14.0,1:29.546,9.0,1:28.757,8.0,1:28.602,11.0,1:28.186,1:27.822,,13.0,1:31.819
+2025,Japanese Grand Prix,HAD,RB,8.0,1:29.224,3.0,1:28.518,10.0,1:28.786,,,,,,
+2025,Japanese Grand Prix,HAD,Racing Bulls,,,,,,,7.0,1:28.278,1:27.775,1:27.569,8.0,1:31.316
+2025,Japanese Grand Prix,HAM,Ferrari,4.0,1:29.051,4.0,1:28.543,6.0,1:28.524,8.0,1:27.941,1:27.609,1:27.609,7.0,1:31.406
+2025,Japanese Grand Prix,HUL,Kick Sauber,,,,,,,16.0,1:28.569,,,16.0,1:32.572
+2025,Japanese Grand Prix,HUL,Sauber,17.0,1:30.022,12.0,1:29.061,20.0,1:30.620,,,,,,
+2025,Japanese Grand Prix,LAW,RB,13.0,1:29.536,5.0,1:28.558,12.0,1:29.103,,,,,,
+2025,Japanese Grand Prix,LAW,Racing Bulls,,,,,,,14.0,1:28.554,1:27.906,,17.0,1:32.043
+2025,Japanese Grand Prix,LEC,Ferrari,3.0,1:28.965,7.0,1:28.585,4.0,1:28.414,4.0,1:27.920,1:27.555,1:27.299,4.0,1:31.468
+2025,Japanese Grand Prix,NOR,McLaren,1.0,1:28.549,2.0,1:28.162,1.0,1:27.965,2.0,1:27.844,1:27.146,1:26.995,2.0,1:31.115
+2025,Japanese Grand Prix,OCO,Haas,19.0,1:30.123,14.0,1:29.507,18.0,1:30.183,,,,,,
+2025,Japanese Grand Prix,OCO,Haas F1 Team,,,,,,,18.0,1:28.695,,,18.0,1:31.966
+2025,Japanese Grand Prix,PIA,McLaren,15.0,1:29.707,1.0,1:28.114,2.0,1:27.990,3.0,1:27.686,1:27.507,1:27.027,3.0,1:31.039
+2025,Japanese Grand Prix,RUS,Mercedes,2.0,1:28.712,6.0,1:28.566,3.0,1:28.076,5.0,1:27.843,1:27.400,1:27.317,5.0,1:31.356
+2025,Japanese Grand Prix,SAI,Williams,10.0,1:29.332,10.0,1:28.831,11.0,1:28.846,12.0,1:28.209,1:27.835,,14.0,1:31.105
+2025,Japanese Grand Prix,STR,Aston Martin,16.0,1:29.757,19.0,1:30.844,19.0,1:30.266,20.0,1:29.271,,,20.0,1:32.052
+2025,Japanese Grand Prix,TSU,Red Bull,6.0,1:29.171,18.0,1:30.625,9.0,1:28.784,,,,,,
+2025,Japanese Grand Prix,TSU,Red Bull Racing,,,,,,,15.0,1:27.966,1:28.000,,12.0,1:31.870
+2025,Japanese Grand Prix,VER,Red Bull,5.0,1:29.064,8.0,1:28.670,5.0,1:28.496,,,,,,
+2025,Japanese Grand Prix,VER,Red Bull Racing,,,,,,,1.0,1:27.942,1:27.501,1:26.983,1.0,1:31.040
+2025,Pre-Season Testing,ALB,Williams,,,13.0,1:32.060,11.0,1:30.668,19.0,,,,14.0,1:35.647
+2025,Pre-Season Testing,ALO,Aston Martin,1.0,1:31.115,4.0,1:30.876,15.0,1:30.923,10.0,1:30.745,1:30.054,1:29.954,7.0,1:35.861
+2025,Pre-Season Testing,ANT,Mercedes,14.0,1:32.399,18.0,1:32.718,4.0,1:30.236,4.0,1:30.036,1:29.649,1:29.537,5.0,1:35.302
+2025,Pre-Season Testing,BEA,Haas,16.0,1:32.537,12.0,1:31.710,14.0,1:30.799,,,,,,
+2025,Pre-Season Testing,BEA,Haas F1 Team,,,,,,,9.0,1:30.420,1:30.075,1:29.867,9.0,1:36.200
+2025,Pre-Season Testing,BOR,Kick Sauber,,,,,,,14.0,1:30.819,,,17.0,1:37.126
+2025,Pre-Season Testing,BOR,Sauber,17.0,1:32.611,15.0,1:32.319,12.0,1:30.697,,,,,,
+2025,Pre-Season Testing,COL,Alpine,,,,,,,16.0,1:30.981,,,16.0,1:37.182
+2025,Pre-Season Testing,COL,,19.0,1:33.323,19.0,1:33.138,16.0,1:31.046,,,,,,
+2025,Pre-Season Testing,GAS,Alpine,13.0,1:32.378,16.0,1:32.457,19.0,1:31.643,18.0,1:31.260,,,19.0,1:34.572
+2025,Pre-Season Testing,HAD,RB,7.0,1:31.754,2.0,1:30.846,7.0,1:30.489,,,,,,
+2025,Pre-Season Testing,HAD,Racing Bulls,,,,,,,8.0,1:30.213,1:30.016,1:29.846,11.0,1:36.938
+2025,Pre-Season Testing,HAM,Ferrari,4.0,1:31.480,10.0,1:31.490,8.0,1:30.558,6.0,1:29.765,1:29.936,1:29.688,8.0,1:33.808
+2025,Pre-Season Testing,HUL,Kick Sauber,,,,,,,11.0,1:30.715,1:30.141,,20.0,1:35.403
+2025,Pre-Season Testing,HUL,Sauber,12.0,1:32.314,14.0,1:32.069,9.0,1:30.637,,,,,,
+2025,Pre-Season Testing,LAW,Racing Bulls,,,,,,,12.0,1:30.680,1:30.319,,15.0,1:35.641
+2025,Pre-Season Testing,LAW,Red Bull,15.0,1:32.460,17.0,1:32.644,20.0,1:33.628,,,,,,
+2025,Pre-Season Testing,LEC,Ferrari,2.0,1:31.266,9.0,1:31.465,10.0,1:30.650,7.0,1:30.370,1:29.914,1:29.784,6.0,1:35.983
+2025,Pre-Season Testing,NOR,McLaren,6.0,1:31.697,5.0,1:31.197,5.0,1:30.236,5.0,1:29.932,1:29.808,1:29.585,3.0,1:35.555
+2025,Pre-Season Testing,OCO,Haas,10.0,1:32.128,7.0,1:31.298,13.0,1:30.784,,,,,,
+2025,Pre-Season Testing,OCO,Haas F1 Team,,,,,,,17.0,1:30.989,,,18.0,1:36.646
+2025,Pre-Season Testing,PIA,McLaren,5.0,1:31.480,1.0,1:30.713,2.0,1:30.165,3.0,1:30.313,1:29.813,1:29.524,4.0,1:35.408
+2025,Pre-Season Testing,RUS,Mercedes,11.0,1:32.138,20.0,1:33.230,3.0,1:30.197,1.0,1:29.927,1:29.561,1:29.158,1.0,1:35.676
+2025,Pre-Season Testing,SAI,Williams,8.0,1:31.811,8.0,1:31.299,6.0,1:30.391,20.0,,,,10.0,1:34.962
+2025,Pre-Season Testing,STR,Aston Martin,18.0,1:33.034,6.0,1:31.221,17.0,1:31.260,15.0,1:30.948,,,13.0,1:35.850
+2025,Pre-Season Testing,TSU,RB,9.0,1:31.859,11.0,1:31.707,18.0,1:31.439,,,,,,
+2025,Pre-Season Testing,TSU,Red Bull Racing,,,,,,,13.0,1:30.573,1:30.352,,12.0,1:36.831
+2025,Pre-Season Testing,VER,Red Bull,3.0,1:31.391,3.0,1:30.856,1.0,1:30.147,,,,,,
+2025,Pre-Season Testing,VER,Red Bull Racing,,,,,,,2.0,1:30.028,1:29.572,1:29.340,2.0,1:35.649
+2025,Singapore Grand Prix,ALB,Williams,,,13.0,1:32.060,11.0,1:30.668,19.0,,,,14.0,1:35.647
+2025,Singapore Grand Prix,ALO,Aston Martin,1.0,1:31.115,4.0,1:30.876,15.0,1:30.923,10.0,1:30.745,1:30.054,1:29.954,7.0,1:35.861
+2025,Singapore Grand Prix,ANT,Mercedes,14.0,1:32.399,18.0,1:32.718,4.0,1:30.236,4.0,1:30.036,1:29.649,1:29.537,5.0,1:35.302
+2025,Singapore Grand Prix,BEA,Haas,16.0,1:32.537,12.0,1:31.710,14.0,1:30.799,,,,,,
+2025,Singapore Grand Prix,BEA,Haas F1 Team,,,,,,,9.0,1:30.420,1:30.075,1:29.867,9.0,1:36.200
+2025,Singapore Grand Prix,BOR,Kick Sauber,,,,,,,14.0,1:30.819,,,17.0,1:37.126
+2025,Singapore Grand Prix,BOR,Sauber,17.0,1:32.611,15.0,1:32.319,12.0,1:30.697,,,,,,
+2025,Singapore Grand Prix,COL,Alpine,19.0,1:33.323,19.0,1:33.138,16.0,1:31.046,16.0,1:30.981,,,16.0,1:37.182
+2025,Singapore Grand Prix,GAS,Alpine,13.0,1:32.378,16.0,1:32.457,19.0,1:31.643,18.0,1:31.260,,,19.0,1:34.572
+2025,Singapore Grand Prix,HAD,RB,7.0,1:31.754,2.0,1:30.846,7.0,1:30.489,,,,,,
+2025,Singapore Grand Prix,HAD,Racing Bulls,,,,,,,8.0,1:30.213,1:30.016,1:29.846,11.0,1:36.938
+2025,Singapore Grand Prix,HAM,Ferrari,4.0,1:31.480,10.0,1:31.490,8.0,1:30.558,6.0,1:29.765,1:29.936,1:29.688,8.0,1:33.808
+2025,Singapore Grand Prix,HUL,Kick Sauber,,,,,,,11.0,1:30.715,1:30.141,,20.0,1:35.403
+2025,Singapore Grand Prix,HUL,Sauber,12.0,1:32.314,14.0,1:32.069,9.0,1:30.637,,,,,,
+2025,Singapore Grand Prix,LAW,RB,15.0,1:32.460,17.0,1:32.644,20.0,1:33.628,,,,,,
+2025,Singapore Grand Prix,LAW,Racing Bulls,,,,,,,12.0,1:30.680,1:30.319,,15.0,1:35.641
+2025,Singapore Grand Prix,LEC,Ferrari,2.0,1:31.266,9.0,1:31.465,10.0,1:30.650,7.0,1:30.370,1:29.914,1:29.784,6.0,1:35.983
+2025,Singapore Grand Prix,NOR,McLaren,6.0,1:31.697,5.0,1:31.197,5.0,1:30.236,5.0,1:29.932,1:29.808,1:29.585,3.0,1:35.555
+2025,Singapore Grand Prix,OCO,Haas,10.0,1:32.128,7.0,1:31.298,13.0,1:30.784,,,,,,
+2025,Singapore Grand Prix,OCO,Haas F1 Team,,,,,,,17.0,1:30.989,,,18.0,1:36.646
+2025,Singapore Grand Prix,PIA,McLaren,5.0,1:31.480,1.0,1:30.713,2.0,1:30.165,3.0,1:30.313,1:29.813,1:29.524,4.0,1:35.408
+2025,Singapore Grand Prix,RUS,Mercedes,11.0,1:32.138,20.0,1:33.230,3.0,1:30.197,1.0,1:29.927,1:29.561,1:29.158,1.0,1:35.676
+2025,Singapore Grand Prix,SAI,Williams,8.0,1:31.811,8.0,1:31.299,6.0,1:30.391,20.0,,,,10.0,1:34.962
+2025,Singapore Grand Prix,STR,Aston Martin,18.0,1:33.034,6.0,1:31.221,17.0,1:31.260,15.0,1:30.948,,,13.0,1:35.850
+2025,Singapore Grand Prix,TSU,Red Bull,9.0,1:31.859,11.0,1:31.707,18.0,1:31.439,,,,,,
+2025,Singapore Grand Prix,TSU,Red Bull Racing,,,,,,,13.0,1:30.573,1:30.352,,12.0,1:36.831
+2025,Singapore Grand Prix,VER,Red Bull,3.0,1:31.391,3.0,1:30.856,1.0,1:30.147,,,,,,
+2025,Singapore Grand Prix,VER,Red Bull Racing,,,,,,,2.0,1:30.028,1:29.572,1:29.340,2.0,1:35.649

@@ -94,6 +94,13 @@ columns = [
     # traffic
     "interval_to_car_ahead",   # seconds
     "in_traffic",              # boolean
+    
+    # track conditions
+    "vsc",                     # boolean - Virtual Safety Car active
+    "safety_car",              # boolean - Safety Car active
+    "yellow_flag",             # boolean - Yellow Flag active
+    "red_flag",                # boolean - Red Flag active
+    "track_condition",         # string - Summary: "GREEN", "YELLOW", "VSC", "SC", "RED", "MIXED"
 ]
 
 BASE_URL = "https://api.openf1.org/v1"
@@ -115,6 +122,13 @@ class LapRecord:
 
     interval_to_car_ahead: Optional[float]  # seconds, NaN if none
     in_traffic: bool
+    
+    # track conditions
+    vsc: bool  # Virtual Safety Car active
+    safety_car: bool  # Safety Car active
+    yellow_flag: bool  # Yellow Flag active
+    red_flag: bool  # Red Flag active
+    track_condition: str  # Summary condition
     
     
 class LapDataLoader:
@@ -214,6 +228,105 @@ class LapDataLoader:
         in_traffic = gap < self.traffic_interval_threshold
         return gap, in_traffic
     
+    def _get_track_condition_for_lap(
+        self,
+        flags: pd.DataFrame,
+        lap_start_time: pd.Timestamp,
+        lap_duration: float,
+    ) -> tuple[bool, bool, bool, bool, str]:
+        """
+        Determine track conditions for a lap based on flags data.
+        Returns: (vsc, safety_car, yellow_flag, red_flag, track_condition)
+        """
+        if flags.empty:
+            return False, False, False, False, "GREEN"
+        
+        # Calculate lap time window
+        lap_end_time = lap_start_time + timedelta(seconds=lap_duration)
+        
+        # Filter flags that overlap with this lap
+        # A flag is active if it starts before lap end and ends after lap start
+        if "flag" in flags.columns and "date_start" in flags.columns:
+            # Check if date_end exists, if not assume flags are point-in-time events
+            if "date_end" in flags.columns:
+                # Flags with start/end times
+                active_flags = flags[
+                    (flags["date_start"] <= lap_end_time) & 
+                    (flags["date_end"] >= lap_start_time)
+                ]
+            else:
+                # Flags as point-in-time events - check if within lap window
+                active_flags = flags[
+                    (flags["date_start"] >= lap_start_time) & 
+                    (flags["date_start"] <= lap_end_time)
+                ]
+        else:
+            # Try alternative column names
+            time_col = None
+            for col in flags.columns:
+                if "date" in col.lower() or "time" in col.lower():
+                    time_col = col
+                    break
+            
+            if time_col:
+                active_flags = flags[
+                    (flags[time_col] >= lap_start_time) & 
+                    (flags[time_col] <= lap_end_time)
+                ]
+            else:
+                return False, False, False, False, "GREEN"
+        
+        if active_flags.empty:
+            return False, False, False, False, "GREEN"
+        
+        # Check for different flag types
+        vsc = False
+        safety_car = False
+        yellow_flag = False
+        red_flag = False
+        
+        # OpenF1 API flag format: flag column contains values like "VSC", "SC", "YELLOW", "RED", etc.
+        if "flag" in active_flags.columns:
+            flag_values = active_flags["flag"].str.upper()
+            vsc = flag_values.str.contains("VSC", na=False).any()
+            safety_car = flag_values.str.contains("SC|SAFETY", na=False).any()
+            yellow_flag = flag_values.str.contains("YELLOW", na=False).any()
+            red_flag = flag_values.str.contains("RED", na=False).any()
+        elif "flag_type" in active_flags.columns:
+            flag_values = active_flags["flag_type"].str.upper()
+            vsc = flag_values.str.contains("VSC", na=False).any()
+            safety_car = flag_values.str.contains("SC|SAFETY", na=False).any()
+            yellow_flag = flag_values.str.contains("YELLOW", na=False).any()
+            red_flag = flag_values.str.contains("RED", na=False).any()
+        
+        # Determine summary condition (priority: RED > SC > VSC > YELLOW > GREEN)
+        if red_flag:
+            track_condition = "RED"
+        elif safety_car:
+            track_condition = "SC"
+        elif vsc:
+            track_condition = "VSC"
+        elif yellow_flag:
+            track_condition = "YELLOW"
+        else:
+            track_condition = "GREEN"
+        
+        # Check for mixed conditions
+        conditions = []
+        if vsc:
+            conditions.append("VSC")
+        if safety_car:
+            conditions.append("SC")
+        if yellow_flag:
+            conditions.append("YELLOW")
+        if red_flag:
+            conditions.append("RED")
+        
+        if len(conditions) > 1:
+            track_condition = "MIXED"
+        
+        return vsc, safety_car, yellow_flag, red_flag, track_condition
+    
     
     def collect_session_lap_data(self, season, meeting_key, race_index, session_key="R") -> pd.DataFrame:
 
@@ -224,6 +337,7 @@ class LapDataLoader:
         laps = self._fetch_df("laps", session_key=session_key)
         stints = self._fetch_df("stints", session_key=session_key)
         intervals = self._fetch_df("intervals", session_key=session_key)
+        flags = self._fetch_df("flags", session_key=session_key)
 
         
         if not laps.empty:
@@ -231,6 +345,18 @@ class LapDataLoader:
             
         if not intervals.empty:
             intervals["date"] = pd.to_datetime(intervals["date"], format='mixed', utc=True)
+        
+        if not flags.empty:
+            # Convert flag timestamps to datetime
+            if "date_start" in flags.columns:
+                flags["date_start"] = pd.to_datetime(flags["date_start"], format='mixed', utc=True)
+            if "date_end" in flags.columns:
+                flags["date_end"] = pd.to_datetime(flags["date_end"], format='mixed', utc=True)
+            elif "date" in flags.columns:
+                flags["date"] = pd.to_datetime(flags["date"], format='mixed', utc=True)
+                # If only date column exists, use it for both start and end
+                flags["date_start"] = flags["date"]
+                flags["date_end"] = flags["date"]
 
         
         records: List[LapRecord] = []
@@ -263,6 +389,13 @@ class LapDataLoader:
                     lap["date_start"],
                     lap_time_sec,
                 )
+                
+                # determine track conditions for this lap
+                vsc, safety_car, yellow_flag, red_flag, track_condition = self._get_track_condition_for_lap(
+                    flags,
+                    lap["date_start"],
+                    lap_time_sec,
+                )
 
                 record = LapRecord(
                     season=season,
@@ -275,6 +408,11 @@ class LapDataLoader:
                     lap_time=lap_time_sec,
                     interval_to_car_ahead=interval_to_ahead,
                     in_traffic=in_traffic,
+                    vsc=vsc,
+                    safety_car=safety_car,
+                    yellow_flag=yellow_flag,
+                    red_flag=red_flag,
+                    track_condition=track_condition,
                 )
                 records.append(record)
                 
@@ -287,6 +425,14 @@ class LapDataLoader:
         df = df[columns]
 
         return df
+
+    def track_status(year: int, race_name: str) -> pd.DataFrame:
+        
+        session = fastf1.get_session(year, race_name, "R")
+        session.load()
+        track_status = session.track_status()
+        
+        return track_status
       
 def main(end_race_name: Optional[str] = "Las Vegas") -> pd.DataFrame:
     """
@@ -375,19 +521,25 @@ def main(end_race_name: Optional[str] = "Las Vegas") -> pd.DataFrame:
 
 if __name__ == "__main__":
     # Example usage: Collect data up to Qatar 2025
-    df = main(end_race_name="Lusail")
+    # df = main(end_race_name="Lusail")
     
-    # Save to CSV
-    if not df.empty:
-        df.to_csv("f1_race_data_2024_2025.csv", index=False)
-        print(f"\nData saved to f1_race_data_2024_2025.csv")
+    # # Save to CSV
+    # if not df.empty:
+    #     df.to_csv("f1_race_data_2024_2025.csv", index=False)
+    #     print(f"\nData saved to f1_race_data_2024_2025.csv")
         
-        # Display summary
-        print("\nData Summary:")
-        print(f"Seasons: {df['season'].unique()}")
-        print(f"Races: {df['race_name'].nunique()}")
-        print(f"Teams: {df['team'].nunique()}")
-        print(f"Drivers: {df['driver'].nunique()}")         
+    #     # Display summary
+    #     print("\nData Summary:")
+    #     print(f"Seasons: {df['season'].unique()}")
+    #     print(f"Races: {df['race_name'].nunique()}")
+    #     print(f"Teams: {df['team'].nunique()}")
+    #     print(f"Drivers: {df['driver'].nunique()}")    
+    
+    df1 = track_status(2025, "Melbourne")
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_colwidth', None)
+    print(df1)
             
             
             

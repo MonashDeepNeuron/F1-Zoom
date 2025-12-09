@@ -13,501 +13,507 @@ import time
 # Define column order for output CSV
 columns = [
     # Metadata
-    "season", "driver", "race_name", "round", "circuit_type", "team",
+    "season", "driver", "race_name", "round", "circuit_type", "team", # basic data which we need to match the other csv files
     
     # Positions
     "fp1_pos", "fp2_pos", "fp3_pos", 
-    "sprint_qualifying_pos", "sprint_race_pos",
+    "sprint_qualifying_pos", "sprint_race_pos", # fp2, fp3, sprint quali and sprint race positions are dependent on whether or not the race has a sprint race of if it is a standard weekend
     "qualifying_pos", "race_pos",
     
     # DNF Information
-    "race_dnf_status",  # e.g., "Crash", "Gearbox", "Engine"
-    "race_classified_position",  # e.g., "R", "D", or numeric position
+    "race_dnf_status",  # Possible values include but are not limited to ‘Finished’, ‘+ 1 Lap’, ‘Crash’, ‘Gearbox’, … (values only given if session is ‘Race’, ‘Sprint’, ‘Sprint Shootout’ or ‘Sprint Qualifying’) - FAST F1 Documentation
+    "race_classified_position",
     
     # Weighted score
-    "weighted_performance_score",
+    "weighted_performance_score", # we compute this metric as we need to score the overall perormance of the driver + car over the weekend whilst taking into consideration that free practice is less important the qualifying or race results
 ]
 
-# Session weights
-WEIGHTS_STANDARD = {
-    'FP1': 0.1,
-    'FP2': 0.2,
-    'FP3': 0.4,
-    'Qualifying': 0.8,
-    'Race': 1.0,
-}
+def get_round_from_race_name(race_name: str, season: int) -> int:
+    """Get round number from FastF1 schedule."""
+    try:
+        schedule = fastf1.get_event_schedule(season)
+        race = schedule[schedule['EventName'] == race_name]
+        if not race.empty:
+            return int(race.iloc[0]['RoundNumber'])
+    except:
+        pass
+    return 1
 
-WEIGHTS_SPRINT = {
-    'FP1': 0.1,  # least weight
-    'Sprint Qualifying': 0.3,
-    'Sprint Race': 0.6,
-    'Qualifying': 0.8,
-    'Race': 1.0,  # most weight
-}
-
-
-class QualifyingToRacePerformance:
-    """
-    Extract driver positions from practice, qualifying, and race sessions.
-    Apply weights and calculate weighted performance scores.
-    """
+def get_team_from_driver(driver_code: str, season: int, race_name: str) -> str:
+    # Cache the round number 
+    race_number = get_round_from_race_name(race_name, season)
     
-    def __init__(self, cache_dir="fastf1_cache"):
-        if not os.path.exists(cache_dir):
-            os.makedirs(cache_dir)
-            print(f"Created cache directory: {cache_dir}")
-        
-        fastf1.Cache.enable_cache(cache_dir)
-        self.cache_dir = cache_dir
-    
-    def load_race_summary(self, csv_path: str = "car_race_summary.csv") -> pd.DataFrame:
-        """Load race summary CSV to get unique races and drivers."""
-        return pd.read_csv(csv_path)
-    
-    def _normalize_race_name(self, race_name: str) -> str:
-        """
-        Normalize race names to match FastF1's expected format.
-        
-        Args:
-            race_name: Race name from CSV
-            
-        Returns:
-            Normalized race name for FastF1
-        """
-        # Mapping of CSV race names to FastF1 race names
-        name_mapping = {
-            "Yas Marina Circuit": "Yas Marina",
-            "Singapore Grand Prix": "Singapore",
-            # Add other mappings as needed if more discrepancies are found
+    # 2024 teams
+    if season == 2024:
+        teams_2024 = {
+            "VER": "Red Bull", "PER": "Red Bull",
+            "HAM": "Mercedes", "RUS": "Mercedes",
+            "LEC": "Ferrari", "SAI": "Ferrari",
+            "BEA": "Ferrari" if race_number == 2 else "Haas",
+            "NOR": "McLaren", "PIA": "McLaren",
+            "ALO": "Aston Martin", "STR": "Aston Martin",
+            "GAS": "Alpine", "OCO": "Alpine", "DOO": "Alpine",
+            "ALB": "Williams",
+            "SAR": "Williams" if race_number <= 15 else None,
+            "COL": "Williams" if race_number >= 16 else None,
+            "BOT": "Sauber", "ZHO": "Sauber",
+            "MAG": "Haas", "HUL": "Haas",
+            "TSU": "RB",
+            "RIC": "RB" if race_number <= 18 else None,
+            "LAW": "RB" if race_number >= 19 else None,
         }
-        
-        return name_mapping.get(race_name, race_name)
+        return teams_2024.get(driver_code, "Unknown Team")
     
-    def _get_session(self, season: int, race_name: str, session_type: str):
-        """
-        Load a FastF1 session.
-        
-        Args:
-            season: Season year
-            race_name: Race name (e.g., "Sakhir", "Jeddah")
-            session_type: Session type ('FP1', 'FP2', 'FP3', 'Q', 'SQ', 'S', 'R')
-            
-        Returns:
-            Session object or None if error
-        """
-        # Normalize race name first
-        normalized_name = self._normalize_race_name(race_name)
-        if normalized_name != race_name:
-            print(f"Normalizing race name: '{race_name}' -> '{normalized_name}'")
-        
-        try:
-            session = fastf1.get_session(season, normalized_name, session_type)
-            session.load()
-            
-            # Check if results are available for qualifying/race sessions
-            if session_type in ['Q', 'R', 'SQ', 'S']:
-                if session.results is None or len(session.results) == 0:
-                    print(f"Warning: {session_type} session loaded for {season} {race_name} but results are empty")
-            
-            return session
-        except Exception as e:
-            # Log all errors for debugging
-            print(f"Error loading {session_type} session for {season} {race_name}: {e}")
-            return None
+    # 2025 teams
+    elif season == 2025:
+        teams_2025 = {
+            "VER": "Red Bull",
+            "LAW": "Red Bull" if race_number <= 2 else "RB",  # Swapped at round 3
+            "TSU": "RB" if race_number <= 2 else "Red Bull",  # Swapped at round 3
+            "HAM": "Ferrari", "LEC": "Ferrari",
+            "RUS": "Mercedes", "ANT": "Mercedes",
+            "NOR": "McLaren", "PIA": "McLaren",
+            "ALO": "Aston Martin", "STR": "Aston Martin",
+            "GAS": "Alpine",
+            "DOO": "Alpine" if race_number <= 6 else None,  # First 6 races
+            "COL": "Alpine" if race_number >= 7 else None,  # From Imola (round 7)
+            "ALB": "Williams", "SAI": "Williams",
+            "BEA": "Haas", "OCO": "Haas",
+            "HUL": "Sauber", "BOR": "Sauber",
+            "HAD": "RB",  # Full season
+        }
+        return teams_2025.get(driver_code, "Unknown Team")
     
-    def _detect_sprint_weekend(self, season: int, race_name: str) -> bool:
-        """
-        Detect if a race weekend is a sprint weekend by checking for Sprint Qualifying session.
-        
-        Args:
-            season: Season year
-            race_name: Race name
-            
-        Returns:
-            True if sprint weekend, False otherwise
-        """
-        # Try to load Sprint Qualifying session
-        sprint_qualifying = self._get_session(season, race_name, 'SQ')
-        return sprint_qualifying is not None
+    return "Unknown Team"
+
+def get_driver_from_number(driver_number: int) -> str:
+    driver_to_number = {
+        "VER": 1, "NOR": 4, "SAI": 55, "PIA": 81, "ALO": 14,
+        "RUS": 63, "HAM": 44, "LEC": 16, "STR": 18, "TSU": 22,
+        "ALB": 23, "HUL": 27, "GAS": 10, "OCO": 31, "PER": 11,
+        "RIC": 3, "SAR": 2, "BOT": 77, "ZHO": 24, "MAG": 20,
+        "ANT": 12, "BEA": 87, "DOO": 7, "COL": 43, "LAW": 30,
+        "BOR": 5, "HAD": 6
+    }
     
-    def _get_driver_position(self, session, driver_code: str, session_type: str) -> Optional[int]:
-        """
-        Get driver position from session results.
-        For practice sessions, calculate position from fastest lap times.
-        For qualifying/race sessions, use SessionResults.
-        Handles DNFs appropriately.
-        
-        Args:
-            session: FastF1 session object
-            driver_code: Driver code (e.g., "VER", "HAM")
-            session_type: Session type to determine if we need to calculate positions
-            
-        Returns:
-            Position (1-based) or None if driver not found/DNF
-        """
-        if session is None:
-            return None
-        
-        try:
-            # For practice sessions, calculate position from fastest lap times
-            if session_type in ['FP1', 'FP2', 'FP3']:
-                return self._get_practice_position(session, driver_code)
-            
-            # For qualifying and race sessions, use SessionResults
-            results = session.results
-            if results is None or len(results) == 0:
-                print(f"Warning: No results available for {session_type} session for driver {driver_code}")
-                return None
-            
-            # Find driver by Abbreviation
-            driver_result = results[results['Abbreviation'] == driver_code]
-            if len(driver_result) == 0:
-                # Log available drivers for debugging
-                available_drivers = results['Abbreviation'].tolist() if 'Abbreviation' in results.columns else []
-                print(f"Warning: Driver {driver_code} not found in {session_type} results. Available drivers: {available_drivers}")
-                return None
-            
-            # Check if driver DNF'd
-            driver_row = driver_result.iloc[0]
-            if hasattr(driver_row, 'dnf') and driver_row.dnf:
-                # For DNFs, we might want to return None or a special value
-                # You could also return the last known position before DNF
-                # For now, return None to indicate no valid position
-                return None
-            
-            # Get classified position
-            classified_pos = driver_row['ClassifiedPosition']
-            
-            # Handle non-numeric positions (R, D, E, W, F, N)
-            if isinstance(classified_pos, str):
-                # These are not valid numeric positions
-                return None
-            
-            position = driver_row['Position']
-            # Handle NaN positions
-            if pd.isna(position):
-                return None
-            
-            return int(position)
-        except Exception as e:
-            print(f"Error getting position for {driver_code} in {session_type}: {e}")
-            return None
+    if driver_number not in driver_to_number.values() and driver_number == 38 or driver_number not in driver_to_number.values() and driver_number == 50:
+        return "BEA"
     
-    def _get_session_position(self, season: int, race_name: str, session_type: str, driver_code: str) -> Optional[int]:
-        """
-        Get driver position from a specific session.
-        
-        Args:
-            season: Season year
-            race_name: Race name
-            session_type: Session type ('FP1', 'FP2', 'FP3', 'Q', 'SQ', 'S', 'R')
-            driver_code: Driver code
-            
-        Returns:
-            Position or None if session/driver not found
-        """
-        session = self._get_session(season, race_name, session_type)
-        return self._get_driver_position(session, driver_code, session_type)
+    if driver_number not in driver_to_number.values() and driver_number == 61:
+        return "DOO"
     
-    def _calculate_weighted_score(self, positions: Dict[str, Optional[int]], is_sprint_weekend: bool) -> float:
-        """
-        Calculate weighted performance score from positions.
-        
-        Args:
-            positions: Dictionary mapping session names to positions
-            is_sprint_weekend: Whether this is a sprint weekend
-            
-        Returns:
-            Weighted score (lower is better, like positions)
-        """
-        weights = WEIGHTS_SPRINT if is_sprint_weekend else WEIGHTS_STANDARD
-        weighted_sum = 0.0
-        has_valid_positions = False
-        
-        for session_name, weight in weights.items():
-            # Map session names to position keys
-            if session_name == 'FP1':
-                pos_key = 'fp1_pos'
-            elif session_name == 'FP2':
-                pos_key = 'fp2_pos'
-            elif session_name == 'FP3':
-                pos_key = 'fp3_pos'
-            elif session_name == 'Sprint Qualifying':
-                pos_key = 'sprint_qualifying_pos'
-            elif session_name == 'Sprint Race':
-                pos_key = 'sprint_race_pos'
-            elif session_name == 'Qualifying':
-                pos_key = 'qualifying_pos'
-            elif session_name == 'Race':
-                pos_key = 'race_pos'
-            else:
-                continue
-            
-            position = positions.get(pos_key)
-            if position is not None and not pd.isna(position):
-                weighted_sum += position * weight
-                has_valid_positions = True
-        
-        # Return weighted sum (lower is better, like positions)
-        # Return NaN if no valid positions found
-        if has_valid_positions:
-            return weighted_sum
-        else:
-            return np.nan
+    for driver, number in driver_to_number.items():
+        if number == driver_number:
+            return driver
+    return "Unknown"
+
+def format_lap_time(lap_time) -> str:
+    """Format Timedelta lap time as M:SS.mmm (e.g., 1:33.648). Returns np.nan if input is NaN/None."""
+    if lap_time is None or pd.isna(lap_time):
+        return np.nan
+    total_seconds = lap_time.total_seconds()
+    minutes = int(total_seconds // 60)
+    seconds = int(total_seconds % 60)
+    milliseconds = int((total_seconds % 1) * 1000)
+    return f"{minutes}:{seconds:02d}.{milliseconds:03d}"
+
+
+def sprint_or_standard_weekend(race_name: str) -> bool:
+    # return True if it is a sprint weekend
     
-    def _get_practice_position(self, session, driver_code: str) -> Optional[int]:
-        """
-        Calculate driver position in practice session based on fastest lap time.
+    sprint_weekend_race_names = ['Shanghai', 'Miami', 'Spa-Francorchamps', 'Austin', 'Sao Paulo', 'Lusail']
+    
+    if race_name in sprint_weekend_race_names:
+        return True
+    else:
+        return False
+
+
+def free_practice_performance(year: int, race_name: str) -> pd.DataFrame:
+    
+    rows = []
+    
+    if not sprint_or_standard_weekend(race_name):
+        # get all free practice data
         
-        Args:
-            session: FastF1 session object
-            driver_code: Driver code
+        print("This is a STANDARD WEEKEND")
+        
+        fp1 = fastf1.get_session(year, race_name, 'FP1')
+        fp1.load()
+        fp1_laps = fp1.laps.pick_quicklaps() # automatically filters for flying laps
+        
+        fp2 = fastf1.get_session(year, race_name, 'FP2')
+        fp2.load()
+        fp2_laps = fp2.laps.pick_quicklaps()
+        
+        fp3 = fastf1.get_session(year, race_name, 'FP3')
+        fp3.load()
+        fp3_laps = fp3.laps.pick_quicklaps()
+        
+        
+        for session, laps in [(fp1, fp1_laps), (fp2, fp2_laps), (fp3, fp3_laps)]:
             
-        Returns:
-            Position (1-based) or None if driver not found
-        """
-        try:
-            # Get all laps for this driver
-            driver_laps = session.laps.pick_driver(driver_code)
-            if len(driver_laps) == 0:
-                return None
+            for driver in session.drivers:
+                
+                driv_laps = laps.pick_driver(driver)
+                if len(driv_laps) > 0:
+                    fastest_lap = driv_laps['LapTime'].min()
+                    print(driver, format_lap_time(fastest_lap)) # comment out print statements so console stays clean
+        
+        fp1_fastest = (
+            fp1_laps.groupby("Driver")["LapTime"]
+            .min()
+            .sort_values()
+        )
+        fp1_pos = {drv: pos for pos, (drv, _) in enumerate(fp1_fastest.items(), start=1)}
+        fp1_fastest_dict = fp1_fastest.to_dict()
+
+        fp2_fastest = (
+            fp2_laps.groupby("Driver")["LapTime"]
+            .min()
+            .sort_values()
+        )
+        fp2_pos = {drv: pos for pos, (drv, _) in enumerate(fp2_fastest.items(), start=1)}
+        fp2_fastest_dict = fp2_fastest.to_dict()
+
+        fp3_fastest = (
+            fp3_laps.groupby("Driver")["LapTime"]
+            .min()
+            .sort_values()
+        )
+        fp3_pos = {drv: pos for pos, (drv, _) in enumerate(fp3_fastest.items(), start=1)}
+        fp3_fastest_dict = fp3_fastest.to_dict()
+        
+        for driver_code in fp3_laps['Driver'].unique():
+            team = get_team_from_driver(driver_code, year, race_name)
             
-            # Get fastest lap time for this driver
-            fastest_lap = driver_laps.pick_fastest()
-            if fastest_lap is None or pd.isna(fastest_lap['LapTime']):
-                return None
-            
-            driver_fastest_time = fastest_lap['LapTime']
-            
-            # Get fastest lap time for all drivers and rank them
-            # Use session.drivers (driver numbers) and convert to codes
-            all_fastest_times = []
-            for driver_num in session.drivers:
-                try:
-                    # Get driver info to get abbreviation
-                    driver_info = session.get_driver(driver_num)
-                    driver_abbrev = driver_info['Abbreviation']
+            row = {
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": team,
+                "fp1_pos": fp1_pos.get(driver_code, np.nan),
+                "fp1_time_fastest_lap": format_lap_time(fp1_fastest_dict.get(driver_code)),
+                "fp2_pos": fp2_pos.get(driver_code, np.nan),
+                "fp2_time_fastest_lap": format_lap_time(fp2_fastest_dict.get(driver_code)),
+                "fp3_pos": fp3_pos.get(driver_code, np.nan),
+                "fp3_time_fastest_lap": format_lap_time(fp3_fastest_dict.get(driver_code)),
+            }
+            rows.append(row)
                     
-                    driver_laps = session.laps.pick_driver(driver_num)
-                    if len(driver_laps) > 0:
-                        fastest = driver_laps.pick_fastest()
-                        if fastest is not None and not pd.isna(fastest['LapTime']):
-                            all_fastest_times.append({
-                                'driver_code': driver_abbrev,
-                                'time': fastest['LapTime']
-                            })
-                except:
-                    continue
-            
-            if len(all_fastest_times) == 0:
-                return None
-            
-            # Sort by fastest time (lower is better)
-            all_fastest_times.sort(key=lambda x: x['time'])
-            
-            # Find position of this driver
-            for idx, entry in enumerate(all_fastest_times, start=1):
-                if entry['driver_code'] == driver_code:
-                    return idx
-            
-            return None
-        except Exception as e:
-            print(f"Error calculating practice position for {driver_code}: {e}")
-            return None
-    
-    def _get_driver_dnf_info(self, session, driver_code: str) -> Optional[Dict[str, str]]:
-        """
-        Get DNF information for a driver from session results.
-        
-        Args:
-            session: FastF1 session object
-            driver_code: Driver code
-            
-        Returns:
-            Dictionary with 'status' and 'classified_position' or None if not DNF
-        """
-        if session is None:
-            return None
-        
-        try:
-            results = session.results
-            if results is None or len(results) == 0:
-                return None
-            
-            driver_result = results[results['Abbreviation'] == driver_code]
-            if len(driver_result) == 0:
-                return None
-            
-            driver_row = driver_result.iloc[0]
-            
-            # Check if driver DNF'd
-            if hasattr(driver_row, 'dnf') and driver_row.dnf:
-                return {
-                    'status': str(driver_row.get('Status', 'Unknown')),
-                    'classified_position': str(driver_row.get('ClassifiedPosition', 'Unknown')),
-                    'dnf': True
-                }
-            
-            return None
-        except Exception as e:
-            print(f"Error getting DNF info for {driver_code}: {e}")
-            return None
-    
-    def _get_all_positions(self, season: int, race_name: str, driver_code: str, is_sprint_weekend: bool) -> Dict[str, Optional[int]]:
-        """
-        Get all session positions for a driver in a race.
-        
-        Args:
-            season: Season year
-            race_name: Race name
-            driver_code: Driver code
-            is_sprint_weekend: Whether this is a sprint weekend
-            
-        Returns:
-            Dictionary of positions
-        """
-        positions = {
-            'fp1_pos': None,
-            'fp2_pos': None,
-            'fp3_pos': None,
-            'sprint_qualifying_pos': None,
-            'sprint_race_pos': None,
-            'qualifying_pos': None,
-            'race_pos': None,
-        }
-        
-        # Always get FP1, FP2, FP3, Qualifying, and Race positions
-        positions['fp1_pos'] = self._get_session_position(season, race_name, 'FP1', driver_code)
-        positions['fp2_pos'] = self._get_session_position(season, race_name, 'FP2', driver_code)
-        positions['fp3_pos'] = self._get_session_position(season, race_name, 'FP3', driver_code)
-        positions['qualifying_pos'] = self._get_session_position(season, race_name, 'Q', driver_code)
-        positions['race_pos'] = self._get_session_position(season, race_name, 'R', driver_code)
-        
-        # Get sprint positions if sprint weekend
-        if is_sprint_weekend:
-            positions['sprint_qualifying_pos'] = self._get_session_position(season, race_name, 'SQ', driver_code)
-            positions['sprint_race_pos'] = self._get_session_position(season, race_name, 'S', driver_code)
-        
-        return positions
-    
-    def generate_performance_data(self, input_csv_path: str = "car_race_summary.csv") -> pd.DataFrame:
-        """
-        Generate qualifying to race performance data for all races.
-        
-        Args:
-            input_csv_path: Path to car_race_summary.csv
-            
-        Returns:
-            DataFrame with performance data
-        """
-        print(f"Loading race summary from {input_csv_path}...")
-        race_summary = self.load_race_summary(input_csv_path)
-        print(f"Loaded {len(race_summary)} driver-race records")
-        
-        # Get unique races
-        unique_races = race_summary[['season', 'race_name', 'round', 'circuit_type']].drop_duplicates()
-        print(f"Processing {len(unique_races)} unique races...")
-        
-        performance_records = []
-        
-        for idx, race_info in unique_races.iterrows():
-            season = int(race_info['season'])
-            race_name = race_info['race_name']
-            round_num = race_info['round']
-            circuit_type = race_info['circuit_type']
-            
-            print(f"Processing {season} {race_name} (Round {round_num})...")
-            
-            # Detect sprint weekend once per race
-            is_sprint_weekend = self._detect_sprint_weekend(season, race_name)
-            weekend_type = "Sprint" if is_sprint_weekend else "Standard"
-            print(f"  Weekend type: {weekend_type}")
-            
-            # Get all drivers for this race
-            race_drivers = race_summary[
-                (race_summary['season'] == season) & 
-                (race_summary['race_name'] == race_name)
-            ]
-            
-            for driver_idx, driver_row in race_drivers.iterrows():
-                driver_code = driver_row['driver']
-                team = driver_row['team']
-                
-                # Get all positions for this driver
-                positions = self._get_all_positions(season, race_name, driver_code, is_sprint_weekend)
-                
-                # Get DNF information for race
-                race_session = self._get_session(season, race_name, 'R')
-                dnf_info = self._get_driver_dnf_info(race_session, driver_code)
-                
-                # Calculate weighted score
-                weighted_score = self._calculate_weighted_score(positions, is_sprint_weekend)
-                
-                # Create record
-                record = {
-                    'season': season,
-                    'driver': driver_code,
-                    'race_name': race_name,
-                    'round': round_num,
-                    'circuit_type': circuit_type,
-                    'team': team,
-                    **positions,
-                    'race_dnf_status': dnf_info['status'] if dnf_info else None,
-                    'race_classified_position': dnf_info['classified_position'] if dnf_info else None,
-                    'weighted_performance_score': weighted_score,
-                }
-                
-                performance_records.append(record)
-            
-            # Small delay to avoid overwhelming the API
-            time.sleep(0.5)
-        
-        # Create DataFrame
-        performance_df = pd.DataFrame(performance_records)
-        
-        # Ensure all columns are present
-        for col in columns:
-            if col not in performance_df.columns:
-                performance_df[col] = np.nan
-        
-        # Reorder columns
-        performance_df = performance_df[columns]
-        
-        # Sort by season, round, driver
-        performance_df = performance_df.sort_values(['season', 'round', 'driver']).reset_index(drop=True)
-        
-        print(f"Generated performance data for {len(performance_df)} driver-race records")
-        return performance_df
-    
-    def save_performance_data(self, performance_df: pd.DataFrame, output_path: str = "qualifying_to_race_performance.csv"):
-        """Save performance DataFrame to CSV."""
-        performance_df.to_csv(output_path, index=False)
-        print(f"Saved performance data to {output_path}")
 
+    else:
+        
+        print("This is a SPRINT WEEKEND")
+        
+        fp1 = fastf1.get_session(year, race_name, 'FP1')
+        fp1.load()
+        fp1_laps = fp1.laps.pick_quicklaps() # automatically filters for flying laps
+        
+        
+        for driver in fp1.drivers:
+            driv_laps = fp1_laps.pick_driver(driver)
+            if len(driv_laps) > 0:
+                fastest_lap = driv_laps['LapTime'].min()
+                print(driver, format_lap_time(fastest_lap))
+        
+        fp1_fastest = (
+            fp1_laps.groupby("Driver")["LapTime"]
+            .min()
+            .sort_values()
+        )
+        fp1_pos = {drv: pos for pos, (drv, _) in enumerate(fp1_fastest.items(), start=1)}
+        fp1_fastest_dict = fp1_fastest.to_dict()
 
-def main(input_csv_path: str = "car_race_summary.csv",
-         output_csv_path: str = "qualifying_to_race_performance.csv",
-         cache_dir: str = "fastf1_cache"):
-    """
-    Main function to generate qualifying to race performance data.
+        for driver_code in fp1_laps['Driver'].unique():
+            team = get_team_from_driver(driver_code, year, race_name)
+            
+            row = {
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": team,
+                "fp1_pos": fp1_pos.get(driver_code, np.nan),
+                "fp1_time_fastest_lap": format_lap_time(fp1_fastest_dict.get(driver_code)),
+            }
+            rows.append(row)
+            
     
-    Args:
-        input_csv_path: Path to input car_race_summary.csv
-        output_csv_path: Path to output qualifying_to_race_performance.csv
-        cache_dir: Directory for FastF1 cache
+    return pd.DataFrame(rows)
+
+def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
+    
+    rows = []
+    
+    if not sprint_or_standard_weekend(race_name):
+        
+        # only a standard qualifying
+        qualifying_session = fastf1.get_session(year, race_name, "Qualifying")
+        qualifying_session.load()
+        qualifying_results = qualifying_session.results
+        
+        for idx, row in qualifying_results.iterrows():
+            driver_code = row['Abbreviation']
+            
+            rows.append({
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": row['TeamName'],
+                "Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
+                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                "Q3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
+            })
+
+    else:
+        
+        print("This is a SPRINT WEEKEND")
+        
+        sprint_qualifying_session = fastf1.get_session(year, race_name, "Sprint Qualifying")
+        sprint_qualifying_session.load()
+        sprint_qualifying_results = sprint_qualifying_session.results
+        
+        qualifying_session = fastf1.get_session(year, race_name, "Qualifying")
+        qualifying_session.load()
+        qualifying_results = qualifying_session.results
+        
+        sprint_qualifying_dict = {}
+        for idx, row in sprint_qualifying_results.iterrows():
+            driver_code = row['Abbreviation']
+            sprint_qualifying_dict[driver_code] = {
+                "team": row['TeamName'],
+                "Sprint_Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "SQ1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
+                "SQ2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                "SQ3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
+            }
+        
+        
+        for idx, row in qualifying_results.iterrows():
+            driver_code = row['Abbreviation']
+            sprint_data = sprint_qualifying_dict.get(driver_code, {})
+            
+            rows.append({
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": sprint_data.get("team", row['TeamName']),  # Use sprint qual team, fallback to qual team
+                "Sprint_Qualifying_Final_Grid_Position": sprint_data.get("Sprint_Qualifying_Final_Grid_Position", np.nan),
+                "SQ1_fastest_lap": sprint_data.get("SQ1_fastest_lap", np.nan), 
+                "SQ2_fastest_lap": sprint_data.get("SQ2_fastest_lap", np.nan), 
+                "SQ3_fastest_lap": sprint_data.get("SQ3_fastest_lap", np.nan),
+                "Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
+                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                "Q3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
+            })
+        
+    return pd.DataFrame(rows)
+    
+
+def race_performance(year: int, race_name: str) -> pd.DataFrame:
+    
+    rows = []
+    
+    if not sprint_or_standard_weekend(race_name):
+        
+        # only a standard race
+        race_session = fastf1.get_session(year, race_name, "Race")
+        race_session.load()
+        race_results = race_session.results
+        
+        for idx, row in race_results.iterrows():
+            driver_code = row['Abbreviation']
+            driv_laps = race_session.laps.pick_driver(driver_code)
+            fastest_lap = driv_laps['LapTime'].min()
+            
+            rows.append({
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": row['TeamName'],
+                "Race_Finishing_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "fastest_lap": format_lap_time(fastest_lap), 
+            })
+
+    else:
+        
+        print("This is a SPRINT WEEKEND")
+        
+        sprint_race_session = fastf1.get_session(year, race_name, "Sprint")
+        sprint_race_session.load()
+        sprint_race_results = sprint_race_session.results
+        
+        race_session = fastf1.get_session(year, race_name, "Race")
+        race_session.load()
+        race_results = race_session.results
+        
+        sprint_race_dict = {}
+        for idx, row in sprint_race_results.iterrows():
+            driver_code = row['Abbreviation']
+            driv_laps = sprint_race_session.laps.pick_driver(driver_code)
+            fastest_lap = driv_laps['LapTime'].min()
+            sprint_race_dict[driver_code] = {
+                "team": row['TeamName'],
+                "sprint_race_final_position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "sprint_race_fastest_lap": format_lap_time(fastest_lap),   
+            }
+        
+        
+        for idx, row in race_results.iterrows():
+            driver_code = row['Abbreviation']
+            driv_laps = race_session.laps.pick_driver(driver_code)
+            fastest_lap = driv_laps['LapTime'].min()
+            sprint_data = sprint_race_dict.get(driver_code, {})
+            
+            rows.append({
+                "season": year,
+                "race_name": race_name,
+                "driver": driver_code,
+                "team": sprint_data.get("team", row['TeamName']),
+                "sprint_race_final_position": sprint_data.get("sprint_race_final_position", np.nan),
+                "sprint_race_fastest_lap": sprint_data.get("sprint_race_fastest_lap", np.nan),
+                "race_final_position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
+                "race_fastest_lap": format_lap_time(fastest_lap), 
+            })
+        
+    return pd.DataFrame(rows)
+
+def main(start_year: int, end_year: int, start_race_name: str = None, end_race_name: str = None, output_csv: str = "qualifying_to_race_performance.csv"):
     """
-    loader = QualifyingToRacePerformance(cache_dir=cache_dir)
-    performance_df = loader.generate_performance_data(input_csv_path)
-    loader.save_performance_data(performance_df, output_csv_path)
-    return performance_df
+    Collect practice, qualifying, and race data.
+    """
+    print(f"Collecting data from {start_year} to {end_year}...")
+    
+    all_data = []
+    
+    # Process each year
+    for year in range(start_year, end_year + 1):
+        print(f"Processing {year} season...")
+        
+        schedule = fastf1.get_event_schedule(year)
+        
+        # Filter races for the first year (start from start_race_name)
+        if year == start_year and start_race_name:
+            start_idx = schedule[schedule['EventName'] == start_race_name].index
+            if len(start_idx) > 0:
+                schedule = schedule.loc[start_idx[0]:]
+                print(f"Starting from race: {start_race_name}")
+            else:
+                print(f"Warning: Start race '{start_race_name}' not found in {year} schedule")
+        
+        # Filter races for the last year (end at end_race_name)
+        if year == end_year and end_race_name:
+            end_idx = schedule[schedule['EventName'] == end_race_name].index
+            if len(end_idx) > 0:
+                schedule = schedule.loc[:end_idx[0]]
+                print(f"Ending at race: {end_race_name}")
+            else:
+                print(f"Warning: End race '{end_race_name}' not found in {year} schedule")
+        
+        # Get list of race names to process for this year
+        race_rows = schedule[['EventName', 'Location']]
+        race_names = race_rows['EventName'].tolist()
+        race_display_map = dict(zip(race_rows['EventName'], race_rows['Location']))
+        print("This is the race name: ", race_names)
+        print(f"Processing {len(race_names)} races in {year}: {', '.join(race_names)}")
+        
+        # Process each race in this year
+        for idx, race_name in enumerate(race_names, 1):
+            print(f"\n[{year}] [{idx}/{len(race_names)}] Processing {race_name}...")
+            
+            try:
+                # Collect practice data
+                print(f" Collecting practice data...")
+                practice_df = free_practice_performance(year, race_name)
+                
+                # Collect qualifying data
+                print(f" Collecting qualifying data...")
+                qualifying_df = qualifying_performance(year, race_name)
+                
+                # Collect race data
+                print(f" Collecting race data...")
+                race_df = race_performance(year, race_name)
+                
+                # Merge all dataframes on common keys (season, race_name, driver)
+                # Start with practice data
+                merged_df = practice_df.copy()
+                
+                # Merge qualifying data
+                if not qualifying_df.empty:
+                    merged_df = merged_df.merge(
+                        qualifying_df,
+                        on=['season', 'race_name', 'driver', 'team'],
+                        how='outer',
+                        suffixes=('', '_qual')
+                    )
+                    # Remove duplicate columns if any
+                    merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+                
+                # Merge race data
+                if not race_df.empty:
+                    merged_df = merged_df.merge(
+                        race_df,
+                        on=['season', 'race_name', 'driver', 'team'],
+                        how='outer',
+                        suffixes=('', '_race')
+                    )
+                    # Remove duplicate columns if any
+                    merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+                
+                all_data.append(merged_df)
+                print(f" Successfully collected data for {race_name}")
+                
+            except Exception as e:
+                print(f" Error processing {race_name}: {e}")
+                import traceback
+                traceback.print_exc()
+                continue
+    
+    # Combine all races into one dataframe
+    if not all_data:
+        print("\nNo data collected!")
+        return pd.DataFrame()
+    
+    final_df = pd.concat(all_data, ignore_index=True)
+    
+    # Sort by season, race_name (round), and driver
+    final_df = final_df.sort_values(['season', 'race_name', 'driver']).reset_index(drop=True)
+    
+    # Export to CSV
+    final_df.to_csv(output_csv, index=False)
+    print(f" Data exported to {output_csv}")
+    print(f" Total rows: {len(final_df)}")
+    print(f" Total columns: {len(final_df.columns)}")
+    print(f" Years covered: {final_df['season'].unique()}")
+    
+    return final_df
+    
+    
 
 
 if __name__ == "__main__":
-    import sys
+    # df1 = free_practice_performance(2025, "Austin")
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #     print(df1)
     
-    # Allow command line arguments
-    input_path = sys.argv[1] if len(sys.argv) > 1 else "car_race_summary.csv"
-    output_path = sys.argv[2] if len(sys.argv) > 2 else "qualifying_to_race_performance.csv"
+    # print("--------------------------------")
     
-    main(input_csv_path=input_path, output_csv_path=output_path)
+    # df2 = free_practice_performance(2025, "Melbourne")
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):  # more options can be specified also
+    #     print(df2)
+    
+    # df3 = qualifying_performance(2025, "Austin")
+    # df4 = qualifying_performance(2025, "Melbourne")
+    
+    # df5 = race_performance(2025, "Austin")
+    # df6 = race_performance(2025, "Melbourne")
+    
+    df7 = main(2024, 2025, start_race_name="Melbourne", end_race_name="Melbourne")
+    
+    pd.set_option('display.max_rows', None)
+    pd.set_option('display.max_columns', None)
+    pd.set_option('display.max_colwidth', None)
 
+    print(df7)
