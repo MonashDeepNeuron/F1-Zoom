@@ -26,6 +26,10 @@ columns = [
     "season", "driver", "race_name", "round", "circuit_type",
     "team",
 
+    # Race Result
+    "finishing_position",            # Final classified position
+    "race_status",                   # 'Finished', '+1 Lap', 'Crash', 'Gearbox', etc.
+
     # Pace
     "avg_race_pace",                 
     "clean_air_avg_race_pace",       # using clean_air_avg_laptime from stints          
@@ -124,6 +128,33 @@ class TeamRaceSummaryLoader:
         except Exception as e:
             print(f"Error loading {session_type} session for {season} {race_name}: {e}")
             return None
+    
+    def _get_race_results(self, season: int, race_name: str) -> Dict[str, Dict]:
+        """
+        Get finishing positions and race status for all drivers in a race.
+        
+        Returns:
+            Dict mapping driver abbreviation to {'position': int, 'status': str}
+        """
+        results_dict = {}
+        try:
+            session = fastf1.get_session(season, race_name, 'R')
+            session.load()
+            results = session.results
+            
+            for idx, row in results.iterrows():
+                driver_code = row['Abbreviation']
+                position = int(row['Position']) if pd.notna(row['Position']) else np.nan
+                status = row['Status'] if pd.notna(row.get('Status')) else np.nan
+                results_dict[driver_code] = {
+                    'position': position,
+                    'status': status
+                }
+                
+        except Exception as e:
+            print(f"Error loading race results for {season} {race_name}: {e}")
+        
+        return results_dict
     
     def _calculate_pace_metrics(self, driver_stints: pd.DataFrame) -> Dict:
         metrics = {}
@@ -361,6 +392,14 @@ class TeamRaceSummaryLoader:
         stint_df = self.load_stint_data(stint_csv_path)
         print(f"Loaded {len(stint_df)} stint records")
         
+        # Pre-fetch race results (finishing positions and status) for all unique races
+        print("Fetching race results (positions and status)...")
+        race_results_cache = {}
+        unique_races = stint_df[['season', 'race_name']].drop_duplicates()
+        for _, race in unique_races.iterrows():
+            season_val, race_name_val = race['season'], race['race_name']
+            race_results_cache[(season_val, race_name_val)] = self._get_race_results(season_val, race_name_val)
+        
         # Group by season, race_name, and driver
         summary_records = []
         
@@ -370,6 +409,11 @@ class TeamRaceSummaryLoader:
             round_num = first_row.get('round', np.nan)
             circuit_type = first_row.get('circuit_type', np.nan)
             team = first_row.get('team', np.nan)
+            
+            # Get finishing position and race status
+            driver_result = race_results_cache.get((season, race_name), {}).get(driver, {})
+            finishing_position = driver_result.get('position', np.nan)
+            race_status = driver_result.get('status', np.nan)
             
             # Calculate all metrics
             pace_metrics = self._calculate_pace_metrics(driver_stints)
@@ -399,6 +443,8 @@ class TeamRaceSummaryLoader:
                 'round': round_num,
                 'circuit_type': circuit_type,
                 'team': team,
+                'finishing_position': finishing_position,
+                'race_status': race_status,
                 **pace_metrics,
                 **speed_metrics,
                 **tyre_metrics,
@@ -456,7 +502,7 @@ if __name__ == "__main__":
     import sys
     
     # Allow command line arguments
-    stint_path = sys.argv[1] if len(sys.argv) > 1 else "stint_analysis.csv"
-    output_path = sys.argv[2] if len(sys.argv) > 2 else "car_race_summary.csv"
+    stint_path = sys.argv[1] if len(sys.argv) > 1 else "Car_Tyre_CSV/stint_analysis.csv"
+    output_path = sys.argv[2] if len(sys.argv) > 2 else "Car_Tyre_CSV/car_race_summary.csv"
     
-    main(stint_csv_path="stint_analysis.csv", output_csv_path="driver_race_summary.csv")
+    main(stint_csv_path="Car_Tyre_CSV/stint_analysis.csv", output_csv_path="Car_Tyre_CSV/driver_race_summary.csv")
