@@ -90,17 +90,11 @@ columns = [
     "season", "race_name", "team", "driver",
     "lap_number", "stint_index", "compound",
     "lap_time",
+    "track_status",
 
     # traffic
     "interval_to_car_ahead",   # seconds
     "in_traffic",              # boolean
-    
-    # track conditions
-    "vsc",                     # boolean - Virtual Safety Car active
-    "safety_car",              # boolean - Safety Car active
-    "yellow_flag",             # boolean - Yellow Flag active
-    "red_flag",                # boolean - Red Flag active
-    "track_condition",         # string - Summary: "GREEN", "YELLOW", "VSC", "SC", "RED", "MIXED"
 ]
 
 BASE_URL = "https://api.openf1.org/v1"
@@ -119,16 +113,10 @@ class LapRecord:
     stint_index: int
     compound: str
     lap_time: float  # collected
+    track_status: str
 
     interval_to_car_ahead: Optional[float]  # seconds, NaN if none
     in_traffic: bool
-    
-    # track conditions
-    vsc: bool  # Virtual Safety Car active
-    safety_car: bool  # Safety Car active
-    yellow_flag: bool  # Yellow Flag active
-    red_flag: bool  # Red Flag active
-    track_condition: str  # Summary condition
     
     
 class LapDataLoader:
@@ -225,119 +213,82 @@ class LapDataLoader:
         except (TypeError, ValueError):
             return np.nan, False
 
-        in_traffic = gap < self.traffic_interval_threshold
+        in_traffic = 0 < gap < self.traffic_interval_threshold # first place is assigned 0 seconds behind the lead
         return gap, in_traffic
     
-    def _get_track_condition_for_lap(
-        self,
-        flags: pd.DataFrame,
-        lap_start_time: pd.Timestamp,
-        lap_duration: float,
-    ) -> tuple[bool, bool, bool, bool, str]:
-        """
-        Determine track conditions for a lap based on flags data.
-        Returns: (vsc, safety_car, yellow_flag, red_flag, track_condition)
-        """
-        if flags.empty:
-            return False, False, False, False, "GREEN"
+    def _get_track_status_for_time(self, track_status_df: pd.DataFrame, session_start: Optional[pd.Timestamp], lap_time: pd.Timestamp) -> str:
+        if track_status_df.empty or session_start is None:
+            return "Green Flag"  # Assume green at start
         
-        # Calculate lap time window
-        lap_end_time = lap_start_time + timedelta(seconds=lap_duration)
+        # Check if required columns exist
+        if 'Time' not in track_status_df.columns or 'Status' not in track_status_df.columns:
+            return "Green Flag"  # Changed from "Unknown"
         
-        # Filter flags that overlap with this lap
-        # A flag is active if it starts before lap end and ends after lap start
-        if "flag" in flags.columns and "date_start" in flags.columns:
-            # Check if date_end exists, if not assume flags are point-in-time events
-            if "date_end" in flags.columns:
-                # Flags with start/end times
-                active_flags = flags[
-                    (flags["date_start"] <= lap_end_time) & 
-                    (flags["date_end"] >= lap_start_time)
-                ]
-            else:
-                # Flags as point-in-time events - check if within lap window
-                active_flags = flags[
-                    (flags["date_start"] >= lap_start_time) & 
-                    (flags["date_start"] <= lap_end_time)
-                ]
+        # Ensure both timestamps are timezone-aware and in UTC
+        if session_start.tz is None:
+            session_start = session_start.tz_localize('UTC')
         else:
-            # Try alternative column names
-            time_col = None
-            for col in flags.columns:
-                if "date" in col.lower() or "time" in col.lower():
-                    time_col = col
-                    break
-            
-            if time_col:
-                active_flags = flags[
-                    (flags[time_col] >= lap_start_time) & 
-                    (flags[time_col] <= lap_end_time)
-                ]
-            else:
-                return False, False, False, False, "GREEN"
+            session_start = session_start.tz_convert('UTC')
         
-        if active_flags.empty:
-            return False, False, False, False, "GREEN"
-        
-        # Check for different flag types
-        vsc = False
-        safety_car = False
-        yellow_flag = False
-        red_flag = False
-        
-        # OpenF1 API flag format: flag column contains values like "VSC", "SC", "YELLOW", "RED", etc.
-        if "flag" in active_flags.columns:
-            flag_values = active_flags["flag"].str.upper()
-            vsc = flag_values.str.contains("VSC", na=False).any()
-            safety_car = flag_values.str.contains("SC|SAFETY", na=False).any()
-            yellow_flag = flag_values.str.contains("YELLOW", na=False).any()
-            red_flag = flag_values.str.contains("RED", na=False).any()
-        elif "flag_type" in active_flags.columns:
-            flag_values = active_flags["flag_type"].str.upper()
-            vsc = flag_values.str.contains("VSC", na=False).any()
-            safety_car = flag_values.str.contains("SC|SAFETY", na=False).any()
-            yellow_flag = flag_values.str.contains("YELLOW", na=False).any()
-            red_flag = flag_values.str.contains("RED", na=False).any()
-        
-        # Determine summary condition (priority: RED > SC > VSC > YELLOW > GREEN)
-        if red_flag:
-            track_condition = "RED"
-        elif safety_car:
-            track_condition = "SC"
-        elif vsc:
-            track_condition = "VSC"
-        elif yellow_flag:
-            track_condition = "YELLOW"
+        if lap_time.tz is None:
+            lap_time = lap_time.tz_localize('UTC')
         else:
-            track_condition = "GREEN"
+            lap_time = lap_time.tz_convert('UTC')
         
-        # Check for mixed conditions
-        conditions = []
-        if vsc:
-            conditions.append("VSC")
-        if safety_car:
-            conditions.append("SC")
-        if yellow_flag:
-            conditions.append("YELLOW")
-        if red_flag:
-            conditions.append("RED")
+        # Convert track_status Time (timedelta) to Timestamps by adding session start time
+        track_status_times = session_start + track_status_df['Time']
         
-        if len(conditions) > 1:
-            track_condition = "MIXED"
+        # Find the most recent track status before this lap time
+        mask = track_status_times <= lap_time
+        if not mask.any():
+            return "Green Flag"  # Changed from "Unknown" - assume green before first status change
         
-        return vsc, safety_car, yellow_flag, red_flag, track_condition
-    
+        status_code = track_status_df[mask].iloc[-1]['Status']
+        
+        status_map = {
+            1: "Green Flag",
+            2: "Yellow Flag",
+            3: "Safety Car Ending",
+            4: "Safety Car",
+            5: "Red Flag",
+            6: "Virtual Safety Car Deployed",
+            7: "Virtual Safety Car Ending",
+            '1': "Green Flag",
+            '2': "Yellow Flag",
+            '3': "Safety Car Ending",
+            '4': "Safety Car",
+            '5': "Red Flag",
+            '6': "Virtual Safety Car Deployed",
+            '7': "Virtual Safety Car Ending"
+        }
+        
+        return status_map.get(status_code, "Unknown")
     
     def collect_session_lap_data(self, season, meeting_key, race_index, session_key="R") -> pd.DataFrame:
 
         race_name = self._get_race_name(meeting_key)
         
+        # Load session once and cache track status data
+        session_start = None
+        try:
+            session = fastf1.get_session(season, race_name, "R")
+            session.load()
+            track_status_df = session.track_status
+            
+            # Ensure session_start is timezone-aware and in UTC
+            session_start = session.date
+            if session_start.tz is None:
+                session_start = session_start.tz_localize('UTC')
+            else:
+                session_start = session_start.tz_convert('UTC')
+        except Exception as e:
+            print(f"  Warning: Could not load track status data: {e}")
+            track_status_df = pd.DataFrame()
         
         drivers = self._fetch_df("drivers", session_key=session_key)
         laps = self._fetch_df("laps", session_key=session_key)
         stints = self._fetch_df("stints", session_key=session_key)
         intervals = self._fetch_df("intervals", session_key=session_key)
-        flags = self._fetch_df("flags", session_key=session_key)
 
         
         if not laps.empty:
@@ -345,18 +296,6 @@ class LapDataLoader:
             
         if not intervals.empty:
             intervals["date"] = pd.to_datetime(intervals["date"], format='mixed', utc=True)
-        
-        if not flags.empty:
-            # Convert flag timestamps to datetime
-            if "date_start" in flags.columns:
-                flags["date_start"] = pd.to_datetime(flags["date_start"], format='mixed', utc=True)
-            if "date_end" in flags.columns:
-                flags["date_end"] = pd.to_datetime(flags["date_end"], format='mixed', utc=True)
-            elif "date" in flags.columns:
-                flags["date"] = pd.to_datetime(flags["date"], format='mixed', utc=True)
-                # If only date column exists, use it for both start and end
-                flags["date_start"] = flags["date"]
-                flags["date_end"] = flags["date"]
 
         
         records: List[LapRecord] = []
@@ -378,6 +317,9 @@ class LapDataLoader:
 
                 lap_number = int(lap["lap_number"])
                 lap_time_sec = float(lap_duration)
+                
+                # Get track status for this specific lap time
+                track_status = self._get_track_status_for_time(track_status_df, session_start, lap["date_start"])
 
                 # the stint / compound this lap is on
                 stint_index, compound = self._find_stint_for_lap(stints, driver_number, lap_number)
@@ -386,13 +328,6 @@ class LapDataLoader:
                 interval_to_ahead, in_traffic = self._find_interval_for_lap(
                     intervals,
                     driver_number,
-                    lap["date_start"],
-                    lap_time_sec,
-                )
-                
-                # determine track conditions for this lap
-                vsc, safety_car, yellow_flag, red_flag, track_condition = self._get_track_condition_for_lap(
-                    flags,
                     lap["date_start"],
                     lap_time_sec,
                 )
@@ -406,13 +341,9 @@ class LapDataLoader:
                     stint_index=stint_index,
                     compound=compound,
                     lap_time=lap_time_sec,
+                    track_status=track_status,
                     interval_to_car_ahead=interval_to_ahead,
                     in_traffic=in_traffic,
-                    vsc=vsc,
-                    safety_car=safety_car,
-                    yellow_flag=yellow_flag,
-                    red_flag=red_flag,
-                    track_condition=track_condition,
                 )
                 records.append(record)
                 
@@ -425,14 +356,6 @@ class LapDataLoader:
         df = df[columns]
 
         return df
-
-    def track_status(year: int, race_name: str) -> pd.DataFrame:
-        
-        session = fastf1.get_session(year, race_name, "R")
-        session.load()
-        track_status = session.track_status()
-        
-        return track_status
       
 def main(end_race_name: Optional[str] = "Las Vegas") -> pd.DataFrame:
     """
@@ -521,25 +444,90 @@ def main(end_race_name: Optional[str] = "Las Vegas") -> pd.DataFrame:
 
 if __name__ == "__main__":
     # Example usage: Collect data up to Qatar 2025
-    # df = main(end_race_name="Lusail")
+    df = main(end_race_name="Lusail")
     
-    # # Save to CSV
-    # if not df.empty:
-    #     df.to_csv("f1_race_data_2024_2025.csv", index=False)
-    #     print(f"\nData saved to f1_race_data_2024_2025.csv")
+    # Save to CSV
+    if not df.empty:
+        df.to_csv("f1_race_data_2024_2025.csv", index=False)
+        print(f"\nData saved to f1_race_data_2024_2025.csv")
         
-    #     # Display summary
-    #     print("\nData Summary:")
-    #     print(f"Seasons: {df['season'].unique()}")
-    #     print(f"Races: {df['race_name'].nunique()}")
-    #     print(f"Teams: {df['team'].nunique()}")
-    #     print(f"Drivers: {df['driver'].nunique()}")    
+        # Display summary
+        print("\nData Summary:")
+        print(f"Seasons: {df['season'].unique()}")
+        print(f"Races: {df['race_name'].nunique()}")
+        print(f"Teams: {df['team'].nunique()}")
+        print(f"Drivers: {df['driver'].nunique()}")  
+
+# if __name__ == "__main__":
+#     # Test track status for a single race
+#     loader = LapDataLoader()
     
-    df1 = track_status(2025, "Melbourne")
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.max_colwidth', None)
-    print(df1)
+#     # Test parameters
+#     test_year = 2024
+#     test_race = "Imola"
+    
+#     print(f"\nTesting track status collection for {test_year} {test_race}...")
+    
+#     # Get the meeting key for this race
+#     meetings_url = f"{BASE_URL}/meetings"
+#     response = requests.get(meetings_url, params={"year": test_year}, timeout=10)
+#     response.raise_for_status()
+#     meetings = response.json()
+    
+#     # Find the specific race
+#     meeting_key = None
+#     for meeting in meetings:
+#         if meeting["circuit_short_name"] == test_race:
+#             meeting_key = meeting["meeting_key"]
+#             print(f"Found meeting_key: {meeting_key}")
+#             break
+    
+#     if meeting_key:
+#         # Get session key
+#         sessions_url = f"{BASE_URL}/sessions"
+#         session_response = requests.get(
+#             sessions_url,
+#             params={"meeting_key": meeting_key},
+#             timeout=10
+#         )
+#         sessions = session_response.json()
+        
+#         print(f"\nAvailable sessions:")
+#         for session in sessions:
+#             print(f"  - {session.get('session_name')} (key: {session.get('session_key')})")
+        
+#         # Find the race session
+#         race_session = None
+#         for session in sessions:
+#             if session.get('session_name') == 'Race':
+#                 race_session = session
+#                 break
+        
+#         if race_session:
+#             session_key = race_session["session_key"]
+#             print(f"\nUsing Race session_key: {session_key}")
             
+#             # Collect data for this race
+#             df = loader.collect_session_lap_data(
+#                 season=test_year,
+#                 meeting_key=meeting_key,
+#                 session_key=session_key,
+#                 race_index=1
+#             )
             
+#             # Display results
+#             print(f"\nCollected {len(df)} laps")
+#             print(f"\nTrack status distribution:")
+#             print(df['track_status'].value_counts())
             
+#             # Show some sample rows
+#             print(f"\nSample data:")
+#             pd.set_option('display.max_columns', None)
+#             print(df.head(10))
+#         else:
+#             print(f"No Race session found. Available sessions listed above.")
+#     else:
+#         print(f"Could not find race: {test_race}")
+#         print(f"\nAvailable circuits in {test_year}:")
+#         for meeting in meetings:
+#             print(f"  - {meeting['circuit_short_name']}")

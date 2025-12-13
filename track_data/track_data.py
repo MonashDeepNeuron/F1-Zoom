@@ -1,0 +1,1 @@
+def get_safety_car_data(season: int, race_name: str)
