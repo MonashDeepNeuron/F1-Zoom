@@ -1,0 +1,480 @@
+year,race_name,team,driver,dnf,dnf_reason
+2024,Abu Dhabi Grand Prix,alpine,DOO,True,Lapped
+2024,Abu Dhabi Grand Prix,alpine,GAS,False,Finished
+2024,Abu Dhabi Grand Prix,aston_martin,ALO,False,Finished
+2024,Abu Dhabi Grand Prix,aston_martin,STR,True,Lapped
+2024,Abu Dhabi Grand Prix,ferrari,LEC,False,Finished
+2024,Abu Dhabi Grand Prix,ferrari,SAI,False,Finished
+2024,Abu Dhabi Grand Prix,haas,HUL,False,Finished
+2024,Abu Dhabi Grand Prix,haas,MAG,True,Lapped
+2024,Abu Dhabi Grand Prix,mclaren,NOR,False,Finished
+2024,Abu Dhabi Grand Prix,mclaren,PIA,False,Finished
+2024,Abu Dhabi Grand Prix,mercedes,HAM,False,Finished
+2024,Abu Dhabi Grand Prix,mercedes,RUS,False,Finished
+2024,Abu Dhabi Grand Prix,rb,LAW,True,Retired
+2024,Abu Dhabi Grand Prix,rb,TSU,True,Lapped
+2024,Abu Dhabi Grand Prix,red_bull,PER,True,Retired
+2024,Abu Dhabi Grand Prix,red_bull,VER,False,Finished
+2024,Abu Dhabi Grand Prix,sauber,BOT,True,Retired
+2024,Abu Dhabi Grand Prix,sauber,ZHO,True,Lapped
+2024,Abu Dhabi Grand Prix,williams,ALB,True,Lapped
+2024,Abu Dhabi Grand Prix,williams,COL,True,Retired
+2024,Australian Grand Prix,alpine,GAS,True,Lapped
+2024,Australian Grand Prix,alpine,OCO,True,Lapped
+2024,Australian Grand Prix,aston_martin,ALO,False,Finished
+2024,Australian Grand Prix,aston_martin,STR,False,Finished
+2024,Australian Grand Prix,ferrari,LEC,False,Finished
+2024,Australian Grand Prix,ferrari,SAI,False,Finished
+2024,Australian Grand Prix,haas,HUL,False,Finished
+2024,Australian Grand Prix,haas,MAG,True,Lapped
+2024,Australian Grand Prix,mclaren,NOR,False,Finished
+2024,Australian Grand Prix,mclaren,PIA,False,Finished
+2024,Australian Grand Prix,mercedes,HAM,True,Retired
+2024,Australian Grand Prix,mercedes,RUS,True,Retired
+2024,Australian Grand Prix,rb,RIC,True,Lapped
+2024,Australian Grand Prix,rb,TSU,False,Finished
+2024,Australian Grand Prix,red_bull,PER,False,Finished
+2024,Australian Grand Prix,red_bull,VER,True,Retired
+2024,Australian Grand Prix,sauber,BOT,True,Lapped
+2024,Australian Grand Prix,sauber,ZHO,True,Lapped
+2024,Australian Grand Prix,williams,ALB,True,Lapped
+2024,Austrian Grand Prix,alpine,GAS,False,Finished
+2024,Austrian Grand Prix,alpine,OCO,False,Finished
+2024,Austrian Grand Prix,aston_martin,ALO,True,Lapped
+2024,Austrian Grand Prix,aston_martin,STR,True,Lapped
+2024,Austrian Grand Prix,ferrari,LEC,False,Finished
+2024,Austrian Grand Prix,ferrari,SAI,False,Finished
+2024,Austrian Grand Prix,haas,HUL,False,Finished
+2024,Austrian Grand Prix,haas,MAG,False,Finished
+2024,Austrian Grand Prix,mclaren,NOR,True,Lapped
+2024,Austrian Grand Prix,mclaren,PIA,False,Finished
+2024,Austrian Grand Prix,mercedes,HAM,False,Finished
+2024,Austrian Grand Prix,mercedes,RUS,False,Finished
+2024,Austrian Grand Prix,rb,RIC,False,Finished
+2024,Austrian Grand Prix,rb,TSU,True,Lapped
+2024,Austrian Grand Prix,red_bull,PER,False,Finished
+2024,Austrian Grand Prix,red_bull,VER,False,Finished
+2024,Austrian Grand Prix,sauber,BOT,True,Lapped
+2024,Austrian Grand Prix,sauber,ZHO,True,Lapped
+2024,Austrian Grand Prix,williams,ALB,True,Lapped
+2024,Austrian Grand Prix,williams,SAR,True,Lapped
+2024,Azerbaijan Grand Prix,alpine,GAS,False,Finished
+2024,Azerbaijan Grand Prix,alpine,OCO,True,Lapped
+2024,Azerbaijan Grand Prix,aston_martin,ALO,False,Finished
+2024,Azerbaijan Grand Prix,aston_martin,STR,True,Retired
+2024,Azerbaijan Grand Prix,ferrari,LEC,False,Finished
+2024,Azerbaijan Grand Prix,ferrari,SAI,True,Retired
+2024,Azerbaijan Grand Prix,haas,BEA,False,Finished
+2024,Azerbaijan Grand Prix,haas,HUL,False,Finished
+2024,Azerbaijan Grand Prix,mclaren,NOR,False,Finished
+2024,Azerbaijan Grand Prix,mclaren,PIA,False,Finished
+2024,Azerbaijan Grand Prix,mercedes,HAM,False,Finished
+2024,Azerbaijan Grand Prix,mercedes,RUS,False,Finished
+2024,Azerbaijan Grand Prix,rb,RIC,False,Finished
+2024,Azerbaijan Grand Prix,rb,TSU,True,Retired
+2024,Azerbaijan Grand Prix,red_bull,PER,True,Retired
+2024,Azerbaijan Grand Prix,red_bull,VER,False,Finished
+2024,Azerbaijan Grand Prix,sauber,BOT,True,Lapped
+2024,Azerbaijan Grand Prix,sauber,ZHO,False,Finished
+2024,Azerbaijan Grand Prix,williams,ALB,False,Finished
+2024,Azerbaijan Grand Prix,williams,COL,False,Finished
+2024,Bahrain Grand Prix,alpine,GAS,True,Lapped
+2024,Bahrain Grand Prix,alpine,OCO,True,Lapped
+2024,Bahrain Grand Prix,aston_martin,ALO,False,Finished
+2024,Bahrain Grand Prix,aston_martin,STR,False,Finished
+2024,Bahrain Grand Prix,ferrari,LEC,False,Finished
+2024,Bahrain Grand Prix,ferrari,SAI,False,Finished
+2024,Bahrain Grand Prix,haas,HUL,True,Lapped
+2024,Bahrain Grand Prix,haas,MAG,True,Lapped
+2024,Bahrain Grand Prix,mclaren,NOR,False,Finished
+2024,Bahrain Grand Prix,mclaren,PIA,False,Finished
+2024,Bahrain Grand Prix,mercedes,HAM,False,Finished
+2024,Bahrain Grand Prix,mercedes,RUS,False,Finished
+2024,Bahrain Grand Prix,rb,RIC,True,Lapped
+2024,Bahrain Grand Prix,rb,TSU,True,Lapped
+2024,Bahrain Grand Prix,red_bull,PER,False,Finished
+2024,Bahrain Grand Prix,red_bull,VER,False,Finished
+2024,Bahrain Grand Prix,sauber,BOT,True,Lapped
+2024,Bahrain Grand Prix,sauber,ZHO,True,Lapped
+2024,Bahrain Grand Prix,williams,ALB,True,Lapped
+2024,Bahrain Grand Prix,williams,SAR,True,Lapped
+2024,Belgian Grand Prix,alpine,GAS,False,Finished
+2024,Belgian Grand Prix,alpine,OCO,False,Finished
+2024,Belgian Grand Prix,aston_martin,ALO,False,Finished
+2024,Belgian Grand Prix,aston_martin,STR,False,Finished
+2024,Belgian Grand Prix,ferrari,LEC,False,Finished
+2024,Belgian Grand Prix,ferrari,SAI,False,Finished
+2024,Belgian Grand Prix,haas,HUL,False,Finished
+2024,Belgian Grand Prix,haas,MAG,False,Finished
+2024,Belgian Grand Prix,mclaren,NOR,False,Finished
+2024,Belgian Grand Prix,mclaren,PIA,False,Finished
+2024,Belgian Grand Prix,mercedes,HAM,False,Finished
+2024,Belgian Grand Prix,mercedes,RUS,True,Disqualified
+2024,Belgian Grand Prix,rb,RIC,False,Finished
+2024,Belgian Grand Prix,rb,TSU,False,Finished
+2024,Belgian Grand Prix,red_bull,PER,False,Finished
+2024,Belgian Grand Prix,red_bull,VER,False,Finished
+2024,Belgian Grand Prix,sauber,BOT,False,Finished
+2024,Belgian Grand Prix,sauber,ZHO,True,Retired
+2024,Belgian Grand Prix,williams,ALB,False,Finished
+2024,Belgian Grand Prix,williams,SAR,False,Finished
+2024,British Grand Prix,alpine,GAS,True,Did not start
+2024,British Grand Prix,alpine,OCO,True,Lapped
+2024,British Grand Prix,aston_martin,ALO,False,Finished
+2024,British Grand Prix,aston_martin,STR,False,Finished
+2024,British Grand Prix,ferrari,LEC,True,Lapped
+2024,British Grand Prix,ferrari,SAI,False,Finished
+2024,British Grand Prix,haas,HUL,False,Finished
+2024,British Grand Prix,haas,MAG,False,Finished
+2024,British Grand Prix,mclaren,NOR,False,Finished
+2024,British Grand Prix,mclaren,PIA,False,Finished
+2024,British Grand Prix,mercedes,HAM,False,Finished
+2024,British Grand Prix,mercedes,RUS,True,Retired
+2024,British Grand Prix,rb,RIC,True,Lapped
+2024,British Grand Prix,rb,TSU,False,Finished
+2024,British Grand Prix,red_bull,PER,True,Lapped
+2024,British Grand Prix,red_bull,VER,False,Finished
+2024,British Grand Prix,sauber,BOT,True,Lapped
+2024,British Grand Prix,sauber,ZHO,True,Lapped
+2024,British Grand Prix,williams,ALB,False,Finished
+2024,British Grand Prix,williams,SAR,False,Finished
+2024,Canadian Grand Prix,alpine,GAS,False,Finished
+2024,Canadian Grand Prix,alpine,OCO,False,Finished
+2024,Canadian Grand Prix,aston_martin,ALO,False,Finished
+2024,Canadian Grand Prix,aston_martin,STR,False,Finished
+2024,Canadian Grand Prix,ferrari,LEC,True,Retired
+2024,Canadian Grand Prix,ferrari,SAI,True,Retired
+2024,Canadian Grand Prix,haas,HUL,False,Finished
+2024,Canadian Grand Prix,haas,MAG,False,Finished
+2024,Canadian Grand Prix,mclaren,NOR,False,Finished
+2024,Canadian Grand Prix,mclaren,PIA,False,Finished
+2024,Canadian Grand Prix,mercedes,HAM,False,Finished
+2024,Canadian Grand Prix,mercedes,RUS,False,Finished
+2024,Canadian Grand Prix,rb,RIC,False,Finished
+2024,Canadian Grand Prix,rb,TSU,False,Finished
+2024,Canadian Grand Prix,red_bull,PER,True,Retired
+2024,Canadian Grand Prix,red_bull,VER,False,Finished
+2024,Canadian Grand Prix,sauber,BOT,False,Finished
+2024,Canadian Grand Prix,sauber,ZHO,True,Lapped
+2024,Canadian Grand Prix,williams,ALB,True,Retired
+2024,Canadian Grand Prix,williams,SAR,True,Retired
+2024,Chinese Grand Prix,alpine,GAS,False,Finished
+2024,Chinese Grand Prix,alpine,OCO,False,Finished
+2024,Chinese Grand Prix,aston_martin,ALO,False,Finished
+2024,Chinese Grand Prix,aston_martin,STR,False,Finished
+2024,Chinese Grand Prix,ferrari,LEC,False,Finished
+2024,Chinese Grand Prix,ferrari,SAI,False,Finished
+2024,Chinese Grand Prix,haas,HUL,False,Finished
+2024,Chinese Grand Prix,haas,MAG,False,Finished
+2024,Chinese Grand Prix,mclaren,NOR,False,Finished
+2024,Chinese Grand Prix,mclaren,PIA,False,Finished
+2024,Chinese Grand Prix,mercedes,HAM,False,Finished
+2024,Chinese Grand Prix,mercedes,RUS,False,Finished
+2024,Chinese Grand Prix,rb,RIC,True,Retired
+2024,Chinese Grand Prix,rb,TSU,True,Retired
+2024,Chinese Grand Prix,red_bull,PER,False,Finished
+2024,Chinese Grand Prix,red_bull,VER,False,Finished
+2024,Chinese Grand Prix,sauber,BOT,True,Retired
+2024,Chinese Grand Prix,sauber,ZHO,False,Finished
+2024,Chinese Grand Prix,williams,ALB,False,Finished
+2024,Chinese Grand Prix,williams,SAR,False,Finished
+2024,Dutch Grand Prix,alpine,GAS,True,Lapped
+2024,Dutch Grand Prix,alpine,OCO,True,Lapped
+2024,Dutch Grand Prix,aston_martin,ALO,True,Lapped
+2024,Dutch Grand Prix,aston_martin,STR,True,Lapped
+2024,Dutch Grand Prix,ferrari,LEC,False,Finished
+2024,Dutch Grand Prix,ferrari,SAI,False,Finished
+2024,Dutch Grand Prix,haas,HUL,True,Lapped
+2024,Dutch Grand Prix,haas,MAG,True,Lapped
+2024,Dutch Grand Prix,mclaren,NOR,False,Finished
+2024,Dutch Grand Prix,mclaren,PIA,False,Finished
+2024,Dutch Grand Prix,mercedes,HAM,False,Finished
+2024,Dutch Grand Prix,mercedes,RUS,False,Finished
+2024,Dutch Grand Prix,rb,RIC,True,Lapped
+2024,Dutch Grand Prix,rb,TSU,True,Lapped
+2024,Dutch Grand Prix,red_bull,PER,False,Finished
+2024,Dutch Grand Prix,red_bull,VER,False,Finished
+2024,Dutch Grand Prix,sauber,BOT,True,Lapped
+2024,Dutch Grand Prix,sauber,ZHO,True,Lapped
+2024,Dutch Grand Prix,williams,ALB,True,Lapped
+2024,Dutch Grand Prix,williams,SAR,True,Lapped
+2024,Emilia Romagna Grand Prix,alpine,GAS,True,Lapped
+2024,Emilia Romagna Grand Prix,alpine,OCO,True,Lapped
+2024,Emilia Romagna Grand Prix,aston_martin,ALO,True,Lapped
+2024,Emilia Romagna Grand Prix,aston_martin,STR,False,Finished
+2024,Emilia Romagna Grand Prix,ferrari,LEC,False,Finished
+2024,Emilia Romagna Grand Prix,ferrari,SAI,False,Finished
+2024,Emilia Romagna Grand Prix,haas,HUL,True,Lapped
+2024,Emilia Romagna Grand Prix,haas,MAG,True,Lapped
+2024,Emilia Romagna Grand Prix,mclaren,NOR,False,Finished
+2024,Emilia Romagna Grand Prix,mclaren,PIA,False,Finished
+2024,Emilia Romagna Grand Prix,mercedes,HAM,False,Finished
+2024,Emilia Romagna Grand Prix,mercedes,RUS,False,Finished
+2024,Emilia Romagna Grand Prix,rb,RIC,True,Lapped
+2024,Emilia Romagna Grand Prix,rb,TSU,True,Lapped
+2024,Emilia Romagna Grand Prix,red_bull,PER,False,Finished
+2024,Emilia Romagna Grand Prix,red_bull,VER,False,Finished
+2024,Emilia Romagna Grand Prix,sauber,BOT,True,Lapped
+2024,Emilia Romagna Grand Prix,sauber,ZHO,True,Lapped
+2024,Emilia Romagna Grand Prix,williams,ALB,True,Retired
+2024,Emilia Romagna Grand Prix,williams,SAR,True,Lapped
+2024,Hungarian Grand Prix,alpine,GAS,True,Retired
+2024,Hungarian Grand Prix,alpine,OCO,True,Lapped
+2024,Hungarian Grand Prix,aston_martin,ALO,False,Finished
+2024,Hungarian Grand Prix,aston_martin,STR,False,Finished
+2024,Hungarian Grand Prix,ferrari,LEC,False,Finished
+2024,Hungarian Grand Prix,ferrari,SAI,False,Finished
+2024,Hungarian Grand Prix,haas,HUL,True,Lapped
+2024,Hungarian Grand Prix,haas,MAG,True,Lapped
+2024,Hungarian Grand Prix,mclaren,NOR,False,Finished
+2024,Hungarian Grand Prix,mclaren,PIA,False,Finished
+2024,Hungarian Grand Prix,mercedes,HAM,False,Finished
+2024,Hungarian Grand Prix,mercedes,RUS,False,Finished
+2024,Hungarian Grand Prix,rb,RIC,True,Lapped
+2024,Hungarian Grand Prix,rb,TSU,False,Finished
+2024,Hungarian Grand Prix,red_bull,PER,False,Finished
+2024,Hungarian Grand Prix,red_bull,VER,False,Finished
+2024,Hungarian Grand Prix,sauber,BOT,True,Lapped
+2024,Hungarian Grand Prix,sauber,ZHO,True,Lapped
+2024,Hungarian Grand Prix,williams,ALB,True,Lapped
+2024,Hungarian Grand Prix,williams,SAR,True,Lapped
+2024,Italian Grand Prix,alpine,GAS,True,Lapped
+2024,Italian Grand Prix,alpine,OCO,True,Lapped
+2024,Italian Grand Prix,aston_martin,ALO,False,Finished
+2024,Italian Grand Prix,aston_martin,STR,True,Lapped
+2024,Italian Grand Prix,ferrari,LEC,False,Finished
+2024,Italian Grand Prix,ferrari,SAI,False,Finished
+2024,Italian Grand Prix,haas,HUL,True,Lapped
+2024,Italian Grand Prix,haas,MAG,False,Finished
+2024,Italian Grand Prix,mclaren,NOR,False,Finished
+2024,Italian Grand Prix,mclaren,PIA,False,Finished
+2024,Italian Grand Prix,mercedes,HAM,False,Finished
+2024,Italian Grand Prix,mercedes,RUS,False,Finished
+2024,Italian Grand Prix,rb,RIC,False,Finished
+2024,Italian Grand Prix,rb,TSU,True,Retired
+2024,Italian Grand Prix,red_bull,PER,False,Finished
+2024,Italian Grand Prix,red_bull,VER,False,Finished
+2024,Italian Grand Prix,sauber,BOT,True,Lapped
+2024,Italian Grand Prix,sauber,ZHO,True,Lapped
+2024,Italian Grand Prix,williams,ALB,False,Finished
+2024,Italian Grand Prix,williams,COL,False,Finished
+2024,Japanese Grand Prix,alpine,GAS,True,Lapped
+2024,Japanese Grand Prix,alpine,OCO,True,Lapped
+2024,Japanese Grand Prix,aston_martin,ALO,False,Finished
+2024,Japanese Grand Prix,aston_martin,STR,True,Lapped
+2024,Japanese Grand Prix,ferrari,LEC,False,Finished
+2024,Japanese Grand Prix,ferrari,SAI,False,Finished
+2024,Japanese Grand Prix,haas,HUL,True,Lapped
+2024,Japanese Grand Prix,haas,MAG,True,Lapped
+2024,Japanese Grand Prix,mclaren,NOR,False,Finished
+2024,Japanese Grand Prix,mclaren,PIA,False,Finished
+2024,Japanese Grand Prix,mercedes,HAM,False,Finished
+2024,Japanese Grand Prix,mercedes,RUS,False,Finished
+2024,Japanese Grand Prix,rb,RIC,True,Retired
+2024,Japanese Grand Prix,rb,TSU,True,Lapped
+2024,Japanese Grand Prix,red_bull,PER,False,Finished
+2024,Japanese Grand Prix,red_bull,VER,False,Finished
+2024,Japanese Grand Prix,sauber,BOT,True,Lapped
+2024,Japanese Grand Prix,sauber,ZHO,True,Retired
+2024,Japanese Grand Prix,williams,ALB,True,Retired
+2024,Japanese Grand Prix,williams,SAR,True,Lapped
+2024,Las Vegas Grand Prix,alpine,GAS,True,Retired
+2024,Las Vegas Grand Prix,alpine,OCO,True,Lapped
+2024,Las Vegas Grand Prix,aston_martin,ALO,False,Finished
+2024,Las Vegas Grand Prix,aston_martin,STR,False,Finished
+2024,Las Vegas Grand Prix,ferrari,LEC,False,Finished
+2024,Las Vegas Grand Prix,ferrari,SAI,False,Finished
+2024,Las Vegas Grand Prix,haas,HUL,False,Finished
+2024,Las Vegas Grand Prix,haas,MAG,False,Finished
+2024,Las Vegas Grand Prix,mclaren,NOR,False,Finished
+2024,Las Vegas Grand Prix,mclaren,PIA,False,Finished
+2024,Las Vegas Grand Prix,mercedes,HAM,False,Finished
+2024,Las Vegas Grand Prix,mercedes,RUS,False,Finished
+2024,Las Vegas Grand Prix,rb,LAW,False,Finished
+2024,Las Vegas Grand Prix,rb,TSU,False,Finished
+2024,Las Vegas Grand Prix,red_bull,PER,False,Finished
+2024,Las Vegas Grand Prix,red_bull,VER,False,Finished
+2024,Las Vegas Grand Prix,sauber,BOT,True,Lapped
+2024,Las Vegas Grand Prix,sauber,ZHO,False,Finished
+2024,Las Vegas Grand Prix,williams,ALB,True,Retired
+2024,Las Vegas Grand Prix,williams,COL,False,Finished
+2024,Mexico City Grand Prix,alpine,GAS,True,Lapped
+2024,Mexico City Grand Prix,alpine,OCO,True,Lapped
+2024,Mexico City Grand Prix,aston_martin,ALO,True,Retired
+2024,Mexico City Grand Prix,aston_martin,STR,True,Lapped
+2024,Mexico City Grand Prix,ferrari,LEC,False,Finished
+2024,Mexico City Grand Prix,ferrari,SAI,False,Finished
+2024,Mexico City Grand Prix,haas,HUL,True,Lapped
+2024,Mexico City Grand Prix,haas,MAG,False,Finished
+2024,Mexico City Grand Prix,mclaren,NOR,False,Finished
+2024,Mexico City Grand Prix,mclaren,PIA,False,Finished
+2024,Mexico City Grand Prix,mercedes,HAM,False,Finished
+2024,Mexico City Grand Prix,mercedes,RUS,False,Finished
+2024,Mexico City Grand Prix,rb,LAW,True,Lapped
+2024,Mexico City Grand Prix,rb,TSU,True,Retired
+2024,Mexico City Grand Prix,red_bull,PER,True,Lapped
+2024,Mexico City Grand Prix,red_bull,VER,False,Finished
+2024,Mexico City Grand Prix,sauber,BOT,True,Lapped
+2024,Mexico City Grand Prix,sauber,ZHO,True,Lapped
+2024,Mexico City Grand Prix,williams,ALB,True,Retired
+2024,Mexico City Grand Prix,williams,COL,True,Lapped
+2024,Miami Grand Prix,alpine,GAS,False,Finished
+2024,Miami Grand Prix,alpine,OCO,False,Finished
+2024,Miami Grand Prix,aston_martin,ALO,False,Finished
+2024,Miami Grand Prix,aston_martin,STR,False,Finished
+2024,Miami Grand Prix,ferrari,LEC,False,Finished
+2024,Miami Grand Prix,ferrari,SAI,False,Finished
+2024,Miami Grand Prix,haas,HUL,False,Finished
+2024,Miami Grand Prix,haas,MAG,False,Finished
+2024,Miami Grand Prix,mclaren,NOR,False,Finished
+2024,Miami Grand Prix,mclaren,PIA,False,Finished
+2024,Miami Grand Prix,mercedes,HAM,False,Finished
+2024,Miami Grand Prix,mercedes,RUS,False,Finished
+2024,Miami Grand Prix,rb,RIC,False,Finished
+2024,Miami Grand Prix,rb,TSU,False,Finished
+2024,Miami Grand Prix,red_bull,PER,False,Finished
+2024,Miami Grand Prix,red_bull,VER,False,Finished
+2024,Miami Grand Prix,sauber,BOT,False,Finished
+2024,Miami Grand Prix,sauber,ZHO,False,Finished
+2024,Miami Grand Prix,williams,ALB,False,Finished
+2024,Miami Grand Prix,williams,SAR,True,Retired
+2024,Monaco Grand Prix,alpine,GAS,True,Lapped
+2024,Monaco Grand Prix,alpine,OCO,True,Retired
+2024,Monaco Grand Prix,aston_martin,ALO,True,Lapped
+2024,Monaco Grand Prix,aston_martin,STR,True,Lapped
+2024,Monaco Grand Prix,ferrari,LEC,False,Finished
+2024,Monaco Grand Prix,ferrari,SAI,False,Finished
+2024,Monaco Grand Prix,haas,HUL,True,Retired
+2024,Monaco Grand Prix,haas,MAG,True,Retired
+2024,Monaco Grand Prix,mclaren,NOR,False,Finished
+2024,Monaco Grand Prix,mclaren,PIA,False,Finished
+2024,Monaco Grand Prix,mercedes,HAM,False,Finished
+2024,Monaco Grand Prix,mercedes,RUS,False,Finished
+2024,Monaco Grand Prix,rb,RIC,True,Lapped
+2024,Monaco Grand Prix,rb,TSU,True,Lapped
+2024,Monaco Grand Prix,red_bull,PER,True,Retired
+2024,Monaco Grand Prix,red_bull,VER,False,Finished
+2024,Monaco Grand Prix,sauber,BOT,True,Lapped
+2024,Monaco Grand Prix,sauber,ZHO,True,Lapped
+2024,Monaco Grand Prix,williams,ALB,True,Lapped
+2024,Monaco Grand Prix,williams,SAR,True,Lapped
+2024,Qatar Grand Prix,alpine,GAS,False,Finished
+2024,Qatar Grand Prix,alpine,OCO,True,Retired
+2024,Qatar Grand Prix,aston_martin,ALO,False,Finished
+2024,Qatar Grand Prix,aston_martin,STR,True,Retired
+2024,Qatar Grand Prix,ferrari,LEC,False,Finished
+2024,Qatar Grand Prix,ferrari,SAI,False,Finished
+2024,Qatar Grand Prix,haas,HUL,True,Retired
+2024,Qatar Grand Prix,haas,MAG,False,Finished
+2024,Qatar Grand Prix,mclaren,NOR,False,Finished
+2024,Qatar Grand Prix,mclaren,PIA,False,Finished
+2024,Qatar Grand Prix,mercedes,HAM,False,Finished
+2024,Qatar Grand Prix,mercedes,RUS,False,Finished
+2024,Qatar Grand Prix,rb,LAW,False,Finished
+2024,Qatar Grand Prix,rb,TSU,False,Finished
+2024,Qatar Grand Prix,red_bull,PER,True,Retired
+2024,Qatar Grand Prix,red_bull,VER,False,Finished
+2024,Qatar Grand Prix,sauber,BOT,False,Finished
+2024,Qatar Grand Prix,sauber,ZHO,False,Finished
+2024,Qatar Grand Prix,williams,ALB,True,Lapped
+2024,Qatar Grand Prix,williams,COL,True,Retired
+2024,Saudi Arabian Grand Prix,alpine,GAS,True,Retired
+2024,Saudi Arabian Grand Prix,alpine,OCO,True,Lapped
+2024,Saudi Arabian Grand Prix,aston_martin,ALO,False,Finished
+2024,Saudi Arabian Grand Prix,aston_martin,STR,True,Retired
+2024,Saudi Arabian Grand Prix,ferrari,BEA,False,Finished
+2024,Saudi Arabian Grand Prix,ferrari,LEC,False,Finished
+2024,Saudi Arabian Grand Prix,haas,HUL,False,Finished
+2024,Saudi Arabian Grand Prix,haas,MAG,False,Finished
+2024,Saudi Arabian Grand Prix,mclaren,NOR,False,Finished
+2024,Saudi Arabian Grand Prix,mclaren,PIA,False,Finished
+2024,Saudi Arabian Grand Prix,mercedes,HAM,False,Finished
+2024,Saudi Arabian Grand Prix,mercedes,RUS,False,Finished
+2024,Saudi Arabian Grand Prix,rb,RIC,True,Lapped
+2024,Saudi Arabian Grand Prix,rb,TSU,True,Lapped
+2024,Saudi Arabian Grand Prix,red_bull,PER,False,Finished
+2024,Saudi Arabian Grand Prix,red_bull,VER,False,Finished
+2024,Saudi Arabian Grand Prix,sauber,BOT,True,Lapped
+2024,Saudi Arabian Grand Prix,sauber,ZHO,True,Lapped
+2024,Saudi Arabian Grand Prix,williams,ALB,False,Finished
+2024,Saudi Arabian Grand Prix,williams,SAR,True,Lapped
+2024,Singapore Grand Prix,alpine,GAS,True,Lapped
+2024,Singapore Grand Prix,alpine,OCO,True,Lapped
+2024,Singapore Grand Prix,aston_martin,ALO,True,Lapped
+2024,Singapore Grand Prix,aston_martin,STR,True,Lapped
+2024,Singapore Grand Prix,ferrari,LEC,False,Finished
+2024,Singapore Grand Prix,ferrari,SAI,False,Finished
+2024,Singapore Grand Prix,haas,HUL,True,Lapped
+2024,Singapore Grand Prix,haas,MAG,True,Retired
+2024,Singapore Grand Prix,mclaren,NOR,False,Finished
+2024,Singapore Grand Prix,mclaren,PIA,False,Finished
+2024,Singapore Grand Prix,mercedes,HAM,False,Finished
+2024,Singapore Grand Prix,mercedes,RUS,False,Finished
+2024,Singapore Grand Prix,rb,RIC,True,Lapped
+2024,Singapore Grand Prix,rb,TSU,True,Lapped
+2024,Singapore Grand Prix,red_bull,PER,True,Lapped
+2024,Singapore Grand Prix,red_bull,VER,False,Finished
+2024,Singapore Grand Prix,sauber,BOT,True,Lapped
+2024,Singapore Grand Prix,sauber,ZHO,True,Lapped
+2024,Singapore Grand Prix,williams,ALB,True,Retired
+2024,Singapore Grand Prix,williams,COL,True,Lapped
+2024,Spanish Grand Prix,alpine,GAS,False,Finished
+2024,Spanish Grand Prix,alpine,OCO,False,Finished
+2024,Spanish Grand Prix,aston_martin,ALO,True,Lapped
+2024,Spanish Grand Prix,aston_martin,STR,True,Lapped
+2024,Spanish Grand Prix,ferrari,LEC,False,Finished
+2024,Spanish Grand Prix,ferrari,SAI,False,Finished
+2024,Spanish Grand Prix,haas,HUL,False,Finished
+2024,Spanish Grand Prix,haas,MAG,True,Lapped
+2024,Spanish Grand Prix,mclaren,NOR,False,Finished
+2024,Spanish Grand Prix,mclaren,PIA,False,Finished
+2024,Spanish Grand Prix,mercedes,HAM,False,Finished
+2024,Spanish Grand Prix,mercedes,RUS,False,Finished
+2024,Spanish Grand Prix,rb,RIC,True,Lapped
+2024,Spanish Grand Prix,rb,TSU,True,Lapped
+2024,Spanish Grand Prix,red_bull,PER,False,Finished
+2024,Spanish Grand Prix,red_bull,VER,False,Finished
+2024,Spanish Grand Prix,sauber,BOT,True,Lapped
+2024,Spanish Grand Prix,sauber,ZHO,True,Lapped
+2024,Spanish Grand Prix,williams,ALB,True,Lapped
+2024,Spanish Grand Prix,williams,SAR,True,Lapped
+2024,São Paulo Grand Prix,alpine,GAS,False,Finished
+2024,São Paulo Grand Prix,alpine,OCO,False,Finished
+2024,São Paulo Grand Prix,aston_martin,ALO,False,Finished
+2024,São Paulo Grand Prix,aston_martin,STR,True,Did not start
+2024,São Paulo Grand Prix,ferrari,LEC,False,Finished
+2024,São Paulo Grand Prix,ferrari,SAI,True,Retired
+2024,São Paulo Grand Prix,haas,BEA,False,Finished
+2024,São Paulo Grand Prix,haas,HUL,True,Disqualified
+2024,São Paulo Grand Prix,mclaren,NOR,False,Finished
+2024,São Paulo Grand Prix,mclaren,PIA,False,Finished
+2024,São Paulo Grand Prix,mercedes,HAM,False,Finished
+2024,São Paulo Grand Prix,mercedes,RUS,False,Finished
+2024,São Paulo Grand Prix,rb,LAW,False,Finished
+2024,São Paulo Grand Prix,rb,TSU,False,Finished
+2024,São Paulo Grand Prix,red_bull,PER,False,Finished
+2024,São Paulo Grand Prix,red_bull,VER,False,Finished
+2024,São Paulo Grand Prix,sauber,BOT,False,Finished
+2024,São Paulo Grand Prix,sauber,ZHO,False,Finished
+2024,São Paulo Grand Prix,williams,ALB,True,Did not start
+2024,São Paulo Grand Prix,williams,COL,True,Retired
+2024,United States Grand Prix,alpine,GAS,False,Finished
+2024,United States Grand Prix,alpine,OCO,True,Lapped
+2024,United States Grand Prix,aston_martin,ALO,True,Lapped
+2024,United States Grand Prix,aston_martin,STR,True,Lapped
+2024,United States Grand Prix,ferrari,LEC,False,Finished
+2024,United States Grand Prix,ferrari,SAI,False,Finished
+2024,United States Grand Prix,haas,HUL,False,Finished
+2024,United States Grand Prix,haas,MAG,False,Finished
+2024,United States Grand Prix,mclaren,NOR,False,Finished
+2024,United States Grand Prix,mclaren,PIA,False,Finished
+2024,United States Grand Prix,mercedes,HAM,True,Retired
+2024,United States Grand Prix,mercedes,RUS,False,Finished
+2024,United States Grand Prix,rb,LAW,False,Finished
+2024,United States Grand Prix,rb,TSU,True,Lapped
+2024,United States Grand Prix,red_bull,PER,False,Finished
+2024,United States Grand Prix,red_bull,VER,False,Finished
+2024,United States Grand Prix,sauber,BOT,True,Lapped
+2024,United States Grand Prix,sauber,ZHO,True,Lapped
+2024,United States Grand Prix,williams,ALB,True,Lapped
+2024,United States Grand Prix,williams,COL,False,Finished
