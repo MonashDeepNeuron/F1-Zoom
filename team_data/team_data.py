@@ -62,4 +62,4 @@ def compute_pitstops_from_lap_data(
 
 
 if __name__ == "__main__":
-    print(get_average_pitstop_time_per_driver(2024, "Bahrain Grand Prix"))
+    # print(get_average_pitstop_time_per_driver(2024, "Bahrain Grand Prix"))
