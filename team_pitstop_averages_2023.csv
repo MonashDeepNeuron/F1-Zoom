@@ -1,0 +1,219 @@
+year,race_name,team,average_pit_stop_time,num_pit_stops
+2023,Bahrain Grand Prix,alfa,25.60966666666667,3
+2023,Bahrain Grand Prix,alphatauri,24.97275,4
+2023,Bahrain Grand Prix,alpine,29.298000000000002,4
+2023,Bahrain Grand Prix,aston_martin,25.6245,2
+2023,Bahrain Grand Prix,ferrari,24.4225,2
+2023,Bahrain Grand Prix,haas,28.656750000000002,4
+2023,Bahrain Grand Prix,mclaren,33.298,3
+2023,Bahrain Grand Prix,mercedes,25.477999999999998,3
+2023,Bahrain Grand Prix,red_bull,24.2765,2
+2023,Bahrain Grand Prix,williams,25.191333333333333,3
+2023,Saudi Arabian Grand Prix,alfa,21.6978,5
+2023,Saudi Arabian Grand Prix,alphatauri,21.265,2
+2023,Saudi Arabian Grand Prix,alpine,20.7405,2
+2023,Saudi Arabian Grand Prix,aston_martin,24.014499999999998,2
+2023,Saudi Arabian Grand Prix,ferrari,20.393,2
+2023,Saudi Arabian Grand Prix,haas,21.2185,2
+2023,Saudi Arabian Grand Prix,mclaren,27.44333333333333,3
+2023,Saudi Arabian Grand Prix,mercedes,20.965,2
+2023,Saudi Arabian Grand Prix,red_bull,20.7695,2
+2023,Saudi Arabian Grand Prix,williams,21.2305,2
+2023,Australian Grand Prix,alfa,479.01325,4
+2023,Australian Grand Prix,alphatauri,629.258,3
+2023,Australian Grand Prix,alpine,627.6603333333334,3
+2023,Australian Grand Prix,aston_martin,927.081,2
+2023,Australian Grand Prix,ferrari,477.6715,2
+2023,Australian Grand Prix,haas,629.1143333333333,3
+2023,Australian Grand Prix,mclaren,934.652,2
+2023,Australian Grand Prix,mercedes,625.0503333333332,3
+2023,Australian Grand Prix,red_bull,474.52374999999995,4
+2023,Australian Grand Prix,williams,248.64375,4
+2023,Azerbaijan Grand Prix,alfa,21.645,4
+2023,Azerbaijan Grand Prix,alphatauri,20.497,1
+2023,Azerbaijan Grand Prix,alpine,20.590333333333334,3
+2023,Azerbaijan Grand Prix,aston_martin,23.1545,2
+2023,Azerbaijan Grand Prix,ferrari,21.548000000000002,2
+2023,Azerbaijan Grand Prix,haas,27.8495,2
+2023,Azerbaijan Grand Prix,mclaren,20.624000000000002,2
+2023,Azerbaijan Grand Prix,mercedes,20.724,3
+2023,Azerbaijan Grand Prix,red_bull,20.548000000000002,2
+2023,Azerbaijan Grand Prix,williams,21.059,2
+2023,Miami Grand Prix,alfa,22.977,2
+2023,Miami Grand Prix,alphatauri,22.938499999999998,2
+2023,Miami Grand Prix,alpine,22.1795,2
+2023,Miami Grand Prix,aston_martin,22.641,2
+2023,Miami Grand Prix,ferrari,22.173000000000002,2
+2023,Miami Grand Prix,haas,22.868000000000002,2
+2023,Miami Grand Prix,mclaren,23.1475,2
+2023,Miami Grand Prix,mercedes,22.2425,2
+2023,Miami Grand Prix,red_bull,22.286,2
+2023,Miami Grand Prix,williams,35.71,2
+2023,Monaco Grand Prix,alfa,27.26533333333333,3
+2023,Monaco Grand Prix,alphatauri,29.122500000000002,2
+2023,Monaco Grand Prix,alpine,26.09775,4
+2023,Monaco Grand Prix,aston_martin,24.995333333333335,3
+2023,Monaco Grand Prix,ferrari,24.222,2
+2023,Monaco Grand Prix,haas,32.494,1
+2023,Monaco Grand Prix,mclaren,27.980666666666664,3
+2023,Monaco Grand Prix,mercedes,27.419666666666668,3
+2023,Monaco Grand Prix,red_bull,26.66275,4
+2023,Monaco Grand Prix,williams,25.8752,5
+2023,Spanish Grand Prix,alfa,23.336666666666662,3
+2023,Spanish Grand Prix,alphatauri,22.170749999999998,4
+2023,Spanish Grand Prix,alpine,23.203333333333333,3
+2023,Spanish Grand Prix,aston_martin,22.76133333333333,3
+2023,Spanish Grand Prix,ferrari,22.049500000000002,2
+2023,Spanish Grand Prix,haas,23.11975,4
+2023,Spanish Grand Prix,mclaren,27.652,3
+2023,Spanish Grand Prix,mercedes,22.424999999999997,2
+2023,Spanish Grand Prix,red_bull,22.008,2
+2023,Spanish Grand Prix,williams,23.2945,4
+2023,Canadian Grand Prix,alfa,25.236,3
+2023,Canadian Grand Prix,alphatauri,25.376333333333335,3
+2023,Canadian Grand Prix,alpine,24.933,4
+2023,Canadian Grand Prix,aston_martin,23.87725,4
+2023,Canadian Grand Prix,ferrari,24.238,2
+2023,Canadian Grand Prix,haas,24.663,3
+2023,Canadian Grand Prix,mclaren,24.424,4
+2023,Canadian Grand Prix,mercedes,45.677,3
+2023,Canadian Grand Prix,red_bull,23.611666666666665,3
+2023,Canadian Grand Prix,williams,25.064,1
+2023,Austrian Grand Prix,alfa,19.657,3
+2023,Austrian Grand Prix,alphatauri,21.07575,4
+2023,Austrian Grand Prix,alpine,18.779,3
+2023,Austrian Grand Prix,aston_martin,16.623,2
+2023,Austrian Grand Prix,ferrari,16.386499999999998,2
+2023,Austrian Grand Prix,haas,22.7275,4
+2023,Austrian Grand Prix,mclaren,18.896666666666665,3
+2023,Austrian Grand Prix,mercedes,19.654,4
+2023,Austrian Grand Prix,red_bull,16.8985,2
+2023,Austrian Grand Prix,williams,18.545333333333332,3
+2023,British Grand Prix,alfa,30.4805,4
+2023,British Grand Prix,alphatauri,28.40275,4
+2023,British Grand Prix,alpine,28.458,1
+2023,British Grand Prix,aston_martin,28.619999999999997,2
+2023,British Grand Prix,ferrari,28.639333333333337,3
+2023,British Grand Prix,haas,35.9875,2
+2023,British Grand Prix,mclaren,28.5465,2
+2023,British Grand Prix,mercedes,29.311999999999998,2
+2023,British Grand Prix,red_bull,28.558,2
+2023,British Grand Prix,williams,29.2405,2
+2023,Hungarian Grand Prix,alfa,24.355,4
+2023,Hungarian Grand Prix,alphatauri,23.44366666666667,3
+2023,Hungarian Grand Prix,aston_martin,22.84525,4
+2023,Hungarian Grand Prix,ferrari,23.75266666666667,3
+2023,Hungarian Grand Prix,haas,22.4455,4
+2023,Hungarian Grand Prix,mclaren,21.58066666666667,3
+2023,Hungarian Grand Prix,mercedes,21.93,2
+2023,Hungarian Grand Prix,red_bull,21.383,3
+2023,Hungarian Grand Prix,williams,22.509,4
+2023,Belgian Grand Prix,alfa,23.9105,4
+2023,Belgian Grand Prix,alphatauri,22.869999999999997,4
+2023,Belgian Grand Prix,alpine,24.02933333333333,3
+2023,Belgian Grand Prix,aston_martin,24.241,2
+2023,Belgian Grand Prix,ferrari,23.2635,2
+2023,Belgian Grand Prix,haas,24.25475,4
+2023,Belgian Grand Prix,mclaren,24.378,2
+2023,Belgian Grand Prix,mercedes,23.316666666666666,3
+2023,Belgian Grand Prix,red_bull,23.2855,2
+2023,Belgian Grand Prix,williams,24.02975,4
+2023,Dutch Grand Prix,alfa,21.6595,2
+2023,Dutch Grand Prix,alphatauri,31.1755,4
+2023,Dutch Grand Prix,alpine,22.579,4
+2023,Dutch Grand Prix,aston_martin,20.25,4
+2023,Dutch Grand Prix,ferrari,25.093,4
+2023,Dutch Grand Prix,haas,25.739,2
+2023,Dutch Grand Prix,mclaren,20.2825,2
+2023,Dutch Grand Prix,mercedes,20.39625,4
+2023,Dutch Grand Prix,red_bull,20.448500000000003,4
+2023,Italian Grand Prix,alfa,25.004333333333335,3
+2023,Italian Grand Prix,alphatauri,24.246499999999997,2
+2023,Italian Grand Prix,alpine,25.437,3
+2023,Italian Grand Prix,aston_martin,25.2325,2
+2023,Italian Grand Prix,ferrari,24.557000000000002,2
+2023,Italian Grand Prix,haas,24.962,4
+2023,Italian Grand Prix,mclaren,26.552999999999997,3
+2023,Italian Grand Prix,mercedes,24.235,2
+2023,Italian Grand Prix,red_bull,24.0235,2
+2023,Italian Grand Prix,williams,24.6585,2
+2023,Singapore Grand Prix,alfa,30.385333333333335,3
+2023,Singapore Grand Prix,alphatauri,32.348,1
+2023,Singapore Grand Prix,alpine,30.7785,2
+2023,Singapore Grand Prix,aston_martin,41.689,2
+2023,Singapore Grand Prix,ferrari,31.1935,2
+2023,Singapore Grand Prix,haas,33.35,3
+2023,Singapore Grand Prix,mclaren,29.427,2
+2023,Singapore Grand Prix,mercedes,31.55675,4
+2023,Singapore Grand Prix,red_bull,29.3375,2
+2023,Singapore Grand Prix,williams,38.6215,4
+2023,Japanese Grand Prix,alfa,43.6115,4
+2023,Japanese Grand Prix,alphatauri,23.250333333333334,3
+2023,Japanese Grand Prix,alpine,25.772,2
+2023,Japanese Grand Prix,aston_martin,23.94033333333333,3
+2023,Japanese Grand Prix,ferrari,23.136,2
+2023,Japanese Grand Prix,haas,23.665333333333333,3
+2023,Japanese Grand Prix,mclaren,23.988999999999997,2
+2023,Japanese Grand Prix,mercedes,24.4375,2
+2023,Japanese Grand Prix,red_bull,646.061,4
+2023,Japanese Grand Prix,williams,42.8146,5
+2023,Qatar Grand Prix,alfa,29.449333333333332,3
+2023,Qatar Grand Prix,alphatauri,28.343,4
+2023,Qatar Grand Prix,alpine,29.13775,4
+2023,Qatar Grand Prix,aston_martin,28.46175,4
+2023,Qatar Grand Prix,ferrari,28.0505,2
+2023,Qatar Grand Prix,haas,32.52333333333333,3
+2023,Qatar Grand Prix,mclaren,28.292333333333332,3
+2023,Qatar Grand Prix,mercedes,34.114000000000004,2
+2023,Qatar Grand Prix,red_bull,28.0205,2
+2023,Qatar Grand Prix,williams,29.354,3
+2023,United States Grand Prix,alfa,25.039,4
+2023,United States Grand Prix,alphatauri,24.281000000000002,3
+2023,United States Grand Prix,alpine,24.39,2
+2023,United States Grand Prix,aston_martin,24.756,2
+2023,United States Grand Prix,ferrari,23.768,3
+2023,United States Grand Prix,haas,25.17325,4
+2023,United States Grand Prix,mclaren,23.758000000000003,2
+2023,United States Grand Prix,mercedes,24.636499999999998,2
+2023,United States Grand Prix,red_bull,24.180500000000002,4
+2023,United States Grand Prix,williams,24.8635,4
+2023,Mexico City Grand Prix,alfa,23.2275,2
+2023,Mexico City Grand Prix,alphatauri,621.9300000000001,4
+2023,Mexico City Grand Prix,alpine,22.627,1
+2023,Mexico City Grand Prix,aston_martin,22.713,2
+2023,Mexico City Grand Prix,ferrari,617.56475,4
+2023,Mexico City Grand Prix,haas,422.204,3
+2023,Mexico City Grand Prix,mclaren,503.03099999999995,5
+2023,Mexico City Grand Prix,mercedes,618.90725,4
+2023,Mexico City Grand Prix,red_bull,417.9783333333333,3
+2023,Mexico City Grand Prix,williams,23.8125,2
+2023,São Paulo Grand Prix,alfa,720.02225,4
+2023,São Paulo Grand Prix,alphatauri,1004.3713333333334,3
+2023,São Paulo Grand Prix,alpine,718.5407499999999,4
+2023,São Paulo Grand Prix,aston_martin,713.78225,4
+2023,São Paulo Grand Prix,ferrari,718.367,2
+2023,São Paulo Grand Prix,haas,34.261,1
+2023,São Paulo Grand Prix,mclaren,1002.668,3
+2023,São Paulo Grand Prix,mercedes,714.0822499999999,4
+2023,São Paulo Grand Prix,red_bull,713.4225,4
+2023,São Paulo Grand Prix,williams,27.472,1
+2023,Las Vegas Grand Prix,alfa,29.21466666666667,3
+2023,Las Vegas Grand Prix,alphatauri,21.251666666666665,3
+2023,Las Vegas Grand Prix,alpine,22.012500000000003,2
+2023,Las Vegas Grand Prix,aston_martin,24.3275,4
+2023,Las Vegas Grand Prix,ferrari,22.150000000000002,3
+2023,Las Vegas Grand Prix,haas,22.7715,4
+2023,Las Vegas Grand Prix,mclaren,23.269,1
+2023,Las Vegas Grand Prix,mercedes,22.691000000000003,4
+2023,Las Vegas Grand Prix,red_bull,25.794,4
+2023,Las Vegas Grand Prix,williams,21.3045,2
+2023,Abu Dhabi Grand Prix,alfa,22.766,2
+2023,Abu Dhabi Grand Prix,alphatauri,21.639333333333337,3
+2023,Abu Dhabi Grand Prix,alpine,22.909666666666666,3
+2023,Abu Dhabi Grand Prix,aston_martin,22.05633333333333,3
+2023,Abu Dhabi Grand Prix,ferrari,21.46466666666667,3
+2023,Abu Dhabi Grand Prix,haas,22.21725,4
+2023,Abu Dhabi Grand Prix,mclaren,22.0865,4
+2023,Abu Dhabi Grand Prix,mercedes,21.9935,4
+2023,Abu Dhabi Grand Prix,red_bull,21.554000000000002,2
+2023,Abu Dhabi Grand Prix,williams,22.147,2

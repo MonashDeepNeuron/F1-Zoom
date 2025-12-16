@@ -1,0 +1,1867 @@
+year,race_name,team,driver,average_pit_stop_time,num_pit_stops,dnf,dnf_reason
+2024,Abu Dhabi Grand Prix,Alpine,Jack Doohan,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Abu Dhabi Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Abu Dhabi Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Abu Dhabi Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Abu Dhabi Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Abu Dhabi Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Retired
+2024,Abu Dhabi Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Abu Dhabi Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Abu Dhabi Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Abu Dhabi Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Abu Dhabi Grand Prix,RB,Liam Lawson,,,True,Retired
+2024,Abu Dhabi Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Abu Dhabi Grand Prix,Red Bull Racing,Sergio Perez,,,True,Retired
+2024,Abu Dhabi Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Abu Dhabi Grand Prix,Williams,Franco Colapinto,,,True,Retired
+2024,Abu Dhabi Grand Prix,alpine,Jack Doohan,22.08,1.0,,
+2024,Abu Dhabi Grand Prix,alpine,Pierre Gasly,22.059,1.0,,
+2024,Abu Dhabi Grand Prix,aston_martin,Fernando Alonso,22.881500000000003,2.0,,
+2024,Abu Dhabi Grand Prix,aston_martin,Lance Stroll,22.6595,2.0,,
+2024,Abu Dhabi Grand Prix,ferrari,Carlos Sainz,21.28,1.0,,
+2024,Abu Dhabi Grand Prix,ferrari,Charles Leclerc,21.869,1.0,,
+2024,Abu Dhabi Grand Prix,haas,Kevin Magnussen,23.2365,4.0,,
+2024,Abu Dhabi Grand Prix,haas,Nico Hülkenberg,21.53,1.0,,
+2024,Abu Dhabi Grand Prix,mclaren,Lando Norris,21.276,1.0,,
+2024,Abu Dhabi Grand Prix,mclaren,Oscar Piastri,28.178,2.0,,
+2024,Abu Dhabi Grand Prix,mercedes,George Russell,21.656,1.0,,
+2024,Abu Dhabi Grand Prix,mercedes,Lewis Hamilton,21.694,1.0,,
+2024,Abu Dhabi Grand Prix,rb,Liam Lawson,26.099,3.0,,
+2024,Abu Dhabi Grand Prix,rb,Yuki Tsunoda,21.869,1.0,,
+2024,Abu Dhabi Grand Prix,red_bull,Max Verstappen,32.652,1.0,,
+2024,Abu Dhabi Grand Prix,sauber,Guanyu Zhou,25.8945,2.0,,
+2024,Abu Dhabi Grand Prix,sauber,Valtteri Bottas,41.144,1.0,,
+2024,Abu Dhabi Grand Prix,williams,Alexander Albon,22.065,1.0,,
+2024,Abu Dhabi Grand Prix,williams,Franco Colapinto,24.941,1.0,,
+2024,Australian Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Australian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Australian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Australian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Australian Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Australian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Australian Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Australian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Australian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Australian Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Australian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Australian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Australian Grand Prix,Mercedes,George Russell,,,True,Retired
+2024,Australian Grand Prix,Mercedes,Lewis Hamilton,,,True,Retired
+2024,Australian Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Australian Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Australian Grand Prix,Red Bull Racing,Max Verstappen,,,True,Retired
+2024,Australian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Australian Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Australian Grand Prix,alpine,Esteban Ocon,24.4565,2.0,,
+2024,Australian Grand Prix,alpine,Pierre Gasly,20.316,1.0,,
+2024,Australian Grand Prix,aston_martin,Fernando Alonso,18.16,1.0,,
+2024,Australian Grand Prix,aston_martin,Lance Stroll,17.939,2.0,,
+2024,Australian Grand Prix,ferrari,Carlos Sainz,17.599,1.0,,
+2024,Australian Grand Prix,ferrari,Charles Leclerc,17.3585,2.0,,
+2024,Australian Grand Prix,haas,Kevin Magnussen,18.226,2.0,,
+2024,Australian Grand Prix,haas,Nico Hülkenberg,18.2325,2.0,,
+2024,Australian Grand Prix,mclaren,Lando Norris,17.776,1.0,,
+2024,Australian Grand Prix,mclaren,Oscar Piastri,18.053,2.0,,
+2024,Australian Grand Prix,mercedes,George Russell,18.046,1.0,,
+2024,Australian Grand Prix,mercedes,Lewis Hamilton,17.596,1.0,,
+2024,Australian Grand Prix,rb,Daniel Ricciardo,18.008000000000003,2.0,,
+2024,Australian Grand Prix,rb,Yuki Tsunoda,18.029,2.0,,
+2024,Australian Grand Prix,red_bull,Sergio Pérez,17.667,2.0,,
+2024,Australian Grand Prix,sauber,Guanyu Zhou,27.948999999999998,2.0,,
+2024,Australian Grand Prix,sauber,Valtteri Bottas,32.9535,2.0,,
+2024,Australian Grand Prix,williams,Alexander Albon,17.75,2.0,,
+2024,Austrian Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Austrian Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Austrian Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Austrian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Austrian Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Austrian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Austrian Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Austrian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Austrian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Austrian Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Austrian Grand Prix,McLaren,Lando Norris,,,True,Lapped
+2024,Austrian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Austrian Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Austrian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Austrian Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Austrian Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Austrian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Austrian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Austrian Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Austrian Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Austrian Grand Prix,alpine,Esteban Ocon,22.291,1.0,,
+2024,Austrian Grand Prix,alpine,Pierre Gasly,21.737000000000002,2.0,,
+2024,Austrian Grand Prix,aston_martin,Fernando Alonso,27.715000000000003,2.0,,
+2024,Austrian Grand Prix,aston_martin,Lance Stroll,21.399,1.0,,
+2024,Austrian Grand Prix,ferrari,Carlos Sainz,21.226,1.0,,
+2024,Austrian Grand Prix,ferrari,Charles Leclerc,25.281666666666666,3.0,,
+2024,Austrian Grand Prix,haas,Kevin Magnussen,21.675,2.0,,
+2024,Austrian Grand Prix,haas,Nico Hülkenberg,22.0845,2.0,,
+2024,Austrian Grand Prix,mclaren,Lando Norris,21.617,1.0,,
+2024,Austrian Grand Prix,mclaren,Oscar Piastri,20.978,1.0,,
+2024,Austrian Grand Prix,mercedes,George Russell,21.673,1.0,,
+2024,Austrian Grand Prix,mercedes,Lewis Hamilton,21.563,1.0,,
+2024,Austrian Grand Prix,rb,Daniel Ricciardo,21.2975,2.0,,
+2024,Austrian Grand Prix,rb,Yuki Tsunoda,21.25,1.0,,
+2024,Austrian Grand Prix,red_bull,Max Verstappen,21.899,1.0,,
+2024,Austrian Grand Prix,red_bull,Sergio Pérez,21.291,1.0,,
+2024,Austrian Grand Prix,sauber,Guanyu Zhou,23.198,1.0,,
+2024,Austrian Grand Prix,sauber,Valtteri Bottas,21.9545,2.0,,
+2024,Austrian Grand Prix,williams,Alexander Albon,21.785,2.0,,
+2024,Austrian Grand Prix,williams,Logan Sargeant,27.112000000000002,2.0,,
+2024,Azerbaijan Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Azerbaijan Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Azerbaijan Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Azerbaijan Grand Prix,Aston Martin,Lance Stroll,,,True,Retired
+2024,Azerbaijan Grand Prix,Ferrari,Carlos Sainz,,,True,Retired
+2024,Azerbaijan Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Azerbaijan Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Azerbaijan Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2024,Azerbaijan Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,Azerbaijan Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Azerbaijan Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Azerbaijan Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Azerbaijan Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Azerbaijan Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Azerbaijan Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Azerbaijan Grand Prix,RB,Yuki Tsunoda,,,True,Retired
+2024,Azerbaijan Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Azerbaijan Grand Prix,Red Bull Racing,Sergio Perez,,,True,Retired
+2024,Azerbaijan Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Azerbaijan Grand Prix,Williams,Franco Colapinto,,,False,Finished
+2024,Azerbaijan Grand Prix,alpine,Esteban Ocon,20.634,1.0,,
+2024,Azerbaijan Grand Prix,alpine,Pierre Gasly,20.257,1.0,,
+2024,Azerbaijan Grand Prix,aston_martin,Fernando Alonso,20.073,1.0,,
+2024,Azerbaijan Grand Prix,aston_martin,Lance Stroll,20.6685,2.0,,
+2024,Azerbaijan Grand Prix,ferrari,Carlos Sainz,21.483,1.0,,
+2024,Azerbaijan Grand Prix,ferrari,Charles Leclerc,20.671,1.0,,
+2024,Azerbaijan Grand Prix,haas,Nico Hülkenberg,21.617,1.0,,
+2024,Azerbaijan Grand Prix,haas,Oliver Bearman,21.276,1.0,,
+2024,Azerbaijan Grand Prix,mclaren,Lando Norris,19.712,1.0,,
+2024,Azerbaijan Grand Prix,mclaren,Oscar Piastri,20.181,1.0,,
+2024,Azerbaijan Grand Prix,mercedes,George Russell,19.954,1.0,,
+2024,Azerbaijan Grand Prix,mercedes,Lewis Hamilton,21.289,1.0,,
+2024,Azerbaijan Grand Prix,rb,Daniel Ricciardo,21.984,1.0,,
+2024,Azerbaijan Grand Prix,rb,Yuki Tsunoda,20.922,1.0,,
+2024,Azerbaijan Grand Prix,red_bull,Max Verstappen,20.935000000000002,2.0,,
+2024,Azerbaijan Grand Prix,red_bull,Sergio Pérez,20.63,1.0,,
+2024,Azerbaijan Grand Prix,sauber,Guanyu Zhou,20.52,1.0,,
+2024,Azerbaijan Grand Prix,sauber,Valtteri Bottas,20.045,1.0,,
+2024,Azerbaijan Grand Prix,williams,Alexander Albon,20.287,1.0,,
+2024,Azerbaijan Grand Prix,williams,Franco Colapinto,20.596,1.0,,
+2024,Bahrain Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Bahrain Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Bahrain Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Bahrain Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Bahrain Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Bahrain Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Bahrain Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Bahrain Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Bahrain Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Bahrain Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Bahrain Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Bahrain Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Bahrain Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Bahrain Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Bahrain Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Bahrain Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Bahrain Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Bahrain Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Bahrain Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Bahrain Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Bahrain Grand Prix,alpine,Esteban Ocon,25.011,2.0,,
+2024,Bahrain Grand Prix,alpine,Pierre Gasly,28.221,2.0,,
+2024,Bahrain Grand Prix,aston_martin,Fernando Alonso,24.786,1.0,,
+2024,Bahrain Grand Prix,aston_martin,Lance Stroll,24.4815,2.0,,
+2024,Bahrain Grand Prix,ferrari,Carlos Sainz,24.474,1.0,,
+2024,Bahrain Grand Prix,ferrari,Charles Leclerc,24.069,1.0,,
+2024,Bahrain Grand Prix,haas,Kevin Magnussen,25.198500000000003,2.0,,
+2024,Bahrain Grand Prix,haas,Nico Hülkenberg,30.686,2.0,,
+2024,Bahrain Grand Prix,mclaren,Lando Norris,24.455,2.0,,
+2024,Bahrain Grand Prix,mclaren,Oscar Piastri,25.45,1.0,,
+2024,Bahrain Grand Prix,mercedes,George Russell,24.822,2.0,,
+2024,Bahrain Grand Prix,mercedes,Lewis Hamilton,25.087,1.0,,
+2024,Bahrain Grand Prix,rb,Daniel Ricciardo,24.988,1.0,,
+2024,Bahrain Grand Prix,rb,Yuki Tsunoda,24.724,1.0,,
+2024,Bahrain Grand Prix,red_bull,Max Verstappen,25.064,1.0,,
+2024,Bahrain Grand Prix,red_bull,Sergio Pérez,24.516,1.0,,
+2024,Bahrain Grand Prix,sauber,Guanyu Zhou,25.151,2.0,,
+2024,Bahrain Grand Prix,sauber,Valtteri Bottas,50.5965,2.0,,
+2024,Bahrain Grand Prix,williams,Alexander Albon,24.681,1.0,,
+2024,Bahrain Grand Prix,williams,Logan Sargeant,30.3995,2.0,,
+2024,Belgian Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Belgian Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Belgian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Belgian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Belgian Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Belgian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Belgian Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Belgian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Belgian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Retired
+2024,Belgian Grand Prix,Kick Sauber,Valtteri Bottas,,,False,Finished
+2024,Belgian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Belgian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Belgian Grand Prix,Mercedes,George Russell,,,True,Disqualified
+2024,Belgian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Belgian Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Belgian Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Belgian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Belgian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Belgian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Belgian Grand Prix,Williams,Logan Sargeant,,,False,Finished
+2024,Belgian Grand Prix,alpine,Esteban Ocon,23.366,1.0,,
+2024,Belgian Grand Prix,alpine,Pierre Gasly,22.872,2.0,,
+2024,Belgian Grand Prix,aston_martin,Fernando Alonso,23.075,1.0,,
+2024,Belgian Grand Prix,aston_martin,Lance Stroll,23.01,1.0,,
+2024,Belgian Grand Prix,ferrari,Carlos Sainz,23.0845,2.0,,
+2024,Belgian Grand Prix,ferrari,Charles Leclerc,23.136,2.0,,
+2024,Belgian Grand Prix,haas,Kevin Magnussen,23.619,1.0,,
+2024,Belgian Grand Prix,haas,Nico Hülkenberg,23.415,2.0,,
+2024,Belgian Grand Prix,mclaren,Lando Norris,22.646,2.0,,
+2024,Belgian Grand Prix,mclaren,Oscar Piastri,22.623,1.0,,
+2024,Belgian Grand Prix,mercedes,George Russell,22.686,1.0,,
+2024,Belgian Grand Prix,mercedes,Lewis Hamilton,22.945999999999998,2.0,,
+2024,Belgian Grand Prix,rb,Daniel Ricciardo,22.485500000000002,2.0,,
+2024,Belgian Grand Prix,rb,Yuki Tsunoda,23.452,1.0,,
+2024,Belgian Grand Prix,red_bull,Max Verstappen,23.0785,2.0,,
+2024,Belgian Grand Prix,red_bull,Sergio Pérez,22.67,2.0,,
+2024,Belgian Grand Prix,sauber,Valtteri Bottas,23.147,1.0,,
+2024,Belgian Grand Prix,williams,Alexander Albon,23.376,2.0,,
+2024,Belgian Grand Prix,williams,Logan Sargeant,23.515,2.0,,
+2024,British Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,British Grand Prix,Alpine,Pierre Gasly,,,True,Did not start
+2024,British Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,British Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,British Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,British Grand Prix,Ferrari,Charles Leclerc,,,True,Lapped
+2024,British Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,British Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,British Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,British Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,British Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,British Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,British Grand Prix,Mercedes,George Russell,,,True,Retired
+2024,British Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,British Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,British Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,British Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,British Grand Prix,Red Bull Racing,Sergio Perez,,,True,Lapped
+2024,British Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,British Grand Prix,Williams,Logan Sargeant,,,False,Finished
+2024,British Grand Prix,alpine,Esteban Ocon,28.686666666666667,3.0,,
+2024,British Grand Prix,aston_martin,Fernando Alonso,29.341,1.0,,
+2024,British Grand Prix,aston_martin,Lance Stroll,29.023,1.0,,
+2024,British Grand Prix,ferrari,Carlos Sainz,29.199,1.0,,
+2024,British Grand Prix,ferrari,Charles Leclerc,28.857,2.0,,
+2024,British Grand Prix,haas,Kevin Magnussen,30.096,2.0,,
+2024,British Grand Prix,haas,Nico Hülkenberg,29.412,1.0,,
+2024,British Grand Prix,mclaren,Lando Norris,28.661,1.0,,
+2024,British Grand Prix,mclaren,Oscar Piastri,29.541,1.0,,
+2024,British Grand Prix,mercedes,George Russell,32.045,1.0,,
+2024,British Grand Prix,mercedes,Lewis Hamilton,29.4835,2.0,,
+2024,British Grand Prix,rb,Daniel Ricciardo,29.374000000000002,2.0,,
+2024,British Grand Prix,rb,Yuki Tsunoda,,1.0,,
+2024,British Grand Prix,red_bull,Max Verstappen,28.7205,2.0,,
+2024,British Grand Prix,red_bull,Sergio Pérez,30.352,2.0,,
+2024,British Grand Prix,sauber,Guanyu Zhou,29.380333333333336,3.0,,
+2024,British Grand Prix,sauber,Valtteri Bottas,31.0775,2.0,,
+2024,British Grand Prix,williams,Alexander Albon,34.742,1.0,,
+2024,British Grand Prix,williams,Logan Sargeant,32.801,1.0,,
+2024,Canadian Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Canadian Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Canadian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Canadian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Canadian Grand Prix,Ferrari,Carlos Sainz,,,True,Retired
+2024,Canadian Grand Prix,Ferrari,Charles Leclerc,,,True,Retired
+2024,Canadian Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Canadian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Canadian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Canadian Grand Prix,Kick Sauber,Valtteri Bottas,,,False,Finished
+2024,Canadian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Canadian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Canadian Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Canadian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Canadian Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Canadian Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Canadian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Canadian Grand Prix,Red Bull Racing,Sergio Perez,,,True,Retired
+2024,Canadian Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Canadian Grand Prix,Williams,Logan Sargeant,,,True,Retired
+2024,Canadian Grand Prix,alpine,Pierre Gasly,24.6595,2.0,,
+2024,Canadian Grand Prix,aston_martin,Fernando Alonso,25.067,2.0,,
+2024,Canadian Grand Prix,aston_martin,Lance Stroll,24.284,1.0,,
+2024,Canadian Grand Prix,ferrari,Carlos Sainz,25.875500000000002,2.0,,
+2024,Canadian Grand Prix,ferrari,Charles Leclerc,31.948666666666668,3.0,,
+2024,Canadian Grand Prix,haas,Kevin Magnussen,27.366333333333333,3.0,,
+2024,Canadian Grand Prix,haas,Nico Hülkenberg,24.450499999999998,2.0,,
+2024,Canadian Grand Prix,mclaren,Lando Norris,23.423,1.0,,
+2024,Canadian Grand Prix,mclaren,Oscar Piastri,23.7265,2.0,,
+2024,Canadian Grand Prix,mercedes,George Russell,24.044,1.0,,
+2024,Canadian Grand Prix,mercedes,Lewis Hamilton,23.994,2.0,,
+2024,Canadian Grand Prix,rb,Daniel Ricciardo,27.079,2.0,,
+2024,Canadian Grand Prix,rb,Yuki Tsunoda,25.569,1.0,,
+2024,Canadian Grand Prix,red_bull,Max Verstappen,24.306,1.0,,
+2024,Canadian Grand Prix,red_bull,Sergio Pérez,29.0925,2.0,,
+2024,Canadian Grand Prix,sauber,Guanyu Zhou,25.598,1.0,,
+2024,Canadian Grand Prix,sauber,Valtteri Bottas,24.929,1.0,,
+2024,Canadian Grand Prix,williams,Alexander Albon,24.753,1.0,,
+2024,Chinese Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Chinese Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Chinese Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Chinese Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Chinese Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Chinese Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Chinese Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Chinese Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Chinese Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,Chinese Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Retired
+2024,Chinese Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Chinese Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Chinese Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Chinese Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Chinese Grand Prix,RB,Daniel Ricciardo,,,True,Retired
+2024,Chinese Grand Prix,RB,Yuki Tsunoda,,,True,Retired
+2024,Chinese Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Chinese Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Chinese Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Chinese Grand Prix,Williams,Logan Sargeant,,,False,Finished
+2024,Chinese Grand Prix,alpine,Esteban Ocon,23.182,2.0,,
+2024,Chinese Grand Prix,alpine,Pierre Gasly,39.712,1.0,,
+2024,Chinese Grand Prix,aston_martin,Fernando Alonso,22.868000000000002,2.0,,
+2024,Chinese Grand Prix,aston_martin,Lance Stroll,23.367,2.0,,
+2024,Chinese Grand Prix,ferrari,Carlos Sainz,22.629,1.0,,
+2024,Chinese Grand Prix,ferrari,Charles Leclerc,22.36,1.0,,
+2024,Chinese Grand Prix,haas,Kevin Magnussen,22.974,1.0,,
+2024,Chinese Grand Prix,haas,Nico Hülkenberg,23.17,2.0,,
+2024,Chinese Grand Prix,mclaren,Lando Norris,22.161,1.0,,
+2024,Chinese Grand Prix,mclaren,Oscar Piastri,22.673,1.0,,
+2024,Chinese Grand Prix,mercedes,George Russell,22.561,2.0,,
+2024,Chinese Grand Prix,mercedes,Lewis Hamilton,22.59,2.0,,
+2024,Chinese Grand Prix,rb,Daniel Ricciardo,22.598,1.0,,
+2024,Chinese Grand Prix,rb,Yuki Tsunoda,22.7735,2.0,,
+2024,Chinese Grand Prix,red_bull,Max Verstappen,22.363,2.0,,
+2024,Chinese Grand Prix,red_bull,Sergio Pérez,22.198999999999998,2.0,,
+2024,Chinese Grand Prix,sauber,Guanyu Zhou,23.362,1.0,,
+2024,Chinese Grand Prix,sauber,Valtteri Bottas,22.949,1.0,,
+2024,Chinese Grand Prix,williams,Alexander Albon,23.436500000000002,2.0,,
+2024,Chinese Grand Prix,williams,Logan Sargeant,23.229,1.0,,
+2024,Dutch Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Dutch Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Dutch Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Dutch Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Dutch Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Dutch Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Dutch Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Dutch Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Dutch Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Dutch Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Dutch Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Dutch Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Dutch Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Dutch Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Dutch Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Dutch Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Dutch Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Dutch Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Dutch Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Dutch Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Dutch Grand Prix,alpine,Esteban Ocon,21.015,1.0,,
+2024,Dutch Grand Prix,alpine,Pierre Gasly,22.646,1.0,,
+2024,Dutch Grand Prix,aston_martin,Fernando Alonso,21.348,1.0,,
+2024,Dutch Grand Prix,aston_martin,Lance Stroll,21.385,1.0,,
+2024,Dutch Grand Prix,ferrari,Carlos Sainz,20.84,1.0,,
+2024,Dutch Grand Prix,ferrari,Charles Leclerc,20.841,1.0,,
+2024,Dutch Grand Prix,haas,Kevin Magnussen,21.403,1.0,,
+2024,Dutch Grand Prix,haas,Nico Hülkenberg,21.619,1.0,,
+2024,Dutch Grand Prix,mclaren,Lando Norris,21.536,1.0,,
+2024,Dutch Grand Prix,mclaren,Oscar Piastri,20.969,1.0,,
+2024,Dutch Grand Prix,mercedes,George Russell,21.502499999999998,2.0,,
+2024,Dutch Grand Prix,mercedes,Lewis Hamilton,21.097,2.0,,
+2024,Dutch Grand Prix,rb,Daniel Ricciardo,20.942,1.0,,
+2024,Dutch Grand Prix,rb,Yuki Tsunoda,21.0645,2.0,,
+2024,Dutch Grand Prix,red_bull,Max Verstappen,20.785,1.0,,
+2024,Dutch Grand Prix,red_bull,Sergio Pérez,22.934,1.0,,
+2024,Dutch Grand Prix,sauber,Guanyu Zhou,21.628999999999998,2.0,,
+2024,Dutch Grand Prix,sauber,Valtteri Bottas,21.183999999999997,2.0,,
+2024,Dutch Grand Prix,williams,Alexander Albon,21.137,2.0,,
+2024,Dutch Grand Prix,williams,Logan Sargeant,22.03,1.0,,
+2024,Emilia Romagna Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Emilia Romagna Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Emilia Romagna Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Emilia Romagna Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Emilia Romagna Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Emilia Romagna Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Emilia Romagna Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Emilia Romagna Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Emilia Romagna Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Emilia Romagna Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Emilia Romagna Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Emilia Romagna Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Emilia Romagna Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Emilia Romagna Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Emilia Romagna Grand Prix,alpine,Esteban Ocon,30.659,1.0,,
+2024,Emilia Romagna Grand Prix,alpine,Pierre Gasly,30.3675,2.0,,
+2024,Emilia Romagna Grand Prix,aston_martin,Fernando Alonso,30.593999999999998,3.0,,
+2024,Emilia Romagna Grand Prix,aston_martin,Lance Stroll,29.971,1.0,,
+2024,Emilia Romagna Grand Prix,ferrari,Carlos Sainz,30.508,1.0,,
+2024,Emilia Romagna Grand Prix,ferrari,Charles Leclerc,30.149,1.0,,
+2024,Emilia Romagna Grand Prix,haas,Kevin Magnussen,31.302,1.0,,
+2024,Emilia Romagna Grand Prix,haas,Nico Hülkenberg,29.749,1.0,,
+2024,Emilia Romagna Grand Prix,mclaren,Lando Norris,29.956,1.0,,
+2024,Emilia Romagna Grand Prix,mclaren,Oscar Piastri,29.77,1.0,,
+2024,Emilia Romagna Grand Prix,mercedes,George Russell,29.634500000000003,2.0,,
+2024,Emilia Romagna Grand Prix,mercedes,Lewis Hamilton,29.547,1.0,,
+2024,Emilia Romagna Grand Prix,rb,Daniel Ricciardo,30.068,1.0,,
+2024,Emilia Romagna Grand Prix,rb,Yuki Tsunoda,29.628,1.0,,
+2024,Emilia Romagna Grand Prix,red_bull,Max Verstappen,30.416,1.0,,
+2024,Emilia Romagna Grand Prix,red_bull,Sergio Pérez,29.669,1.0,,
+2024,Emilia Romagna Grand Prix,sauber,Guanyu Zhou,30.244,1.0,,
+2024,Emilia Romagna Grand Prix,sauber,Valtteri Bottas,30.24,1.0,,
+2024,Emilia Romagna Grand Prix,williams,Alexander Albon,33.19325,4.0,,
+2024,Emilia Romagna Grand Prix,williams,Logan Sargeant,31.085,1.0,,
+2024,Hungarian Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Hungarian Grand Prix,Alpine,Pierre Gasly,,,True,Retired
+2024,Hungarian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Hungarian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Hungarian Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Hungarian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Hungarian Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Hungarian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Hungarian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Hungarian Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Hungarian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Hungarian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Hungarian Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Hungarian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Hungarian Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Hungarian Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Hungarian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Hungarian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Hungarian Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Hungarian Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Hungarian Grand Prix,alpine,Esteban Ocon,21.636499999999998,2.0,,
+2024,Hungarian Grand Prix,alpine,Pierre Gasly,21.405,1.0,,
+2024,Hungarian Grand Prix,aston_martin,Fernando Alonso,22.171,2.0,,
+2024,Hungarian Grand Prix,aston_martin,Lance Stroll,23.237,1.0,,
+2024,Hungarian Grand Prix,ferrari,Carlos Sainz,21.655,1.0,,
+2024,Hungarian Grand Prix,ferrari,Charles Leclerc,21.8085,2.0,,
+2024,Hungarian Grand Prix,haas,Kevin Magnussen,22.201,2.0,,
+2024,Hungarian Grand Prix,haas,Nico Hülkenberg,22.3795,2.0,,
+2024,Hungarian Grand Prix,mclaren,Lando Norris,21.861,1.0,,
+2024,Hungarian Grand Prix,mclaren,Oscar Piastri,21.641,1.0,,
+2024,Hungarian Grand Prix,mercedes,George Russell,21.369,1.0,,
+2024,Hungarian Grand Prix,mercedes,Lewis Hamilton,21.608,2.0,,
+2024,Hungarian Grand Prix,rb,Daniel Ricciardo,21.231,2.0,,
+2024,Hungarian Grand Prix,rb,Yuki Tsunoda,21.467,1.0,,
+2024,Hungarian Grand Prix,red_bull,Max Verstappen,22.101,1.0,,
+2024,Hungarian Grand Prix,red_bull,Sergio Pérez,21.395,1.0,,
+2024,Hungarian Grand Prix,sauber,Guanyu Zhou,22.088,2.0,,
+2024,Hungarian Grand Prix,sauber,Valtteri Bottas,22.146,1.0,,
+2024,Hungarian Grand Prix,williams,Alexander Albon,22.750500000000002,2.0,,
+2024,Hungarian Grand Prix,williams,Logan Sargeant,21.5775,2.0,,
+2024,Italian Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Italian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Italian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Italian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Italian Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Italian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Italian Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Italian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Italian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Italian Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Italian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Italian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Italian Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Italian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Italian Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Italian Grand Prix,RB,Yuki Tsunoda,,,True,Retired
+2024,Italian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Italian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Italian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Italian Grand Prix,Williams,Franco Colapinto,,,False,Finished
+2024,Italian Grand Prix,alpine,Esteban Ocon,24.146,1.0,,
+2024,Italian Grand Prix,alpine,Pierre Gasly,24.269,2.0,,
+2024,Italian Grand Prix,aston_martin,Fernando Alonso,24.683500000000002,2.0,,
+2024,Italian Grand Prix,aston_martin,Lance Stroll,24.819333333333333,3.0,,
+2024,Italian Grand Prix,ferrari,Carlos Sainz,24.313,1.0,,
+2024,Italian Grand Prix,ferrari,Charles Leclerc,24.551,1.0,,
+2024,Italian Grand Prix,haas,Kevin Magnussen,25.672,1.0,,
+2024,Italian Grand Prix,haas,Nico Hülkenberg,37.7255,2.0,,
+2024,Italian Grand Prix,mclaren,Lando Norris,24.5195,2.0,,
+2024,Italian Grand Prix,mclaren,Oscar Piastri,24.2315,2.0,,
+2024,Italian Grand Prix,mercedes,George Russell,29.496499999999997,2.0,,
+2024,Italian Grand Prix,mercedes,Lewis Hamilton,24.312,2.0,,
+2024,Italian Grand Prix,rb,Daniel Ricciardo,30.317,1.0,,
+2024,Italian Grand Prix,red_bull,Max Verstappen,26.174,2.0,,
+2024,Italian Grand Prix,red_bull,Sergio Pérez,24.379,2.0,,
+2024,Italian Grand Prix,sauber,Guanyu Zhou,27.138,1.0,,
+2024,Italian Grand Prix,sauber,Valtteri Bottas,24.41,1.0,,
+2024,Italian Grand Prix,williams,Alexander Albon,24.801,1.0,,
+2024,Italian Grand Prix,williams,Franco Colapinto,25.147,1.0,,
+2024,Japanese Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Japanese Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Japanese Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Japanese Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Japanese Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Japanese Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Japanese Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Japanese Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Japanese Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Retired
+2024,Japanese Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Japanese Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Japanese Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Japanese Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Japanese Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Japanese Grand Prix,RB,Daniel Ricciardo,,,True,Retired
+2024,Japanese Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Japanese Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Japanese Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Japanese Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Japanese Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Japanese Grand Prix,alpine,Esteban Ocon,1586.095,1.0,,
+2024,Japanese Grand Prix,alpine,Pierre Gasly,1586.793,1.0,,
+2024,Japanese Grand Prix,aston_martin,Fernando Alonso,801.961,2.0,,
+2024,Japanese Grand Prix,aston_martin,Lance Stroll,804.6345,2.0,,
+2024,Japanese Grand Prix,ferrari,Carlos Sainz,801.6165,2.0,,
+2024,Japanese Grand Prix,ferrari,Charles Leclerc,1583.333,1.0,,
+2024,Japanese Grand Prix,haas,Kevin Magnussen,1584.63,1.0,,
+2024,Japanese Grand Prix,haas,Nico Hülkenberg,802.254,2.0,,
+2024,Japanese Grand Prix,mclaren,Lando Norris,801.5825,2.0,,
+2024,Japanese Grand Prix,mclaren,Oscar Piastri,801.812,2.0,,
+2024,Japanese Grand Prix,mercedes,George Russell,1581.238,1.0,,
+2024,Japanese Grand Prix,mercedes,Lewis Hamilton,1580.696,1.0,,
+2024,Japanese Grand Prix,rb,Yuki Tsunoda,803.9555,2.0,,
+2024,Japanese Grand Prix,red_bull,Max Verstappen,799.39,2.0,,
+2024,Japanese Grand Prix,red_bull,Sergio Pérez,800.3255,2.0,,
+2024,Japanese Grand Prix,sauber,Guanyu Zhou,544.4916666666667,3.0,,
+2024,Japanese Grand Prix,sauber,Valtteri Bottas,803.683,2.0,,
+2024,Japanese Grand Prix,williams,Logan Sargeant,1585.267,1.0,,
+2024,Las Vegas Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Las Vegas Grand Prix,Alpine,Pierre Gasly,,,True,Retired
+2024,Las Vegas Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Las Vegas Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Las Vegas Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Las Vegas Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Las Vegas Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Las Vegas Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Las Vegas Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,Las Vegas Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Las Vegas Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Las Vegas Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Las Vegas Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Las Vegas Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Las Vegas Grand Prix,RB,Liam Lawson,,,False,Finished
+2024,Las Vegas Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Las Vegas Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Las Vegas Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Las Vegas Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Las Vegas Grand Prix,Williams,Franco Colapinto,,,False,Finished
+2024,Las Vegas Grand Prix,alpine,Esteban Ocon,18.466,2.0,,
+2024,Las Vegas Grand Prix,alpine,Pierre Gasly,22.179,1.0,,
+2024,Las Vegas Grand Prix,aston_martin,Fernando Alonso,21.407,2.0,,
+2024,Las Vegas Grand Prix,aston_martin,Lance Stroll,28.2255,2.0,,
+2024,Las Vegas Grand Prix,ferrari,Carlos Sainz,20.9635,2.0,,
+2024,Las Vegas Grand Prix,ferrari,Charles Leclerc,21.329,1.0,,
+2024,Las Vegas Grand Prix,haas,Kevin Magnussen,21.963,1.0,,
+2024,Las Vegas Grand Prix,haas,Nico Hülkenberg,21.511,1.0,,
+2024,Las Vegas Grand Prix,mclaren,Lando Norris,20.930999999999997,2.0,,
+2024,Las Vegas Grand Prix,mclaren,Oscar Piastri,24.407,2.0,,
+2024,Las Vegas Grand Prix,mercedes,George Russell,21.072,1.0,,
+2024,Las Vegas Grand Prix,mercedes,Lewis Hamilton,21.211,2.0,,
+2024,Las Vegas Grand Prix,rb,Liam Lawson,21.049,1.0,,
+2024,Las Vegas Grand Prix,rb,Yuki Tsunoda,21.188,2.0,,
+2024,Las Vegas Grand Prix,red_bull,Max Verstappen,21.4755,2.0,,
+2024,Las Vegas Grand Prix,red_bull,Sergio Pérez,21.294,1.0,,
+2024,Las Vegas Grand Prix,sauber,Guanyu Zhou,22.96,1.0,,
+2024,Las Vegas Grand Prix,sauber,Valtteri Bottas,21.623,1.0,,
+2024,Las Vegas Grand Prix,williams,Alexander Albon,22.012,1.0,,
+2024,Las Vegas Grand Prix,williams,Franco Colapinto,21.195500000000003,2.0,,
+2024,Mexico City Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Mexico City Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Mexico City Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2024,Mexico City Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Mexico City Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Mexico City Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Mexico City Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Mexico City Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Mexico City Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Mexico City Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Mexico City Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Mexico City Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Mexico City Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Mexico City Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Mexico City Grand Prix,RB,Liam Lawson,,,True,Lapped
+2024,Mexico City Grand Prix,RB,Yuki Tsunoda,,,True,Retired
+2024,Mexico City Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Mexico City Grand Prix,Red Bull Racing,Sergio Perez,,,True,Lapped
+2024,Mexico City Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Mexico City Grand Prix,Williams,Franco Colapinto,,,True,Lapped
+2024,Mexico City Grand Prix,alpine,Esteban Ocon,23.245,1.0,,
+2024,Mexico City Grand Prix,alpine,Pierre Gasly,23.204,1.0,,
+2024,Mexico City Grand Prix,aston_martin,Lance Stroll,22.592,1.0,,
+2024,Mexico City Grand Prix,ferrari,Carlos Sainz,22.249,1.0,,
+2024,Mexico City Grand Prix,ferrari,Charles Leclerc,22.775,2.0,,
+2024,Mexico City Grand Prix,haas,Kevin Magnussen,23.332,1.0,,
+2024,Mexico City Grand Prix,haas,Nico Hülkenberg,23.077,1.0,,
+2024,Mexico City Grand Prix,mclaren,Lando Norris,22.111,1.0,,
+2024,Mexico City Grand Prix,mclaren,Oscar Piastri,21.825,1.0,,
+2024,Mexico City Grand Prix,mercedes,George Russell,22.462,1.0,,
+2024,Mexico City Grand Prix,mercedes,Lewis Hamilton,22.538,1.0,,
+2024,Mexico City Grand Prix,rb,Liam Lawson,26.4425,2.0,,
+2024,Mexico City Grand Prix,red_bull,Max Verstappen,43.73,1.0,,
+2024,Mexico City Grand Prix,red_bull,Sergio Pérez,23.941333333333333,3.0,,
+2024,Mexico City Grand Prix,sauber,Guanyu Zhou,22.935,1.0,,
+2024,Mexico City Grand Prix,sauber,Valtteri Bottas,22.505,1.0,,
+2024,Mexico City Grand Prix,williams,Franco Colapinto,23.895,1.0,,
+2024,Miami Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Miami Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Miami Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Miami Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2024,Miami Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Miami Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Miami Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Miami Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Miami Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,Miami Grand Prix,Kick Sauber,Valtteri Bottas,,,False,Finished
+2024,Miami Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Miami Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Miami Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Miami Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Miami Grand Prix,RB,Daniel Ricciardo,,,False,Finished
+2024,Miami Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Miami Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Miami Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Miami Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Miami Grand Prix,Williams,Logan Sargeant,,,True,Retired
+2024,Miami Grand Prix,alpine,Esteban Ocon,22.663,1.0,,
+2024,Miami Grand Prix,alpine,Pierre Gasly,22.466,1.0,,
+2024,Miami Grand Prix,aston_martin,Fernando Alonso,22.374,1.0,,
+2024,Miami Grand Prix,aston_martin,Lance Stroll,22.8345,2.0,,
+2024,Miami Grand Prix,ferrari,Carlos Sainz,22.805,1.0,,
+2024,Miami Grand Prix,ferrari,Charles Leclerc,21.825,1.0,,
+2024,Miami Grand Prix,haas,Kevin Magnussen,27.908,3.0,,
+2024,Miami Grand Prix,haas,Nico Hülkenberg,22.771,2.0,,
+2024,Miami Grand Prix,mclaren,Lando Norris,22.041,1.0,,
+2024,Miami Grand Prix,mclaren,Oscar Piastri,26.3125,2.0,,
+2024,Miami Grand Prix,mercedes,George Russell,22.8,1.0,,
+2024,Miami Grand Prix,mercedes,Lewis Hamilton,22.107,1.0,,
+2024,Miami Grand Prix,rb,Daniel Ricciardo,22.54,1.0,,
+2024,Miami Grand Prix,rb,Yuki Tsunoda,22.153,1.0,,
+2024,Miami Grand Prix,red_bull,Max Verstappen,22.187,1.0,,
+2024,Miami Grand Prix,red_bull,Sergio Pérez,22.0455,2.0,,
+2024,Miami Grand Prix,sauber,Guanyu Zhou,23.017,1.0,,
+2024,Miami Grand Prix,sauber,Valtteri Bottas,23.247500000000002,2.0,,
+2024,Miami Grand Prix,williams,Alexander Albon,22.697499999999998,2.0,,
+2024,Miami Grand Prix,williams,Logan Sargeant,22.611,1.0,,
+2024,Monaco Grand Prix,Alpine,Esteban Ocon,,,True,Retired
+2024,Monaco Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Monaco Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Monaco Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Monaco Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Monaco Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Monaco Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Retired
+2024,Monaco Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Retired
+2024,Monaco Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Monaco Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Monaco Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Monaco Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Monaco Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Monaco Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Monaco Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Monaco Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Monaco Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Monaco Grand Prix,Red Bull Racing,Sergio Perez,,,True,Retired
+2024,Monaco Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Monaco Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Monaco Grand Prix,alpine,Pierre Gasly,2381.893,1.0,,
+2024,Monaco Grand Prix,aston_martin,Fernando Alonso,2389.467,1.0,,
+2024,Monaco Grand Prix,aston_martin,Lance Stroll,811.977,3.0,,
+2024,Monaco Grand Prix,ferrari,Carlos Sainz,2327.072,1.0,,
+2024,Monaco Grand Prix,ferrari,Charles Leclerc,2358.026,1.0,,
+2024,Monaco Grand Prix,mclaren,Lando Norris,2365.538,1.0,,
+2024,Monaco Grand Prix,mclaren,Oscar Piastri,2357.645,1.0,,
+2024,Monaco Grand Prix,mercedes,George Russell,2369.363,1.0,,
+2024,Monaco Grand Prix,mercedes,Lewis Hamilton,1199.8005,2.0,,
+2024,Monaco Grand Prix,rb,Daniel Ricciardo,2385.823,1.0,,
+2024,Monaco Grand Prix,rb,Yuki Tsunoda,2377.564,1.0,,
+2024,Monaco Grand Prix,red_bull,Max Verstappen,1198.2415,2.0,,
+2024,Monaco Grand Prix,sauber,Guanyu Zhou,1205.3905000000002,2.0,,
+2024,Monaco Grand Prix,sauber,Valtteri Bottas,1209.146,2.0,,
+2024,Monaco Grand Prix,williams,Alexander Albon,2381.39,1.0,,
+2024,Monaco Grand Prix,williams,Logan Sargeant,1207.992,2.0,,
+2024,Qatar Grand Prix,Alpine,Esteban Ocon,,,True,Retired
+2024,Qatar Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Qatar Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Qatar Grand Prix,Aston Martin,Lance Stroll,,,True,Retired
+2024,Qatar Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Qatar Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Qatar Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Qatar Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Retired
+2024,Qatar Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,Qatar Grand Prix,Kick Sauber,Valtteri Bottas,,,False,Finished
+2024,Qatar Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Qatar Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Qatar Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Qatar Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Qatar Grand Prix,RB,Liam Lawson,,,False,Finished
+2024,Qatar Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,Qatar Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Qatar Grand Prix,Red Bull Racing,Sergio Perez,,,True,Retired
+2024,Qatar Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Qatar Grand Prix,Williams,Franco Colapinto,,,True,Retired
+2024,Qatar Grand Prix,alpine,Pierre Gasly,25.7545,2.0,,
+2024,Qatar Grand Prix,aston_martin,Fernando Alonso,28.628,1.0,,
+2024,Qatar Grand Prix,aston_martin,Lance Stroll,35.7285,2.0,,
+2024,Qatar Grand Prix,ferrari,Carlos Sainz,36.143,1.0,,
+2024,Qatar Grand Prix,ferrari,Charles Leclerc,27.067500000000003,2.0,,
+2024,Qatar Grand Prix,haas,Kevin Magnussen,28.543,1.0,,
+2024,Qatar Grand Prix,haas,Nico Hülkenberg,30.65,2.0,,
+2024,Qatar Grand Prix,mclaren,Lando Norris,26.808,2.0,,
+2024,Qatar Grand Prix,mclaren,Oscar Piastri,25.3425,2.0,,
+2024,Qatar Grand Prix,mercedes,George Russell,27.647333333333336,3.0,,
+2024,Qatar Grand Prix,mercedes,Lewis Hamilton,30.6635,2.0,,
+2024,Qatar Grand Prix,rb,Liam Lawson,45.049,1.0,,
+2024,Qatar Grand Prix,rb,Yuki Tsunoda,29.024,1.0,,
+2024,Qatar Grand Prix,red_bull,Max Verstappen,26.0935,2.0,,
+2024,Qatar Grand Prix,red_bull,Sergio Pérez,25.3965,2.0,,
+2024,Qatar Grand Prix,sauber,Guanyu Zhou,29.085,1.0,,
+2024,Qatar Grand Prix,sauber,Valtteri Bottas,29.000999999999998,2.0,,
+2024,Qatar Grand Prix,williams,Alexander Albon,29.179,1.0,,
+2024,Saudi Arabian Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Saudi Arabian Grand Prix,Alpine,Pierre Gasly,,,True,Retired
+2024,Saudi Arabian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,Saudi Arabian Grand Prix,Aston Martin,Lance Stroll,,,True,Retired
+2024,Saudi Arabian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Saudi Arabian Grand Prix,Ferrari,Oliver Bearman,,,False,Finished
+2024,Saudi Arabian Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,Saudi Arabian Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Saudi Arabian Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Saudi Arabian Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Saudi Arabian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Saudi Arabian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Saudi Arabian Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Saudi Arabian Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Saudi Arabian Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Saudi Arabian Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Saudi Arabian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Saudi Arabian Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Saudi Arabian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2024,Saudi Arabian Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Saudi Arabian Grand Prix,alpine,Esteban Ocon,22.502,1.0,,
+2024,Saudi Arabian Grand Prix,aston_martin,Fernando Alonso,22.129,1.0,,
+2024,Saudi Arabian Grand Prix,ferrari,Charles Leclerc,23.419,1.0,,
+2024,Saudi Arabian Grand Prix,ferrari,Oliver Bearman,22.457,1.0,,
+2024,Saudi Arabian Grand Prix,haas,Kevin Magnussen,21.46,1.0,,
+2024,Saudi Arabian Grand Prix,haas,Nico Hülkenberg,21.035,1.0,,
+2024,Saudi Arabian Grand Prix,mclaren,Lando Norris,22.211,1.0,,
+2024,Saudi Arabian Grand Prix,mclaren,Oscar Piastri,21.427,1.0,,
+2024,Saudi Arabian Grand Prix,mercedes,George Russell,21.013,1.0,,
+2024,Saudi Arabian Grand Prix,mercedes,Lewis Hamilton,20.17,1.0,,
+2024,Saudi Arabian Grand Prix,rb,Daniel Ricciardo,63.364,1.0,,
+2024,Saudi Arabian Grand Prix,rb,Yuki Tsunoda,21.694,1.0,,
+2024,Saudi Arabian Grand Prix,red_bull,Max Verstappen,20.607,1.0,,
+2024,Saudi Arabian Grand Prix,red_bull,Sergio Pérez,22.196,1.0,,
+2024,Saudi Arabian Grand Prix,sauber,Guanyu Zhou,46.381,1.0,,
+2024,Saudi Arabian Grand Prix,sauber,Valtteri Bottas,23.038,2.0,,
+2024,Saudi Arabian Grand Prix,williams,Alexander Albon,21.723,1.0,,
+2024,Saudi Arabian Grand Prix,williams,Logan Sargeant,23.645,1.0,,
+2024,Singapore Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,Singapore Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2024,Singapore Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Singapore Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Singapore Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Singapore Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Singapore Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Retired
+2024,Singapore Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Lapped
+2024,Singapore Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Singapore Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Singapore Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Singapore Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Singapore Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Singapore Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Singapore Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Singapore Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Singapore Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Singapore Grand Prix,Red Bull Racing,Sergio Perez,,,True,Lapped
+2024,Singapore Grand Prix,Williams,Alexander Albon,,,True,Retired
+2024,Singapore Grand Prix,Williams,Franco Colapinto,,,True,Lapped
+2024,Singapore Grand Prix,alpine,Esteban Ocon,29.601,1.0,,
+2024,Singapore Grand Prix,alpine,Pierre Gasly,31.509,1.0,,
+2024,Singapore Grand Prix,aston_martin,Fernando Alonso,29.251,1.0,,
+2024,Singapore Grand Prix,aston_martin,Lance Stroll,29.816,1.0,,
+2024,Singapore Grand Prix,ferrari,Carlos Sainz,29.385,1.0,,
+2024,Singapore Grand Prix,ferrari,Charles Leclerc,29.042,1.0,,
+2024,Singapore Grand Prix,haas,Kevin Magnussen,30.499000000000002,2.0,,
+2024,Singapore Grand Prix,haas,Nico Hülkenberg,29.808,1.0,,
+2024,Singapore Grand Prix,mclaren,Lando Norris,29.091,1.0,,
+2024,Singapore Grand Prix,mclaren,Oscar Piastri,29.152,1.0,,
+2024,Singapore Grand Prix,mercedes,George Russell,28.739,1.0,,
+2024,Singapore Grand Prix,mercedes,Lewis Hamilton,29.272,1.0,,
+2024,Singapore Grand Prix,rb,Daniel Ricciardo,29.67833333333333,3.0,,
+2024,Singapore Grand Prix,rb,Yuki Tsunoda,29.662,1.0,,
+2024,Singapore Grand Prix,red_bull,Max Verstappen,29.655,1.0,,
+2024,Singapore Grand Prix,red_bull,Sergio Pérez,28.99,1.0,,
+2024,Singapore Grand Prix,sauber,Guanyu Zhou,29.36,1.0,,
+2024,Singapore Grand Prix,sauber,Valtteri Bottas,30.423,1.0,,
+2024,Singapore Grand Prix,williams,Alexander Albon,29.126,1.0,,
+2024,Singapore Grand Prix,williams,Franco Colapinto,29.772,1.0,,
+2024,Spanish Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,Spanish Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,Spanish Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,Spanish Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,Spanish Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,Spanish Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,Spanish Grand Prix,Haas F1 Team,Kevin Magnussen,,,True,Lapped
+2024,Spanish Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,Spanish Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,Spanish Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,Spanish Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,Spanish Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,Spanish Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,Spanish Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,Spanish Grand Prix,RB,Daniel Ricciardo,,,True,Lapped
+2024,Spanish Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,Spanish Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,Spanish Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,Spanish Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,Spanish Grand Prix,Williams,Logan Sargeant,,,True,Lapped
+2024,Spanish Grand Prix,alpine,Esteban Ocon,21.877499999999998,2.0,,
+2024,Spanish Grand Prix,alpine,Pierre Gasly,23.892000000000003,2.0,,
+2024,Spanish Grand Prix,aston_martin,Fernando Alonso,21.957,1.0,,
+2024,Spanish Grand Prix,aston_martin,Lance Stroll,22.630499999999998,2.0,,
+2024,Spanish Grand Prix,ferrari,Carlos Sainz,22.2215,2.0,,
+2024,Spanish Grand Prix,ferrari,Charles Leclerc,22.26,1.0,,
+2024,Spanish Grand Prix,haas,Kevin Magnussen,26.1635,2.0,,
+2024,Spanish Grand Prix,haas,Nico Hülkenberg,22.722,1.0,,
+2024,Spanish Grand Prix,mclaren,Lando Norris,21.618,1.0,,
+2024,Spanish Grand Prix,mclaren,Oscar Piastri,22.224,1.0,,
+2024,Spanish Grand Prix,mercedes,George Russell,23.8615,2.0,,
+2024,Spanish Grand Prix,mercedes,Lewis Hamilton,21.84,1.0,,
+2024,Spanish Grand Prix,rb,Daniel Ricciardo,22.364,1.0,,
+2024,Spanish Grand Prix,rb,Yuki Tsunoda,22.073999999999998,2.0,,
+2024,Spanish Grand Prix,red_bull,Max Verstappen,21.544,1.0,,
+2024,Spanish Grand Prix,red_bull,Sergio Pérez,21.822499999999998,2.0,,
+2024,Spanish Grand Prix,sauber,Guanyu Zhou,22.523,1.0,,
+2024,Spanish Grand Prix,sauber,Valtteri Bottas,22.8535,2.0,,
+2024,Spanish Grand Prix,williams,Alexander Albon,23.248,1.0,,
+2024,Spanish Grand Prix,williams,Logan Sargeant,22.4535,2.0,,
+2024,São Paulo Grand Prix,Alpine,Esteban Ocon,,,False,Finished
+2024,São Paulo Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,São Paulo Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2024,São Paulo Grand Prix,Aston Martin,Lance Stroll,,,True,Did not start
+2024,São Paulo Grand Prix,Ferrari,Carlos Sainz,,,True,Retired
+2024,São Paulo Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,São Paulo Grand Prix,Haas F1 Team,Nico Hulkenberg,,,True,Disqualified
+2024,São Paulo Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2024,São Paulo Grand Prix,Kick Sauber,Guanyu Zhou,,,False,Finished
+2024,São Paulo Grand Prix,Kick Sauber,Valtteri Bottas,,,False,Finished
+2024,São Paulo Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,São Paulo Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,São Paulo Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,São Paulo Grand Prix,Mercedes,Lewis Hamilton,,,False,Finished
+2024,São Paulo Grand Prix,RB,Liam Lawson,,,False,Finished
+2024,São Paulo Grand Prix,RB,Yuki Tsunoda,,,False,Finished
+2024,São Paulo Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,São Paulo Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,São Paulo Grand Prix,Williams,Alexander Albon,,,True,Did not start
+2024,São Paulo Grand Prix,Williams,Franco Colapinto,,,True,Retired
+2024,São Paulo Grand Prix,alpine,Esteban Ocon,1408.695,1.0,,
+2024,São Paulo Grand Prix,alpine,Pierre Gasly,1407.586,1.0,,
+2024,São Paulo Grand Prix,aston_martin,Fernando Alonso,723.9895,2.0,,
+2024,São Paulo Grand Prix,ferrari,Carlos Sainz,25.92,1.0,,
+2024,São Paulo Grand Prix,ferrari,Charles Leclerc,722.4165,2.0,,
+2024,São Paulo Grand Prix,haas,Nico Hülkenberg,37.647666666666666,3.0,,
+2024,São Paulo Grand Prix,haas,Oliver Bearman,35.755,1.0,,
+2024,São Paulo Grand Prix,mclaren,Lando Norris,720.0635,2.0,,
+2024,São Paulo Grand Prix,mclaren,Oscar Piastri,723.16,2.0,,
+2024,São Paulo Grand Prix,mercedes,George Russell,720.768,2.0,,
+2024,São Paulo Grand Prix,mercedes,Lewis Hamilton,725.454,2.0,,
+2024,São Paulo Grand Prix,rb,Liam Lawson,725.4445,2.0,,
+2024,São Paulo Grand Prix,rb,Yuki Tsunoda,722.2305,2.0,,
+2024,São Paulo Grand Prix,red_bull,Max Verstappen,1409.303,1.0,,
+2024,São Paulo Grand Prix,red_bull,Sergio Pérez,26.692,1.0,,
+2024,São Paulo Grand Prix,sauber,Guanyu Zhou,445.15633333333335,3.0,,
+2024,São Paulo Grand Prix,williams,Franco Colapinto,25.262999999999998,2.0,,
+2024,United States Grand Prix,Alpine,Esteban Ocon,,,True,Lapped
+2024,United States Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2024,United States Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2024,United States Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2024,United States Grand Prix,Ferrari,Carlos Sainz,,,False,Finished
+2024,United States Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2024,United States Grand Prix,Haas F1 Team,Kevin Magnussen,,,False,Finished
+2024,United States Grand Prix,Haas F1 Team,Nico Hulkenberg,,,False,Finished
+2024,United States Grand Prix,Kick Sauber,Guanyu Zhou,,,True,Lapped
+2024,United States Grand Prix,Kick Sauber,Valtteri Bottas,,,True,Lapped
+2024,United States Grand Prix,McLaren,Lando Norris,,,False,Finished
+2024,United States Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2024,United States Grand Prix,Mercedes,George Russell,,,False,Finished
+2024,United States Grand Prix,Mercedes,Lewis Hamilton,,,True,Retired
+2024,United States Grand Prix,RB,Liam Lawson,,,False,Finished
+2024,United States Grand Prix,RB,Yuki Tsunoda,,,True,Lapped
+2024,United States Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2024,United States Grand Prix,Red Bull Racing,Sergio Perez,,,False,Finished
+2024,United States Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2024,United States Grand Prix,Williams,Franco Colapinto,,,False,Finished
+2024,United States Grand Prix,alpine,Esteban Ocon,25.1655,2.0,,
+2024,United States Grand Prix,alpine,Pierre Gasly,28.228,1.0,,
+2024,United States Grand Prix,aston_martin,Fernando Alonso,24.247,1.0,,
+2024,United States Grand Prix,aston_martin,Lance Stroll,26.399,1.0,,
+2024,United States Grand Prix,ferrari,Carlos Sainz,23.963,1.0,,
+2024,United States Grand Prix,ferrari,Charles Leclerc,23.817,1.0,,
+2024,United States Grand Prix,haas,Kevin Magnussen,24.0265,2.0,,
+2024,United States Grand Prix,haas,Nico Hülkenberg,24.5,1.0,,
+2024,United States Grand Prix,mclaren,Lando Norris,23.731,1.0,,
+2024,United States Grand Prix,mclaren,Oscar Piastri,24.107,1.0,,
+2024,United States Grand Prix,mercedes,George Russell,29.327,1.0,,
+2024,United States Grand Prix,rb,Liam Lawson,23.839,1.0,,
+2024,United States Grand Prix,rb,Yuki Tsunoda,24.193,1.0,,
+2024,United States Grand Prix,red_bull,Max Verstappen,24.228,1.0,,
+2024,United States Grand Prix,red_bull,Sergio Pérez,23.58,1.0,,
+2024,United States Grand Prix,sauber,Guanyu Zhou,24.6615,2.0,,
+2024,United States Grand Prix,sauber,Valtteri Bottas,24.439,1.0,,
+2024,United States Grand Prix,williams,Alexander Albon,29.686999999999998,2.0,,
+2024,United States Grand Prix,williams,Franco Colapinto,23.971,1.0,,
+2025,Abu Dhabi Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Abu Dhabi Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Abu Dhabi Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Abu Dhabi Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Abu Dhabi Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Abu Dhabi Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Abu Dhabi Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Abu Dhabi Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Abu Dhabi Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Abu Dhabi Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Abu Dhabi Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Abu Dhabi Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Abu Dhabi Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Abu Dhabi Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Abu Dhabi Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Abu Dhabi Grand Prix,Racing Bulls,Liam Lawson,,,True,Lapped
+2025,Abu Dhabi Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Abu Dhabi Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Abu Dhabi Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Abu Dhabi Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Abu Dhabi Grand Prix,alpine,Franco Colapinto,22.454,2.0,,
+2025,Abu Dhabi Grand Prix,alpine,Pierre Gasly,22.4095,2.0,,
+2025,Abu Dhabi Grand Prix,aston_martin,Fernando Alonso,23.267,1.0,,
+2025,Abu Dhabi Grand Prix,aston_martin,Lance Stroll,21.535,1.0,,
+2025,Abu Dhabi Grand Prix,ferrari,Charles Leclerc,21.297,2.0,,
+2025,Abu Dhabi Grand Prix,ferrari,Lewis Hamilton,21.509,2.0,,
+2025,Abu Dhabi Grand Prix,haas,Esteban Ocon,22.254,1.0,,
+2025,Abu Dhabi Grand Prix,haas,Oliver Bearman,22.263,1.0,,
+2025,Abu Dhabi Grand Prix,mclaren,Lando Norris,21.365000000000002,2.0,,
+2025,Abu Dhabi Grand Prix,mclaren,Oscar Piastri,21.565,1.0,,
+2025,Abu Dhabi Grand Prix,mercedes,Andrea Kimi Antonelli,22.155,1.0,,
+2025,Abu Dhabi Grand Prix,mercedes,George Russell,21.979,1.0,,
+2025,Abu Dhabi Grand Prix,rb,Isack Hadjar,21.932,1.0,,
+2025,Abu Dhabi Grand Prix,rb,Liam Lawson,28.369,1.0,,
+2025,Abu Dhabi Grand Prix,red_bull,Max Verstappen,21.703,1.0,,
+2025,Abu Dhabi Grand Prix,red_bull,Yuki Tsunoda,27.041,1.0,,
+2025,Abu Dhabi Grand Prix,sauber,Gabriel Bortoleto,22.121,1.0,,
+2025,Abu Dhabi Grand Prix,sauber,Nico Hülkenberg,21.5435,2.0,,
+2025,Abu Dhabi Grand Prix,williams,Alexander Albon,21.523,2.0,,
+2025,Abu Dhabi Grand Prix,williams,Carlos Sainz,21.799,1.0,,
+2025,Australian Grand Prix,Alpine,Jack Doohan,,,True,Retired
+2025,Australian Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Australian Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2025,Australian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Australian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Australian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Australian Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Australian Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Australian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Retired
+2025,Australian Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Australian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Australian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Australian Grand Prix,Mercedes,Andrea Kimi Antonelli,,,False,Finished
+2025,Australian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Australian Grand Prix,Racing Bulls,Isack Hadjar,,,True,Retired
+2025,Australian Grand Prix,Racing Bulls,Yuki Tsunoda,,,False,Finished
+2025,Australian Grand Prix,Red Bull Racing,Liam Lawson,,,True,Retired
+2025,Australian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Australian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Australian Grand Prix,Williams,Carlos Sainz,,,True,Retired
+2025,Australian Grand Prix,alpine,Pierre Gasly,15.424,2.0,,
+2025,Australian Grand Prix,aston_martin,Fernando Alonso,15.888,2.0,,
+2025,Australian Grand Prix,aston_martin,Lance Stroll,15.7595,2.0,,
+2025,Australian Grand Prix,ferrari,Charles Leclerc,14.4015,2.0,,
+2025,Australian Grand Prix,ferrari,Lewis Hamilton,15.596499999999999,2.0,,
+2025,Australian Grand Prix,haas,Esteban Ocon,14.395,1.0,,
+2025,Australian Grand Prix,haas,Oliver Bearman,14.605,1.0,,
+2025,Australian Grand Prix,mclaren,Lando Norris,13.125499999999999,2.0,,
+2025,Australian Grand Prix,mclaren,Oscar Piastri,13.457999999999998,2.0,,
+2025,Australian Grand Prix,mercedes,Andrea Kimi Antonelli,15.515999999999998,2.0,,
+2025,Australian Grand Prix,mercedes,George Russell,13.888,2.0,,
+2025,Australian Grand Prix,rb,Yuki Tsunoda,15.09,2.0,,
+2025,Australian Grand Prix,red_bull,Liam Lawson,14.79,1.0,,
+2025,Australian Grand Prix,red_bull,Max Verstappen,13.578,2.0,,
+2025,Australian Grand Prix,sauber,Gabriel Bortoleto,14.432,1.0,,
+2025,Australian Grand Prix,sauber,Nico Hülkenberg,15.5505,2.0,,
+2025,Australian Grand Prix,williams,Alexander Albon,16.0065,2.0,,
+2025,Austrian Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Austrian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Austrian Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2025,Austrian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Austrian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Austrian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Austrian Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Austrian Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Lapped
+2025,Austrian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Austrian Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Austrian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Austrian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Austrian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Austrian Grand Prix,Mercedes,Kimi Antonelli,,,True,Retired
+2025,Austrian Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Austrian Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Austrian Grand Prix,Red Bull Racing,Max Verstappen,,,True,Retired
+2025,Austrian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,Austrian Grand Prix,Williams,Alexander Albon,,,True,Retired
+2025,Austrian Grand Prix,Williams,Carlos Sainz,,,True,Did not start
+2025,Austrian Grand Prix,alpine,Franco Colapinto,22.0625,2.0,,
+2025,Austrian Grand Prix,alpine,Pierre Gasly,22.032,2.0,,
+2025,Austrian Grand Prix,aston_martin,Fernando Alonso,21.865,1.0,,
+2025,Austrian Grand Prix,aston_martin,Lance Stroll,22.907,1.0,,
+2025,Austrian Grand Prix,ferrari,Charles Leclerc,21.422,2.0,,
+2025,Austrian Grand Prix,ferrari,Lewis Hamilton,21.2225,2.0,,
+2025,Austrian Grand Prix,haas,Esteban Ocon,22.735999999999997,2.0,,
+2025,Austrian Grand Prix,haas,Oliver Bearman,21.8405,2.0,,
+2025,Austrian Grand Prix,mclaren,Lando Norris,21.779,2.0,,
+2025,Austrian Grand Prix,mclaren,Oscar Piastri,21.816000000000003,2.0,,
+2025,Austrian Grand Prix,mercedes,George Russell,21.599,2.0,,
+2025,Austrian Grand Prix,rb,Isack Hadjar,21.488500000000002,2.0,,
+2025,Austrian Grand Prix,rb,Liam Lawson,21.434,1.0,,
+2025,Austrian Grand Prix,red_bull,Yuki Tsunoda,21.492,2.0,,
+2025,Austrian Grand Prix,sauber,Gabriel Bortoleto,21.481,2.0,,
+2025,Austrian Grand Prix,sauber,Nico Hülkenberg,21.140500000000003,2.0,,
+2025,Austrian Grand Prix,williams,Alexander Albon,21.21,1.0,,
+2025,Azerbaijan Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Azerbaijan Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Azerbaijan Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Azerbaijan Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Azerbaijan Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Azerbaijan Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Azerbaijan Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Azerbaijan Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Azerbaijan Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Azerbaijan Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Azerbaijan Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Azerbaijan Grand Prix,McLaren,Oscar Piastri,,,True,Retired
+2025,Azerbaijan Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Azerbaijan Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Azerbaijan Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Azerbaijan Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Azerbaijan Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Azerbaijan Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Azerbaijan Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Azerbaijan Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Azerbaijan Grand Prix,alpine,Franco Colapinto,21.088,1.0,,
+2025,Azerbaijan Grand Prix,alpine,Pierre Gasly,21.5,1.0,,
+2025,Azerbaijan Grand Prix,aston_martin,Fernando Alonso,25.768,1.0,,
+2025,Azerbaijan Grand Prix,aston_martin,Lance Stroll,21.82,1.0,,
+2025,Azerbaijan Grand Prix,ferrari,Charles Leclerc,20.542,1.0,,
+2025,Azerbaijan Grand Prix,ferrari,Lewis Hamilton,20.062,1.0,,
+2025,Azerbaijan Grand Prix,haas,Esteban Ocon,20.725,2.0,,
+2025,Azerbaijan Grand Prix,haas,Oliver Bearman,21.194,1.0,,
+2025,Azerbaijan Grand Prix,mclaren,Lando Norris,21.975,1.0,,
+2025,Azerbaijan Grand Prix,mercedes,Andrea Kimi Antonelli,20.669,1.0,,
+2025,Azerbaijan Grand Prix,mercedes,George Russell,19.809,1.0,,
+2025,Azerbaijan Grand Prix,rb,Isack Hadjar,20.294,1.0,,
+2025,Azerbaijan Grand Prix,rb,Liam Lawson,20.283,1.0,,
+2025,Azerbaijan Grand Prix,red_bull,Max Verstappen,20.221,1.0,,
+2025,Azerbaijan Grand Prix,red_bull,Yuki Tsunoda,20.323,1.0,,
+2025,Azerbaijan Grand Prix,sauber,Gabriel Bortoleto,20.845,1.0,,
+2025,Azerbaijan Grand Prix,sauber,Nico Hülkenberg,19.97,1.0,,
+2025,Azerbaijan Grand Prix,williams,Alexander Albon,20.6235,2.0,,
+2025,Azerbaijan Grand Prix,williams,Carlos Sainz,20.508,1.0,,
+2025,Bahrain Grand Prix,Alpine,Jack Doohan,,,False,Finished
+2025,Bahrain Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Bahrain Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Bahrain Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Bahrain Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Bahrain Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Bahrain Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Bahrain Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Bahrain Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Bahrain Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Disqualified
+2025,Bahrain Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Bahrain Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Bahrain Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Bahrain Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Bahrain Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Bahrain Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Bahrain Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Bahrain Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Bahrain Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Bahrain Grand Prix,Williams,Carlos Sainz,,,True,Retired
+2025,Bahrain Grand Prix,alpine,Jack Doohan,24.942,2.0,,
+2025,Bahrain Grand Prix,alpine,Pierre Gasly,24.9955,2.0,,
+2025,Bahrain Grand Prix,aston_martin,Fernando Alonso,24.826,1.0,,
+2025,Bahrain Grand Prix,aston_martin,Lance Stroll,24.611,1.0,,
+2025,Bahrain Grand Prix,ferrari,Charles Leclerc,24.5215,2.0,,
+2025,Bahrain Grand Prix,ferrari,Lewis Hamilton,24.34,1.0,,
+2025,Bahrain Grand Prix,haas,Esteban Ocon,24.854,2.0,,
+2025,Bahrain Grand Prix,haas,Oliver Bearman,24.562,1.0,,
+2025,Bahrain Grand Prix,mclaren,Lando Norris,29.822,1.0,,
+2025,Bahrain Grand Prix,mclaren,Oscar Piastri,24.698999999999998,2.0,,
+2025,Bahrain Grand Prix,mercedes,Andrea Kimi Antonelli,24.6565,2.0,,
+2025,Bahrain Grand Prix,mercedes,George Russell,24.072000000000003,2.0,,
+2025,Bahrain Grand Prix,rb,Isack Hadjar,24.9525,2.0,,
+2025,Bahrain Grand Prix,rb,Liam Lawson,25.242,1.0,,
+2025,Bahrain Grand Prix,red_bull,Max Verstappen,27.2925,2.0,,
+2025,Bahrain Grand Prix,red_bull,Yuki Tsunoda,26.493,1.0,,
+2025,Bahrain Grand Prix,sauber,Gabriel Bortoleto,24.143,1.0,,
+2025,Bahrain Grand Prix,sauber,Nico Hülkenberg,24.259999999999998,2.0,,
+2025,Bahrain Grand Prix,williams,Alexander Albon,25.394,1.0,,
+2025,Bahrain Grand Prix,williams,Carlos Sainz,24.6,1.0,,
+2025,Belgian Grand Prix,Alpine,Franco Colapinto,,,False,Finished
+2025,Belgian Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Belgian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Belgian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Belgian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Belgian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Belgian Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Belgian Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Belgian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Belgian Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Belgian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Belgian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Belgian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Belgian Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Belgian Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Belgian Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Belgian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Belgian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Belgian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Belgian Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Belgian Grand Prix,alpine,Franco Colapinto,23.557000000000002,2.0,,
+2025,Belgian Grand Prix,alpine,Pierre Gasly,26.825,1.0,,
+2025,Belgian Grand Prix,aston_martin,Fernando Alonso,23.548000000000002,2.0,,
+2025,Belgian Grand Prix,aston_martin,Lance Stroll,23.787,1.0,,
+2025,Belgian Grand Prix,ferrari,Charles Leclerc,23.806,1.0,,
+2025,Belgian Grand Prix,ferrari,Lewis Hamilton,23.284,1.0,,
+2025,Belgian Grand Prix,haas,Esteban Ocon,23.802,1.0,,
+2025,Belgian Grand Prix,haas,Oliver Bearman,24.13,1.0,,
+2025,Belgian Grand Prix,mclaren,Lando Norris,24.376,1.0,,
+2025,Belgian Grand Prix,mclaren,Oscar Piastri,23.844,1.0,,
+2025,Belgian Grand Prix,mercedes,Andrea Kimi Antonelli,23.334000000000003,2.0,,
+2025,Belgian Grand Prix,mercedes,George Russell,23.635,1.0,,
+2025,Belgian Grand Prix,rb,Isack Hadjar,23.478,2.0,,
+2025,Belgian Grand Prix,rb,Liam Lawson,23.269,1.0,,
+2025,Belgian Grand Prix,red_bull,Max Verstappen,25.913,1.0,,
+2025,Belgian Grand Prix,red_bull,Yuki Tsunoda,23.33,1.0,,
+2025,Belgian Grand Prix,sauber,Gabriel Bortoleto,23.274,1.0,,
+2025,Belgian Grand Prix,sauber,Nico Hülkenberg,23.744500000000002,2.0,,
+2025,Belgian Grand Prix,williams,Alexander Albon,24.029,1.0,,
+2025,Belgian Grand Prix,williams,Carlos Sainz,25.649,2.0,,
+2025,British Grand Prix,Alpine,Franco Colapinto,,,True,Did not start
+2025,British Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,British Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,British Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,British Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,British Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,British Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,British Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,British Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Retired
+2025,British Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,British Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,British Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,British Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,British Grand Prix,Mercedes,Kimi Antonelli,,,True,Retired
+2025,British Grand Prix,Racing Bulls,Isack Hadjar,,,True,Retired
+2025,British Grand Prix,Racing Bulls,Liam Lawson,,,True,Retired
+2025,British Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,British Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,British Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,British Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,British Grand Prix,alpine,Pierre Gasly,28.6905,2.0,,
+2025,British Grand Prix,aston_martin,Fernando Alonso,28.6205,2.0,,
+2025,British Grand Prix,aston_martin,Lance Stroll,28.843666666666667,3.0,,
+2025,British Grand Prix,ferrari,Charles Leclerc,29.089,1.0,,
+2025,British Grand Prix,ferrari,Lewis Hamilton,29.022,2.0,,
+2025,British Grand Prix,haas,Esteban Ocon,29.562,1.0,,
+2025,British Grand Prix,haas,Oliver Bearman,29.1455,2.0,,
+2025,British Grand Prix,mclaren,Lando Norris,30.63,1.0,,
+2025,British Grand Prix,mclaren,Oscar Piastri,29.491,1.0,,
+2025,British Grand Prix,mercedes,Andrea Kimi Antonelli,29.052000000000003,3.0,,
+2025,British Grand Prix,mercedes,George Russell,28.426,2.0,,
+2025,British Grand Prix,rb,Isack Hadjar,28.523,1.0,,
+2025,British Grand Prix,red_bull,Max Verstappen,28.935499999999998,2.0,,
+2025,British Grand Prix,red_bull,Yuki Tsunoda,34.344500000000004,2.0,,
+2025,British Grand Prix,sauber,Nico Hülkenberg,29.844,2.0,,
+2025,British Grand Prix,williams,Alexander Albon,29.251,1.0,,
+2025,British Grand Prix,williams,Carlos Sainz,29.1045,2.0,,
+2025,Canadian Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Canadian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Canadian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Canadian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Canadian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Canadian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Canadian Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Canadian Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Lapped
+2025,Canadian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Canadian Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Canadian Grand Prix,McLaren,Lando Norris,,,True,Retired
+2025,Canadian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Canadian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Canadian Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Canadian Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Canadian Grand Prix,Racing Bulls,Liam Lawson,,,True,Retired
+2025,Canadian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Canadian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,Canadian Grand Prix,Williams,Alexander Albon,,,True,Retired
+2025,Canadian Grand Prix,Williams,Carlos Sainz,,,True,Lapped
+2025,Canadian Grand Prix,alpine,Franco Colapinto,24.735,1.0,,
+2025,Canadian Grand Prix,alpine,Pierre Gasly,23.987,1.0,,
+2025,Canadian Grand Prix,aston_martin,Fernando Alonso,21.876666666666665,3.0,,
+2025,Canadian Grand Prix,aston_martin,Lance Stroll,29.241999999999997,2.0,,
+2025,Canadian Grand Prix,ferrari,Charles Leclerc,23.6095,2.0,,
+2025,Canadian Grand Prix,ferrari,Lewis Hamilton,23.471,2.0,,
+2025,Canadian Grand Prix,haas,Esteban Ocon,24.452,1.0,,
+2025,Canadian Grand Prix,haas,Oliver Bearman,23.562,1.0,,
+2025,Canadian Grand Prix,mclaren,Lando Norris,23.347,2.0,,
+2025,Canadian Grand Prix,mclaren,Oscar Piastri,23.2095,2.0,,
+2025,Canadian Grand Prix,mercedes,Andrea Kimi Antonelli,23.368000000000002,2.0,,
+2025,Canadian Grand Prix,mercedes,George Russell,23.7465,2.0,,
+2025,Canadian Grand Prix,rb,Isack Hadjar,24.13,1.0,,
+2025,Canadian Grand Prix,rb,Liam Lawson,23.28,1.0,,
+2025,Canadian Grand Prix,red_bull,Max Verstappen,23.362499999999997,2.0,,
+2025,Canadian Grand Prix,red_bull,Yuki Tsunoda,25.178,1.0,,
+2025,Canadian Grand Prix,sauber,Gabriel Bortoleto,23.715,1.0,,
+2025,Canadian Grand Prix,sauber,Nico Hülkenberg,23.476,1.0,,
+2025,Canadian Grand Prix,williams,Alexander Albon,23.898,1.0,,
+2025,Canadian Grand Prix,williams,Carlos Sainz,23.269,1.0,,
+2025,Chinese Grand Prix,Alpine,Jack Doohan,,,False,Finished
+2025,Chinese Grand Prix,Alpine,Pierre Gasly,,,True,Disqualified
+2025,Chinese Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2025,Chinese Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Chinese Grand Prix,Ferrari,Charles Leclerc,,,True,Disqualified
+2025,Chinese Grand Prix,Ferrari,Lewis Hamilton,,,True,Disqualified
+2025,Chinese Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Chinese Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Chinese Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Chinese Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Chinese Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Chinese Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Chinese Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Chinese Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Chinese Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Chinese Grand Prix,Racing Bulls,Yuki Tsunoda,,,True,Lapped
+2025,Chinese Grand Prix,Red Bull Racing,Liam Lawson,,,False,Finished
+2025,Chinese Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Chinese Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Chinese Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Chinese Grand Prix,alpine,Jack Doohan,22.793,1.0,,
+2025,Chinese Grand Prix,alpine,Pierre Gasly,23.138,1.0,,
+2025,Chinese Grand Prix,aston_martin,Lance Stroll,22.995,1.0,,
+2025,Chinese Grand Prix,ferrari,Charles Leclerc,22.151,1.0,,
+2025,Chinese Grand Prix,ferrari,Lewis Hamilton,22.376,2.0,,
+2025,Chinese Grand Prix,haas,Esteban Ocon,23.114,1.0,,
+2025,Chinese Grand Prix,haas,Oliver Bearman,22.808,1.0,,
+2025,Chinese Grand Prix,mclaren,Lando Norris,22.213,1.0,,
+2025,Chinese Grand Prix,mclaren,Oscar Piastri,23.938,1.0,,
+2025,Chinese Grand Prix,mercedes,Andrea Kimi Antonelli,22.675,1.0,,
+2025,Chinese Grand Prix,mercedes,George Russell,22.324,1.0,,
+2025,Chinese Grand Prix,rb,Isack Hadjar,22.565,2.0,,
+2025,Chinese Grand Prix,rb,Yuki Tsunoda,27.734666666666666,3.0,,
+2025,Chinese Grand Prix,red_bull,Liam Lawson,22.445500000000003,2.0,,
+2025,Chinese Grand Prix,red_bull,Max Verstappen,22.454,1.0,,
+2025,Chinese Grand Prix,sauber,Gabriel Bortoleto,23.0875,2.0,,
+2025,Chinese Grand Prix,sauber,Nico Hülkenberg,22.959,1.0,,
+2025,Chinese Grand Prix,williams,Alexander Albon,23.362,1.0,,
+2025,Chinese Grand Prix,williams,Carlos Sainz,22.721,1.0,,
+2025,Dutch Grand Prix,Alpine,Franco Colapinto,,,False,Finished
+2025,Dutch Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Dutch Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Dutch Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Dutch Grand Prix,Ferrari,Charles Leclerc,,,True,Retired
+2025,Dutch Grand Prix,Ferrari,Lewis Hamilton,,,True,Retired
+2025,Dutch Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Dutch Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Dutch Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Dutch Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Dutch Grand Prix,McLaren,Lando Norris,,,True,Retired
+2025,Dutch Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Dutch Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Dutch Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Dutch Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Dutch Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Dutch Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Dutch Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Dutch Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Dutch Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Dutch Grand Prix,alpine,Franco Colapinto,17.986,1.0,,
+2025,Dutch Grand Prix,alpine,Pierre Gasly,19.223,1.0,,
+2025,Dutch Grand Prix,aston_martin,Fernando Alonso,17.683,2.0,,
+2025,Dutch Grand Prix,aston_martin,Lance Stroll,17.5795,2.0,,
+2025,Dutch Grand Prix,ferrari,Charles Leclerc,17.061500000000002,2.0,,
+2025,Dutch Grand Prix,haas,Esteban Ocon,18.27,1.0,,
+2025,Dutch Grand Prix,mclaren,Lando Norris,21.325000000000003,2.0,,
+2025,Dutch Grand Prix,mclaren,Oscar Piastri,17.982,2.0,,
+2025,Dutch Grand Prix,mercedes,Andrea Kimi Antonelli,17.420499999999997,2.0,,
+2025,Dutch Grand Prix,mercedes,George Russell,18.088,2.0,,
+2025,Dutch Grand Prix,rb,Isack Hadjar,17.9745,2.0,,
+2025,Dutch Grand Prix,rb,Liam Lawson,19.878999999999998,2.0,,
+2025,Dutch Grand Prix,red_bull,Max Verstappen,18.5005,2.0,,
+2025,Dutch Grand Prix,red_bull,Yuki Tsunoda,18.348,1.0,,
+2025,Dutch Grand Prix,sauber,Gabriel Bortoleto,17.908,1.0,,
+2025,Dutch Grand Prix,sauber,Nico Hülkenberg,17.602,1.0,,
+2025,Dutch Grand Prix,williams,Alexander Albon,19.692,1.0,,
+2025,Dutch Grand Prix,williams,Carlos Sainz,25.817666666666668,3.0,,
+2025,Emilia Romagna Grand Prix,Alpine,Franco Colapinto,,,False,Finished
+2025,Emilia Romagna Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Emilia Romagna Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Emilia Romagna Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Emilia Romagna Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Emilia Romagna Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Emilia Romagna Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Retired
+2025,Emilia Romagna Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Emilia Romagna Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Emilia Romagna Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Emilia Romagna Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Emilia Romagna Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Emilia Romagna Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Emilia Romagna Grand Prix,Mercedes,Kimi Antonelli,,,True,Retired
+2025,Emilia Romagna Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Emilia Romagna Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Emilia Romagna Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Emilia Romagna Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Emilia Romagna Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Emilia Romagna Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Emilia Romagna Grand Prix,alpine,Franco Colapinto,30.317,1.0,,
+2025,Emilia Romagna Grand Prix,alpine,Pierre Gasly,31.7455,2.0,,
+2025,Emilia Romagna Grand Prix,aston_martin,Fernando Alonso,30.163,1.0,,
+2025,Emilia Romagna Grand Prix,aston_martin,Lance Stroll,31.218,1.0,,
+2025,Emilia Romagna Grand Prix,ferrari,Charles Leclerc,30.766,2.0,,
+2025,Emilia Romagna Grand Prix,ferrari,Lewis Hamilton,29.949,1.0,,
+2025,Emilia Romagna Grand Prix,haas,Esteban Ocon,30.506,1.0,,
+2025,Emilia Romagna Grand Prix,haas,Oliver Bearman,44.085499999999996,2.0,,
+2025,Emilia Romagna Grand Prix,mclaren,Lando Norris,30.594,2.0,,
+2025,Emilia Romagna Grand Prix,mclaren,Oscar Piastri,30.791,2.0,,
+2025,Emilia Romagna Grand Prix,mercedes,Andrea Kimi Antonelli,30.051,1.0,,
+2025,Emilia Romagna Grand Prix,mercedes,George Russell,30.269,2.0,,
+2025,Emilia Romagna Grand Prix,rb,Isack Hadjar,30.123,1.0,,
+2025,Emilia Romagna Grand Prix,rb,Liam Lawson,29.993000000000002,2.0,,
+2025,Emilia Romagna Grand Prix,red_bull,Max Verstappen,29.823999999999998,2.0,,
+2025,Emilia Romagna Grand Prix,red_bull,Yuki Tsunoda,29.807,1.0,,
+2025,Emilia Romagna Grand Prix,sauber,Gabriel Bortoleto,30.755499999999998,2.0,,
+2025,Emilia Romagna Grand Prix,sauber,Nico Hülkenberg,30.184,1.0,,
+2025,Emilia Romagna Grand Prix,williams,Alexander Albon,30.471,1.0,,
+2025,Emilia Romagna Grand Prix,williams,Carlos Sainz,30.3575,2.0,,
+2025,Hungarian Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Hungarian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Hungarian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Hungarian Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,Hungarian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Hungarian Grand Prix,Ferrari,Lewis Hamilton,,,True,Lapped
+2025,Hungarian Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Hungarian Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Retired
+2025,Hungarian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Hungarian Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Hungarian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Hungarian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Hungarian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Hungarian Grand Prix,Mercedes,Kimi Antonelli,,,True,Lapped
+2025,Hungarian Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Hungarian Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Hungarian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Hungarian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,Hungarian Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2025,Hungarian Grand Prix,Williams,Carlos Sainz,,,True,Lapped
+2025,Hungarian Grand Prix,alpine,Franco Colapinto,28.264000000000003,2.0,,
+2025,Hungarian Grand Prix,alpine,Pierre Gasly,21.699,1.0,,
+2025,Hungarian Grand Prix,aston_martin,Fernando Alonso,22.204,1.0,,
+2025,Hungarian Grand Prix,aston_martin,Lance Stroll,21.464,1.0,,
+2025,Hungarian Grand Prix,ferrari,Charles Leclerc,21.133,2.0,,
+2025,Hungarian Grand Prix,ferrari,Lewis Hamilton,21.15,1.0,,
+2025,Hungarian Grand Prix,haas,Esteban Ocon,22.444,1.0,,
+2025,Hungarian Grand Prix,haas,Oliver Bearman,21.754,1.0,,
+2025,Hungarian Grand Prix,mclaren,Lando Norris,20.94,1.0,,
+2025,Hungarian Grand Prix,mclaren,Oscar Piastri,21.0425,2.0,,
+2025,Hungarian Grand Prix,mercedes,Andrea Kimi Antonelli,22.328,1.0,,
+2025,Hungarian Grand Prix,mercedes,George Russell,21.5765,2.0,,
+2025,Hungarian Grand Prix,rb,Isack Hadjar,21.096,1.0,,
+2025,Hungarian Grand Prix,rb,Liam Lawson,22.136,1.0,,
+2025,Hungarian Grand Prix,red_bull,Max Verstappen,21.3455,2.0,,
+2025,Hungarian Grand Prix,red_bull,Yuki Tsunoda,21.418,2.0,,
+2025,Hungarian Grand Prix,sauber,Gabriel Bortoleto,21.773,1.0,,
+2025,Hungarian Grand Prix,sauber,Nico Hülkenberg,25.1855,2.0,,
+2025,Hungarian Grand Prix,williams,Alexander Albon,22.0355,2.0,,
+2025,Hungarian Grand Prix,williams,Carlos Sainz,21.5465,2.0,,
+2025,Italian Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Italian Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Italian Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2025,Italian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Italian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Italian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Italian Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Italian Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Italian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Italian Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Did not start
+2025,Italian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Italian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Italian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Italian Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Italian Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Italian Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Italian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Italian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Italian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Italian Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Italian Grand Prix,alpine,Franco Colapinto,24.971,1.0,,
+2025,Italian Grand Prix,alpine,Pierre Gasly,25.012,1.0,,
+2025,Italian Grand Prix,aston_martin,Fernando Alonso,25.16,1.0,,
+2025,Italian Grand Prix,aston_martin,Lance Stroll,38.418,1.0,,
+2025,Italian Grand Prix,ferrari,Charles Leclerc,24.235,1.0,,
+2025,Italian Grand Prix,ferrari,Lewis Hamilton,23.971,1.0,,
+2025,Italian Grand Prix,haas,Esteban Ocon,30.754,1.0,,
+2025,Italian Grand Prix,haas,Oliver Bearman,25.372,1.0,,
+2025,Italian Grand Prix,mclaren,Lando Norris,27.498,1.0,,
+2025,Italian Grand Prix,mclaren,Oscar Piastri,23.602,1.0,,
+2025,Italian Grand Prix,mercedes,Andrea Kimi Antonelli,24.916,1.0,,
+2025,Italian Grand Prix,mercedes,George Russell,25.021,1.0,,
+2025,Italian Grand Prix,rb,Isack Hadjar,24.326,1.0,,
+2025,Italian Grand Prix,rb,Liam Lawson,24.156,1.0,,
+2025,Italian Grand Prix,red_bull,Max Verstappen,24.545,1.0,,
+2025,Italian Grand Prix,red_bull,Yuki Tsunoda,24.372,1.0,,
+2025,Italian Grand Prix,sauber,Gabriel Bortoleto,26.143,1.0,,
+2025,Italian Grand Prix,williams,Alexander Albon,24.717,1.0,,
+2025,Italian Grand Prix,williams,Carlos Sainz,24.605,1.0,,
+2025,Japanese Grand Prix,Alpine,Jack Doohan,,,False,Finished
+2025,Japanese Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Japanese Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Japanese Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Japanese Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Japanese Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Japanese Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Japanese Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Japanese Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Japanese Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Japanese Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Japanese Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Japanese Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Japanese Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Japanese Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Japanese Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Japanese Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Japanese Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Japanese Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Japanese Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Japanese Grand Prix,alpine,Jack Doohan,23.382,1.0,,
+2025,Japanese Grand Prix,alpine,Pierre Gasly,26.041,1.0,,
+2025,Japanese Grand Prix,aston_martin,Fernando Alonso,25.708,1.0,,
+2025,Japanese Grand Prix,aston_martin,Lance Stroll,23.666,2.0,,
+2025,Japanese Grand Prix,ferrari,Charles Leclerc,23.346,1.0,,
+2025,Japanese Grand Prix,ferrari,Lewis Hamilton,22.937,1.0,,
+2025,Japanese Grand Prix,haas,Esteban Ocon,24.464,1.0,,
+2025,Japanese Grand Prix,haas,Oliver Bearman,24.834,1.0,,
+2025,Japanese Grand Prix,mclaren,Lando Norris,23.222,1.0,,
+2025,Japanese Grand Prix,mclaren,Oscar Piastri,23.037,1.0,,
+2025,Japanese Grand Prix,mercedes,Andrea Kimi Antonelli,24.38,1.0,,
+2025,Japanese Grand Prix,mercedes,George Russell,23.184,1.0,,
+2025,Japanese Grand Prix,rb,Isack Hadjar,23.333,1.0,,
+2025,Japanese Grand Prix,rb,Liam Lawson,23.662,1.0,,
+2025,Japanese Grand Prix,red_bull,Max Verstappen,24.397,1.0,,
+2025,Japanese Grand Prix,red_bull,Yuki Tsunoda,24.181,1.0,,
+2025,Japanese Grand Prix,sauber,Gabriel Bortoleto,23.419,1.0,,
+2025,Japanese Grand Prix,sauber,Nico Hülkenberg,23.515,1.0,,
+2025,Japanese Grand Prix,williams,Alexander Albon,23.093,1.0,,
+2025,Japanese Grand Prix,williams,Carlos Sainz,23.337,1.0,,
+2025,Las Vegas Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Las Vegas Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Las Vegas Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Las Vegas Grand Prix,Aston Martin,Lance Stroll,,,True,Retired
+2025,Las Vegas Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Las Vegas Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Las Vegas Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Las Vegas Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Las Vegas Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Retired
+2025,Las Vegas Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Las Vegas Grand Prix,McLaren,Lando Norris,,,True,Disqualified
+2025,Las Vegas Grand Prix,McLaren,Oscar Piastri,,,True,Disqualified
+2025,Las Vegas Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Las Vegas Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Las Vegas Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Las Vegas Grand Prix,Racing Bulls,Liam Lawson,,,True,Lapped
+2025,Las Vegas Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Las Vegas Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Las Vegas Grand Prix,Williams,Alexander Albon,,,True,Retired
+2025,Las Vegas Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Las Vegas Grand Prix,alpine,Franco Colapinto,22.842,1.0,,
+2025,Las Vegas Grand Prix,alpine,Pierre Gasly,23.903,1.0,,
+2025,Las Vegas Grand Prix,aston_martin,Fernando Alonso,21.068,1.0,,
+2025,Las Vegas Grand Prix,ferrari,Charles Leclerc,21.351,1.0,,
+2025,Las Vegas Grand Prix,ferrari,Lewis Hamilton,21.638,1.0,,
+2025,Las Vegas Grand Prix,haas,Esteban Ocon,22.389,1.0,,
+2025,Las Vegas Grand Prix,haas,Oliver Bearman,21.491,1.0,,
+2025,Las Vegas Grand Prix,mclaren,Lando Norris,21.049,1.0,,
+2025,Las Vegas Grand Prix,mclaren,Oscar Piastri,21.371,1.0,,
+2025,Las Vegas Grand Prix,mercedes,Andrea Kimi Antonelli,21.968,1.0,,
+2025,Las Vegas Grand Prix,mercedes,George Russell,20.929,1.0,,
+2025,Las Vegas Grand Prix,rb,Isack Hadjar,21.324,1.0,,
+2025,Las Vegas Grand Prix,rb,Liam Lawson,27.011499999999998,2.0,,
+2025,Las Vegas Grand Prix,red_bull,Max Verstappen,21.708,1.0,,
+2025,Las Vegas Grand Prix,red_bull,Yuki Tsunoda,21.0315,2.0,,
+2025,Las Vegas Grand Prix,sauber,Gabriel Bortoleto,33.23,1.0,,
+2025,Las Vegas Grand Prix,sauber,Nico Hülkenberg,22.333,1.0,,
+2025,Las Vegas Grand Prix,williams,Alexander Albon,27.578000000000003,3.0,,
+2025,Las Vegas Grand Prix,williams,Carlos Sainz,21.164,1.0,,
+2025,Mexico City Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Mexico City Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Mexico City Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2025,Mexico City Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Mexico City Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Mexico City Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Mexico City Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Mexico City Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Mexico City Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Mexico City Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Retired
+2025,Mexico City Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Mexico City Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Mexico City Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Mexico City Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Mexico City Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Mexico City Grand Prix,Racing Bulls,Liam Lawson,,,True,Retired
+2025,Mexico City Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Mexico City Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Mexico City Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2025,Mexico City Grand Prix,Williams,Carlos Sainz,,,True,Retired
+2025,Mexico City Grand Prix,alpine,Franco Colapinto,22.789,1.0,,
+2025,Mexico City Grand Prix,alpine,Pierre Gasly,22.834,1.0,,
+2025,Mexico City Grand Prix,aston_martin,Fernando Alonso,26.816,1.0,,
+2025,Mexico City Grand Prix,aston_martin,Lance Stroll,22.892000000000003,2.0,,
+2025,Mexico City Grand Prix,ferrari,Charles Leclerc,22.215,1.0,,
+2025,Mexico City Grand Prix,ferrari,Lewis Hamilton,28.325,2.0,,
+2025,Mexico City Grand Prix,haas,Esteban Ocon,23.203,1.0,,
+2025,Mexico City Grand Prix,haas,Oliver Bearman,22.4105,2.0,,
+2025,Mexico City Grand Prix,mclaren,Lando Norris,22.567,1.0,,
+2025,Mexico City Grand Prix,mclaren,Oscar Piastri,22.685,2.0,,
+2025,Mexico City Grand Prix,mercedes,Andrea Kimi Antonelli,23.499499999999998,2.0,,
+2025,Mexico City Grand Prix,mercedes,George Russell,22.4085,2.0,,
+2025,Mexico City Grand Prix,rb,Isack Hadjar,22.196,1.0,,
+2025,Mexico City Grand Prix,rb,Liam Lawson,34.212,1.0,,
+2025,Mexico City Grand Prix,red_bull,Max Verstappen,22.762,1.0,,
+2025,Mexico City Grand Prix,red_bull,Yuki Tsunoda,31.63,1.0,,
+2025,Mexico City Grand Prix,sauber,Gabriel Bortoleto,22.41,1.0,,
+2025,Mexico City Grand Prix,williams,Alexander Albon,22.04,1.0,,
+2025,Mexico City Grand Prix,williams,Carlos Sainz,23.67233333333333,3.0,,
+2025,Miami Grand Prix,Alpine,Jack Doohan,,,True,Retired
+2025,Miami Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Miami Grand Prix,Aston Martin,Fernando Alonso,,,True,Lapped
+2025,Miami Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Miami Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Miami Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Miami Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Miami Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Retired
+2025,Miami Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Retired
+2025,Miami Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Miami Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Miami Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Miami Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Miami Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Miami Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Miami Grand Prix,Racing Bulls,Liam Lawson,,,True,Retired
+2025,Miami Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Miami Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Miami Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Miami Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Miami Grand Prix,alpine,Pierre Gasly,22.06,1.0,,
+2025,Miami Grand Prix,aston_martin,Fernando Alonso,23.602,1.0,,
+2025,Miami Grand Prix,aston_martin,Lance Stroll,22.317,1.0,,
+2025,Miami Grand Prix,ferrari,Charles Leclerc,22.183,1.0,,
+2025,Miami Grand Prix,ferrari,Lewis Hamilton,23.104,1.0,,
+2025,Miami Grand Prix,haas,Esteban Ocon,23.162,1.0,,
+2025,Miami Grand Prix,mclaren,Lando Norris,22.044,1.0,,
+2025,Miami Grand Prix,mclaren,Oscar Piastri,22.106,1.0,,
+2025,Miami Grand Prix,mercedes,Andrea Kimi Antonelli,24.383,1.0,,
+2025,Miami Grand Prix,mercedes,George Russell,24.257,1.0,,
+2025,Miami Grand Prix,rb,Isack Hadjar,22.115,1.0,,
+2025,Miami Grand Prix,rb,Liam Lawson,22.439,1.0,,
+2025,Miami Grand Prix,red_bull,Max Verstappen,22.501,1.0,,
+2025,Miami Grand Prix,red_bull,Yuki Tsunoda,22.56,1.0,,
+2025,Miami Grand Prix,sauber,Gabriel Bortoleto,22.188,1.0,,
+2025,Miami Grand Prix,sauber,Nico Hülkenberg,22.108,1.0,,
+2025,Miami Grand Prix,williams,Alexander Albon,21.906,1.0,,
+2025,Miami Grand Prix,williams,Carlos Sainz,22.415,1.0,,
+2025,Monaco Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Monaco Grand Prix,Alpine,Pierre Gasly,,,True,Retired
+2025,Monaco Grand Prix,Aston Martin,Fernando Alonso,,,True,Retired
+2025,Monaco Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Monaco Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Monaco Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Monaco Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Monaco Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Lapped
+2025,Monaco Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Monaco Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Monaco Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Monaco Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Monaco Grand Prix,Mercedes,George Russell,,,True,Lapped
+2025,Monaco Grand Prix,Mercedes,Kimi Antonelli,,,True,Lapped
+2025,Monaco Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Monaco Grand Prix,Racing Bulls,Liam Lawson,,,True,Lapped
+2025,Monaco Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Monaco Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,Monaco Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2025,Monaco Grand Prix,Williams,Carlos Sainz,,,True,Lapped
+2025,Monaco Grand Prix,alpine,Franco Colapinto,24.426000000000002,2.0,,
+2025,Monaco Grand Prix,alpine,Pierre Gasly,24.376,1.0,,
+2025,Monaco Grand Prix,aston_martin,Fernando Alonso,25.375,1.0,,
+2025,Monaco Grand Prix,aston_martin,Lance Stroll,23.978,1.0,,
+2025,Monaco Grand Prix,ferrari,Charles Leclerc,23.627000000000002,2.0,,
+2025,Monaco Grand Prix,ferrari,Lewis Hamilton,23.565,1.0,,
+2025,Monaco Grand Prix,haas,Esteban Ocon,25.174,2.0,,
+2025,Monaco Grand Prix,haas,Oliver Bearman,37.3855,2.0,,
+2025,Monaco Grand Prix,mclaren,Lando Norris,24.1245,2.0,,
+2025,Monaco Grand Prix,mclaren,Oscar Piastri,24.832,2.0,,
+2025,Monaco Grand Prix,rb,Isack Hadjar,24.171,2.0,,
+2025,Monaco Grand Prix,rb,Liam Lawson,24.262999999999998,2.0,,
+2025,Monaco Grand Prix,red_bull,Max Verstappen,24.114,1.0,,
+2025,Monaco Grand Prix,red_bull,Yuki Tsunoda,24.525,1.0,,
+2025,Monaco Grand Prix,sauber,Gabriel Bortoleto,28.657333333333337,3.0,,
+2025,Monaco Grand Prix,sauber,Nico Hülkenberg,24.231,2.0,,
+2025,Monaco Grand Prix,williams,Alexander Albon,24.058500000000002,2.0,,
+2025,Monaco Grand Prix,williams,Carlos Sainz,24.498,1.0,,
+2025,Qatar Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Qatar Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Qatar Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Qatar Grand Prix,Aston Martin,Lance Stroll,,,True,Retired
+2025,Qatar Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Qatar Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Qatar Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Qatar Grand Prix,Haas F1 Team,Oliver Bearman,,,True,Retired
+2025,Qatar Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Qatar Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Retired
+2025,Qatar Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Qatar Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Qatar Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Qatar Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Qatar Grand Prix,Racing Bulls,Isack Hadjar,,,True,Retired
+2025,Qatar Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Qatar Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Qatar Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Qatar Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Qatar Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Qatar Grand Prix,alpine,Franco Colapinto,29.538,1.0,,
+2025,Qatar Grand Prix,alpine,Pierre Gasly,31.343,1.0,,
+2025,Qatar Grand Prix,aston_martin,Fernando Alonso,28.6115,2.0,,
+2025,Qatar Grand Prix,aston_martin,Lance Stroll,28.094,2.0,,
+2025,Qatar Grand Prix,ferrari,Charles Leclerc,29.697,2.0,,
+2025,Qatar Grand Prix,ferrari,Lewis Hamilton,32.166,1.0,,
+2025,Qatar Grand Prix,haas,Esteban Ocon,34.272999999999996,2.0,,
+2025,Qatar Grand Prix,haas,Oliver Bearman,37.0345,2.0,,
+2025,Qatar Grand Prix,mclaren,Lando Norris,27.938,1.0,,
+2025,Qatar Grand Prix,mclaren,Oscar Piastri,29.047,1.0,,
+2025,Qatar Grand Prix,mercedes,Andrea Kimi Antonelli,30.273000000000003,2.0,,
+2025,Qatar Grand Prix,mercedes,George Russell,31.159,2.0,,
+2025,Qatar Grand Prix,rb,Isack Hadjar,28.373,2.0,,
+2025,Qatar Grand Prix,rb,Liam Lawson,28.5355,2.0,,
+2025,Qatar Grand Prix,red_bull,Max Verstappen,29.069,2.0,,
+2025,Qatar Grand Prix,red_bull,Yuki Tsunoda,29.188,1.0,,
+2025,Qatar Grand Prix,sauber,Gabriel Bortoleto,28.471,1.0,,
+2025,Qatar Grand Prix,williams,Alexander Albon,28.89,1.0,,
+2025,Qatar Grand Prix,williams,Carlos Sainz,28.3705,2.0,,
+2025,Saudi Arabian Grand Prix,Alpine,Jack Doohan,,,True,Lapped
+2025,Saudi Arabian Grand Prix,Alpine,Pierre Gasly,,,True,Retired
+2025,Saudi Arabian Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Saudi Arabian Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Saudi Arabian Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Saudi Arabian Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Saudi Arabian Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Saudi Arabian Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Saudi Arabian Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Saudi Arabian Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Saudi Arabian Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Saudi Arabian Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Saudi Arabian Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Saudi Arabian Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Saudi Arabian Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Saudi Arabian Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Saudi Arabian Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Saudi Arabian Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Retired
+2025,Saudi Arabian Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,Saudi Arabian Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Saudi Arabian Grand Prix,alpine,Jack Doohan,21.046,2.0,,
+2025,Saudi Arabian Grand Prix,aston_martin,Fernando Alonso,21.891,1.0,,
+2025,Saudi Arabian Grand Prix,aston_martin,Lance Stroll,20.487,1.0,,
+2025,Saudi Arabian Grand Prix,ferrari,Charles Leclerc,20.131,1.0,,
+2025,Saudi Arabian Grand Prix,ferrari,Lewis Hamilton,20.144,1.0,,
+2025,Saudi Arabian Grand Prix,haas,Esteban Ocon,21.512,1.0,,
+2025,Saudi Arabian Grand Prix,haas,Oliver Bearman,22.095,1.0,,
+2025,Saudi Arabian Grand Prix,mclaren,Lando Norris,20.427,1.0,,
+2025,Saudi Arabian Grand Prix,mclaren,Oscar Piastri,21.388,1.0,,
+2025,Saudi Arabian Grand Prix,mercedes,Andrea Kimi Antonelli,20.399,1.0,,
+2025,Saudi Arabian Grand Prix,mercedes,George Russell,20.329,1.0,,
+2025,Saudi Arabian Grand Prix,rb,Isack Hadjar,20.827,1.0,,
+2025,Saudi Arabian Grand Prix,rb,Liam Lawson,20.534,1.0,,
+2025,Saudi Arabian Grand Prix,red_bull,Max Verstappen,26.03,1.0,,
+2025,Saudi Arabian Grand Prix,sauber,Gabriel Bortoleto,21.854,1.0,,
+2025,Saudi Arabian Grand Prix,sauber,Nico Hülkenberg,20.441,1.0,,
+2025,Saudi Arabian Grand Prix,williams,Alexander Albon,22.135,1.0,,
+2025,Saudi Arabian Grand Prix,williams,Carlos Sainz,24.148,1.0,,
+2025,Singapore Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,Singapore Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,Singapore Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Singapore Grand Prix,Aston Martin,Lance Stroll,,,True,Lapped
+2025,Singapore Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Singapore Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Singapore Grand Prix,Haas F1 Team,Esteban Ocon,,,True,Lapped
+2025,Singapore Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Singapore Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,Singapore Grand Prix,Kick Sauber,Nico Hulkenberg,,,True,Lapped
+2025,Singapore Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Singapore Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Singapore Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Singapore Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,Singapore Grand Prix,Racing Bulls,Isack Hadjar,,,True,Lapped
+2025,Singapore Grand Prix,Racing Bulls,Liam Lawson,,,True,Lapped
+2025,Singapore Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Singapore Grand Prix,Red Bull Racing,Yuki Tsunoda,,,True,Lapped
+2025,Singapore Grand Prix,Williams,Alexander Albon,,,True,Lapped
+2025,Singapore Grand Prix,Williams,Carlos Sainz,,,True,Lapped
+2025,Singapore Grand Prix,alpine,Franco Colapinto,24.04,1.0,,
+2025,Singapore Grand Prix,alpine,Pierre Gasly,25.3855,2.0,,
+2025,Singapore Grand Prix,aston_martin,Fernando Alonso,30.749,1.0,,
+2025,Singapore Grand Prix,aston_martin,Lance Stroll,24.012,1.0,,
+2025,Singapore Grand Prix,ferrari,Charles Leclerc,23.63,1.0,,
+2025,Singapore Grand Prix,ferrari,Lewis Hamilton,24.069000000000003,2.0,,
+2025,Singapore Grand Prix,haas,Esteban Ocon,25.078,1.0,,
+2025,Singapore Grand Prix,haas,Oliver Bearman,23.979,1.0,,
+2025,Singapore Grand Prix,mclaren,Lando Norris,23.314,1.0,,
+2025,Singapore Grand Prix,mclaren,Oscar Piastri,26.637,1.0,,
+2025,Singapore Grand Prix,mercedes,Andrea Kimi Antonelli,23.806,1.0,,
+2025,Singapore Grand Prix,mercedes,George Russell,23.966,1.0,,
+2025,Singapore Grand Prix,rb,Isack Hadjar,23.827,1.0,,
+2025,Singapore Grand Prix,rb,Liam Lawson,24.027,1.0,,
+2025,Singapore Grand Prix,red_bull,Max Verstappen,24.008,1.0,,
+2025,Singapore Grand Prix,red_bull,Yuki Tsunoda,24.61,1.0,,
+2025,Singapore Grand Prix,sauber,Gabriel Bortoleto,32.856,1.0,,
+2025,Singapore Grand Prix,sauber,Nico Hülkenberg,28.0435,2.0,,
+2025,Singapore Grand Prix,williams,Alexander Albon,25.732,1.0,,
+2025,Singapore Grand Prix,williams,Carlos Sainz,24.075,1.0,,
+2025,Spanish Grand Prix,Alpine,Franco Colapinto,,,False,Finished
+2025,Spanish Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,Spanish Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,Spanish Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,Spanish Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,Spanish Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,Spanish Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,Spanish Grand Prix,Kick Sauber,Gabriel Bortoleto,,,False,Finished
+2025,Spanish Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,Spanish Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,Spanish Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,Spanish Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,Spanish Grand Prix,Mercedes,Kimi Antonelli,,,True,Retired
+2025,Spanish Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,Spanish Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,Spanish Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,Spanish Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,Spanish Grand Prix,Williams,Alexander Albon,,,True,Retired
+2025,Spanish Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,Spanish Grand Prix,alpine,Franco Colapinto,22.305,2.0,,
+2025,Spanish Grand Prix,alpine,Pierre Gasly,22.115000000000002,2.0,,
+2025,Spanish Grand Prix,aston_martin,Fernando Alonso,22.512,2.0,,
+2025,Spanish Grand Prix,ferrari,Charles Leclerc,21.878,2.0,,
+2025,Spanish Grand Prix,ferrari,Lewis Hamilton,21.957,1.0,,
+2025,Spanish Grand Prix,haas,Esteban Ocon,22.511,2.0,,
+2025,Spanish Grand Prix,haas,Oliver Bearman,22.139499999999998,2.0,,
+2025,Spanish Grand Prix,mclaren,Lando Norris,22.454,1.0,,
+2025,Spanish Grand Prix,mclaren,Oscar Piastri,21.858,1.0,,
+2025,Spanish Grand Prix,mercedes,Andrea Kimi Antonelli,22.234,1.0,,
+2025,Spanish Grand Prix,mercedes,George Russell,21.7455,2.0,,
+2025,Spanish Grand Prix,rb,Isack Hadjar,21.769,1.0,,
+2025,Spanish Grand Prix,rb,Liam Lawson,22.039,1.0,,
+2025,Spanish Grand Prix,red_bull,Max Verstappen,21.901,2.0,,
+2025,Spanish Grand Prix,red_bull,Yuki Tsunoda,21.962,2.0,,
+2025,Spanish Grand Prix,sauber,Gabriel Bortoleto,22.041,1.0,,
+2025,Spanish Grand Prix,sauber,Nico Hülkenberg,22.233,1.0,,
+2025,Spanish Grand Prix,williams,Alexander Albon,34.2485,2.0,,
+2025,Spanish Grand Prix,williams,Carlos Sainz,26.4465,2.0,,
+2025,São Paulo Grand Prix,Alpine,Franco Colapinto,,,False,Finished
+2025,São Paulo Grand Prix,Alpine,Pierre Gasly,,,False,Finished
+2025,São Paulo Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,São Paulo Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,São Paulo Grand Prix,Ferrari,Charles Leclerc,,,True,Retired
+2025,São Paulo Grand Prix,Ferrari,Lewis Hamilton,,,True,Retired
+2025,São Paulo Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,São Paulo Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,São Paulo Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Retired
+2025,São Paulo Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,São Paulo Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,São Paulo Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,São Paulo Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,São Paulo Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,São Paulo Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,São Paulo Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,São Paulo Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,São Paulo Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,São Paulo Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,São Paulo Grand Prix,Williams,Carlos Sainz,,,False,Finished
+2025,São Paulo Grand Prix,alpine,Franco Colapinto,24.917,2.0,,
+2025,São Paulo Grand Prix,alpine,Pierre Gasly,23.6605,2.0,,
+2025,São Paulo Grand Prix,aston_martin,Fernando Alonso,23.752499999999998,2.0,,
+2025,São Paulo Grand Prix,aston_martin,Lance Stroll,23.76,1.0,,
+2025,São Paulo Grand Prix,ferrari,Lewis Hamilton,31.417999999999996,3.0,,
+2025,São Paulo Grand Prix,haas,Esteban Ocon,24.1905,2.0,,
+2025,São Paulo Grand Prix,haas,Oliver Bearman,24.201,2.0,,
+2025,São Paulo Grand Prix,mclaren,Lando Norris,23.49,1.0,,
+2025,São Paulo Grand Prix,mclaren,Oscar Piastri,34.644,1.0,,
+2025,São Paulo Grand Prix,mercedes,Andrea Kimi Antonelli,23.378500000000003,2.0,,
+2025,São Paulo Grand Prix,mercedes,George Russell,23.358,1.0,,
+2025,São Paulo Grand Prix,rb,Isack Hadjar,23.584,2.0,,
+2025,São Paulo Grand Prix,rb,Liam Lawson,22.899,1.0,,
+2025,São Paulo Grand Prix,red_bull,Max Verstappen,23.127499999999998,2.0,,
+2025,São Paulo Grand Prix,red_bull,Yuki Tsunoda,28.579500000000003,2.0,,
+2025,São Paulo Grand Prix,sauber,Nico Hülkenberg,23.086,1.0,,
+2025,São Paulo Grand Prix,williams,Alexander Albon,23.061,1.0,,
+2025,São Paulo Grand Prix,williams,Carlos Sainz,24.649,2.0,,
+2025,United States Grand Prix,Alpine,Franco Colapinto,,,True,Lapped
+2025,United States Grand Prix,Alpine,Pierre Gasly,,,True,Lapped
+2025,United States Grand Prix,Aston Martin,Fernando Alonso,,,False,Finished
+2025,United States Grand Prix,Aston Martin,Lance Stroll,,,False,Finished
+2025,United States Grand Prix,Ferrari,Charles Leclerc,,,False,Finished
+2025,United States Grand Prix,Ferrari,Lewis Hamilton,,,False,Finished
+2025,United States Grand Prix,Haas F1 Team,Esteban Ocon,,,False,Finished
+2025,United States Grand Prix,Haas F1 Team,Oliver Bearman,,,False,Finished
+2025,United States Grand Prix,Kick Sauber,Gabriel Bortoleto,,,True,Lapped
+2025,United States Grand Prix,Kick Sauber,Nico Hulkenberg,,,False,Finished
+2025,United States Grand Prix,McLaren,Lando Norris,,,False,Finished
+2025,United States Grand Prix,McLaren,Oscar Piastri,,,False,Finished
+2025,United States Grand Prix,Mercedes,George Russell,,,False,Finished
+2025,United States Grand Prix,Mercedes,Kimi Antonelli,,,False,Finished
+2025,United States Grand Prix,Racing Bulls,Isack Hadjar,,,False,Finished
+2025,United States Grand Prix,Racing Bulls,Liam Lawson,,,False,Finished
+2025,United States Grand Prix,Red Bull Racing,Max Verstappen,,,False,Finished
+2025,United States Grand Prix,Red Bull Racing,Yuki Tsunoda,,,False,Finished
+2025,United States Grand Prix,Williams,Alexander Albon,,,False,Finished
+2025,United States Grand Prix,Williams,Carlos Sainz,,,True,Retired
+2025,United States Grand Prix,alpine,Franco Colapinto,24.045,1.0,,
+2025,United States Grand Prix,alpine,Pierre Gasly,26.631,1.0,,
+2025,United States Grand Prix,aston_martin,Fernando Alonso,24.054,1.0,,
+2025,United States Grand Prix,aston_martin,Lance Stroll,24.192,1.0,,
+2025,United States Grand Prix,ferrari,Charles Leclerc,23.718,1.0,,
+2025,United States Grand Prix,ferrari,Lewis Hamilton,23.937,1.0,,
+2025,United States Grand Prix,haas,Esteban Ocon,25.06,1.0,,
+2025,United States Grand Prix,haas,Oliver Bearman,24.11,1.0,,
+2025,United States Grand Prix,mclaren,Lando Norris,24.58,1.0,,
+2025,United States Grand Prix,mclaren,Oscar Piastri,23.452,1.0,,
+2025,United States Grand Prix,mercedes,Andrea Kimi Antonelli,23.949,1.0,,
+2025,United States Grand Prix,mercedes,George Russell,23.555,1.0,,
+2025,United States Grand Prix,rb,Isack Hadjar,23.831,1.0,,
+2025,United States Grand Prix,rb,Liam Lawson,23.681,1.0,,
+2025,United States Grand Prix,red_bull,Max Verstappen,23.987,1.0,,
+2025,United States Grand Prix,red_bull,Yuki Tsunoda,24.539,1.0,,
+2025,United States Grand Prix,sauber,Gabriel Bortoleto,24.787,2.0,,
+2025,United States Grand Prix,sauber,Nico Hülkenberg,23.753,1.0,,
+2025,United States Grand Prix,williams,Alexander Albon,24.1725,2.0,,
