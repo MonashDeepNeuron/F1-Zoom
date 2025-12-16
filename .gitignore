@@ -210,3 +210,4 @@ __marimo__/
 *_cache/
 fastf1_http_cache/
 data_cache/*.ff1pkl
+*.ff1pkl
