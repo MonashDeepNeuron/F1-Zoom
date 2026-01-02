@@ -118,6 +118,13 @@ def format_lap_time(lap_time) -> str:
     return f"{minutes}:{seconds:02d}.{milliseconds:03d}"
 
 
+def lap_time_to_seconds(lap_time) -> float:
+    """Convert Timedelta lap time to total seconds as float. Returns np.nan if input is NaN/None."""
+    if lap_time is None or pd.isna(lap_time):
+        return np.nan
+    return lap_time.total_seconds()
+
+
 def sprint_or_standard_weekend(race_name: str) -> bool:
     # return True if it is a sprint weekend
     
@@ -251,6 +258,29 @@ def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
         qualifying_session = fastf1.get_session(year, race_name, "Qualifying")
         qualifying_session.load()
         qualifying_results = qualifying_session.results
+        qualifying_results = qualifying_results.sort_values('Position').reset_index(drop=True)
+        
+        # Calculate Q1, Q2, Q3 position rankings based on times
+        # Q1 ranking - all drivers participate
+        q1_times = qualifying_results[['Abbreviation', 'Q1']].dropna(subset=['Q1']).copy()
+        q1_times['Q1_seconds'] = q1_times['Q1'].apply(lap_time_to_seconds)
+        q1_times = q1_times.sort_values('Q1_seconds')
+        q1_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q1_times.iterrows(), start=1)}
+        q1_seconds_dict = dict(zip(q1_times['Abbreviation'], q1_times['Q1_seconds']))
+        
+        # Q2 ranking - top 15 from Q1
+        q2_times = qualifying_results[['Abbreviation', 'Q2']].dropna(subset=['Q2']).copy()
+        q2_times['Q2_seconds'] = q2_times['Q2'].apply(lap_time_to_seconds)
+        q2_times = q2_times.sort_values('Q2_seconds')
+        q2_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q2_times.iterrows(), start=1)}
+        q2_seconds_dict = dict(zip(q2_times['Abbreviation'], q2_times['Q2_seconds']))
+        
+        # Q3 ranking - top 10 from Q2
+        q3_times = qualifying_results[['Abbreviation', 'Q3']].dropna(subset=['Q3']).copy()
+        q3_times['Q3_seconds'] = q3_times['Q3'].apply(lap_time_to_seconds)
+        q3_times = q3_times.sort_values('Q3_seconds')
+        q3_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q3_times.iterrows(), start=1)}
+        q3_seconds_dict = dict(zip(q3_times['Abbreviation'], q3_times['Q3_seconds']))
         
         for idx, row in qualifying_results.iterrows():
             driver_code = row['Abbreviation']
@@ -261,8 +291,17 @@ def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
                 "driver": driver_code,
                 "team": row['TeamName'],
                 "Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
-                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
-                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                # Q1 data
+                "Q1_time_seconds": q1_seconds_dict.get(driver_code, np.nan),
+                "Q1_position": q1_pos_dict.get(driver_code, np.nan),
+                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)),
+                # Q2 data
+                "Q2_time_seconds": q2_seconds_dict.get(driver_code, np.nan),
+                "Q2_position": q2_pos_dict.get(driver_code, np.nan),
+                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)),
+                # Q3 data
+                "Q3_time_seconds": q3_seconds_dict.get(driver_code, np.nan),
+                "Q3_position": q3_pos_dict.get(driver_code, np.nan),
                 "Q3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
             })
 
@@ -278,17 +317,60 @@ def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
         qualifying_session.load()
         qualifying_results = qualifying_session.results
         
+        # Sprint Qualifying rankings
+        sq1_times = sprint_qualifying_results[['Abbreviation', 'Q1']].dropna(subset=['Q1']).copy()
+        sq1_times['SQ1_seconds'] = sq1_times['Q1'].apply(lap_time_to_seconds)
+        sq1_times = sq1_times.sort_values('SQ1_seconds')
+        sq1_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(sq1_times.iterrows(), start=1)}
+        sq1_seconds_dict = dict(zip(sq1_times['Abbreviation'], sq1_times['SQ1_seconds']))
+        
+        sq2_times = sprint_qualifying_results[['Abbreviation', 'Q2']].dropna(subset=['Q2']).copy()
+        sq2_times['SQ2_seconds'] = sq2_times['Q2'].apply(lap_time_to_seconds)
+        sq2_times = sq2_times.sort_values('SQ2_seconds')
+        sq2_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(sq2_times.iterrows(), start=1)}
+        sq2_seconds_dict = dict(zip(sq2_times['Abbreviation'], sq2_times['SQ2_seconds']))
+        
+        sq3_times = sprint_qualifying_results[['Abbreviation', 'Q3']].dropna(subset=['Q3']).copy()
+        sq3_times['SQ3_seconds'] = sq3_times['Q3'].apply(lap_time_to_seconds)
+        sq3_times = sq3_times.sort_values('SQ3_seconds')
+        sq3_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(sq3_times.iterrows(), start=1)}
+        sq3_seconds_dict = dict(zip(sq3_times['Abbreviation'], sq3_times['SQ3_seconds']))
+        
+        # Main Qualifying rankings
+        q1_times = qualifying_results[['Abbreviation', 'Q1']].dropna(subset=['Q1']).copy()
+        q1_times['Q1_seconds'] = q1_times['Q1'].apply(lap_time_to_seconds)
+        q1_times = q1_times.sort_values('Q1_seconds')
+        q1_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q1_times.iterrows(), start=1)}
+        q1_seconds_dict = dict(zip(q1_times['Abbreviation'], q1_times['Q1_seconds']))
+        
+        q2_times = qualifying_results[['Abbreviation', 'Q2']].dropna(subset=['Q2']).copy()
+        q2_times['Q2_seconds'] = q2_times['Q2'].apply(lap_time_to_seconds)
+        q2_times = q2_times.sort_values('Q2_seconds')
+        q2_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q2_times.iterrows(), start=1)}
+        q2_seconds_dict = dict(zip(q2_times['Abbreviation'], q2_times['Q2_seconds']))
+        
+        q3_times = qualifying_results[['Abbreviation', 'Q3']].dropna(subset=['Q3']).copy()
+        q3_times['Q3_seconds'] = q3_times['Q3'].apply(lap_time_to_seconds)
+        q3_times = q3_times.sort_values('Q3_seconds')
+        q3_pos_dict = {row['Abbreviation']: pos for pos, (_, row) in enumerate(q3_times.iterrows(), start=1)}
+        q3_seconds_dict = dict(zip(q3_times['Abbreviation'], q3_times['Q3_seconds']))
+        
         sprint_qualifying_dict = {}
         for idx, row in sprint_qualifying_results.iterrows():
             driver_code = row['Abbreviation']
             sprint_qualifying_dict[driver_code] = {
                 "team": row['TeamName'],
                 "Sprint_Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
-                "SQ1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
-                "SQ2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                "SQ1_time_seconds": sq1_seconds_dict.get(driver_code, np.nan),
+                "SQ1_position": sq1_pos_dict.get(driver_code, np.nan),
+                "SQ1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)),
+                "SQ2_time_seconds": sq2_seconds_dict.get(driver_code, np.nan),
+                "SQ2_position": sq2_pos_dict.get(driver_code, np.nan),
+                "SQ2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)),
+                "SQ3_time_seconds": sq3_seconds_dict.get(driver_code, np.nan),
+                "SQ3_position": sq3_pos_dict.get(driver_code, np.nan),
                 "SQ3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
             }
-        
         
         for idx, row in qualifying_results.iterrows():
             driver_code = row['Abbreviation']
@@ -298,14 +380,28 @@ def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
                 "season": year,
                 "race_name": race_name,
                 "driver": driver_code,
-                "team": sprint_data.get("team", row['TeamName']),  # Use sprint qual team, fallback to qual team
+                "team": sprint_data.get("team", row['TeamName']),
+                # Sprint Qualifying data
                 "Sprint_Qualifying_Final_Grid_Position": sprint_data.get("Sprint_Qualifying_Final_Grid_Position", np.nan),
-                "SQ1_fastest_lap": sprint_data.get("SQ1_fastest_lap", np.nan), 
-                "SQ2_fastest_lap": sprint_data.get("SQ2_fastest_lap", np.nan), 
+                "SQ1_time_seconds": sprint_data.get("SQ1_time_seconds", np.nan),
+                "SQ1_position": sprint_data.get("SQ1_position", np.nan),
+                "SQ1_fastest_lap": sprint_data.get("SQ1_fastest_lap", np.nan),
+                "SQ2_time_seconds": sprint_data.get("SQ2_time_seconds", np.nan),
+                "SQ2_position": sprint_data.get("SQ2_position", np.nan),
+                "SQ2_fastest_lap": sprint_data.get("SQ2_fastest_lap", np.nan),
+                "SQ3_time_seconds": sprint_data.get("SQ3_time_seconds", np.nan),
+                "SQ3_position": sprint_data.get("SQ3_position", np.nan),
                 "SQ3_fastest_lap": sprint_data.get("SQ3_fastest_lap", np.nan),
+                # Main Qualifying data
                 "Qualifying_Final_Grid_Position": int(row['Position']) if pd.notna(row['Position']) else np.nan,
-                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)), 
-                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)), 
+                "Q1_time_seconds": q1_seconds_dict.get(driver_code, np.nan),
+                "Q1_position": q1_pos_dict.get(driver_code, np.nan),
+                "Q1_fastest_lap": format_lap_time(row.get('Q1', pd.NaT)),
+                "Q2_time_seconds": q2_seconds_dict.get(driver_code, np.nan),
+                "Q2_position": q2_pos_dict.get(driver_code, np.nan),
+                "Q2_fastest_lap": format_lap_time(row.get('Q2', pd.NaT)),
+                "Q3_time_seconds": q3_seconds_dict.get(driver_code, np.nan),
+                "Q3_position": q3_pos_dict.get(driver_code, np.nan),
                 "Q3_fastest_lap": format_lap_time(row.get('Q3', pd.NaT))
             })
         
@@ -442,9 +538,11 @@ def main(start_year: int, end_year: int, start_race_name: str = None, end_race_n
                 
                 # Merge qualifying data
                 if not qualifying_df.empty:
+                    # Drop team column from qualifying_df to avoid conflicts
+                    qualifying_df_no_team = qualifying_df.drop(columns=['team'], errors='ignore')
                     merged_df = merged_df.merge(
-                        qualifying_df,
-                        on=['season', 'race_name', 'driver', 'team'],
+                        qualifying_df_no_team,
+                        on=['season', 'race_name', 'driver'],
                         how='outer',
                         suffixes=('', '_qual')
                     )
@@ -453,14 +551,26 @@ def main(start_year: int, end_year: int, start_race_name: str = None, end_race_n
                 
                 # Merge race data
                 if not race_df.empty:
+                    # Drop team column from race_df to avoid conflicts
+                    race_df_no_team = race_df.drop(columns=['team'], errors='ignore')
                     merged_df = merged_df.merge(
-                        race_df,
-                        on=['season', 'race_name', 'driver', 'team'],
+                        race_df_no_team,
+                        on=['season', 'race_name', 'driver'],
                         how='outer',
                         suffixes=('', '_race')
                     )
                     # Remove duplicate columns if any
                     merged_df = merged_df.loc[:, ~merged_df.columns.duplicated()]
+                
+                # Fill in missing team values from qualifying or race data if practice data didn't have it
+                if 'team' not in merged_df.columns or merged_df['team'].isna().any():
+                    # Try to get team from qualifying results
+                    if not qualifying_df.empty:
+                        team_lookup = qualifying_df.set_index('driver')['team'].to_dict()
+                        if 'team' not in merged_df.columns:
+                            merged_df['team'] = merged_df['driver'].map(team_lookup)
+                        else:
+                            merged_df['team'] = merged_df['team'].fillna(merged_df['driver'].map(team_lookup))
                 
                 all_data.append(merged_df)
                 print(f" Successfully collected data for {race_name}")
@@ -507,13 +617,13 @@ if __name__ == "__main__":
     # df3 = qualifying_performance(2025, "Austin")
     # df4 = qualifying_performance(2025, "Melbourne")
     
-    # df5 = race_performance(2025, "Austin")
+    # df5 = qualifying_performance(2025, "Abu Dhabi")
     # df6 = race_performance(2025, "Melbourne")
     
-    df7 = main(2024, 2025, start_race_name="Melbourne", end_race_name="Melbourne")
+    df7 = main(2024, 2025, start_race_name="Melbourne", end_race_name="Abu Dhabi")
     
-    pd.set_option('display.max_rows', None)
-    pd.set_option('display.max_columns', None)
-    pd.set_option('display.max_colwidth', None)
+    # pd.set_option('display.max_rows', None)
+    # pd.set_option('display.max_columns', None)
+    # pd.set_option('display.max_colwidth', None)
 
-    print(df7)
+    # print(df5)
