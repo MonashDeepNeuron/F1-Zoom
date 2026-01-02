@@ -69,13 +69,13 @@ def create_master_dataframe(dataframes: dict) -> pd.DataFrame:
     master['gp_name'] = master['race_name'].map(circuit_to_gp)
     
     # Merge stint analysis data
-    stint_cols = ['season', 'race_name', 'driver', 'stint_index', 'compound',
+    stint_cols = ['season', 'race_name', 'driver', 'stint_index',
                   'start_lap', 'end_lap', 'stint_length_laps', 'pit_ended_stint',
                   'avg_laptime', 'best_laptime', 'laptime_slope_per_lap',
                   'clean_air_avg_laptime']
     stint_data = dataframes['stint_analysis'][stint_cols].copy()
     stint_data.columns = ['season', 'race_name', 'driver', 'stint_index', 
-                          'stint_compound', 'stint_start_lap', 'stint_end_lap',
+                          'stint_start_lap', 'stint_end_lap',
                           'stint_length', 'stint_pit_ended', 'stint_avg_laptime',
                           'stint_best_laptime', 'stint_deg_slope', 'stint_clean_air_avg']
     
