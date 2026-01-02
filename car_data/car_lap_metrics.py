@@ -88,7 +88,8 @@ def get_driver_from_number(driver_number: int) -> str:
 
 columns = [
     "season", "race_name", "team", "driver",
-    "lap_number", "stint_index", "compound",
+    "lap_number", "stint_index", 
+    # "compound",
     "lap_time",
     "track_status",
 
@@ -111,7 +112,7 @@ class LapRecord:
     
     lap_number: int # collected through the index of the laps array
     stint_index: int
-    compound: str
+    #compound: str
     lap_time: float  # collected
     track_status: str
 
@@ -176,7 +177,8 @@ class LapDataLoader:
             return 0, "UNKNOWN"
 
         row = row.iloc[0]
-        return int(row["stint_number"]), str(row["compound"])
+        return int(row["stint_number"]) 
+    #str(row["compound"])
 
     def _find_interval_for_lap(
         self,
@@ -322,7 +324,8 @@ class LapDataLoader:
                 track_status = self._get_track_status_for_time(track_status_df, session_start, lap["date_start"])
 
                 # the stint / compound this lap is on
-                stint_index, compound = self._find_stint_for_lap(stints, driver_number, lap_number)
+               
+                stint_index = self._find_stint_for_lap(stints, driver_number, lap_number)
 
                 # what's the gap to the car ahead in the middle of this lap?
                 interval_to_ahead, in_traffic = self._find_interval_for_lap(
@@ -339,7 +342,7 @@ class LapDataLoader:
                     driver=driver_name,
                     lap_number=lap_number,
                     stint_index=stint_index,
-                    compound=compound,
+                    # compound=compound,
                     lap_time=lap_time_sec,
                     track_status=track_status,
                     interval_to_car_ahead=interval_to_ahead,
