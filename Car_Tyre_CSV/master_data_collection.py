@@ -86,16 +86,34 @@ def create_master_dataframe(dataframes: dict) -> pd.DataFrame:
     )
     
     # Merge driver race summary data
-    driver_cols = ['season', 'driver', 'race_name', 'finishing_position', 
-                   'race_status', 'avg_race_pace', 'clean_air_avg_race_pace',
-                   'top_speed', 'cornering_speed', 'top_speed_rank', 
-                   'corner_speed_rank', 'drag_index']
+    driver_cols = [
+        'season', 'driver', 'race_name', 'finishing_position',
+        'race_status',
+        'avg_race_pace', 'clean_air_avg_race_pace',
+        'grid_avg_race_pace', 'pace_delta_to_grid', 'pace_zscore_vs_grid',
+        'pace_score_vs_grid', 'pace_score_0_100',
+        'top_speed', 'cornering_speed',
+        'top_speed_rank', 'corner_speed_rank', 'drag_index'
+    ]
     driver_data = dataframes['driver_race_summary'][driver_cols].copy()
-    driver_data.columns = ['season', 'driver', 'race_name', 'race_finish_pos',
-                           'race_status', 'driver_avg_pace', 'driver_clean_air_pace',
-                           'driver_top_speed', 'driver_corner_speed', 
-                           'driver_top_speed_rank', 'driver_corner_speed_rank',
-                           'driver_drag_index']
+
+    driver_data = driver_data.rename(columns={
+        'finishing_position': 'race_finish_pos',
+        'avg_race_pace': 'driver_avg_pace',
+        'clean_air_avg_race_pace': 'driver_clean_air_pace',
+
+        'grid_avg_race_pace': 'driver_grid_avg_pace',
+        'pace_delta_to_grid': 'driver_pace_delta_to_grid',
+        'pace_zscore_vs_grid': 'driver_pace_zscore_vs_grid',
+        'pace_score_vs_grid': 'driver_pace_score_vs_grid',
+        'pace_score_0_100': 'driver_pace_score_0_100',
+
+        'top_speed': 'driver_top_speed',
+        'cornering_speed': 'driver_corner_speed',
+        'top_speed_rank': 'driver_top_speed_rank',
+        'corner_speed_rank': 'driver_corner_speed_rank',
+        'drag_index': 'driver_drag_index',
+    })
     
     master = master.merge(
         driver_data,
@@ -116,29 +134,55 @@ def create_master_dataframe(dataframes: dict) -> pd.DataFrame:
     
     # Merge qualifying to race performance data
     # This data uses GP names, so we merge on gp_name + season + driver
-    quali_data = dataframes['qualifying_to_race'].copy()
-    quali_cols_to_use = ['season', 'race_name', 'driver', 
-                         'fp1_pos', 'fp1_time_fastest_lap',
-                         'fp2_pos', 'fp2_time_fastest_lap',
-                         'fp3_pos', 'fp3_time_fastest_lap',
-                         'Qualifying_Final_Grid_Position',
-                         'Q1_fastest_lap', 'Q2_fastest_lap', 'Q3_fastest_lap']
+    quali_data = dataframes["qualifying_to_race"].copy()
+
+    # Keep column names identical to the CSV
+    quali_cols_to_use = [
+        "season",
+        "race_name",
+        "driver",
+        "team",
+        "fp1_pos",
+        "fp1_time_fastest_lap",
+        "fp2_pos",
+        "fp2_time_fastest_lap",
+        "fp3_pos",
+        "fp3_time_fastest_lap",
+        "Qualifying_Final_Grid_Position",
+        "Q1_time_seconds",
+        "Q1_position",
+        "Q1_fastest_lap",
+        "Q2_time_seconds",
+        "Q2_position",
+        "Q2_fastest_lap",
+        "Q3_time_seconds",
+        "Q3_position",
+        "Q3_fastest_lap",
+        "Race_Finishing_Position",
+        "fastest_lap",
+        "qualifying_pos",
+        "race_pos",
+        "position_gain_from_quali_to_race",
+        "round",
+        "avg_race_pos_3_races",
+        "avg_race_pos_5_races",
+        "avg_race_pos_7_races",
+    ]
+
     quali_data = quali_data[quali_cols_to_use].copy()
-    quali_data.columns = ['season', 'gp_name', 'driver',
-                          'fp1_pos', 'fp1_time',
-                          'fp2_pos', 'fp2_time',
-                          'fp3_pos', 'fp3_time',
-                          'quali_grid_pos',
-                          'q1_time', 'q2_time', 'q3_time']
-    
-    # Drop duplicates (some drivers have multiple entries per race due to team name variations)
-    quali_data = quali_data.drop_duplicates(subset=['season', 'gp_name', 'driver'], keep='first')
-    
+
+    # Only rename the join key to match master
+    quali_data = quali_data.rename(columns={"race_name": "gp_name"})
+
+    # Keep first occurrence if duplicates exist
+    quali_data = quali_data.drop_duplicates(subset=["season", "gp_name", "driver"], keep="first")
+
     master = master.merge(
         quali_data,
-        on=['season', 'gp_name', 'driver'],
-        how='outer'
+        on=["season", "gp_name", "driver"],
+        how="outer",
     )
+
     
     # For rows that came from qualifying data without lap-by-lap data,
     # fill in the race_name using the circuit name (reverse mapping from GP name)

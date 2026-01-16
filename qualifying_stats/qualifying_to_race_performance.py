@@ -476,6 +476,59 @@ def race_performance(year: int, race_name: str) -> pd.DataFrame:
         
     return pd.DataFrame(rows)
 
+def calculate_rolling_avg_positions(df: pd.DataFrame, windows: list = [3, 5, 7]) -> pd.DataFrame:
+    # Make a copy
+    df = df.copy()
+    
+    # Ensure race_pos is numeric
+    df['race_pos'] = pd.to_numeric(df['race_pos'], errors='coerce')
+    
+    # Create a race order column if it doesn't exist
+    # This creates a sequential race number within each season
+    if 'round' not in df.columns:
+        print("Creating sequential round numbers within each season...")
+        df['round'] = df.groupby('season').cumcount() + 1
+    
+    # Sort by driver, season, and round to ensure chronological order
+    print("Sorting data chronologically by driver, season, and round...")
+    df = df.sort_values(['driver', 'season', 'round']).reset_index(drop=True)
+    
+    # For each window size, calculate rolling average
+    for window in windows:
+        col_name = f'avg_race_pos_{window}_races'
+        print(f"\nCalculating {col_name}...")
+        
+        # Group by driver and calculate rolling mean
+        # min_periods=1 ensures we get values even for drivers with fewer races
+        df[col_name] = (
+            df.groupby('driver')['race_pos']
+            .rolling(window=window, min_periods=1)
+            .mean()
+            .reset_index(level=0, drop=True)
+        )
+        
+        # CRITICAL: Shift by 1 to use only PAST races (avoid data leakage)
+        # This ensures the rolling average for a race only includes races BEFORE it
+        df[col_name] = df.groupby('driver')[col_name].shift(1)
+        
+        # Count how many non-null values we have
+        non_null_count = df[col_name].notna().sum()
+        print(f"  ✓ Created {col_name} with {non_null_count} valid values")
+
+    
+    # Show a sample of the results
+    print("\nSample of rolling averages (first 25 rows with valid data):")
+    sample_cols = ['season', 'race_name', 'driver', 'race_pos', 
+                   'avg_race_pos_3_races', 'avg_race_pos_5_races', 
+                   'avg_race_pos_7_races']
+    available_cols = [col for col in sample_cols if col in df.columns]
+    sample_df = df[available_cols].dropna(subset=['race_pos']).head(25)
+    
+    print(sample_df.to_string(index=False))
+    
+    return df
+
+
 def main(start_year: int, end_year: int, start_race_name: str = None, end_race_name: str = None, output_csv: str = "qualifying_to_race_performance.csv"):
     """
     Collect practice, qualifying, and race data.
@@ -590,6 +643,28 @@ def main(start_year: int, end_year: int, start_race_name: str = None, end_race_n
     
     # Sort by season, race_name (round), and driver
     final_df = final_df.sort_values(['season', 'race_name', 'driver']).reset_index(drop=True)
+    
+    final_df["qualifying_pos"] = pd.to_numeric(
+        final_df.get("Qualifying_Final_Grid_Position", np.nan),
+        errors="coerce"
+        )
+
+    # Race position column name differs by weekend type; combine whichever exists
+    if "Race_Finishing_Position" in final_df.columns and "race_final_position" in final_df.columns:
+        final_df["race_pos"] = final_df["Race_Finishing_Position"].combine_first(final_df["race_final_position"])
+    elif "Race_Finishing_Position" in final_df.columns:
+        final_df["race_pos"] = final_df["Race_Finishing_Position"]
+    elif "race_final_position" in final_df.columns:
+        final_df["race_pos"] = final_df["race_final_position"]
+    else:
+        final_df["race_pos"] = np.nan
+
+    final_df["race_pos"] = pd.to_numeric(final_df["race_pos"], errors="coerce")
+
+    # Positive = gained places (qualified 10th, finished 6th => +4)
+    final_df["position_gain_from_quali_to_race"] = final_df["qualifying_pos"] - final_df["race_pos"]
+    
+    final_df = calculate_rolling_avg_positions(final_df, windows=[3, 5, 7])
     
     # Export to CSV
     final_df.to_csv(output_csv, index=False)
