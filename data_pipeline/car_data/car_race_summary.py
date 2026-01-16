@@ -32,7 +32,12 @@ columns = [
 
     # Pace
     "avg_race_pace",                 
-    "clean_air_avg_race_pace",       # using clean_air_avg_laptime from stints          
+    "clean_air_avg_race_pace",       # using clean_air_avg_laptime from stints
+    "grid_avg_race_pace",
+    "pace_delta_to_grid",
+    "pace_zscore_vs_grid",
+    "pace_score_vs_grid",
+    "pace_score_0_100",          
 
     # Speed & Cornering
     "top_speed",                     
@@ -376,7 +381,53 @@ class TeamRaceSummaryLoader:
                 )
         
         return race_summary
-    
+
+    def _add_grid_relative_pace_scores(
+        self,
+        summary_df: pd.DataFrame,
+        pace_col: str = "avg_race_pace",
+        group_cols: List[str] = ["season", "race_name"]
+    ) -> pd.DataFrame:
+        """
+        Add grid-relative pace scoring columns.
+
+        Adds:
+            - grid_avg_race_pace
+            - pace_delta_to_grid
+            - pace_zscore_vs_grid
+            - pace_score_vs_grid
+
+        Notes:
+            - Lower lap time = better
+            - pace_score_vs_grid: higher is better
+        """
+        df = summary_df.copy()
+
+        grp = df.groupby(group_cols)
+
+        # Grid average pace
+        df["grid_avg_race_pace"] = grp[pace_col].transform("mean")
+
+        # Delta to grid (seconds)
+        df["pace_delta_to_grid"] = df[pace_col] - df["grid_avg_race_pace"]
+
+        # Z-score normalization within race
+        grid_std = grp[pace_col].transform("std")
+        df["pace_zscore_vs_grid"] = df["pace_delta_to_grid"] / grid_std
+
+        # Higher = better (faster than grid)
+        df["pace_score_vs_grid"] = -df["pace_zscore_vs_grid"]
+
+        # Safety: handle zero / missing std
+        invalid_std = grid_std.isna() | (grid_std == 0)
+        df.loc[invalid_std, ["pace_zscore_vs_grid", "pace_score_vs_grid"]] = np.nan
+        
+        df["pace_score_0_100"] = grp[pace_col].transform(
+            lambda s: 100 * (1 - s.rank(pct=True, ascending=True))
+        )
+
+        return df
+        
     def generate_summary(self, stint_csv_path: str) -> pd.DataFrame:
         """
         Generate driver-level race summary from stint data.
@@ -457,6 +508,12 @@ class TeamRaceSummaryLoader:
         # Create DataFrame
         summary_df = pd.DataFrame(summary_records)
         
+        summary_df = self._add_grid_relative_pace_scores(summary_df)
+        
+        # Calculate rankings
+        print("Calculating rankings...")
+        summary_df = self._calculate_rankings(summary_df)
+    
         # Ensure all columns from the columns list are present
         for col in columns:
             if col not in summary_df.columns:
@@ -464,10 +521,6 @@ class TeamRaceSummaryLoader:
         
         # Reorder columns to match the defined order
         summary_df = summary_df[columns]
-        
-        # Calculate rankings
-        print("Calculating rankings...")
-        summary_df = self._calculate_rankings(summary_df)
         
         # Sort by season, round, driver for consistency
         summary_df = summary_df.sort_values(['season', 'round', 'driver']).reset_index(drop=True)
