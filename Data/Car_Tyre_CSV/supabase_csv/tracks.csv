@@ -1,0 +1,26 @@
+id,track_name,gp_name,track_score,track_avg_overtakes,track_sc_pct,track_vsc_pct,track_red_pct
+03c25c4b-a99e-4a12-8333-36aa33693b06,Yas Marina Circuit,Abu Dhabi Grand Prix,83.5,206.7,0.0,33.3,0.0
+9dba4fda-97dd-4225-b439-7e6d7b532856,Melbourne,Australian Grand Prix,15.0,85.0,66.7,100.0,33.3
+5c13b638-86bd-4c7f-8f46-f8d37359a6b3,Spielberg,Austrian Grand Prix,66.1,175.7,33.3,100.0,0.0
+3df3e96e-8f0a-4057-9185-b276e4ad2b68,Baku,Azerbaijan Grand Prix,15.6,86.0,33.3,66.7,0.0
+be16511d-34c6-4125-b550-0949b7f82ff4,Sakhir,Bahrain Grand Prix,78.2,197.3,33.3,66.7,0.0
+1eb1571d-d58b-43cc-b67d-89fb8fe83774,Spa-Francorchamps,Belgian Grand Prix,83.5,206.7,33.3,0.0,0.0
+ca8114e7-6063-40cc-8013-0444d3e731a0,Silverstone,British Grand Prix,20.8,95.3,66.7,33.3,33.3
+9598985c-5cbf-4e79-b875-208de55e34a3,Montreal,Canadian Grand Prix,17.8,90.0,100.0,66.7,0.0
+f2b19289-eca1-4715-bafd-d114f589d4b5,Shanghai,Chinese Grand Prix,75.8,193.0,100.0,100.0,0.0
+56f959e0-1c16-40d5-855a-8248af2fcbf2,Zandvoort,Dutch Grand Prix,75.8,193.0,66.7,66.7,33.3
+39a4353c-4ce8-4f9c-b983-51dcb1a606e2,Imola,Emilia Romagna Grand Prix,16.2,87.0,50.0,0.0,0.0
+9c2eee39-b163-4908-98b0-028af331f6a8,Hungaroring,Hungarian Grand Prix,73.7,189.3,0.0,33.3,0.0
+de591c4a-c7dd-469e-af0c-c8af2d26c239,Monza,Italian Grand Prix,59.3,163.7,33.3,33.3,0.0
+45100642-955a-40aa-9d0d-c0a9db0634f1,Suzuka,Japanese Grand Prix,,,,,
+cea2af3f-93bc-49ff-82e0-e818778bf5c8,Las Vegas,Las Vegas Grand Prix,100.0,236.0,50.0,50.0,0.0
+1f510bbd-63b2-4839-bed2-9230c952324c,Mexico City,Mexico City Grand Prix,,,,,
+ad8dde41-6aba-4fae-9da8-90478c0a154d,Miami,Miami Grand Prix,42.0,133.0,66.7,66.7,0.0
+3bc68f84-aac5-4779-83be-7decbf70acca,Monte Carlo,Monaco Grand Prix,0.0,58.3,66.7,33.3,66.7
+4cf836ca-02ff-4f1f-a3ba-e3e50ca8295f,Pre-Season Testing,Pre-Season Testing,,,,,
+e4aa9140-dbec-4b45-a860-d1ea0d0350dc,Lusail,Qatar Grand Prix,85.1,209.5,100.0,50.0,0.0
+efa9e2f8-5bc2-4a9a-acfd-9cc47b8f838f,Jeddah,Saudi Arabian Grand Prix,11.3,78.3,100.0,33.3,0.0
+7676c2bc-4a73-48f7-a7dd-6ebffeaff342,Singapore,Singapore Grand Prix,19.9,93.7,66.7,66.7,0.0
+ebc51513-5837-4f2e-b870-f71d766ff429,Catalunya,Spanish Grand Prix,96.1,229.0,0.0,0.0,0.0
+07f218ec-5781-41f1-8edc-6f63313737e6,Interlagos,São Paulo Grand Prix,49.9,147.0,100.0,66.7,66.7
+1523fc54-78b6-428e-9866-64602d9f47a4,Austin,United States Grand Prix,76.5,194.3,66.7,0.0,0.0
