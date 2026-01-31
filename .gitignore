@@ -216,3 +216,5 @@ data_cache/*.ff1pkl
 .env.*
 !.env.example
 
+# stop traking csvs as they are too big
+*.csv
