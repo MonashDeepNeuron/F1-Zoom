@@ -1,3 +1,4 @@
+// Ripped off https://github.com/gazijarin/Gazi
 import { useRef, useEffect, useState } from "react";
 
 interface Line {
