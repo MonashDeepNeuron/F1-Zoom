@@ -1,8 +1,10 @@
 package f1zoom.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.bind.annotation.GetMapping;
 
 
 
@@ -52,5 +54,13 @@ public class F1Controller {
     }
 
     // 5. AI Prediction model for Next Race winner endpoint
+    // AI prediction - placeholder
+    @GetMapping("/predictions/next-race")
+    public Map<String, Object> getNextRacePrediction() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("status", "model_in_progress");
+        response.put("predictedWinner", "TBD");
+        return response;
+    }
     
 }
