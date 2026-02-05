@@ -1,0 +1,68 @@
+.prediction-carousel-container {
+  margin-bottom: 30px;
+}
+
+/* Fixed container for carousel */
+.carousel {
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-inner,
+.carousel-item {
+  height: 100%;
+}
+
+.carousel-card {
+  background: linear-gradient(135deg, #e10600 0%, #15151e 100%);
+  color: white;
+  padding: 40px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;  /* KEEP: this keeps text centered */
+  gap: 40px;
+}
+
+.carousel-left {
+  flex-shrink: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  align-self: flex-start;
+  padding-top: 0px;
+  margin-top: -80px;  /* ADD THIS - pulls it up beyond normal flow */
+}
+
+.carousel-right {
+  flex: 1;  /* ADD: take remaining space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: left;  /* CHANGE: align text left */
+}
+
+.carousel-card h2 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+}
+
+.carousel-card h3 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+.carousel-card p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 5px 0;
+}
+
+.carousel-card .status {
+  font-style: italic;
+  opacity: 0.7;
+  font-size: 0.95rem;
+}

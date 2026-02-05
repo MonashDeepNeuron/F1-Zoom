@@ -1,0 +1,46 @@
+.next-race-card {
+  height: 100%;
+  min-height: 380px;  /* ADD THIS - match other cards */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;           /* ADD THIS */
+  flex-direction: column;  /* ADD THIS */
+  text-align: center;
+}
+
+.next-race-card .card-header {
+  background: #000000;
+  color: white;
+  border-radius: 12px 12px 0 0;
+  flex-shrink: 0;
+  padding: 20px;  /* ADD THIS - makes the header thicker */
+}
+
+.next-race-card .card-body {
+  flex: 1;  /* ADD THIS */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* Center content vertically */
+}
+
+.next-race-card h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.next-race-card h4 {
+  color: #e10600;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.next-race-card p {
+  margin: 8px 0;
+}
+
+.location {
+  color: #666;
+  font-style: italic;
+}

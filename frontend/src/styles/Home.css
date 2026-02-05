@@ -1,0 +1,33 @@
+.home-dashboard {
+  padding: 30px;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  min-height: 100vh;
+  font-family: 'Titillium Web', sans-serif;
+}
+
+.dashboard-title {
+  text-align: center;
+  color: #e10600;
+  font-weight: bold;
+  margin-bottom: 30px;
+  font-size: 2.5rem;
+}
+
+.dashboard-content {
+  max-width: 1000px;  /* ADD THIS - container for both carousel and cards */
+  margin: 0 auto;
+}
+
+.cards-row {
+  margin-top: 30px;  /* ADD THIS - space between carousel and cards */
+}
+
+.cards-row > div {
+  display: flex;
+  padding: 0 10px;
+}
+
+.cards-row .standings-card,
+.cards-row .next-race-card {
+  width: 100%;
+}
