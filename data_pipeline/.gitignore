@@ -209,4 +209,12 @@ __marimo__/
 #Fast F1 Cache files
 *_cache/
 fastf1_http_cache/
-data_cache/
+data_cache/*.ff1pkl
+*.ff1pkl
+
+# supabase env variables
+.env.*
+!.env.example
+
+# stop traking csvs as they are too big
+*.csv
