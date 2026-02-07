@@ -194,10 +194,51 @@
   padding: 8px;
 }
 
+/* ─── Circuit Nav Arrows ──────────────────────────────────────── */
+.circuit-nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 25;
+  background: rgba(10, 0, 0, 0.6);
+  border: 1px solid rgba(255, 0, 0, 0.3);
+  color: #ff0000;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+
+.circuit-nav-arrow:hover {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.15);
+  color: #ff3333;
+  transform: translateY(-50%) scale(1.1);
+}
+
+.circuit-nav-arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.circuit-nav-prev {
+  left: 24px;
+}
+
+.circuit-nav-next {
+  right: 24px;
+}
+
 /* ─── Scroll Down Indicator ───────────────────────────────────── */
 .scroll-down-indicator {
   position: absolute;
   bottom: 30px;
+
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;
@@ -289,5 +330,23 @@
 
   .circuit-controls-hint {
     display: none;
+  }
+
+  .circuit-nav-arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .circuit-nav-arrow svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  .circuit-nav-prev {
+    left: 12px;
+  }
+
+  .circuit-nav-next {
+    right: 12px;
   }
 }

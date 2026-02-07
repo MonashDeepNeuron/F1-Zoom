@@ -172,6 +172,51 @@
             color: #ff0000;
             padding: 8px;
         }
+
+        /* Circuit nav arrows */
+        .circuit-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 25;
+            background: rgba(10, 0, 0, 0.6);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: #ff0000;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(4px);
+        }
+
+        .circuit-nav-arrow:hover {
+            background: rgba(255, 0, 0, 0.15);
+            border-color: #ff0000;
+            box-shadow: 0 0 20px rgba(255, 0, 0, 0.4), 0 0 40px rgba(255, 0, 0, 0.15);
+            color: #ff3333;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .circuit-nav-arrow:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .circuit-nav-prev {
+            left: 24px;
+        }
+
+        .circuit-nav-next {
+            right: 24px;
+        }
+
+        .circuit-nav-arrow svg {
+            width: 32px;
+            height: 32px;
+        }
     </style>
 </head>
 <body>
@@ -207,6 +252,17 @@
             <span>CLICK + DRAG TO ROTATE</span>
             <span>SCROLL TO ZOOM</span>
         </div>
+
+        <button class="circuit-nav-arrow circuit-nav-prev" id="nav-prev" aria-label="Previous circuit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+        </button>
+        <button class="circuit-nav-arrow circuit-nav-next" id="nav-next" aria-label="Next circuit">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="9 6 15 12 9 18" />
+            </svg>
+        </button>
 
         <div class="track-selector">
             <label>Select Circuit</label>
@@ -251,6 +307,25 @@
 
         selectEl.addEventListener('change', () => {
             loadTrack(selectEl.value);
+        });
+
+        // ─── Nav Arrow Handlers ──────────────────────────────────────────
+        const trackKeysArr = Object.keys(TRACKS);
+
+        document.getElementById('nav-prev').addEventListener('click', () => {
+            const idx = trackKeysArr.indexOf(selectEl.value);
+            const prevIdx = (idx - 1 + trackKeysArr.length) % trackKeysArr.length;
+            const key = trackKeysArr[prevIdx];
+            selectEl.value = key;
+            loadTrack(key);
+        });
+
+        document.getElementById('nav-next').addEventListener('click', () => {
+            const idx = trackKeysArr.indexOf(selectEl.value);
+            const nextIdx = (idx + 1) % trackKeysArr.length;
+            const key = trackKeysArr[nextIdx];
+            selectEl.value = key;
+            loadTrack(key);
         });
 
         // ─── Update Info Panel ───────────────────────────────────────────
@@ -416,25 +491,35 @@
             const curve       = new THREE.CatmullRomCurve3(trackPoints, true, 'catmullrom', 0.2);
             const numSamples  = Math.min(trackPoints.length * 2, 1200);
 
-            // Main track – bright red core
+            // Main track – bright red/yellow core (thicker for 3D presence)
             const trackMesh = new THREE.Mesh(
-                new THREE.TubeGeometry(curve, numSamples, 0.08, 12, true),
+                new THREE.TubeGeometry(curve, numSamples, 0.18, 16, true),
                 new THREE.MeshPhongMaterial({
-                    color: 0xff0000, emissive: 0xff0000, emissiveIntensity: 1.0,
-                    shininess: 100, specular: 0xff3333
+                    color: 0xff2200, emissive: 0xff4400, emissiveIntensity: 1.5,
+                    shininess: 150, specular: 0xffaa33
                 })
             );
             scene.add(trackMesh);
 
-            // Glow layers
-            const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
-            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true), glow1Mat));
+            // Hot white-yellow inner core for brightness
+            const coreMat = new THREE.MeshBasicMaterial({ color: 0xffee88, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.10, 12, true), coreMat));
 
-            const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xffaaaa, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
-            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.25, 12, true), glow2Mat));
+            // Glow layers – progressively larger and softer for neon bloom
+            const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.30, 12, true), glow1Mat));
 
-            const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
-            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.4, 12, true), glow3Mat));
+            const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xff2200, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.50, 12, true), glow2Mat));
+
+            const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.75, 12, true), glow3Mat));
+
+            const glow4Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 1.2, 12, true), glow4Mat));
+
+            const glow5Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending });
+            scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 2.0, 8, true), glow5Mat));
 
             // Turn markers
             const markerGeo = new THREE.SphereGeometry(0.05, 16, 16);
@@ -470,9 +555,9 @@
             scene.add(grid);
 
             // ── Camera & controls (X-axis rotation only) ─────────────────
-            const FIXED_PHI = Math.PI / 5;          // Locked vertical angle
+            const FIXED_PHI = Math.PI / 9;          // Lower angle for side-on view
             let cameraAngleTheta = Math.PI / 4;     // Horizontal orbit angle
-            let cameraDistance    = 30;
+            let cameraDistance    = 35;
             let isDragging        = false;
             let autoRotate        = true;
             const autoRotateSpeed = 0.0015;
@@ -533,10 +618,12 @@
                 updateCamera();
 
                 const t = Date.now() * 0.001;
-                pointLight1.intensity = 2 + Math.sin(t * 1.5) * 0.3;
-                pointLight2.intensity = 1.2 + Math.sin(t * 2) * 0.2;
-                glow1Mat.opacity = 0.6 + Math.sin(t * 3) * 0.1;
-                glow2Mat.opacity = 0.4 + Math.sin(t * 2.5) * 0.08;
+                pointLight1.intensity = 2.5 + Math.sin(t * 1.5) * 0.5;
+                pointLight2.intensity = 1.5 + Math.sin(t * 2) * 0.3;
+                glow1Mat.opacity = 0.7 + Math.sin(t * 3) * 0.12;
+                glow2Mat.opacity = 0.5 + Math.sin(t * 2.5) * 0.1;
+                glow3Mat.opacity = 0.3 + Math.sin(t * 2) * 0.06;
+                glow4Mat.opacity = 0.15 + Math.sin(t * 1.8) * 0.04;
 
                 renderer.render(scene, camera);
             }

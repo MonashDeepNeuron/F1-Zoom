@@ -16,19 +16,19 @@ interface TrackMeta {
 
 const TRACKS: Record<string, TrackMeta> = {
   Melbourne:  { file: "Melbourne",  title: "MELBOURNE",   subtitle: "ALBERT PARK CIRCUIT",                 flag: "\u{1F1E6}\u{1F1FA}", length: "5.278 KM",  laps: 58, corners: 16, distance: "306.124 KM" },
-  Austin:     { file: "Austin",     title: "AUSTIN",      subtitle: "CIRCUIT OF THE AMERICAS",             flag: "\u{1F1FA}\u{1F1F8}", length: "5.513 KM",  laps: 56, corners: 20, distance: "308.405 KM" },
-  Catalunya:  { file: "Catalunya",  title: "BARCELONA",   subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",      flag: "\u{1F1EA}\u{1F1F8}", length: "4.657 KM",  laps: 66, corners: 16, distance: "307.236 KM" },
-  MexicoCity: { file: "MexicoCity", title: "MEXICO CITY", subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ", flag: "\u{1F1F2}\u{1F1FD}", length: "4.304 KM",  laps: 71, corners: 17, distance: "305.354 KM" },
-  Montreal:   { file: "Montreal",   title: "MONTREAL",    subtitle: "CIRCUIT GILLES-VILLENEUVE",           flag: "\u{1F1E8}\u{1F1E6}", length: "4.361 KM",  laps: 70, corners: 14, distance: "305.270 KM" },
-  Monza:      { file: "Monza",      title: "MONZA",       subtitle: "AUTODROMO NAZIONALE MONZA",           flag: "\u{1F1EE}\u{1F1F9}", length: "5.793 KM",  laps: 53, corners: 11, distance: "306.720 KM" },
-  Sakhir:     { file: "Sakhir",     title: "SAKHIR",      subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",       flag: "\u{1F1E7}\u{1F1ED}", length: "5.412 KM",  laps: 57, corners: 15, distance: "308.238 KM" },
-  SaoPaulo:   { file: "SaoPaulo",   title: "S\u00c3O PAULO", subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE", flag: "\u{1F1E7}\u{1F1F7}", length: "4.309 KM",  laps: 71, corners: 15, distance: "305.879 KM" },
   Shanghai:   { file: "Shanghai",   title: "SHANGHAI",    subtitle: "SHANGHAI INTERNATIONAL CIRCUIT",      flag: "\u{1F1E8}\u{1F1F3}", length: "5.451 KM",  laps: 56, corners: 16, distance: "305.066 KM" },
+  Suzuka:     { file: "Suzuka",     title: "SUZUKA",      subtitle: "SUZUKA INTERNATIONAL RACING COURSE",  flag: "\u{1F1EF}\u{1F1F5}", length: "5.807 KM",  laps: 53, corners: 18, distance: "307.471 KM" },
+  Sakhir:     { file: "Sakhir",     title: "SAKHIR",      subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",       flag: "\u{1F1E7}\u{1F1ED}", length: "5.412 KM",  laps: 57, corners: 15, distance: "308.238 KM" },
+  Montreal:   { file: "Montreal",   title: "MONTREAL",    subtitle: "CIRCUIT GILLES-VILLENEUVE",           flag: "\u{1F1E8}\u{1F1E6}", length: "4.361 KM",  laps: 70, corners: 14, distance: "305.270 KM" },
+  Catalunya:  { file: "Catalunya",  title: "BARCELONA",   subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",      flag: "\u{1F1EA}\u{1F1F8}", length: "4.657 KM",  laps: 66, corners: 16, distance: "307.236 KM" },
   Silverstone:{ file: "Silverstone",title: "SILVERSTONE", subtitle: "SILVERSTONE CIRCUIT",                 flag: "\u{1F1EC}\u{1F1E7}", length: "5.891 KM",  laps: 52, corners: 18, distance: "306.198 KM" },
   Spa:        { file: "Spa",        title: "SPA",         subtitle: "CIRCUIT DE SPA-FRANCORCHAMPS",        flag: "\u{1F1E7}\u{1F1EA}", length: "7.004 KM",  laps: 44, corners: 19, distance: "308.052 KM" },
-  Suzuka:     { file: "Suzuka",     title: "SUZUKA",      subtitle: "SUZUKA INTERNATIONAL RACING COURSE",  flag: "\u{1F1EF}\u{1F1F5}", length: "5.807 KM",  laps: 53, corners: 18, distance: "307.471 KM" },
-  YasMarina:  { file: "YasMarina",  title: "YAS MARINA",  subtitle: "YAS MARINA CIRCUIT",                  flag: "\u{1F1E6}\u{1F1EA}", length: "5.281 KM",  laps: 58, corners: 16, distance: "306.183 KM" },
   Zandvoort:  { file: "Zandvoort",  title: "ZANDVOORT",   subtitle: "CIRCUIT ZANDVOORT",                   flag: "\u{1F1F3}\u{1F1F1}", length: "4.259 KM",  laps: 72, corners: 14, distance: "306.587 KM" },
+  Monza:      { file: "Monza",      title: "MONZA",       subtitle: "AUTODROMO NAZIONALE MONZA",           flag: "\u{1F1EE}\u{1F1F9}", length: "5.793 KM",  laps: 53, corners: 11, distance: "306.720 KM" },
+  Austin:     { file: "Austin",     title: "AUSTIN",      subtitle: "CIRCUIT OF THE AMERICAS",             flag: "\u{1F1FA}\u{1F1F8}", length: "5.513 KM",  laps: 56, corners: 20, distance: "308.405 KM" },
+  MexicoCity: { file: "MexicoCity", title: "MEXICO CITY", subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ", flag: "\u{1F1F2}\u{1F1FD}", length: "4.304 KM",  laps: 71, corners: 17, distance: "305.354 KM" },
+  SaoPaulo:   { file: "SaoPaulo",   title: "S\u00c3O PAULO", subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE", flag: "\u{1F1E7}\u{1F1F7}", length: "4.309 KM",  laps: 71, corners: 15, distance: "305.879 KM" },
+  YasMarina:  { file: "YasMarina",  title: "YAS MARINA",  subtitle: "YAS MARINA CIRCUIT",                  flag: "\u{1F1E6}\u{1F1EA}", length: "5.281 KM",  laps: 58, corners: 16, distance: "306.183 KM" },
 };
 
 // ─── Helpers ─────────────────────────────────────────────────────
@@ -76,6 +76,7 @@ export default function CircuitHero() {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationRef = useRef<number | null>(null);
   const scrollRafRef = useRef<number | null>(null);
+  const loadIdRef = useRef(0);
   const sceneStateRef = useRef<{
     isDragging: boolean;
     autoRotate: boolean;
@@ -177,25 +178,35 @@ export default function CircuitHero() {
     const curve = new THREE.CatmullRomCurve3(trackPoints, true, 'catmullrom', 0.2);
     const numSamples = Math.min(trackPoints.length * 2, 1200);
 
-    // Main track – bright red core
+    // Main track – bright red/yellow core (thicker for 3D presence)
     const trackMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, numSamples, 0.08, 12, true),
+      new THREE.TubeGeometry(curve, numSamples, 0.18, 16, true),
       new THREE.MeshPhongMaterial({
-        color: 0xff0000, emissive: 0xff0000, emissiveIntensity: 1.0,
-        shininess: 100, specular: 0xff3333,
+        color: 0xff2200, emissive: 0xff4400, emissiveIntensity: 1.5,
+        shininess: 150, specular: 0xffaa33,
       })
     );
     scene.add(trackMesh);
 
-    // Glow layers
-    const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true), glow1Mat));
+    // Hot white-yellow inner core for brightness
+    const coreMat = new THREE.MeshBasicMaterial({ color: 0xffee88, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.10, 12, true), coreMat));
 
-    const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xffaaaa, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.25, 12, true), glow2Mat));
+    // Glow layers – progressively larger and softer for neon bloom
+    const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.30, 12, true), glow1Mat));
 
-    const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.4, 12, true), glow3Mat));
+    const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xff2200, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.50, 12, true), glow2Mat));
+
+    const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.75, 12, true), glow3Mat));
+
+    const glow4Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 1.2, 12, true), glow4Mat));
+
+    const glow5Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 2.0, 8, true), glow5Mat));
 
     // Turn markers
     const markerGeo = new THREE.SphereGeometry(0.05, 16, 16);
@@ -231,11 +242,11 @@ export default function CircuitHero() {
     scene.add(grid);
 
     // ── Camera & controls ────────────────────────────────────────
-    const FIXED_PHI = Math.PI / 5;
+    const FIXED_PHI = Math.PI / 9;          // Lower angle for side-on view
     const autoRotateSpeed = 0.0015;
     const state = sceneStateRef.current;
     state.cameraAngleTheta = Math.PI / 4;
-    state.cameraDistance = 30;
+    state.cameraDistance = 35;
     state.autoRotate = true;
 
     function updateCamera() {
@@ -305,10 +316,12 @@ export default function CircuitHero() {
       updateCamera();
 
       const t = Date.now() * 0.001;
-      pointLight1.intensity = 2 + Math.sin(t * 1.5) * 0.3;
-      pointLight2.intensity = 1.2 + Math.sin(t * 2) * 0.2;
-      glow1Mat.opacity = 0.6 + Math.sin(t * 3) * 0.1;
-      glow2Mat.opacity = 0.4 + Math.sin(t * 2.5) * 0.08;
+      pointLight1.intensity = 2.5 + Math.sin(t * 1.5) * 0.5;
+      pointLight2.intensity = 1.5 + Math.sin(t * 2) * 0.3;
+      glow1Mat.opacity = 0.7 + Math.sin(t * 3) * 0.12;
+      glow2Mat.opacity = 0.5 + Math.sin(t * 2.5) * 0.1;
+      glow3Mat.opacity = 0.3 + Math.sin(t * 2) * 0.06;
+      glow4Mat.opacity = 0.15 + Math.sin(t * 1.8) * 0.04;
 
       renderer.render(scene, camera);
     }
@@ -320,9 +333,6 @@ export default function CircuitHero() {
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
     window.addEventListener('resize', onResize);
-
-    // Hide loading
-    setTimeout(() => setLoading(false), 400);
 
     animate();
 
@@ -340,33 +350,33 @@ export default function CircuitHero() {
   }, []);
 
   // Load track data
-  const loadTrack = useCallback((trackKey: string) => {
+  const loadTrack = useCallback(async (trackKey: string) => {
     const meta = TRACKS[trackKey];
     if (!meta) return;
 
     setLoading(true);
-    setTrackMeta(meta);
     teardownScene();
+    const currentLoadId = ++loadIdRef.current;
 
-    // Fetch the CSV data from the JS file
-    // The JS files call window.__onTrackData(csvString)
-    (window as unknown as Record<string, unknown>).__onTrackData = (csvData: string) => {
+    try {
+      const response = await fetch(`/circuit_3d/TrackCoordinateCSVs/${meta.file}.csv`, {
+        cache: 'no-store',
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to load track CSV: ${meta.file}`);
+      }
+      const csvData = await response.text();
+      if (currentLoadId !== loadIdRef.current) return;
       initTrackScene(csvData);
-    };
-
-    // Remove old script
-    const oldScript = document.getElementById('track-data-script');
-    if (oldScript) oldScript.remove();
-
-    // Inject new script
-    const script = document.createElement('script');
-    script.id = 'track-data-script';
-    script.src = `/circuit_3d/TrackCoordinateJS/${meta.file}.js`;
-    script.onerror = () => {
-      console.error('[F1] Failed to load track file:', meta.file);
+      requestAnimationFrame(() => {
+        if (currentLoadId !== loadIdRef.current) return;
+        setTrackMeta(meta);
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error('[F1] Failed to load track file:', meta.file, error);
       setLoading(false);
-    };
-    document.body.appendChild(script);
+    }
   }, [teardownScene, initTrackScene]);
 
   // Initial load
@@ -374,13 +384,29 @@ export default function CircuitHero() {
     loadTrack('Melbourne');
     return () => {
       teardownScene();
-      const oldScript = document.getElementById('track-data-script');
-      if (oldScript) oldScript.remove();
     };
   }, [loadTrack, teardownScene]);
 
+  const trackKeys = Object.keys(TRACKS);
+
   const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = e.target.value;
+    setSelectedTrack(key);
+    loadTrack(key);
+  };
+
+  const handlePrevTrack = () => {
+    const idx = trackKeys.indexOf(selectedTrack);
+    const prevIdx = (idx - 1 + trackKeys.length) % trackKeys.length;
+    const key = trackKeys[prevIdx];
+    setSelectedTrack(key);
+    loadTrack(key);
+  };
+
+  const handleNextTrack = () => {
+    const idx = trackKeys.indexOf(selectedTrack);
+    const nextIdx = (idx + 1) % trackKeys.length;
+    const key = trackKeys[nextIdx];
     setSelectedTrack(key);
     loadTrack(key);
   };
@@ -442,6 +468,18 @@ export default function CircuitHero() {
         {!loading && (
           <div className="circuit-country-flag">{trackMeta.flag}</div>
         )}
+
+        {/* Prev / Next circuit nav arrows */}
+        <button className="circuit-nav-arrow circuit-nav-prev" onClick={handlePrevTrack} aria-label="Previous circuit">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button className="circuit-nav-arrow circuit-nav-next" onClick={handleNextTrack} aria-label="Next circuit">
+          <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <polyline points="9 6 15 12 9 18" />
+          </svg>
+        </button>
 
         {/* Controls hint */}
         <div className="circuit-controls-hint">
