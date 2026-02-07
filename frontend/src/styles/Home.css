@@ -1,33 +1,64 @@
+/* ─── Full Page Wrapper ──────────────────────────────────────── */
+.home-page {
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* ─── Dashboard Section ──────────────────────────────────────── */
 .home-dashboard {
-  padding: 30px;
-  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  position: relative;
+  z-index: 2;
+  padding: 80px 40px 60px;
+  background: #000000;
   min-height: 100vh;
-  font-family: 'Titillium Web', sans-serif;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
 }
 
 .dashboard-title {
   text-align: center;
-  color: #e10600;
-  font-weight: bold;
-  margin-bottom: 30px;
-  font-size: 2.5rem;
+  color: #ff0000;
+  font-weight: 900;
+  margin-bottom: 50px;
+  font-size: 2.8rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  /* Fade-in on scroll */
+  animation: fadeSlideUp 0.8s ease-out both;
 }
 
 .dashboard-content {
-  max-width: 1000px;  /* ADD THIS - container for both carousel and cards */
+  max-width: 1100px;
   margin: 0 auto;
 }
 
+.prediction-carousel-container {
+  animation: fadeSlideUp 0.9s ease-out 0.15s both;
+}
+
 .cards-row {
-  margin-top: 30px;  /* ADD THIS - space between carousel and cards */
+  margin-top: 40px;
+  animation: fadeSlideUp 1s ease-out 0.3s both;
 }
 
 .cards-row > div {
   display: flex;
-  padding: 0 10px;
+  padding: 0 12px;
 }
 
 .cards-row .standings-card,
 .cards-row .next-race-card {
   width: 100%;
+}
+
+/* ─── Fade-slide-up entrance ─────────────────────────────────── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

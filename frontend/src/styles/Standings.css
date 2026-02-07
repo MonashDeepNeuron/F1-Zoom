@@ -1,35 +1,46 @@
 .standings-card {
   height: 100%;
-  min-height: 380px;  /* ADD THIS - force all cards to same height */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border: none;
-  border-radius: 12px;  
+  min-height: 380px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 4px;
   overflow: hidden;
-  display: flex;           /* ADD THIS */
-  flex-direction: column;  /* ADD THIS */
-  height: 100%;
-  text-align: center; 
-  background: linear-gradient(135deg, #e10600 0%, #15151e 100%);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: radial-gradient(ellipse at bottom, #0a0000 0%, #000000 100%);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.standings-card:hover {
+  border-color: rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.2);
 }
 
 .standings-card .card-header {
-  background: #000000;
+  background: rgba(255, 0, 0, 0.08);
   color: white;
   flex-shrink: 0;
-  padding: 20px;  /* ADD THIS - makes the header thicker */
-  border-radius: 12px 12px 0 0; 
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 4px 4px 0 0;
 }
 
 .standings-card .card-body {
-  flex: 1;  /* ADD THIS - body fills remaining space */
-  display: flex;                /* ADD THIS */
-  flex-direction: column;       /* ADD THIS */
-  justify-content: center;      /* ADD THIS - centers content vertically */
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
 }
 
 .standings-card h3 {
   margin: 0;
-  font-size: 1.2rem;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  font-weight: 700;
 }
 
 .standings-list {
@@ -41,8 +52,13 @@
 .standings-list li {
   display: flex;
   justify-content: space-between;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+  transition: background 0.2s;
+}
+
+.standings-list li:hover {
+  background: rgba(255, 0, 0, 0.05);
 }
 
 .standings-list li:last-child {
@@ -50,19 +66,22 @@
 }
 
 .position {
-  font-weight: bold;
-  color: white;
+  font-weight: 900;
+  color: #ff0000;
   min-width: 30px;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
 }
 
 .driver-name,
 .team-name {
   flex: 1;
   padding: 0 10px;
-  color: white;
+  color: #ffffff;
+  letter-spacing: 0.5px;
 }
 
 .points {
-  font-weight: bold;
-  color: white;
+  font-weight: 900;
+  color: #ff0000;
+  text-shadow: 0 0 8px rgba(255, 0, 0, 0.4);
 }

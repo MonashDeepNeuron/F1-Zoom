@@ -1,0 +1,293 @@
+/* ─── Circuit Hero Section ─────────────────────────────────────── */
+.circuit-hero-section {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  z-index: 1;
+  background: #000000;
+}
+
+.circuit-hero-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  background: radial-gradient(ellipse at center, #1a0000 0%, #000000 100%);
+  will-change: transform, opacity;
+}
+
+.circuit-hero-container canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ─── Bottom gradient overlay (seamless bleed into dashboard) ── */
+.circuit-hero-gradient-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40%;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, #000000 100%);
+  pointer-events: none;
+  z-index: 15;
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* ─── Loading ─────────────────────────────────────────────────── */
+.circuit-loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ff0000;
+  font-size: 28px;
+  font-weight: bold;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  z-index: 10;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+/* ─── Info Panel ──────────────────────────────────────────────── */
+.circuit-info-panel {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  z-index: 10;
+  color: white;
+}
+
+.circuit-title {
+  font-size: 56px;
+  color: #ff0000;
+  margin-bottom: 5px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+.circuit-subtitle {
+  font-size: 18px;
+  color: #ffffff;
+  margin-bottom: 20px;
+  letter-spacing: 2px;
+  opacity: 0.9;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+.circuit-stats {
+  display: flex;
+  gap: 40px;
+  margin-top: 20px;
+}
+
+.circuit-stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.circuit-stat-label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 5px;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+.circuit-stat-value {
+  font-size: 28px;
+  color: #ff0000;
+  font-weight: 900;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+/* ─── Country Flag ────────────────────────────────────────────── */
+.circuit-country-flag {
+  position: absolute;
+  top: 40px;
+  right: 40px;
+  font-size: 48px;
+  opacity: 0.8;
+  z-index: 10;
+}
+
+/* ─── Controls Hint ───────────────────────────────────────────── */
+.circuit-controls-hint {
+  position: absolute;
+  bottom: 40px;
+  right: 40px;
+  color: #666;
+  font-size: 13px;
+  text-align: right;
+  letter-spacing: 1px;
+  z-index: 10;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+.circuit-controls-hint span {
+  display: block;
+  margin: 5px 0;
+}
+
+/* ─── Track Selector ──────────────────────────────────────────── */
+.circuit-track-selector {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.circuit-track-selector label {
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+.circuit-track-selector select {
+  background: rgba(20, 0, 0, 0.85);
+  color: #ff0000;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  padding: 10px 16px;
+  font-size: 16px;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-weight: 900;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  outline: none;
+  min-width: 260px;
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23ff0000'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 12px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.circuit-track-selector select:hover {
+  border-color: rgba(255, 0, 0, 0.8);
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+}
+
+.circuit-track-selector select:focus {
+  border-color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+}
+
+.circuit-track-selector select option {
+  background: #0a0000;
+  color: #ff0000;
+  padding: 8px;
+}
+
+/* ─── Scroll Down Indicator ───────────────────────────────────── */
+.scroll-down-indicator {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  animation: bounce 2s ease-in-out infinite;
+  padding: 10px 20px;
+}
+
+.scroll-arrow {
+  width: 24px;
+  height: 24px;
+  border-right: 2px solid rgba(255, 0, 0, 0.7);
+  border-bottom: 2px solid rgba(255, 0, 0, 0.7);
+  transform: rotate(45deg);
+  transition: border-color 0.3s;
+}
+
+.scroll-down-indicator:hover .scroll-arrow {
+  border-color: #ff0000;
+}
+
+.scroll-text {
+  font-size: 11px;
+  color: rgba(255, 0, 0, 0.6);
+  letter-spacing: 3px;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-weight: 700;
+  transition: color 0.3s;
+}
+
+.scroll-down-indicator:hover .scroll-text {
+  color: #ff0000;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(10px);
+  }
+}
+
+/* ─── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .circuit-title {
+    font-size: 32px;
+  }
+
+  .circuit-subtitle {
+    font-size: 14px;
+  }
+
+  .circuit-stats {
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .circuit-stat-value {
+    font-size: 20px;
+  }
+
+  .circuit-info-panel {
+    top: 20px;
+    left: 20px;
+  }
+
+  .circuit-country-flag {
+    top: 20px;
+    right: 20px;
+    font-size: 32px;
+  }
+
+  .circuit-track-selector {
+    bottom: 20px;
+    left: 20px;
+  }
+
+  .circuit-track-selector select {
+    min-width: 200px;
+    font-size: 14px;
+  }
+
+  .circuit-controls-hint {
+    display: none;
+  }
+}
