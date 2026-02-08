@@ -156,104 +156,260 @@ export default function CircuitHero() {
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // ── Lighting ─────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    // ── Lighting (subtle — most colour comes from emissive materials) ──
+    scene.add(new THREE.AmbientLight(0xffffff, 0.08));
 
-    const pointLight1 = new THREE.PointLight(0xff0000, 2, 80);
+    // Overhead key light
+    const pointLight1 = new THREE.PointLight(0xff2200, 1.2, 60);
     pointLight1.position.set(0, 25, 0);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0xff0000, 1.2, 60);
+    // Accent fills for subtle depth
+    const pointLight2 = new THREE.PointLight(0xff3300, 0.6, 50);
     pointLight2.position.set(20, 15, 20);
     scene.add(pointLight2);
 
-    const pointLight3 = new THREE.PointLight(0xffffff, 0.8, 50);
+    const pointLight3 = new THREE.PointLight(0xff4400, 0.4, 40);
     pointLight3.position.set(-20, 12, -20);
     scene.add(pointLight3);
+
+    // Gentle side lights
+    const sideLight1 = new THREE.PointLight(0xff1100, 0.5, 50);
+    sideLight1.position.set(25, 10, 0);
+    scene.add(sideLight1);
+
+    const sideLight2 = new THREE.PointLight(0xff1100, 0.5, 50);
+    sideLight2.position.set(-25, 10, 0);
+    scene.add(sideLight2);
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
     const trackPoints = buildScaledPoints(rawPoints);
 
-    const curve = new THREE.CatmullRomCurve3(trackPoints, true, 'catmullrom', 0.2);
-    const numSamples = Math.min(trackPoints.length * 2, 1200);
+    const TRACK_ELEVATION = 2.5;
 
-    // Main track – bright red/yellow core (thicker for 3D presence)
+    // Elevated curve for main track (raised above ground for 3D depth)
+    const elevatedPoints = trackPoints.map(p =>
+      new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
+    );
+    const curve = new THREE.CatmullRomCurve3(elevatedPoints, true, 'catmullrom', 0.2);
+
+    // Shadow/bottom edge sits just below the main track
+    const SHADOW_Y = TRACK_ELEVATION - 1.4;
+
+    const shadowPoints = trackPoints.map(p =>
+      new THREE.Vector3(p.x, SHADOW_Y, p.z)
+    );
+    const shadowCurve = new THREE.CatmullRomCurve3(shadowPoints, true, 'catmullrom', 0.2);
+
+    const numSamples = Math.min(trackPoints.length * 2, 1200);
+    const shadowSamples = Math.min(trackPoints.length, 600);
+
+    // ── Connecting wall (ribbon between top track and bottom edge) ──
+    const wallSegments = 500;
+    const wallPositions: number[] = [];
+    const wallUvs: number[] = [];
+    const wallIndices: number[] = [];
+
+    for (let i = 0; i <= wallSegments; i++) {
+      const t = i / wallSegments;
+      const topPt = curve.getPointAt(t);
+      const u = t;
+
+      // Top vertex (at main track level)
+      wallPositions.push(topPt.x, topPt.y, topPt.z);
+      wallUvs.push(u, 1);
+
+      // Bottom vertex (at shadow level)
+      wallPositions.push(topPt.x, SHADOW_Y, topPt.z);
+      wallUvs.push(u, 0);
+    }
+
+    for (let i = 0; i < wallSegments; i++) {
+      const tl = i * 2;
+      const bl = i * 2 + 1;
+      const tr = (i + 1) * 2;
+      const br = (i + 1) * 2 + 1;
+      wallIndices.push(tl, bl, tr);
+      wallIndices.push(tr, bl, br);
+    }
+
+    const wallGeo = new THREE.BufferGeometry();
+    wallGeo.setAttribute('position', new THREE.Float32BufferAttribute(wallPositions, 3));
+    wallGeo.setAttribute('uv', new THREE.Float32BufferAttribute(wallUvs, 2));
+    wallGeo.setIndex(wallIndices);
+    wallGeo.computeVertexNormals();
+
+    // Dark semi-transparent wall
+    const wallMat = new THREE.MeshBasicMaterial({
+      color: 0x330500, transparent: true, opacity: 0.22,
+      side: THREE.DoubleSide, depthWrite: false,
+    });
+    scene.add(new THREE.Mesh(wallGeo, wallMat));
+
+    // Slightly brighter inner wall for depth
+    const wallGlowMat = new THREE.MeshBasicMaterial({
+      color: 0x441000, transparent: true, opacity: 0.10,
+      side: THREE.DoubleSide, depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
+
+    // ── Shadow / bottom edge track ───────────────────────────────
+    // Bottom edge core — mirrors the main track shape
+    const shadowCoreMat = new THREE.MeshBasicMaterial({
+      color: 0x661100, transparent: true, opacity: 0.4,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true), shadowCoreMat
+    ));
+
+    // Soft glow around bottom edge
+    const shadowMidMat = new THREE.MeshBasicMaterial({
+      color: 0x330500, transparent: true, opacity: 0.15,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true), shadowMidMat
+    ));
+
+    // Faint outer glow on bottom edge
+    const shadowOuterMat = new THREE.MeshBasicMaterial({
+      color: 0x220300, transparent: true, opacity: 0.06,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true), shadowOuterMat
+    ));
+
+    // ── Main track (elevated top edge) ───────────────────────────
+    // Solid track body
     const trackMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, numSamples, 0.18, 16, true),
+      new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true),
       new THREE.MeshPhongMaterial({
-        color: 0xff2200, emissive: 0xff4400, emissiveIntensity: 1.5,
-        shininess: 150, specular: 0xffaa33,
+        color: 0xff2200,
+        emissive: 0xff3300,
+        emissiveIntensity: 1.8,
+        shininess: 150,
+        specular: 0xff8844,
       })
     );
     scene.add(trackMesh);
 
-    // Hot white-yellow inner core for brightness
-    const coreMat = new THREE.MeshBasicMaterial({ color: 0xffee88, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.10, 12, true), coreMat));
+    // Bright inner core — thin hot centre
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0xffcc88,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true), coreMat));
 
-    // Glow layers – progressively larger and softer for neon bloom
-    const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.30, 12, true), glow1Mat));
+    // Tight glow layer 1 — close halo
+    const glow1Mat = new THREE.MeshBasicMaterial({
+      color: 0xff3300, transparent: true, opacity: 0.35,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true), glow1Mat));
 
-    const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xff2200, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.50, 12, true), glow2Mat));
+    // Glow layer 2 — soft spread
+    const glow2Mat = new THREE.MeshBasicMaterial({
+      color: 0xff1100, transparent: true, opacity: 0.15,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true), glow2Mat));
 
-    const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.75, 12, true), glow3Mat));
+    // Glow layer 3 — faint outer aura
+    const glow3Mat = new THREE.MeshBasicMaterial({
+      color: 0xff0000, transparent: true, opacity: 0.06,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true), glow3Mat));
 
-    const glow4Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 1.2, 12, true), glow4Mat));
-
-    const glow5Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 2.0, 8, true), glow5Mat));
-
-    // Turn markers
+    // ── Turn markers with drop lines ─────────────────────────────
     const markerGeo = new THREE.SphereGeometry(0.05, 16, 16);
-    const markerMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1.2, shininess: 100 });
+    const markerMat = new THREE.MeshPhongMaterial({
+      color: 0xffffff,
+      emissive: 0xffeeaa,
+      emissiveIntensity: 1.2,
+      shininess: 120
+    });
+    const markers: THREE.Mesh[] = [];
+    const markerGlows: THREE.Mesh[] = [];
+
     const step = Math.max(1, Math.floor(trackPoints.length / 14));
     for (let i = 0; i < trackPoints.length; i += step) {
-      const marker = new THREE.Mesh(markerGeo, markerMat);
-      marker.position.copy(trackPoints[i]);
-      marker.position.y = 0.15;
-      scene.add(marker);
+      const p = trackPoints[i];
 
+      // Marker dot on top track
+      const marker = new THREE.Mesh(markerGeo, markerMat);
+      marker.position.set(p.x, TRACK_ELEVATION + 0.12, p.z);
+      scene.add(marker);
+      markers.push(marker);
+
+      // Small tight halo
       const glowSphere = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1, 16, 16),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending })
+        new THREE.SphereGeometry(0.09, 10, 10),
+        new THREE.MeshBasicMaterial({
+          color: 0xff6633, transparent: true, opacity: 0.2,
+          blending: THREE.AdditiveBlending
+        })
       );
       glowSphere.position.copy(marker.position);
       scene.add(glowSphere);
+      markerGlows.push(glowSphere);
+
+      // Drop line from marker down past bottom edge
+      const dropLineGeo = new THREE.BufferGeometry().setFromPoints([
+        new THREE.Vector3(p.x, TRACK_ELEVATION + 0.12, p.z),
+        new THREE.Vector3(p.x, SHADOW_Y - 0.6, p.z)
+      ]);
+      const dropLine = new THREE.Line(dropLineGeo, new THREE.LineBasicMaterial({
+        color: 0xff2200, transparent: true, opacity: 0.15
+      }));
+      scene.add(dropLine);
+
+      // Small glow dot at the bottom of drop line
+      const shadowDot = new THREE.Mesh(
+        new THREE.SphereGeometry(0.05, 8, 8),
+        new THREE.MeshBasicMaterial({
+          color: 0x661100, transparent: true, opacity: 0.25,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      shadowDot.position.set(p.x, SHADOW_Y - 0.6, p.z);
+      scene.add(shadowDot);
     }
 
-    // Platform & grid
+    // Platform & grid (below shadow level — very subtle)
     const platform = new THREE.Mesh(
       new THREE.CircleGeometry(30, 64),
-      new THREE.MeshBasicMaterial({ color: 0x0a0000, transparent: true, opacity: 0.3 })
+      new THREE.MeshBasicMaterial({ color: 0x050000, transparent: true, opacity: 0.12 })
     );
     platform.rotation.x = -Math.PI / 2;
-    platform.position.y = -0.2;
+    platform.position.y = SHADOW_Y - 1.0;
     scene.add(platform);
 
-    const grid = new THREE.GridHelper(60, 60, 0x330000, 0x110000);
-    grid.position.y = -0.19;
-    (grid.material as THREE.Material).opacity = 0.2;
+    const grid = new THREE.GridHelper(60, 60, 0x220000, 0x0a0000);
+    grid.position.y = SHADOW_Y - 0.99;
+    (grid.material as THREE.Material).opacity = 0.10;
     (grid.material as THREE.Material).transparent = true;
     scene.add(grid);
 
     // ── Camera & controls ────────────────────────────────────────
-    const FIXED_PHI = Math.PI / 9;          // Lower angle for side-on view
-    const autoRotateSpeed = 0.0015;
+    const FIXED_PHI = Math.PI / 3;         // Much lower angle for side-on view (try values: /8 = very low, /10 = low, /12 = moderate, /15 = higher)
+    const autoRotateSpeed = 0.002;
     const state = sceneStateRef.current;
     state.cameraAngleTheta = Math.PI / 4;
-    state.cameraDistance = 35;
+    state.cameraDistance = 32;
     state.autoRotate = true;
 
     function updateCamera() {
       camera.position.x = state.cameraDistance * Math.sin(FIXED_PHI) * Math.cos(state.cameraAngleTheta);
       camera.position.y = state.cameraDistance * Math.cos(FIXED_PHI);
       camera.position.z = state.cameraDistance * Math.sin(FIXED_PHI) * Math.sin(state.cameraAngleTheta);
-      camera.lookAt(0, 0, 0);
+      camera.lookAt(0, 1.8, 0);
     }
     updateCamera();
 
@@ -309,19 +465,51 @@ export default function CircuitHero() {
     renderer.domElement.addEventListener('touchmove', onTouchMove);
     renderer.domElement.addEventListener('touchend', onTouchEnd);
 
-    // ── Animation loop ───────────────────────────────────────────
+    // ── Animation loop with enhanced dynamics ────────────────────
     function animate() {
       animationRef.current = requestAnimationFrame(animate);
       if (state.autoRotate) state.cameraAngleTheta += autoRotateSpeed;
       updateCamera();
 
       const t = Date.now() * 0.001;
-      pointLight1.intensity = 2.5 + Math.sin(t * 1.5) * 0.5;
-      pointLight2.intensity = 1.5 + Math.sin(t * 2) * 0.3;
-      glow1Mat.opacity = 0.7 + Math.sin(t * 3) * 0.12;
-      glow2Mat.opacity = 0.5 + Math.sin(t * 2.5) * 0.1;
-      glow3Mat.opacity = 0.3 + Math.sin(t * 2) * 0.06;
-      glow4Mat.opacity = 0.15 + Math.sin(t * 1.8) * 0.04;
+      
+      // Subtle light pulsing
+      pointLight1.intensity = 1.2 + Math.sin(t * 1.8) * 0.15;
+      pointLight2.intensity = 0.6 + Math.sin(t * 2.3) * 0.08;
+      pointLight3.intensity = 0.4 + Math.sin(t * 1.6) * 0.06;
+      sideLight1.intensity = 0.5 + Math.sin(t * 2.7) * 0.08;
+      sideLight2.intensity = 0.5 + Math.cos(t * 2.7) * 0.08;
+      
+      // Pulsing track core
+      coreMat.opacity = 0.8 + Math.sin(t * 3) * 0.1;
+      
+      // Animated glow layers
+      glow1Mat.opacity = 0.35 + Math.sin(t * 2.5) * 0.06;
+      glow2Mat.opacity = 0.15 + Math.sin(t * 2.0) * 0.04;
+      glow3Mat.opacity = 0.06 + Math.sin(t * 1.5) * 0.02;
+
+      // Animate shadow reflection layers
+      shadowCoreMat.opacity = 0.35 + Math.sin(t * 1.8) * 0.05;
+      shadowMidMat.opacity = 0.18 + Math.sin(t * 1.5) * 0.03;
+      shadowOuterMat.opacity = 0.08 + Math.sin(t * 1.2) * 0.02;
+      
+      // Breathing effect on main track
+      trackMesh.material.emissiveIntensity = 1.8 + Math.sin(t * 2.5) * 0.2;
+      
+      // Subtle marker animation
+      markers.forEach((marker, i) => {
+        const offset = i * 0.5;
+        marker.scale.setScalar(1.0 + Math.sin(t * 2 + offset) * 0.08);
+        (marker.material as THREE.MeshPhongMaterial).emissiveIntensity = 
+          1.2 + Math.sin(t * 2 + offset) * 0.2;
+      });
+      
+      markerGlows.forEach((glow, i) => {
+        const offset = i * 0.5;
+        glow.scale.setScalar(1.0 + Math.sin(t * 2 + offset) * 0.1);
+        (glow.material as THREE.MeshBasicMaterial).opacity = 
+          0.25 + Math.sin(t * 2 + offset) * 0.08;
+      });
 
       renderer.render(scene, camera);
     }
