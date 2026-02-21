@@ -1,9 +1,11 @@
 import { useRef, useEffect, useState, useCallback } from 'react';
 import * as THREE from 'three';
+import { getCircuitsBySeason } from '../services/api';
 import '../styles/CircuitHero.css';
 
 // ─── Track Metadata ──────────────────────────────────────────────
 interface TrackMeta {
+  key: string;
   file: string;
   title: string;
   subtitle: string;
@@ -12,37 +14,97 @@ interface TrackMeta {
   laps: number;
   corners: number;
   distance: string;
+  round?: number | null;
+  grandPrixName?: string | null;
+  weekendFormat?: 'normal' | 'sprint' | null;
+  sessions: CircuitSession[];
 }
 
-const TRACKS: Record<string, TrackMeta> = {
-  Melbourne:  { file: "Melbourne",  title: "MELBOURNE",   subtitle: "ALBERT PARK CIRCUIT",                 flag: "\u{1F1E6}\u{1F1FA}", length: "5.278 KM",  laps: 58, corners: 16, distance: "306.124 KM" },
-  Austin:     { file: "Austin",     title: "AUSTIN",      subtitle: "CIRCUIT OF THE AMERICAS",             flag: "\u{1F1FA}\u{1F1F8}", length: "5.513 KM",  laps: 56, corners: 20, distance: "308.405 KM" },
-  Catalunya:  { file: "Catalunya",  title: "BARCELONA",   subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",      flag: "\u{1F1EA}\u{1F1F8}", length: "4.657 KM",  laps: 66, corners: 16, distance: "307.236 KM" },
-  MexicoCity: { file: "MexicoCity", title: "MEXICO CITY", subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ", flag: "\u{1F1F2}\u{1F1FD}", length: "4.304 KM",  laps: 71, corners: 17, distance: "305.354 KM" },
-  Montreal:   { file: "Montreal",   title: "MONTREAL",    subtitle: "CIRCUIT GILLES-VILLENEUVE",           flag: "\u{1F1E8}\u{1F1E6}", length: "4.361 KM",  laps: 70, corners: 14, distance: "305.270 KM" },
-  Monza:      { file: "Monza",      title: "MONZA",       subtitle: "AUTODROMO NAZIONALE MONZA",           flag: "\u{1F1EE}\u{1F1F9}", length: "5.793 KM",  laps: 53, corners: 11, distance: "306.720 KM" },
-  Sakhir:     { file: "Sakhir",     title: "SAKHIR",      subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",       flag: "\u{1F1E7}\u{1F1ED}", length: "5.412 KM",  laps: 57, corners: 15, distance: "308.238 KM" },
-  SaoPaulo:   { file: "SaoPaulo",   title: "S\u00c3O PAULO", subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE", flag: "\u{1F1E7}\u{1F1F7}", length: "4.309 KM",  laps: 71, corners: 15, distance: "305.879 KM" },
-  Shanghai:   { file: "Shanghai",   title: "SHANGHAI",    subtitle: "SHANGHAI INTERNATIONAL CIRCUIT",      flag: "\u{1F1E8}\u{1F1F3}", length: "5.451 KM",  laps: 56, corners: 16, distance: "305.066 KM" },
-  Silverstone:{ file: "Silverstone",title: "SILVERSTONE", subtitle: "SILVERSTONE CIRCUIT",                 flag: "\u{1F1EC}\u{1F1E7}", length: "5.891 KM",  laps: 52, corners: 18, distance: "306.198 KM" },
-  Spa:        { file: "Spa",        title: "SPA",         subtitle: "CIRCUIT DE SPA-FRANCORCHAMPS",        flag: "\u{1F1E7}\u{1F1EA}", length: "7.004 KM",  laps: 44, corners: 19, distance: "308.052 KM" },
-  Suzuka:     { file: "Suzuka",     title: "SUZUKA",      subtitle: "SUZUKA INTERNATIONAL RACING COURSE",  flag: "\u{1F1EF}\u{1F1F5}", length: "5.807 KM",  laps: 53, corners: 18, distance: "307.471 KM" },
-  YasMarina:  { file: "YasMarina",  title: "YAS MARINA",  subtitle: "YAS MARINA CIRCUIT",                  flag: "\u{1F1E6}\u{1F1EA}", length: "5.281 KM",  laps: 58, corners: 16, distance: "306.183 KM" },
-  Zandvoort:  { file: "Zandvoort",  title: "ZANDVOORT",   subtitle: "CIRCUIT ZANDVOORT",                   flag: "\u{1F1F3}\u{1F1F1}", length: "4.259 KM",  laps: 72, corners: 14, distance: "306.587 KM" },
-};
+interface CircuitSession {
+  sessionType: SessionField;
+  sessionDateAest?: string | null;
+  sessionTimeAest?: string | null;
+  sessionStartUtc?: string | null;
+}
+
+interface CircuitApiRow {
+  code: string;
+  fileSlug: string;
+  title: string;
+  subtitle: string;
+  flag: string;
+  lengthKm: number;
+  laps: number;
+  corners: number;
+  distanceKm: number;
+  season?: number | null;
+  round?: number | null;
+  grandPrixName?: string | null;
+  weekendFormat?: 'normal' | 'sprint' | null;
+  sessions?: CircuitSession[];
+}
+
+interface SessionRow {
+  key: SessionField;
+  label: string;
+  startAt: Date;
+}
+
+type SessionField =
+  | 'practice_1'
+  | 'practice_2'
+  | 'practice_3'
+  | 'sprint_qualifying'
+  | 'qualifying'
+  | 'sprint'
+  | 'race';
+
+const SESSION_SEQUENCE: { key: SessionField; label: string }[] = [
+  { key: 'practice_1', label: 'Practice 1' },
+  { key: 'practice_2', label: 'Practice 2' },
+  { key: 'practice_3', label: 'Practice 3' },
+  { key: 'sprint_qualifying', label: 'Sprint Qualifying' },
+  { key: 'qualifying', label: 'Qualifying' },
+  { key: 'sprint', label: 'Sprint' },
+  { key: 'race', label: 'Race' },
+];
+
+const AEST_TIME_ZONE = 'Australia/Brisbane';
+const AEST_DAY_FORMATTER = new Intl.DateTimeFormat('en-AU', {
+  timeZone: AEST_TIME_ZONE,
+  day: 'numeric',
+  month: 'short',
+});
+const AEST_TIME_FORMATTER = new Intl.DateTimeFormat('en-AU', {
+  timeZone: AEST_TIME_ZONE,
+  hour: 'numeric',
+  minute: '2-digit',
+  hour12: false,
+});
+
+const DEFAULT_SEASON = new Date().getFullYear();
 
 // ─── Helpers ─────────────────────────────────────────────────────
-function parseTrackData(csv: string): { x: number; y: number }[] {
+function parseTrackData(raw: string): { x: number; y: number; isCorner: boolean }[] {
+  // Strip JS template-literal wrapper if present (`const trackData = \`...\`;`)
+  let csv = raw;
+  const wrapperMatch = raw.match(/`([\s\S]*)`/);
+  if (wrapperMatch) csv = wrapperMatch[1];
+
   const lines = csv.trim().split('\n');
-  const points: { x: number; y: number }[] = [];
-  for (let i = 1; i < lines.length; i++) {
+  const points: { x: number; y: number; isCorner: boolean }[] = [];
+  for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    if (line.length === 0) continue;
+    if (line.length === 0 || line.startsWith('#')) continue;
     const parts = line.split(',');
     if (parts.length >= 2) {
       const x = parseFloat(parts[0]);
       const y = parseFloat(parts[1]);
-      if (!isNaN(x) && !isNaN(y)) points.push({ x, y });
+      if (!isNaN(x) && !isNaN(y)) {
+        // 5th column (index 4) is is_corner flag produced by csv_reading.py
+        const isCorner = parts.length >= 5 ? parts[4].trim() === '1' : false;
+        points.push({ x, y, isCorner });
+      }
     }
   }
   return points;
@@ -69,6 +131,77 @@ function buildScaledPoints(rawPoints: { x: number; y: number }[]): THREE.Vector3
   );
 }
 
+function countryCodeToFlag(code: string): string {
+  if (!/^[A-Za-z]{2}$/.test(code)) return code;
+  return code
+    .toUpperCase()
+    .split('')
+    .map((char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
+    .join('');
+}
+
+function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
+  return {
+    key: row.code,
+    file: row.fileSlug,
+    title: row.title,
+    subtitle: row.subtitle,
+    flag: countryCodeToFlag(row.flag),
+    length: `${Number(row.lengthKm).toFixed(3)} KM`,
+    laps: row.laps,
+    corners: row.corners,
+    distance: `${Number(row.distanceKm).toFixed(3)} KM`,
+    round: row.round ?? null,
+    grandPrixName: row.grandPrixName ?? null,
+    weekendFormat: row.weekendFormat ?? null,
+    sessions: row.sessions ?? [],
+  };
+}
+
+function parseSessionTime(session?: CircuitSession): Date | null {
+  if (!session) return null;
+  if (session.sessionStartUtc) {
+    const fromUtc = new Date(session.sessionStartUtc);
+    return Number.isNaN(fromUtc.getTime()) ? null : fromUtc;
+  }
+
+  if (!session.sessionDateAest || !session.sessionTimeAest) return null;
+  const normalizedTime = session.sessionTimeAest.length === 5
+    ? `${session.sessionTimeAest}:00`
+    : session.sessionTimeAest;
+  const asAest = new Date(`${session.sessionDateAest}T${normalizedTime}+10:00`);
+  return Number.isNaN(asAest.getTime()) ? null : asAest;
+}
+
+function getSessionRows(track: TrackMeta | null): SessionRow[] {
+  if (!track) return [];
+
+  const sessionMap = new Map<SessionField, CircuitSession>();
+  track.sessions.forEach((session) => {
+    sessionMap.set(session.sessionType, session);
+  });
+
+  const rows: SessionRow[] = [];
+  SESSION_SEQUENCE.forEach(({ key, label }) => {
+    const startAt = parseSessionTime(sessionMap.get(key));
+    if (startAt) rows.push({ key, label, startAt });
+  });
+
+  rows.sort((a, b) => a.startAt.getTime() - b.startAt.getTime());
+  return rows;
+}
+
+function formatAestDayMonth(date: Date): string {
+  const parts = AEST_DAY_FORMATTER.formatToParts(date);
+  const day = parts.find(p => p.type === 'day')?.value ?? '';
+  const month = (parts.find(p => p.type === 'month')?.value ?? '').replace('.', '').toUpperCase();
+  return `${day} ${month}`.trim();
+}
+
+function formatAestTime(date: Date): string {
+  return AEST_TIME_FORMATTER.format(date);
+}
+
 // ─── Component ───────────────────────────────────────────────────
 export default function CircuitHero() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -76,6 +209,8 @@ export default function CircuitHero() {
   const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
   const animationRef = useRef<number | null>(null);
   const scrollRafRef = useRef<number | null>(null);
+  const loadIdRef = useRef(0);
+  const tracksRef = useRef<TrackMeta[]>([]);
   const sceneStateRef = useRef<{
     isDragging: boolean;
     autoRotate: boolean;
@@ -90,10 +225,13 @@ export default function CircuitHero() {
     cameraDistance: 30,
   });
 
-  const [selectedTrack, setSelectedTrack] = useState('Melbourne');
-  const [trackMeta, setTrackMeta] = useState<TrackMeta>(TRACKS['Melbourne']);
+  const [tracks, setTracks] = useState<TrackMeta[]>([]);
+  const [selectedTrack, setSelectedTrack] = useState('');
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [scheduleLoading, setScheduleLoading] = useState(true);
+  const [scheduleError, setScheduleError] = useState<string | null>(null);
+  const [nowMs, setNowMs] = useState(() => Date.now());
 
   // ── Scroll-driven parallax: fade/scale the hero as user scrolls past ──
   useEffect(() => {
@@ -155,94 +293,286 @@ export default function CircuitHero() {
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // ── Lighting ─────────────────────────────────────────────────
-    scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+    // ── Lighting (subtle — most colour comes from emissive materials) ──
+    scene.add(new THREE.AmbientLight(0xffffff, 0.08));
 
-    const pointLight1 = new THREE.PointLight(0xff0000, 2, 80);
+    // Overhead key light
+    const pointLight1 = new THREE.PointLight(0xff2200, 1.2, 60);
     pointLight1.position.set(0, 25, 0);
     scene.add(pointLight1);
 
-    const pointLight2 = new THREE.PointLight(0xff0000, 1.2, 60);
+    // Accent fills for subtle depth
+    const pointLight2 = new THREE.PointLight(0xff3300, 0.6, 50);
     pointLight2.position.set(20, 15, 20);
     scene.add(pointLight2);
 
-    const pointLight3 = new THREE.PointLight(0xffffff, 0.8, 50);
+    const pointLight3 = new THREE.PointLight(0xff4400, 0.4, 40);
     pointLight3.position.set(-20, 12, -20);
     scene.add(pointLight3);
+
+    // Gentle side lights
+    const sideLight1 = new THREE.PointLight(0xff1100, 0.5, 50);
+    sideLight1.position.set(25, 10, 0);
+    scene.add(sideLight1);
+
+    const sideLight2 = new THREE.PointLight(0xff1100, 0.5, 50);
+    sideLight2.position.set(-25, 10, 0);
+    scene.add(sideLight2);
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
     const trackPoints = buildScaledPoints(rawPoints);
 
-    const curve = new THREE.CatmullRomCurve3(trackPoints, true, 'catmullrom', 0.2);
-    const numSamples = Math.min(trackPoints.length * 2, 1200);
+    // Compute scaling params (mirrors buildScaledPoints) for turn marker placement
+    let _minX = Infinity, _maxX = -Infinity, _minY = Infinity, _maxY = -Infinity;
+    rawPoints.forEach(p => {
+      if (p.x < _minX) _minX = p.x;
+      if (p.x > _maxX) _maxX = p.x;
+      if (p.y < _minY) _minY = p.y;
+      if (p.y > _maxY) _maxY = p.y;
+    });
+    const _scale = 25 / Math.max(_maxX - _minX, _maxY - _minY);
+    const _centreX = (_minX + _maxX) / 2;
+    const _centreY = (_minY + _maxY) / 2;
 
-    // Main track – bright red core
+    const TRACK_ELEVATION = 2.5;
+
+    // Elevated curve for main track (raised above ground for 3D depth)
+    const elevatedPoints = trackPoints.map(p =>
+      new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
+    );
+    const curve = new THREE.CatmullRomCurve3(elevatedPoints, true, 'catmullrom', 0.2);
+
+    // Shadow/bottom edge sits just below the main track
+    const SHADOW_Y = TRACK_ELEVATION - 1.4;
+
+    const shadowPoints = trackPoints.map(p =>
+      new THREE.Vector3(p.x, SHADOW_Y, p.z)
+    );
+    const shadowCurve = new THREE.CatmullRomCurve3(shadowPoints, true, 'catmullrom', 0.2);
+
+    const numSamples = Math.min(trackPoints.length * 2, 1200);
+    const shadowSamples = Math.min(trackPoints.length, 600);
+
+    // ── Connecting wall (ribbon between top track and bottom edge) ──
+    const wallSegments = 500;
+    const wallPositions: number[] = [];
+    const wallUvs: number[] = [];
+    const wallIndices: number[] = [];
+
+    for (let i = 0; i <= wallSegments; i++) {
+      const t = i / wallSegments;
+      const topPt = curve.getPointAt(t);
+      const u = t;
+
+      // Top vertex (at main track level)
+      wallPositions.push(topPt.x, topPt.y, topPt.z);
+      wallUvs.push(u, 1);
+
+      // Bottom vertex (at shadow level)
+      wallPositions.push(topPt.x, SHADOW_Y, topPt.z);
+      wallUvs.push(u, 0);
+    }
+
+    for (let i = 0; i < wallSegments; i++) {
+      const tl = i * 2;
+      const bl = i * 2 + 1;
+      const tr = (i + 1) * 2;
+      const br = (i + 1) * 2 + 1;
+      wallIndices.push(tl, bl, tr);
+      wallIndices.push(tr, bl, br);
+    }
+
+    const wallGeo = new THREE.BufferGeometry();
+    wallGeo.setAttribute('position', new THREE.Float32BufferAttribute(wallPositions, 3));
+    wallGeo.setAttribute('uv', new THREE.Float32BufferAttribute(wallUvs, 2));
+    wallGeo.setIndex(wallIndices);
+    wallGeo.computeVertexNormals();
+
+    // Dark semi-transparent wall
+    const wallMat = new THREE.MeshBasicMaterial({
+      color: 0x330500, transparent: true, opacity: 0.22,
+      side: THREE.DoubleSide, depthWrite: false,
+    });
+    scene.add(new THREE.Mesh(wallGeo, wallMat));
+
+    // Slightly brighter inner wall for depth
+    const wallGlowMat = new THREE.MeshBasicMaterial({
+      color: 0x441000, transparent: true, opacity: 0.10,
+      side: THREE.DoubleSide, depthWrite: false,
+      blending: THREE.AdditiveBlending,
+    });
+    scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
+
+    // ── Shadow / bottom edge track ───────────────────────────────
+    // Bottom edge core — mirrors the main track shape
+    const shadowCoreMat = new THREE.MeshBasicMaterial({
+      color: 0x661100, transparent: true, opacity: 0.4,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true), shadowCoreMat
+    ));
+
+    // Soft glow around bottom edge
+    const shadowMidMat = new THREE.MeshBasicMaterial({
+      color: 0x330500, transparent: true, opacity: 0.15,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true), shadowMidMat
+    ));
+
+    // Faint outer glow on bottom edge
+    const shadowOuterMat = new THREE.MeshBasicMaterial({
+      color: 0x220300, transparent: true, opacity: 0.06,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(
+      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true), shadowOuterMat
+    ));
+
+    // ── Main track (elevated top edge) ───────────────────────────
+    // Solid track body
     const trackMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, numSamples, 0.08, 12, true),
+      new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true),
       new THREE.MeshPhongMaterial({
-        color: 0xff0000, emissive: 0xff0000, emissiveIntensity: 1.0,
-        shininess: 100, specular: 0xff3333,
+        color: 0xff2200,
+        emissive: 0xff3300,
+        emissiveIntensity: 1.8,
+        shininess: 150,
+        specular: 0xff8844,
       })
     );
     scene.add(trackMesh);
 
-    // Glow layers
-    const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.6, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true), glow1Mat));
+    // Bright inner core — thin hot centre
+    const coreMat = new THREE.MeshBasicMaterial({
+      color: 0xffcc88,
+      transparent: true,
+      opacity: 0.85,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true), coreMat));
 
-    const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xffaaaa, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.25, 12, true), glow2Mat));
+    // Tight glow layer 1 — close halo
+    const glow1Mat = new THREE.MeshBasicMaterial({
+      color: 0xff3300, transparent: true, opacity: 0.35,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true), glow1Mat));
 
-    const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.4, 12, true), glow3Mat));
+    // Glow layer 2 — soft spread
+    const glow2Mat = new THREE.MeshBasicMaterial({
+      color: 0xff1100, transparent: true, opacity: 0.15,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true), glow2Mat));
 
-    // Turn markers
-    const markerGeo = new THREE.SphereGeometry(0.05, 16, 16);
-    const markerMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1.2, shininess: 100 });
-    const step = Math.max(1, Math.floor(trackPoints.length / 14));
-    for (let i = 0; i < trackPoints.length; i += step) {
-      const marker = new THREE.Mesh(markerGeo, markerMat);
-      marker.position.copy(trackPoints[i]);
-      marker.position.y = 0.15;
-      scene.add(marker);
+    // Glow layer 3 — faint outer aura
+    const glow3Mat = new THREE.MeshBasicMaterial({
+      color: 0xff0000, transparent: true, opacity: 0.06,
+      blending: THREE.AdditiveBlending
+    });
+    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true), glow3Mat));
 
-      const glowSphere = new THREE.Mesh(
-        new THREE.SphereGeometry(0.1, 16, 16),
-        new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending })
-      );
-      glowSphere.position.copy(marker.position);
-      scene.add(glowSphere);
+    // ── Turn number markers ─────────────────────────────────────
+    const MARKER_Y = TRACK_ELEVATION + 2.4;
+
+    function makeTurnLabel(num: number): THREE.Sprite {
+      const size = 128;
+      const canvas = document.createElement('canvas');
+      canvas.width = size;
+      canvas.height = size;
+      const ctx = canvas.getContext('2d')!;
+
+      // Outer glow halo
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, 56, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(255, 34, 0, 0.12)';
+      ctx.fill();
+
+      // Solid background circle
+      ctx.beginPath();
+      ctx.arc(size / 2, size / 2, 38, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(12, 0, 0, 0.92)';
+      ctx.fill();
+      ctx.strokeStyle = '#ff2200';
+      ctx.lineWidth = 4;
+      ctx.stroke();
+
+      // Turn number text
+      const fontSize = num >= 10 ? 34 : 42;
+      ctx.fillStyle = '#ff6644';
+      ctx.font = `bold ${fontSize}px Arial`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.shadowColor = '#ff3300';
+      ctx.shadowBlur = 10;
+      ctx.fillText(String(num), size / 2, size / 2 + 2);
+
+      const texture = new THREE.CanvasTexture(canvas);
+      const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+      const sprite = new THREE.Sprite(mat);
+      sprite.scale.set(3.0, 3.0, 1);
+      return sprite;
     }
 
-    // Platform & grid
+    let turnNum = 0;
+    for (let i = 0; i < rawPoints.length; i++) {
+      const curr = rawPoints[i];
+      const prev = i > 0 ? rawPoints[i - 1] : null;
+      // Turn entry: is_corner transitions from false → true
+      if (curr.isCorner && (!prev || !prev.isCorner)) {
+        turnNum++;
+        const sx = (curr.x - _centreX) * _scale;
+        const sz = (curr.y - _centreY) * _scale;
+
+        // Small glowing dot at track level
+        const dotGeo = new THREE.SphereGeometry(0.22, 8, 8);
+        const dotMat = new THREE.MeshBasicMaterial({
+          color: 0xffaa00, transparent: true, opacity: 0.9,
+          blending: THREE.AdditiveBlending,
+        });
+        const dot = new THREE.Mesh(dotGeo, dotMat);
+        dot.position.set(sx, TRACK_ELEVATION + 0.35, sz);
+        scene.add(dot);
+
+        // Numbered label sprite floating above the track
+        const label = makeTurnLabel(turnNum);
+        label.position.set(sx, MARKER_Y, sz);
+        scene.add(label);
+      }
+    }
+
+    // Platform & grid (below shadow level — very subtle)
     const platform = new THREE.Mesh(
       new THREE.CircleGeometry(30, 64),
-      new THREE.MeshBasicMaterial({ color: 0x0a0000, transparent: true, opacity: 0.3 })
+      new THREE.MeshBasicMaterial({ color: 0x050000, transparent: true, opacity: 0.12 })
     );
     platform.rotation.x = -Math.PI / 2;
-    platform.position.y = -0.2;
+    platform.position.y = SHADOW_Y - 1.0;
     scene.add(platform);
 
-    const grid = new THREE.GridHelper(60, 60, 0x330000, 0x110000);
-    grid.position.y = -0.19;
-    (grid.material as THREE.Material).opacity = 0.2;
+    const grid = new THREE.GridHelper(60, 60, 0x220000, 0x0a0000);
+    grid.position.y = SHADOW_Y - 0.99;
+    (grid.material as THREE.Material).opacity = 0.10;
     (grid.material as THREE.Material).transparent = true;
     scene.add(grid);
 
     // ── Camera & controls ────────────────────────────────────────
-    const FIXED_PHI = Math.PI / 5;
-    const autoRotateSpeed = 0.0015;
+    const FIXED_PHI = Math.PI / 3;         // Much lower angle for side-on view (try values: /8 = very low, /10 = low, /12 = moderate, /15 = higher)
+    const autoRotateSpeed = 0.002;
     const state = sceneStateRef.current;
     state.cameraAngleTheta = Math.PI / 4;
-    state.cameraDistance = 30;
+    state.cameraDistance = 32;
     state.autoRotate = true;
 
     function updateCamera() {
       camera.position.x = state.cameraDistance * Math.sin(FIXED_PHI) * Math.cos(state.cameraAngleTheta);
       camera.position.y = state.cameraDistance * Math.cos(FIXED_PHI);
       camera.position.z = state.cameraDistance * Math.sin(FIXED_PHI) * Math.sin(state.cameraAngleTheta);
-      camera.lookAt(0, 0, 0);
+      camera.lookAt(0, 1.8, 0);
     }
     updateCamera();
 
@@ -298,18 +628,37 @@ export default function CircuitHero() {
     renderer.domElement.addEventListener('touchmove', onTouchMove);
     renderer.domElement.addEventListener('touchend', onTouchEnd);
 
-    // ── Animation loop ───────────────────────────────────────────
+    // ── Animation loop with enhanced dynamics ────────────────────
     function animate() {
       animationRef.current = requestAnimationFrame(animate);
       if (state.autoRotate) state.cameraAngleTheta += autoRotateSpeed;
       updateCamera();
 
       const t = Date.now() * 0.001;
-      pointLight1.intensity = 2 + Math.sin(t * 1.5) * 0.3;
-      pointLight2.intensity = 1.2 + Math.sin(t * 2) * 0.2;
-      glow1Mat.opacity = 0.6 + Math.sin(t * 3) * 0.1;
-      glow2Mat.opacity = 0.4 + Math.sin(t * 2.5) * 0.08;
+      
+      // Subtle light pulsing
+      pointLight1.intensity = 1.2 + Math.sin(t * 1.8) * 0.15;
+      pointLight2.intensity = 0.6 + Math.sin(t * 2.3) * 0.08;
+      pointLight3.intensity = 0.4 + Math.sin(t * 1.6) * 0.06;
+      sideLight1.intensity = 0.5 + Math.sin(t * 2.7) * 0.08;
+      sideLight2.intensity = 0.5 + Math.cos(t * 2.7) * 0.08;
+      
+      // Pulsing track core
+      coreMat.opacity = 0.8 + Math.sin(t * 3) * 0.1;
+      
+      // Animated glow layers
+      glow1Mat.opacity = 0.35 + Math.sin(t * 2.5) * 0.06;
+      glow2Mat.opacity = 0.15 + Math.sin(t * 2.0) * 0.04;
+      glow3Mat.opacity = 0.06 + Math.sin(t * 1.5) * 0.02;
 
+      // Animate shadow reflection layers
+      shadowCoreMat.opacity = 0.35 + Math.sin(t * 1.8) * 0.05;
+      shadowMidMat.opacity = 0.18 + Math.sin(t * 1.5) * 0.03;
+      shadowOuterMat.opacity = 0.08 + Math.sin(t * 1.2) * 0.02;
+      
+      // Breathing effect on main track
+      trackMesh.material.emissiveIntensity = 1.8 + Math.sin(t * 2.5) * 0.2;
+      
       renderer.render(scene, camera);
     }
 
@@ -320,9 +669,6 @@ export default function CircuitHero() {
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
     window.addEventListener('resize', onResize);
-
-    // Hide loading
-    setTimeout(() => setLoading(false), 400);
 
     animate();
 
@@ -340,47 +686,139 @@ export default function CircuitHero() {
   }, []);
 
   // Load track data
-  const loadTrack = useCallback((trackKey: string) => {
-    const meta = TRACKS[trackKey];
+  const loadTrack = useCallback(async (trackKey: string, sourceTracks?: TrackMeta[]) => {
+    const availableTracks = sourceTracks ?? tracksRef.current;
+    const meta = availableTracks.find((track) => track.key === trackKey);
     if (!meta) return;
 
     setLoading(true);
-    setTrackMeta(meta);
     teardownScene();
+    const currentLoadId = ++loadIdRef.current;
 
-    // Fetch the CSV data from the JS file
-    // The JS files call window.__onTrackData(csvString)
-    (window as unknown as Record<string, unknown>).__onTrackData = (csvData: string) => {
+    try {
+      const response = await fetch(`/circuit_3d/TrackCoordinateJS/${meta.file}.js`, {
+        cache: 'no-store',
+      });
+      if (!response.ok) {
+        throw new Error(`Failed to load track data: ${meta.file}`);
+      }
+      const csvData = await response.text();
+      if (currentLoadId !== loadIdRef.current) return;
       initTrackScene(csvData);
-    };
-
-    // Remove old script
-    const oldScript = document.getElementById('track-data-script');
-    if (oldScript) oldScript.remove();
-
-    // Inject new script
-    const script = document.createElement('script');
-    script.id = 'track-data-script';
-    script.src = `/circuit_3d/TrackCoordinateJS/${meta.file}.js`;
-    script.onerror = () => {
-      console.error('[F1] Failed to load track file:', meta.file);
+      requestAnimationFrame(() => {
+        if (currentLoadId !== loadIdRef.current) return;
+        setLoading(false);
+      });
+    } catch (error) {
+      console.error('[F1] Failed to load track file:', meta.file, error);
       setLoading(false);
-    };
-    document.body.appendChild(script);
+    }
   }, [teardownScene, initTrackScene]);
 
-  // Initial load
   useEffect(() => {
-    loadTrack('Melbourne');
+    tracksRef.current = tracks;
+  }, [tracks]);
+
+  useEffect(() => {
+    let active = true;
+    setScheduleLoading(true);
+    setScheduleError(null);
+
+    getCircuitsBySeason(DEFAULT_SEASON)
+      .then((res) => {
+        if (!active) return;
+        const rows: CircuitApiRow[] = Array.isArray(res.data) ? res.data : [];
+        const mapped = rows
+          .map(mapApiCircuitToTrack)
+          .sort((a, b) => (a.round ?? 999) - (b.round ?? 999));
+
+        tracksRef.current = mapped;
+        setTracks(mapped);
+
+        if (mapped.length === 0) {
+          setScheduleError('No circuits found in database.');
+          setLoading(false);
+          return;
+        }
+
+        const initialTrack = mapped[0];
+        setSelectedTrack(initialTrack.key);
+        loadTrack(initialTrack.key, mapped);
+      })
+      .catch((error) => {
+        console.error('[F1] Failed to load circuits from database:', error);
+        if (!active) return;
+        tracksRef.current = [];
+        setTracks([]);
+        let detail = '';
+        if (typeof error === 'object' && error !== null) {
+          const maybeAxios = error as {
+            response?: { data?: unknown; status?: number };
+            message?: string;
+          };
+          if (typeof maybeAxios.response?.data === 'string') {
+            detail = maybeAxios.response.data;
+          } else if (
+            typeof maybeAxios.response?.data === 'object' &&
+            maybeAxios.response?.data !== null &&
+            'message' in (maybeAxios.response.data as Record<string, unknown>) &&
+            typeof (maybeAxios.response.data as Record<string, unknown>).message === 'string'
+          ) {
+            detail = (maybeAxios.response.data as Record<string, string>).message;
+          } else if (typeof maybeAxios.message === 'string') {
+            detail = maybeAxios.message;
+          }
+        }
+        setScheduleError(
+          detail
+            ? `Unable to load circuits from database. ${detail}`
+            : 'Unable to load circuits from database.'
+        );
+        setLoading(false);
+      })
+      .finally(() => {
+        if (active) setScheduleLoading(false);
+      });
+
     return () => {
+      active = false;
       teardownScene();
-      const oldScript = document.getElementById('track-data-script');
-      if (oldScript) oldScript.remove();
     };
   }, [loadTrack, teardownScene]);
 
+  useEffect(() => {
+    const timerId = window.setInterval(() => {
+      setNowMs(Date.now());
+    }, 1000);
+
+    return () => window.clearInterval(timerId);
+  }, []);
+
+  const trackKeys = tracks.map((track) => track.key);
+  const selectedTrackMeta = tracks.find((track) => track.key === selectedTrack) ?? null;
+  const sessionRows = getSessionRows(selectedTrackMeta);
+  const nextSessionIndex = sessionRows.findIndex((session) => session.startAt.getTime() > nowMs);
+
   const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = e.target.value;
+    setSelectedTrack(key);
+    loadTrack(key);
+  };
+
+  const handlePrevTrack = () => {
+    const idx = trackKeys.indexOf(selectedTrack);
+    if (idx === -1 || trackKeys.length === 0) return;
+    const prevIdx = (idx - 1 + trackKeys.length) % trackKeys.length;
+    const key = trackKeys[prevIdx];
+    setSelectedTrack(key);
+    loadTrack(key);
+  };
+
+  const handleNextTrack = () => {
+    const idx = trackKeys.indexOf(selectedTrack);
+    if (idx === -1 || trackKeys.length === 0) return;
+    const nextIdx = (idx + 1) % trackKeys.length;
+    const key = trackKeys[nextIdx];
     setSelectedTrack(key);
     loadTrack(key);
   };
@@ -412,35 +850,107 @@ export default function CircuitHero() {
           <div className="circuit-loading">LOADING CIRCUIT...</div>
         )}
 
+        {!loading && !selectedTrackMeta && (
+          <div className="circuit-loading">
+            {scheduleError ?? 'No circuit data available.'}
+          </div>
+        )}
+
         {/* Info panel */}
-        {!loading && (
+        {!loading && selectedTrackMeta && (
           <div className="circuit-info-panel">
-            <h1 className="circuit-title">{trackMeta.title}</h1>
-            <div className="circuit-subtitle">{trackMeta.subtitle}</div>
+            <h1 className="circuit-title">{selectedTrackMeta.title}</h1>
+            <div className="circuit-subtitle">{selectedTrackMeta.subtitle}</div>
             <div className="circuit-stats">
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Length</span>
-                <span className="circuit-stat-value">{trackMeta.length}</span>
+                <span className="circuit-stat-value">{selectedTrackMeta.length}</span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Laps</span>
-                <span className="circuit-stat-value">{trackMeta.laps}</span>
+                <span className="circuit-stat-value">{selectedTrackMeta.laps}</span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Corners</span>
-                <span className="circuit-stat-value">{trackMeta.corners}</span>
+                <span className="circuit-stat-value">{selectedTrackMeta.corners}</span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Distance</span>
-                <span className="circuit-stat-value">{trackMeta.distance}</span>
+                <span className="circuit-stat-value">{selectedTrackMeta.distance}</span>
               </div>
             </div>
           </div>
         )}
 
-        {/* Country flag */}
-        {!loading && (
-          <div className="circuit-country-flag">{trackMeta.flag}</div>
+        {/* Race weekend schedule */}
+        {!loading && selectedTrackMeta && (
+          <div className="circuit-schedule-panel">
+            <div className="circuit-schedule-topbar">
+              <span className="circuit-schedule-heading">Schedule</span>
+              <span className="circuit-schedule-flag">{selectedTrackMeta.flag}</span>
+            </div>
+            <div className="circuit-schedule-race">
+              {selectedTrackMeta.grandPrixName ?? `${selectedTrackMeta.title} GP`}
+            </div>
+            <div className="circuit-schedule-columns">
+              <span>Event</span>
+              <span>Date</span>
+              <span>Time</span>
+            </div>
+
+            {scheduleLoading && (
+              <div className="circuit-schedule-empty">Loading sessions...</div>
+            )}
+
+            {!scheduleLoading && scheduleError && (
+              <div className="circuit-schedule-empty">{scheduleError}</div>
+            )}
+
+            {!scheduleLoading && !scheduleError && sessionRows.length === 0 && (
+              <div className="circuit-schedule-empty">No session times available.</div>
+            )}
+
+            {!scheduleLoading && !scheduleError && sessionRows.length > 0 && (
+              <div className="circuit-schedule-list">
+                {sessionRows.map((session, index) => {
+                  const sessionStartMs = session.startAt.getTime();
+                  const isNext = nextSessionIndex === index;
+                  const isPast = sessionStartMs <= nowMs;
+                  const rowClassName = [
+                    'circuit-schedule-row',
+                    isNext ? 'is-next' : '',
+                    isPast ? 'is-past' : '',
+                  ].filter(Boolean).join(' ');
+
+                  return (
+                    <div key={`${session.key}-${sessionStartMs}`} className={rowClassName}>
+                      <span>{session.label}</span>
+                      <span>{formatAestDayMonth(session.startAt)}</span>
+                      <span>{formatAestTime(session.startAt)}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            <div className="circuit-schedule-footnote">*AEST (UTC+10)</div>
+          </div>
+        )}
+
+        {/* Prev / Next circuit nav arrows */}
+        {trackKeys.length > 0 && (
+          <>
+            <button className="circuit-nav-arrow circuit-nav-prev" onClick={handlePrevTrack} aria-label="Previous circuit">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+            <button className="circuit-nav-arrow circuit-nav-next" onClick={handleNextTrack} aria-label="Next circuit">
+              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 6 15 12 9 18" />
+              </svg>
+            </button>
+          </>
         )}
 
         {/* Controls hint */}
@@ -450,14 +960,16 @@ export default function CircuitHero() {
         </div>
 
         {/* Track selector */}
-        <div className="circuit-track-selector">
-          <label>Select Circuit</label>
-          <select value={selectedTrack} onChange={handleTrackChange}>
-            {Object.entries(TRACKS).map(([key, meta]) => (
-              <option key={key} value={key}>{meta.title}</option>
-            ))}
-          </select>
-        </div>
+        {trackKeys.length > 0 && (
+          <div className="circuit-track-selector">
+            <label>Select Circuit</label>
+            <select value={selectedTrack} onChange={handleTrackChange}>
+              {tracks.map((track) => (
+                <option key={track.key} value={track.key}>{track.title}</option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {/* Bottom gradient overlay for seamless bleed into dashboard */}
