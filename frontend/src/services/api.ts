@@ -14,5 +14,8 @@ export const getNextRace = () =>
 export const getLastRace = () =>
     axios.get(`${API_BASE}/races/last`)
 
+export const getRaceCalendar = () =>
+    axios.get(`${API_BASE}/races/calendar`)
+
 export const getPrediction = () => 
   axios.get(`${API_BASE}/predictions/next-race`);

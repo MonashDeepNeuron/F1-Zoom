@@ -53,7 +53,14 @@ public class F1Controller {
         return restTemplate.getForObject(url, Object.class);
     }
 
-    // 5. AI Prediction model for Next Race winner endpoint
+    // 5. Full Season Calendar endpoint
+    @GetMapping("/races/calendar")
+    public Object getRaceCalendar() {
+        String url = "https://api.jolpi.ca/ergast/f1/current.json";
+        return restTemplate.getForObject(url, Object.class);
+    }
+
+    // 6. AI Prediction model for Next Race winner endpoint
     // AI prediction - placeholder
     @GetMapping("/predictions/next-race")
     public Map<String, Object> getNextRacePrediction() {
