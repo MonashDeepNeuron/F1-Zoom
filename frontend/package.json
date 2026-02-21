@@ -15,6 +15,7 @@
     "react": "^19.2.0",
     "react-bootstrap": "^2.10.10",
     "react-dom": "^19.2.0",
+    "react-simple-maps": "^3.0.0",
     "three": "^0.182.0"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
+    "@types/react-simple-maps": "^3.0.6",
     "@types/three": "^0.182.0",
     "@vitejs/plugin-react": "^5.1.1",
     "eslint": "^9.39.1",

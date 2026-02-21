@@ -1,10 +1,11 @@
-import { Row, Col } from 'react-bootstrap';
-import CircuitHero from '../components/CircuitHero';
-import PredictionCarousel from '../components/PredictionCarousel';
-import DriverStandings from '../components/DriverStandings';
-import ConstructorStandings from '../components/ConstructorStandings';
-import NextRaceInfo from '../components/NextRaceInfo';
-import '../styles/Home.css';
+import { Row, Col } from "react-bootstrap";
+import CircuitHero from "../components/CircuitHero";
+import PredictionCarousel from "../components/PredictionCarousel";
+import DriverStandings from "../components/DriverStandings";
+import ConstructorStandings from "../components/ConstructorStandings";
+import NextRaceInfo from "../components/NextRaceInfo";
+import RaceCalendarMap from "../components/RaceCalendarMap";
+import "../styles/Home.css";
 
 function Home() {
   return (
@@ -15,7 +16,7 @@ function Home() {
       {/* Dashboard content (scroll to reveal) */}
       <div className="home-dashboard">
         <h1 className="dashboard-title">Predict The Grid</h1>
-        
+
         <div className="dashboard-content">
           {/* Top: Horizontal Carousel */}
           <PredictionCarousel />
@@ -32,6 +33,9 @@ function Home() {
               <NextRaceInfo />
             </Col>
           </Row>
+
+          {/* Race Calendar Map */}
+          <RaceCalendarMap />
         </div>
       </div>
     </div>
