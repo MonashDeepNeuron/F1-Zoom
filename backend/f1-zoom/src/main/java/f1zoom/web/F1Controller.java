@@ -29,9 +29,10 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
-@RestController                 // Handle HTTP requests and convert Java to JSON
-@RequestMapping("/api/v1")      // Base path
-@CrossOrigin(origins = "*")     // Fixes CORS (Cross-origin Resource Sharing) errors. Allow any website to call the API *. For production specify website
+@RestController // Handle HTTP requests and convert Java to JSON
+@RequestMapping("/api/v1") // Base path
+@CrossOrigin(origins = "*") // Fixes CORS (Cross-origin Resource Sharing) errors. Allow any website to call
+                            // the API *. For production specify website
 public class F1Controller {
 
     // Spring HTTP client - makes HTTP request to other APIs
@@ -44,7 +45,7 @@ public class F1Controller {
     @Value("${supabase.service-role-key:}")
     private String supabaseServiceRoleKey;
 
-    // Create endpoint  GET /api/v1/test
+    // Create endpoint GET /api/v1/test
     @GetMapping("/test")
     public String test() {
         return "F1 Zoom API is working";
@@ -65,14 +66,14 @@ public class F1Controller {
         String url = "https://api.jolpi.ca/ergast/f1/2025/constructorStandings.json";
         return restTemplate.getForObject(url, Object.class);
     }
-    
+
     // 3. Next Race Info endpoint
     @GetMapping("/races/next")
     public Object getNextRace() {
         String url = "https://api.jolpi.ca/ergast/f1/current/next.json";
         return restTemplate.getForObject(url, Object.class);
     }
-       
+
     // 4. Last Race Info endpoint
     @GetMapping("/races/last")
     public Object getLastRace() {
@@ -87,14 +88,22 @@ public class F1Controller {
         return restTemplate.getForObject(url, Object.class);
     }
 
-    // 6. Circuit + session data from Supabase for a season
+    // 6. Full Season Calendar endpoint (alias for schedule)
+    @GetMapping("/races/calendar")
+    public Object getRaceCalendar() {
+        String url = "https://api.jolpi.ca/ergast/f1/current.json";
+        return restTemplate.getForObject(url, Object.class);
+    }
+
+    // 7. Circuit + session data from Supabase for a season
     @GetMapping("/circuits/season/{season}")
     public Object getCircuitsForSeason(@PathVariable int season) {
         try {
             Map<Long, Map<String, Object>> circuitsById = new LinkedHashMap<>();
 
             Map<String, String> circuitsParams = new LinkedHashMap<>();
-            circuitsParams.put("select", "id,code,file_slug,title,subtitle,flag,weekend_format,length_km,laps,corners,distance_km");
+            circuitsParams.put("select",
+                    "id,code,file_slug,title,subtitle,flag,weekend_format,length_km,laps,corners,distance_km");
             circuitsParams.put("order", "id.asc");
             JsonNode circuitsNode = supabaseGet("circuits", circuitsParams);
 
@@ -116,7 +125,8 @@ public class F1Controller {
             }
 
             Map<String, String> eventsParams = new LinkedHashMap<>();
-            eventsParams.put("select", "id,season,round,grand_prix_name,circuit_id,race_sessions(session_type,session_date_aest,session_time_aest)");
+            eventsParams.put("select",
+                    "id,season,round,grand_prix_name,circuit_id,race_sessions(session_type,session_date_aest,session_time_aest)");
             eventsParams.put("season", "eq." + season);
             eventsParams.put("order", "round.asc");
             JsonNode eventsNode = supabaseGet("race_events", eventsParams);
@@ -127,7 +137,8 @@ public class F1Controller {
             for (JsonNode event : eventsNode) {
                 long circuitId = event.path("circuit_id").asLong(-1);
                 Map<String, Object> circuit = circuitsById.get(circuitId);
-                if (circuit == null) continue;
+                if (circuit == null)
+                    continue;
 
                 Map<String, Object> row = new LinkedHashMap<>(circuit);
                 row.put("season", event.path("season").asInt());
@@ -152,11 +163,12 @@ public class F1Controller {
 
             return result;
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to load circuits from Supabase", e);
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to load circuits from Supabase",
+                    e);
         }
     }
 
-    // 7. AI Prediction model for Next Race winner endpoint
+    // 8. AI Prediction model for Next Race winner endpoint
     // AI prediction - placeholder
     @GetMapping("/predictions/next-race")
     public Map<String, Object> getNextRacePrediction() {
@@ -167,13 +179,15 @@ public class F1Controller {
     }
 
     private JsonNode supabaseGet(String table, Map<String, String> queryParams) throws Exception {
-        if (supabaseUrl == null || supabaseUrl.isBlank() || supabaseServiceRoleKey == null || supabaseServiceRoleKey.isBlank()) {
-            throw new IllegalStateException("Supabase credentials missing. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY for read-only access).");
+        if (supabaseUrl == null || supabaseUrl.isBlank() || supabaseServiceRoleKey == null
+                || supabaseServiceRoleKey.isBlank()) {
+            throw new IllegalStateException(
+                    "Supabase credentials missing. Set SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY (or SUPABASE_ANON_KEY for read-only access).");
         }
 
         UriComponentsBuilder builder = UriComponentsBuilder
-            .fromUriString(supabaseUrl)
-            .pathSegment("rest", "v1", table);
+                .fromUriString(supabaseUrl)
+                .pathSegment("rest", "v1", table);
 
         for (Map.Entry<String, String> entry : queryParams.entrySet()) {
             builder.queryParam(entry.getKey(), entry.getValue());
@@ -186,18 +200,18 @@ public class F1Controller {
 
         HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
         ResponseEntity<String> response = restTemplate.exchange(
-            builder.build(true).toUri(),
-            HttpMethod.GET,
-            requestEntity,
-            String.class
-        );
+                builder.build(true).toUri(),
+                HttpMethod.GET,
+                requestEntity,
+                String.class);
 
         return objectMapper.readTree(response.getBody());
     }
 
     private List<Map<String, Object>> parseSessions(JsonNode sessionsNode) {
         List<Map<String, Object>> sessions = new ArrayList<>();
-        if (sessionsNode == null || !sessionsNode.isArray()) return sessions;
+        if (sessionsNode == null || !sessionsNode.isArray())
+            return sessions;
 
         Map<String, Integer> sessionOrder = new HashMap<>();
         sessionOrder.put("practice_1", 1);
@@ -252,7 +266,8 @@ public class F1Controller {
 
     private String textOrNull(JsonNode node, String field) {
         JsonNode value = node.path(field);
-        if (value.isMissingNode() || value.isNull()) return null;
+        if (value.isMissingNode() || value.isNull())
+            return null;
         String text = value.asText();
         return text == null || text.isBlank() ? null : text;
     }
