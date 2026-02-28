@@ -8,7 +8,7 @@
   display: flex;
   flex-direction: column;
   text-align: center;
-  background: radial-gradient(ellipse at bottom, #0a0000 0%, #000000 100%);
+  background: radial-gradient(ellipse at bottom, #140505 0%, #111111 100%);
   transition: border-color 0.3s, box-shadow 0.3s;
 }
 
@@ -62,4 +62,48 @@
   color: #666;
   font-style: italic;
   letter-spacing: 1px;
+}
+
+.next-race-countdown {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.next-race-countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.next-race-countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.next-race-countdown-unit {
+  min-width: 52px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.next-race-countdown-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.next-race-countdown-unit-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #888;
 }

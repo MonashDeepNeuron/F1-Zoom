@@ -2,7 +2,7 @@
 .race-calendar-container {
   width: 100%;
   padding: 60px 40px;
-  background: radial-gradient(ellipse at center, #1a0000 0%, #000000 100%);
+  background: radial-gradient(ellipse at center, #1a0505 0%, #111111 100%);
   border-top: 2px solid rgba(255, 0, 0, 0.3);
   position: relative;
   overflow: hidden;

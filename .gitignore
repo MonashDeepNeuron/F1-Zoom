@@ -1,0 +1,16 @@
+# OS
+.DS_Store
+
+# Python (root / live_service)
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+.venv
+venv/
+.env
+.env.*
+!.env.example
+
+# live_service virtual env (avoids 1500+ site-packages files)
+live_service/.f1-dash/
