@@ -40,12 +40,12 @@
 
         .info-panel h1 {
             font-size: 56px;
-            color: #ff0000;
+            color: #ffff00;
             margin-bottom: 5px;
             letter-spacing: 3px;
             font-weight: 900;
             text-transform: uppercase;
-            text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            text-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
         }
 
         .info-panel .subtitle {
@@ -77,9 +77,9 @@
 
         .stat-value {
             font-size: 28px;
-            color: #ff0000;
+            color: #ffff00;
             font-weight: 900;
-            text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+            text-shadow: 0 0 10px rgba(255, 255, 0, 0.6);
         }
 
         .controls-hint {
@@ -276,20 +276,20 @@
     <script>
         // ─── Track Metadata ──────────────────────────────────────────────
         const TRACKS = {
-            Melbourne:    { file: "Melbourne",    title: "MELBOURNE",     subtitle: "ALBERT PARK CIRCUIT",                 flag: "\u{1F1E6}\u{1F1FA}", length: "5.278 KM",  laps: 58, corners: 16, distance: "306.124 KM" },
-            Austin:       { file: "Austin",       title: "AUSTIN",        subtitle: "CIRCUIT OF THE AMERICAS",             flag: "\u{1F1FA}\u{1F1F8}", length: "5.513 KM",  laps: 56, corners: 20, distance: "308.405 KM" },
-            Catalunya:    { file: "Catalunya",    title: "BARCELONA",     subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",      flag: "\u{1F1EA}\u{1F1F8}", length: "4.657 KM",  laps: 66, corners: 16, distance: "307.236 KM" },
-            MexicoCity:   { file: "MexicoCity",   title: "MEXICO CITY",   subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ", flag: "\u{1F1F2}\u{1F1FD}", length: "4.304 KM",  laps: 71, corners: 17, distance: "305.354 KM" },
-            Montreal:     { file: "Montreal",     title: "MONTREAL",      subtitle: "CIRCUIT GILLES-VILLENEUVE",           flag: "\u{1F1E8}\u{1F1E6}", length: "4.361 KM",  laps: 70, corners: 14, distance: "305.270 KM" },
-            Monza:        { file: "Monza",        title: "MONZA",         subtitle: "AUTODROMO NAZIONALE MONZA",           flag: "\u{1F1EE}\u{1F1F9}", length: "5.793 KM",  laps: 53, corners: 11, distance: "306.720 KM" },
-            Sakhir:       { file: "Sakhir",       title: "SAKHIR",        subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",       flag: "\u{1F1E7}\u{1F1ED}", length: "5.412 KM",  laps: 57, corners: 15, distance: "308.238 KM" },
-            SaoPaulo:     { file: "SaoPaulo",     title: "S\u00c3O PAULO",  subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE", flag: "\u{1F1E7}\u{1F1F7}", length: "4.309 KM",  laps: 71, corners: 15, distance: "305.879 KM" },
-            Shanghai:     { file: "Shanghai",     title: "SHANGHAI",      subtitle: "SHANGHAI INTERNATIONAL CIRCUIT",      flag: "\u{1F1E8}\u{1F1F3}", length: "5.451 KM",  laps: 56, corners: 16, distance: "305.066 KM" },
-            Silverstone:  { file: "Silverstone",  title: "SILVERSTONE",   subtitle: "SILVERSTONE CIRCUIT",                 flag: "\u{1F1EC}\u{1F1E7}", length: "5.891 KM",  laps: 52, corners: 18, distance: "306.198 KM" },
-            Spa:          { file: "Spa",          title: "SPA",           subtitle: "CIRCUIT DE SPA-FRANCORCHAMPS",        flag: "\u{1F1E7}\u{1F1EA}", length: "7.004 KM",  laps: 44, corners: 19, distance: "308.052 KM" },
-            Suzuka:       { file: "Suzuka",       title: "SUZUKA",        subtitle: "SUZUKA INTERNATIONAL RACING COURSE",  flag: "\u{1F1EF}\u{1F1F5}", length: "5.807 KM",  laps: 53, corners: 18, distance: "307.471 KM" },
-            YasMarina:    { file: "YasMarina",    title: "YAS MARINA",    subtitle: "YAS MARINA CIRCUIT",                  flag: "\u{1F1E6}\u{1F1EA}", length: "5.281 KM",  laps: 58, corners: 16, distance: "306.183 KM" },
-            Zandvoort:    { file: "Zandvoort",    title: "ZANDVOORT",     subtitle: "CIRCUIT ZANDVOORT",                   flag: "\u{1F1F3}\u{1F1F1}", length: "4.259 KM",  laps: 72, corners: 14, distance: "306.587 KM" }
+            Melbourne:    { file: "Melbourne",    title: "MELBOURNE",     subtitle: "ALBERT PARK CIRCUIT",                 flag: "\u{1F1E6}\u{1F1FA}", length: "5.278 KM",  laps: 58, corners: 16, distance: "306.124 KM", trackColor: 0x00aa00, labelColor: 0xffdd00 },
+            Austin:       { file: "Austin",       title: "AUSTIN",        subtitle: "CIRCUIT OF THE AMERICAS",             flag: "\u{1F1FA}\u{1F1F8}", length: "5.513 KM",  laps: 56, corners: 20, distance: "308.405 KM", trackColor: 0xdd0000, labelColor: 0xffffff },
+            Catalunya:    { file: "Catalunya",    title: "BARCELONA",     subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",      flag: "\u{1F1EA}\u{1F1F8}", length: "4.657 KM",  laps: 66, corners: 16, distance: "307.236 KM", trackColor: 0xffaa00, labelColor: 0x004D98 },
+            MexicoCity:   { file: "MexicoCity",   title: "MEXICO CITY",   subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ", flag: "\u{1F1F2}\u{1F1FD}", length: "4.304 KM",  laps: 71, corners: 17, distance: "305.354 KM", trackColor: 0x00aa00, labelColor: 0xffffff },
+            Montreal:     { file: "Montreal",     title: "MONTREAL",      subtitle: "CIRCUIT GILLES-VILLENEUVE",           flag: "\u{1F1E8}\u{1F1E6}", length: "4.361 KM",  laps: 70, corners: 14, distance: "305.270 KM", trackColor: 0xdd0000, labelColor: 0xffffff },
+            Monza:        { file: "Monza",        title: "MONZA",         subtitle: "AUTODROMO NAZIONALE MONZA",           flag: "\u{1F1EE}\u{1F1F9}", length: "5.793 KM",  laps: 53, corners: 11, distance: "306.720 KM", trackColor: 0xdd0000, labelColor: 0xffff00 },
+            Sakhir:       { file: "Sakhir",       title: "SAKHIR",        subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",       flag: "\u{1F1E7}\u{1F1ED}", length: "5.412 KM",  laps: 57, corners: 15, distance: "308.238 KM", trackColor: 0xffffff, labelColor: 0xdd0000 },
+            SaoPaulo:     { file: "SaoPaulo",     title: "S\u00c3O PAULO",  subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE", flag: "\u{1F1E7}\u{1F1F7}", length: "4.309 KM",  laps: 71, corners: 15, distance: "305.879 KM", trackColor: 0x00aa00, labelColor: 0xffdd00 },
+            Shanghai:     { file: "Shanghai",     title: "SHANGHAI",      subtitle: "SHANGHAI INTERNATIONAL CIRCUIT",      flag: "\u{1F1E8}\u{1F1F3}", length: "5.451 KM",  laps: 56, corners: 16, distance: "305.066 KM", trackColor: 0xdd0000, labelColor: 0xffff00 },
+            Silverstone:  { file: "Silverstone",  title: "SILVERSTONE",   subtitle: "SILVERSTONE CIRCUIT",                 flag: "\u{1F1EC}\u{1F1E7}", length: "5.891 KM",  laps: 52, corners: 18, distance: "306.198 KM", trackColor: 0x00aa00, labelColor: 0xffffff },
+            Spa:          { file: "Spa",          title: "SPA",           subtitle: "CIRCUIT DE SPA-FRANCORCHAMPS",        flag: "\u{1F1E7}\u{1F1EA}", length: "7.004 KM",  laps: 44, corners: 19, distance: "308.052 KM", trackColor: 0xff8800, labelColor: 0x000000 },
+            Suzuka:       { file: "Suzuka",       title: "SUZUKA",        subtitle: "SUZUKA INTERNATIONAL RACING COURSE",  flag: "\u{1F1EF}\u{1F1F5}", length: "5.807 KM",  laps: 53, corners: 18, distance: "307.471 KM", trackColor: 0xdd0000, labelColor: 0xffffff },
+            YasMarina:    { file: "YasMarina",    title: "YAS MARINA",    subtitle: "YAS MARINA CIRCUIT",                  flag: "\u{1F1E6}\u{1F1EA}", length: "5.281 KM",  laps: 58, corners: 16, distance: "306.183 KM", trackColor: 0x990000, labelColor: 0xffff00 },
+            Zandvoort:    { file: "Zandvoort",    title: "ZANDVOORT",     subtitle: "CIRCUIT ZANDVOORT",                   flag: "\u{1F1F3}\u{1F1F1}", length: "4.259 KM",  laps: 72, corners: 14, distance: "306.587 KM", trackColor: 0xff6600, labelColor: 0xffffff }
         };
 
         // ─── State ───────────────────────────────────────────────────────
@@ -339,6 +339,26 @@
             document.getElementById('stat-corners').textContent   = meta.corners;
             document.getElementById('stat-distance').textContent  = meta.distance;
             document.getElementById('country-flag').textContent   = meta.flag;
+            
+            // Convert label color from hex number to CSS hex string
+            const labelHex = '#' + meta.labelColor.toString(16).padStart(6, '0');
+            
+            // Extract RGB values for text-shadow
+            const labelColor = new THREE.Color(meta.labelColor);
+            const r = Math.round(labelColor.r * 255);
+            const g = Math.round(labelColor.g * 255);
+            const b = Math.round(labelColor.b * 255);
+            
+            // Update title color
+            document.getElementById('track-title').style.color = labelHex;
+            document.getElementById('track-title').style.textShadow = `0 0 20px rgba(${r}, ${g}, ${b}, 0.8)`;
+            
+            // Update all stat values color
+            const statElements = document.querySelectorAll('.stat-value');
+            statElements.forEach(el => {
+                el.style.color = labelHex;
+                el.style.textShadow = `0 0 10px rgba(${r}, ${g}, ${b}, 0.6)`;
+            });
         }
 
         // ─── Dynamic Track Loader (JSONP-style callback) ─────────────────
@@ -365,7 +385,7 @@
                 console.log('[F1] Received track data for', trackKey,
                             '— points:', csvData.trim().split('\\n').length);
                 updateInfoPanel(trackKey);
-                initTrackScene(csvData);
+                initTrackScene(csvData, meta);
             };
 
             // Inject the <script> tag — works with both http:// and file://
@@ -450,7 +470,12 @@
         }
 
         // ─── Init 3D Scene ───────────────────────────────────────────────
-        function initTrackScene(csvData) {
+        function initTrackScene(csvData, trackMeta) {
+            // Use track color or default to red
+            const trackColor = trackMeta?.trackColor || 0xff0000;
+            const labelColor = trackMeta?.labelColor || 0xffff00;
+            const dimTrackColor = trackColor * 0.5; // Darken for secondary layers
+            
             const scene = new THREE.Scene();
             scene.background = new THREE.Color(0x000000);
             scene.fog = new THREE.Fog(0x000000, 30, 100);
@@ -472,11 +497,11 @@
             // ── Lighting ─────────────────────────────────────────────────
             scene.add(new THREE.AmbientLight(0xffffff, 0.2));
 
-            const pointLight1 = new THREE.PointLight(0xff0000, 2, 80);
+            const pointLight1 = new THREE.PointLight(trackColor, 2, 80);
             pointLight1.position.set(0, 25, 0);
             scene.add(pointLight1);
 
-            const pointLight2 = new THREE.PointLight(0xff0000, 1.2, 60);
+            const pointLight2 = new THREE.PointLight(trackColor, 1.2, 60);
             pointLight2.position.set(20, 15, 20);
             scene.add(pointLight2);
 
@@ -491,53 +516,93 @@
             const curve       = new THREE.CatmullRomCurve3(trackPoints, true, 'catmullrom', 0.2);
             const numSamples  = Math.min(trackPoints.length * 2, 1200);
 
-            // Main track – bright red/yellow core (thicker for 3D presence)
+            // Main track – uses country color
             const trackMesh = new THREE.Mesh(
                 new THREE.TubeGeometry(curve, numSamples, 0.18, 16, true),
                 new THREE.MeshPhongMaterial({
-                    color: 0xff2200, emissive: 0xff4400, emissiveIntensity: 1.5,
-                    shininess: 150, specular: 0xffaa33
+                    color: trackColor, emissive: trackColor, emissiveIntensity: 1.5,
+                    shininess: 150, specular: labelColor
                 })
             );
             scene.add(trackMesh);
 
-            // Hot white-yellow inner core for brightness
-            const coreMat = new THREE.MeshBasicMaterial({ color: 0xffee88, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
+            // Hot bright inner core for luminosity
+            const coreMat = new THREE.MeshBasicMaterial({ color: labelColor, transparent: true, opacity: 0.9, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.10, 12, true), coreMat));
 
             // Glow layers – progressively larger and softer for neon bloom
-            const glow1Mat = new THREE.MeshBasicMaterial({ color: 0xff4400, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
+            const glow1Mat = new THREE.MeshBasicMaterial({ color: trackColor, transparent: true, opacity: 0.7, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.30, 12, true), glow1Mat));
 
-            const glow2Mat = new THREE.MeshBasicMaterial({ color: 0xff2200, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
+            const glow2Mat = new THREE.MeshBasicMaterial({ color: trackColor, transparent: true, opacity: 0.5, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.50, 12, true), glow2Mat));
 
-            const glow3Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
+            const glow3Mat = new THREE.MeshBasicMaterial({ color: trackColor, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.75, 12, true), glow3Mat));
 
-            const glow4Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
+            const glow4Mat = new THREE.MeshBasicMaterial({ color: trackColor, transparent: true, opacity: 0.15, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 1.2, 12, true), glow4Mat));
 
-            const glow5Mat = new THREE.MeshBasicMaterial({ color: 0xff0000, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending });
+            const glow5Mat = new THREE.MeshBasicMaterial({ color: trackColor, transparent: true, opacity: 0.06, blending: THREE.AdditiveBlending });
             scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 2.0, 8, true), glow5Mat));
 
-            // Turn markers
-            const markerGeo = new THREE.SphereGeometry(0.05, 16, 16);
-            const markerMat = new THREE.MeshPhongMaterial({ color: 0xffffff, emissive: 0xffffff, emissiveIntensity: 1.2, shininess: 100 });
-            const step = Math.max(1, Math.floor(trackPoints.length / 14));
-            for (let i = 0; i < trackPoints.length; i += step) {
+            // Turn markers - use corner data from CSV
+            const markerGeo = new THREE.SphereGeometry(0.15, 16, 16);
+            const markerMat = new THREE.MeshPhongMaterial({ color: labelColor, emissive: labelColor, emissiveIntensity: 1.5, shininess: 100 });
+            
+            // Filter for corner points and map to scaled positions
+            const cornerIndices = rawPoints.map((p, idx) => p.isCorner === 1 ? idx : -1).filter(idx => idx !== -1);
+            const markersToDisplay = cornerIndices.length > 0 
+                ? cornerIndices.map(idx => trackPoints[idx])
+                : trackPoints.filter((_, i) => i % Math.max(1, Math.floor(trackPoints.length / 14)) === 0);
+            
+            // Function to create number texture with label color
+            function createNumberTexture(number) {
+                const canvas = document.createElement('canvas');
+                canvas.width = 128;
+                canvas.height = 128;
+                const ctx = canvas.getContext('2d');
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(0, 0, 128, 128);
+                
+                // Convert labelColor number to hex string safely
+                const hexColor = '#' + labelColor.toString(16).padStart(6, '0');
+                ctx.fillStyle = hexColor;
+                ctx.font = 'bold 80px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(number.toString(), 64, 64);
+                const texture = new THREE.CanvasTexture(canvas);
+                return texture;
+            }
+            
+            const labels = [];
+            markersToDisplay.forEach((markerPos, idx) => {
                 const marker = new THREE.Mesh(markerGeo, markerMat);
-                marker.position.copy(trackPoints[i]);
-                marker.position.y = 0.15;
+                marker.position.copy(markerPos);
+                marker.position.y = 0.25;
                 scene.add(marker);
 
                 const glowSphere = new THREE.Mesh(
-                    new THREE.SphereGeometry(0.1, 16, 16),
-                    new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.3, blending: THREE.AdditiveBlending })
+                    new THREE.SphereGeometry(0.25, 16, 16),
+                    new THREE.MeshBasicMaterial({ color: labelColor, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending })
                 );
                 glowSphere.position.copy(marker.position);
                 scene.add(glowSphere);
-            }
+                
+                // Add numbered label
+                const labelGeo = new THREE.PlaneGeometry(0.35, 0.35);
+                const labelMat = new THREE.MeshBasicMaterial({ 
+                    map: createNumberTexture(idx + 1), 
+                    transparent: true,
+                    blending: THREE.AdditiveBlending
+                });
+                const label = new THREE.Mesh(labelGeo, labelMat);
+                label.position.copy(marker.position);
+                label.position.y += 0.3;
+                scene.add(label);
+                labels.push(label);
+            })
 
             // Platform & grid
             const platform = new THREE.Mesh(
@@ -616,6 +681,11 @@
 
                 if (autoRotate) cameraAngleTheta += autoRotateSpeed;
                 updateCamera();
+
+                // Keep labels facing camera
+                labels.forEach(label => {
+                    label.lookAt(camera.position);
+                });
 
                 const t = Date.now() * 0.001;
                 pointLight1.intensity = 2.5 + Math.sin(t * 1.5) * 0.5;
