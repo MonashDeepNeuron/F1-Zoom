@@ -14,3 +14,11 @@ venv/
 
 # live_service virtual env (avoids 1500+ site-packages files)
 live_service/.f1-dash/
+
+# IDE
+.vscode/
+
+# Frontend build artifacts
+.vite/
+node_modules/
+dist/
