@@ -1,5 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import { useLiveTimingStore } from "../../stores/liveTimingStore";
+import type { TimingDataDriver, Sector, Segment } from "../../types/liveTiming";
 
 interface Pt {
   x: number;
@@ -24,17 +25,75 @@ function parseTrackData(raw: string): Pt[] {
   return pts;
 }
 
+/**
+ * Find highest completed segment and total segment count from sector data.
+ * Sectors have variable segment counts (e.g. 9, 5, 10 for Melbourne = 24 total).
+ * Returns { highest: absolute index of last completed segment, total: total segments }.
+ */
+function getSegmentProgress(
+  sectors: Sector[] | Record<string, Sector>
+): { highest: number; total: number } {
+  const sectorEntries: [number, Sector][] = Array.isArray(sectors)
+    ? sectors.map((s, i) => [i, s])
+    : Object.entries(sectors)
+        .sort(([a], [b]) => parseInt(a) - parseInt(b))
+        .map(([k, v]) => [parseInt(k), v]);
+
+  let total = 0;
+  let highest = -1;
+  let offset = 0;
+
+  for (const [, sector] of sectorEntries) {
+    if (!sector?.Segments) continue;
+
+    const segs: (Segment | null)[] = Array.isArray(sector.Segments)
+      ? sector.Segments
+      : Object.entries(sector.Segments)
+          .sort(([a], [b]) => parseInt(a) - parseInt(b))
+          .map(([, v]) => v);
+
+    for (let g = 0; g < segs.length; g++) {
+      const seg = segs[g];
+      if (seg && seg.Status !== 0) {
+        const absolute = offset + g;
+        if (absolute > highest) highest = absolute;
+      }
+    }
+    offset += segs.length;
+    total += segs.length;
+  }
+
+  return { highest, total: total || 24 };
+}
+
+function interpolateTrack(pts: Pt[], progress: number): Pt {
+  const n = pts.length;
+  const clamped = Math.max(0, Math.min(progress, 0.9999));
+  const idxF = clamped * (n - 1);
+  const i = Math.floor(idxF);
+  const frac = idxF - i;
+  if (i >= n - 1) return pts[n - 1];
+  return {
+    x: pts[i].x + frac * (pts[i + 1].x - pts[i].x),
+    y: pts[i].y + frac * (pts[i + 1].y - pts[i].y),
+  };
+}
+
 export default function LiveTrackMap() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const trackRef = useRef<Pt[]>([]);
   const sizeRef = useRef({ w: 0, h: 0 });
   const [loaded, setLoaded] = useState(false);
-  const lastRawPositionsRef = useRef<Record<string, { X: number; Y: number }>>(
-    {}
-  );
-  const prevPosRef = useRef<Record<string, { X: number; Y: number }>>({});
-  const targetPosRef = useRef<Record<string, { X: number; Y: number }>>({});
+
+  const prevProgressRef = useRef<Record<string, number>>({});
+  const targetProgressRef = useRef<Record<string, number>>({});
   const lastUpdateRef = useRef<Record<string, number>>({});
+
+  const rawTargetRef = useRef<Record<string, { x: number; y: number }>>({});
+  const rawTimestampRef = useRef<Record<string, number>>({});
+  const rawVelocityRef = useRef<Record<string, { vx: number; vy: number }>>({});
+  const displayPosRef = useRef<Record<string, { x: number; y: number }>>({});
+  const lastFrameRef = useRef<number>(0);
 
   useEffect(() => {
     fetch("/circuit_3d/TrackCoordinateJS/Melbourne.js")
@@ -66,7 +125,7 @@ export default function LiveTrackMap() {
     if (!canvas || !pts.length) return;
 
     const ctx = canvas.getContext("2d")!;
-    const { positions, driverList } = useLiveTimingStore.getState();
+    const { positions, timingData, driverList } = useLiveTimingStore.getState();
     const now = performance.now();
     const dpr = window.devicePixelRatio;
     const w = sizeRef.current.w;
@@ -76,6 +135,7 @@ export default function LiveTrackMap() {
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     ctx.clearRect(0, 0, w, h);
 
+    // compute bounding box for track-to-canvas mapping
     let minX = Infinity,
       maxX = -Infinity,
       minY = Infinity,
@@ -99,7 +159,7 @@ export default function LiveTrackMap() {
       cy: (y - cy) * scale + h / 2,
     });
 
-    // track glow (thicker for more presence)
+    // draw track glow
     ctx.beginPath();
     pts.forEach((p, i) => {
       const { cx: px, cy: py } = toC(p.x, p.y);
@@ -110,93 +170,170 @@ export default function LiveTrackMap() {
     ctx.lineWidth = 22;
     ctx.stroke();
 
-    // track line
+    // draw track line
     ctx.strokeStyle = "rgba(255,255,255,0.26)";
     ctx.lineWidth = 4.5;
     ctx.stroke();
 
-    // update interpolation targets when raw positions change
-    const smoothMs = 300;
-    const rawEntries = Object.entries(positions);
-    const seen: Set<string> = new Set();
-    for (const [num, pos] of rawEntries) {
-      seen.add(num);
-      const last = lastRawPositionsRef.current[num];
-      if (!last || last.X !== pos.X || last.Y !== pos.Y) {
-        const current =
-          targetPosRef.current[num] ??
-          last ??
-          { X: pos.X, Y: pos.Y };
-        prevPosRef.current[num] = current;
-        targetPosRef.current[num] = { X: pos.X, Y: pos.Y };
-        lastUpdateRef.current[num] = now;
-        lastRawPositionsRef.current[num] = { X: pos.X, Y: pos.Y };
+    // choose position source: raw XY positions (from mock/Position.z) or
+    // estimated from microsector progress (live F1 where Position data unavailable)
+    const hasRawPositions = Object.keys(positions).length > 0;
+    const smoothMs = 350;
+
+    type DriverPos = { num: string; x: number; y: number; color: string; tla: string };
+    const driverPositions: DriverPos[] = [];
+
+    if (hasRawPositions) {
+      const VELOCITY_SMOOTHING = 0.35;
+      const MAX_EXTRAPOLATE_MS = 2000;
+      // Frame-rate independent smoothing: higher = snappier response to corrections
+      const CHASE_RATE = 10;
+
+      const dt = lastFrameRef.current ? (now - lastFrameRef.current) / 1000 : 0.016;
+      const alpha = 1 - Math.exp(-CHASE_RATE * dt);
+
+      for (const [num, pos] of Object.entries(positions)) {
+        const drv = driverList[num];
+        const prevTarget = rawTargetRef.current[num];
+
+        if (!prevTarget || prevTarget.x !== pos.X || prevTarget.y !== pos.Y) {
+          const prevTimestamp = rawTimestampRef.current[num];
+          if (prevTimestamp !== undefined && prevTarget) {
+            const gap = now - prevTimestamp;
+            if (gap > 0) {
+              const newVx = (pos.X - prevTarget.x) / gap;
+              const newVy = (pos.Y - prevTarget.y) / gap;
+              const oldVel = rawVelocityRef.current[num];
+              if (oldVel) {
+                rawVelocityRef.current[num] = {
+                  vx: oldVel.vx * (1 - VELOCITY_SMOOTHING) + newVx * VELOCITY_SMOOTHING,
+                  vy: oldVel.vy * (1 - VELOCITY_SMOOTHING) + newVy * VELOCITY_SMOOTHING,
+                };
+              } else {
+                rawVelocityRef.current[num] = { vx: newVx, vy: newVy };
+              }
+            }
+          }
+
+          rawTargetRef.current[num] = { x: pos.X, y: pos.Y };
+          rawTimestampRef.current[num] = now;
+        }
+
+        const target = rawTargetRef.current[num] ?? { x: pos.X, y: pos.Y };
+        const vel = rawVelocityRef.current[num];
+        const elapsed = Math.min(
+          now - (rawTimestampRef.current[num] ?? now),
+          MAX_EXTRAPOLATE_MS,
+        );
+
+        const predictedX = target.x + (vel?.vx ?? 0) * elapsed;
+        const predictedY = target.y + (vel?.vy ?? 0) * elapsed;
+
+        const display = displayPosRef.current[num];
+        let smoothX: number;
+        let smoothY: number;
+        if (display) {
+          smoothX = display.x + (predictedX - display.x) * alpha;
+          smoothY = display.y + (predictedY - display.y) * alpha;
+        } else {
+          smoothX = pos.X;
+          smoothY = pos.Y;
+        }
+        displayPosRef.current[num] = { x: smoothX, y: smoothY };
+
+        const { cx: dx, cy: dy } = toC(smoothX, smoothY);
+        driverPositions.push({
+          num,
+          x: dx,
+          y: dy,
+          color: `#${drv?.TeamColour ?? "ffffff"}`,
+          tla: drv?.Tla ?? num,
+        });
       }
-    }
-    // clean up drivers no longer present
-    for (const key of Object.keys(lastRawPositionsRef.current)) {
-      if (!seen.has(key)) {
-        delete lastRawPositionsRef.current[key];
-        delete prevPosRef.current[key];
-        delete targetPosRef.current[key];
-        delete lastUpdateRef.current[key];
+    } else {
+      // derive positions from microsector data
+      for (const [num, td] of Object.entries(timingData) as [string, TimingDataDriver][]) {
+        if (td.InPit || td.Retired) continue;
+        if (!td.Sectors) continue;
+
+        const { highest: seg, total: totalSegs } = getSegmentProgress(td.Sectors);
+        if (seg < 0) continue;
+
+        const progress = Math.min((seg + 1) / totalSegs, 0.9999);
+
+        // smooth animation between segment steps
+        const prev = targetProgressRef.current[num];
+        if (prev === undefined || prev !== progress) {
+          prevProgressRef.current[num] = prev ?? progress;
+          targetProgressRef.current[num] = progress;
+          lastUpdateRef.current[num] = now;
+        }
+
+        const start = lastUpdateRef.current[num] ?? now;
+        let t = (now - start) / smoothMs;
+        if (t > 1) t = 1;
+
+        const fromP = prevProgressRef.current[num] ?? progress;
+        let delta = progress - fromP;
+        // handle wrap-around (sector 3 segment 7 → sector 0 segment 0)
+        if (delta < -0.5) delta += 1;
+        if (delta > 0.5) delta -= 1;
+        let interp = fromP + delta * t;
+        if (interp < 0) interp += 1;
+        if (interp >= 1) interp -= 1;
+
+        const trackPt = interpolateTrack(pts, interp);
+        const { cx: dx, cy: dy } = toC(trackPt.x, trackPt.y);
+        const drv = driverList[num];
+
+        driverPositions.push({
+          num,
+          x: dx,
+          y: dy,
+          color: `#${drv?.TeamColour ?? "ffffff"}`,
+          tla: drv?.Tla ?? num,
+        });
       }
     }
 
-    // car dots (larger icons + clearer labels, interpolated positions)
-    const entries = rawEntries;
-    for (const [num, pos] of entries) {
-      const drv = driverList[num];
-      const color = `#${drv?.TeamColour ?? "ffffff"}`;
-      const start = lastUpdateRef.current[num] ?? now;
-      const prev = prevPosRef.current[num] ?? { X: pos.X, Y: pos.Y };
-      const target = targetPosRef.current[num] ?? { X: pos.X, Y: pos.Y };
-      let t = (now - start) / smoothMs;
-      if (t < 0) t = 0;
-      if (t > 1) t = 1;
-      const interpX = prev.X + (target.X - prev.X) * t;
-      const interpY = prev.Y + (target.Y - prev.Y) * t;
-      const { cx: dx, cy: dy } = toC(interpX, interpY);
-
+    // draw car dots
+    for (const dp of driverPositions) {
       // glow
       ctx.beginPath();
-      ctx.arc(dx, dy, 13, 0, Math.PI * 2);
-      ctx.fillStyle = color + "30";
+      ctx.arc(dp.x, dp.y, 13, 0, Math.PI * 2);
+      ctx.fillStyle = dp.color + "30";
       ctx.fill();
 
       // dot
       ctx.beginPath();
-      ctx.arc(dx, dy, 7, 0, Math.PI * 2);
-      ctx.fillStyle = color;
+      ctx.arc(dp.x, dp.y, 7, 0, Math.PI * 2);
+      ctx.fillStyle = dp.color;
       ctx.fill();
 
       // label
-      if (drv?.Tla) {
-        const label = drv.Tla;
-        ctx.font = "bold 12px monospace";
-        const textWidth = ctx.measureText(label).width;
-        const paddingX = 6;
-        const paddingY = 3;
-        const labelX = dx + 16;
-        const labelY = dy + 4;
+      ctx.font = "bold 12px monospace";
+      const textWidth = ctx.measureText(dp.tla).width;
+      const paddingX = 6;
+      const paddingY = 3;
+      const labelX = dp.x + 16;
+      const labelY = dp.y + 4;
 
-        // background pill
-        ctx.fillStyle = "rgba(0,0,0,0.78)";
-        ctx.beginPath();
-        ctx.roundRect(
-          labelX - paddingX,
-          labelY - 11,
-          textWidth + paddingX * 2,
-          16 + paddingY,
-          8
-        );
-        ctx.fill();
+      ctx.fillStyle = "rgba(0,0,0,0.78)";
+      ctx.beginPath();
+      ctx.roundRect(
+        labelX - paddingX,
+        labelY - 11,
+        textWidth + paddingX * 2,
+        16 + paddingY,
+        8
+      );
+      ctx.fill();
 
-        // text
-        ctx.fillStyle = "rgba(255,255,255,0.96)";
-        ctx.fillText(label, labelX, labelY);
-      }
+      ctx.fillStyle = "rgba(255,255,255,0.96)";
+      ctx.fillText(dp.tla, labelX, labelY);
     }
+
+    lastFrameRef.current = now;
   }, []);
 
   useEffect(() => {

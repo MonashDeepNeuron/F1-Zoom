@@ -63,15 +63,21 @@ def _deep_merge(base: Any, update: Any) -> Any:
     return update
 
 
-def _load_track(track_dir: str, track_name: str) -> list[tuple[float, float]]:
+def _load_track(track_dir: str, track_name: str) -> tuple[list[tuple[float, float]], list[bool]]:
     path = os.path.join(track_dir, f"{track_name}.js")
     if not os.path.exists(path):
-        return [(300 * math.cos(2 * math.pi * i / 500), 200 * math.sin(2 * math.pi * i / 500)) for i in range(500)]
+        n = 500
+        coords = [
+            (300 * math.cos(2 * math.pi * i / n), 200 * math.sin(2 * math.pi * i / n))
+            for i in range(n)
+        ]
+        return coords, [False] * n
     with open(path) as f:
         content = f.read()
     m = re.search(r"`([\s\S]*?)`", content)
     csv_text = m.group(1) if m else content
-    pts: list[tuple[float, float]] = []
+    coords: list[tuple[float, float]] = []
+    corners: list[bool] = []
     for line in csv_text.strip().split("\n"):
         line = line.strip()
         if not line or line.startswith("#"):
@@ -79,10 +85,32 @@ def _load_track(track_dir: str, track_name: str) -> list[tuple[float, float]]:
         parts = line.split(",")
         if len(parts) >= 2:
             try:
-                pts.append((float(parts[0]), float(parts[1])))
+                coords.append((float(parts[0]), float(parts[1])))
+                corners.append(len(parts) >= 5 and parts[4].strip() == "1")
             except ValueError:
                 continue
-    return pts
+    return coords, corners
+
+
+def _build_speed_profile(corners: list[bool]) -> list[float]:
+    """Per-point speed multipliers: slower in corners, faster on straights.
+
+    Smoothed with a circular moving average and normalized so the average
+    multiplier is 1.0, preserving overall lap duration.
+    """
+    CORNER_SPEED = 0.55
+    STRAIGHT_SPEED = 1.35
+    n = len(corners)
+    if n == 0:
+        return [1.0]
+    raw = [CORNER_SPEED if c else STRAIGHT_SPEED for c in corners]
+    window = max(1, n // 50)
+    smoothed = []
+    for i in range(n):
+        total = sum(raw[(i + j) % n] for j in range(-window, window + 1))
+        smoothed.append(total / (2 * window + 1))
+    avg = sum(smoothed) / n
+    return [s / avg for s in smoothed]
 
 
 def _fmt_lap(seconds: float) -> str:
@@ -122,7 +150,9 @@ class DriverState:
 class MockSession:
     def __init__(self, state_service: Any, track_dir: str, track_name: str) -> None:
         self.ss = state_service
-        self.track = _load_track(track_dir, track_name)
+        coords, corners = _load_track(track_dir, track_name)
+        self.track = coords
+        self.speed_profile = _build_speed_profile(corners)
         self.track_name = track_name
         self.tick = 0
         self.drivers = [
@@ -245,12 +275,14 @@ class MockSession:
                 tu["Sectors"] = sectors_reset
             return self._pack(ds, tu, pu)
 
-        speed = {
+        base_speed = {
             "out_lap": 1.0 / OUT_LAP_TICKS,
             "flying": 1.0 / FLYING_LAP_TICKS,
             "in_lap": 1.0 / IN_LAP_TICKS,
         }.get(ds.phase, 0)
 
+        track_idx = int((ds.track_progress % 1.0) * len(self.track)) % len(self.track)
+        speed = base_speed * self.speed_profile[track_idx]
         ds.track_progress += speed
         x, y = self._pos_at(ds.track_progress % 1.0)
         pu = {"X": x, "Y": y, "Z": 0, "Status": "OnTrack"}

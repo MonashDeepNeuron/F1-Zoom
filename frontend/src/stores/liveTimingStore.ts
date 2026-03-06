@@ -11,6 +11,14 @@ import type {
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+function getPositionEntries(data: any): Record<string, CarPosition> {
+  if (data?.Position?.Entries) return data.Position.Entries;
+  const pz = data?.["Position.z"];
+  if (pz?.Entries) return pz.Entries;
+  if (pz && typeof pz === "object" && !Array.isArray(pz)) return pz;
+  return {};
+}
+
 function deepMerge(base: any, update: any): any {
   if (
     base !== null &&
@@ -81,7 +89,7 @@ export const useLiveTimingStore = create<LiveTimingState>((set, get) => ({
       timingData: data.TimingData?.Lines ?? {},
       timingStats: data.TimingStats?.Lines ?? {},
       timingAppData: data.TimingAppData?.Lines ?? {},
-      positions: data.Position?.Entries ?? {},
+      positions: getPositionEntries(data),
       sessionInfo: data.SessionInfo ?? null,
       sessionStatus: data.SessionStatus?.Status ?? "",
       trackStatus: data.TrackStatus?.Status ?? "",
@@ -99,8 +107,9 @@ export const useLiveTimingStore = create<LiveTimingState>((set, get) => ({
       patch.timingStats = deepMerge(s.timingStats, data.TimingStats.Lines);
     if (data.TimingAppData?.Lines)
       patch.timingAppData = deepMerge(s.timingAppData, data.TimingAppData.Lines);
-    if (data.Position?.Entries)
-      patch.positions = deepMerge(s.positions, data.Position.Entries);
+    const positionEntries = getPositionEntries(data);
+    if (Object.keys(positionEntries).length > 0)
+      patch.positions = deepMerge(s.positions, positionEntries);
     if (data.SessionInfo)
       patch.sessionInfo = deepMerge(s.sessionInfo ?? {}, data.SessionInfo);
     if (data.SessionStatus?.Status)
