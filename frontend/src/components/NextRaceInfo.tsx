@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { Card } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { getNextRace } from "../services/api";
 import "../styles/NextRaceInfo.css";
 
@@ -125,6 +126,16 @@ function NextRaceInfo({ showCountdown = false }: NextRaceInfoProps) {
                   </p>
                 ) : null}
               </div>
+            )}
+            {!showCountdown && (
+              <Link
+                to="/live"
+                className={`live-timing-btn ${hasStartedOrPassed ? "is-live" : ""}`}
+              >
+                {hasStartedOrPassed && <span className="live-dot" />}
+                {hasStartedOrPassed ? "Watch Live" : "Live Timing"}
+                <span className="live-timing-btn-arrow">&rarr;</span>
+              </Link>
             )}
           </>
         ) : (

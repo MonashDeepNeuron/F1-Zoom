@@ -4,6 +4,7 @@ import type {
   DriverInfo,
   TimingDataDriver,
   GapMode,
+  TyreCompound,
 } from "../../types/liveTiming";
 
 interface Props {
@@ -11,7 +12,16 @@ interface Props {
   driver: DriverInfo | undefined;
   timing: TimingDataDriver;
   gapMode: GapMode;
+  isFastestInTeam: boolean;
 }
+
+const TYRE_COLORS: Record<string, string> = {
+  SOFT: "#e10600",
+  MEDIUM: "#eab308",
+  HARD: "#ccc",
+  INTERMEDIATE: "#22c55e",
+  WET: "#3b82f6",
+};
 
 function lapTimeClass(lt?: { OverallFastest?: boolean; PersonalFastest?: boolean }): string {
   if (!lt) return "";
@@ -20,10 +30,22 @@ function lapTimeClass(lt?: { OverallFastest?: boolean; PersonalFastest?: boolean
   return "";
 }
 
-export default function DriverRow({ driverNum, driver, timing, gapMode }: Props) {
+function getCurrentCompound(stints: unknown): TyreCompound {
+  if (!stints || typeof stints !== "object") return "";
+  const arr = Array.isArray(stints) ? stints : Object.values(stints as Record<string, unknown>);
+  if (arr.length === 0) return "";
+  const last = arr[arr.length - 1] as { Compound?: TyreCompound } | null;
+  return last?.Compound ?? "";
+}
+
+export default function DriverRow({ driverNum, driver, timing, gapMode, isFastestInTeam }: Props) {
   const stats = useLiveTimingStore((s) => s.timingStats[driverNum]);
+  const appData = useLiveTimingStore((s) => s.timingAppData[driverNum]);
   const teamColor = `#${driver?.TeamColour ?? "ffffff"}`;
   const isLeader = timing.Position === "1";
+
+  const compound = getCurrentCompound(appData?.Stints);
+  const tyreColor = TYRE_COLORS[compound] ?? "#555";
 
   const gapValue =
     gapMode === "leader"
@@ -49,7 +71,9 @@ export default function DriverRow({ driverNum, driver, timing, gapMode }: Props)
 
       <div className="dr-driver">
         <span className="team-bar" style={{ backgroundColor: teamColor }} />
-        <span className="driver-tla">{driver?.Tla ?? driverNum}</span>
+        <span className={`driver-tla${isFastestInTeam ? " team-fastest" : ""}`}>
+          {driver?.Tla ?? driverNum}
+        </span>
       </div>
 
       <div className="dr-gap mono">
@@ -65,12 +89,21 @@ export default function DriverRow({ driverNum, driver, timing, gapMode }: Props)
         </div>
       ))}
 
-      <div className={`dr-time mono ${lapTimeClass(timing.LastLapTime)}`}>
-        {timing.LastLapTime?.Value ?? ""}
+      <div className="dr-laptime">
+        <div className={`laptime-best mono ${lapTimeClass(timing.BestLapTime)}`}>
+          {timing.BestLapTime?.Value ?? ""}
+        </div>
+        <div className={`laptime-last mono ${lapTimeClass(timing.LastLapTime)}`}>
+          {timing.LastLapTime?.Value ?? ""}
+        </div>
       </div>
 
-      <div className={`dr-time mono best ${lapTimeClass(timing.BestLapTime)}`}>
-        {timing.BestLapTime?.Value ?? ""}
+      <div className="dr-tyre">
+        {compound && (
+          <span className="tyre-badge" style={{ borderColor: tyreColor, color: tyreColor }}>
+            {compound[0]}
+          </span>
+        )}
       </div>
     </div>
   );

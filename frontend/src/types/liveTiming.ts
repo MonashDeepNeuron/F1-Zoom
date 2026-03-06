@@ -59,6 +59,19 @@ export interface TimingStatsDriver {
   BestSectors: BestTime[];
 }
 
+export type TyreCompound = "SOFT" | "MEDIUM" | "HARD" | "INTERMEDIATE" | "WET" | "";
+
+export interface Stint {
+  Compound: TyreCompound;
+  New: string;
+  TotalLaps: number;
+  StartLaps: number;
+}
+
+export interface TimingAppDataDriver {
+  Stints: Stint[];
+}
+
 export interface CarPosition {
   X: number;
   Y: number;

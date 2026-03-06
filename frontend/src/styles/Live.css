@@ -1,11 +1,13 @@
 /* ─── Page Layout ──────────────────────────────────────────────── */
 
 .live-page {
-  min-height: 100vh;
+  height: 100vh;
+  max-height: 100vh;
   background: #0a0a0a;
   color: #fff;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
@@ -113,17 +115,20 @@
 
 .live-left-pane {
   width: 360px;
-  max-width: 520px;
+  max-width: 800px;
   min-width: 260px;
   display: flex;
   flex-direction: column;
   border-right: 1px solid #1a1a1a;
+  overflow: hidden;
 }
 
 .live-right-pane {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .live-resize-handle {
@@ -163,12 +168,11 @@
 /* ─── Track Map ────────────────────────────────────────────────── */
 
 .track-map-container {
-  height: 100%;
-  min-height: 320px;
+  flex: 1;
+  min-height: 0;
   background: #0a0a0a;
-  border-bottom: 1px solid #1a1a1a;
   position: relative;
-  flex-shrink: 0;
+  overflow: hidden;
 }
 
 .track-map-canvas {
@@ -188,7 +192,7 @@
 
 .timing-table-header {
   display: grid;
-  grid-template-columns: 42px 100px 90px 1fr 1fr 1fr 100px 100px;
+  grid-template-columns: 42px 100px 90px 1fr 1fr 1fr 110px 44px;
   align-items: center;
   padding: 6px 12px;
   background: #0d0d0d;
@@ -218,31 +222,21 @@
 
 .timing-table-body {
   flex: 1;
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: #333 #111;
-}
-
-.timing-table-body::-webkit-scrollbar {
-  width: 6px;
-}
-
-.timing-table-body::-webkit-scrollbar-track {
-  background: #111;
-}
-
-.timing-table-body::-webkit-scrollbar-thumb {
-  background: #333;
-  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
 }
 
 /* ─── Driver Row ───────────────────────────────────────────────── */
 
 .driver-row {
   display: grid;
-  grid-template-columns: 42px 100px 90px 1fr 1fr 1fr 100px 100px;
+  grid-template-columns: 42px 100px 90px 1fr 1fr 1fr 110px 44px;
   align-items: center;
-  padding: 5px 12px;
+  padding: 0 12px;
+  flex: 1;
+  min-height: 0;
   border-bottom: 1px solid #151515;
   font-size: 13px;
   transition: background 0.15s, opacity 0.3s;
@@ -318,17 +312,57 @@
   justify-content: center;
 }
 
-/* Times */
+/* Stacked Lap Time */
 
-.dr-time {
-  font-size: 13px;
-  text-align: right;
+.dr-laptime {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
   padding-right: 4px;
-  color: #ccc;
+  gap: 1px;
 }
 
-.dr-time.best {
-  color: #888;
+.laptime-best {
+  font-size: 13px;
+  color: #ccc;
+  line-height: 1.2;
+}
+
+.laptime-last {
+  font-size: 10px;
+  color: #666;
+  line-height: 1.2;
+}
+
+/* Tyre badge */
+
+.dr-tyre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tyre-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: 2px solid;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.th-tyre {
+  text-align: center;
+}
+
+/* Team fastest (yellow highlight) */
+
+.driver-tla.team-fastest {
+  color: #eab308;
 }
 
 .mono {
@@ -407,13 +441,9 @@
 @media (max-width: 900px) {
   .timing-table-header,
   .driver-row {
-    grid-template-columns: 36px 70px 70px 1fr 1fr 1fr 80px 80px;
+    grid-template-columns: 36px 70px 70px 1fr 1fr 1fr 90px 36px;
     font-size: 11px;
-    padding: 4px 8px;
-  }
-
-  .track-map-container {
-    height: 260px;
+    padding: 0 8px;
   }
 
   .live-content-active {
@@ -424,8 +454,13 @@
     width: 100%;
     max-width: none;
     min-width: 0;
+    flex: 1;
     border-right: none;
     border-bottom: 1px solid #1a1a1a;
+  }
+
+  .live-right-pane {
+    flex: 1;
   }
 
   .live-resize-handle {
@@ -447,16 +482,21 @@
   .best-sector-time {
     display: none;
   }
+
+  .tyre-badge {
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+  }
 }
 
 @media (max-width: 640px) {
   .timing-table-header,
   .driver-row {
-    grid-template-columns: 30px 56px 60px 1fr 1fr 1fr 70px;
+    grid-template-columns: 30px 56px 60px 1fr 1fr 1fr 70px 30px;
   }
 
-  .th-time:last-child,
-  .dr-time.best {
+  .laptime-last {
     display: none;
   }
 }

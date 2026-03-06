@@ -1,9 +1,14 @@
-import { useRef, useEffect, useState, useCallback } from 'react';
-import * as THREE from 'three';
-import { getCircuitsBySeason } from '../services/api';
-import '../styles/CircuitHero.css';
+import { useRef, useEffect, useState, useCallback } from "react";
+import * as THREE from "three";
+import { getCircuitsBySeason } from "../services/api";
+import "../styles/CircuitHero.css";
 
 // ─── Track Metadata ──────────────────────────────────────────────
+interface TrackHistoryEntry {
+  year: number;
+  winner: string;
+}
+
 interface TrackMeta {
   key: string;
   file: string;
@@ -16,8 +21,9 @@ interface TrackMeta {
   distance: string;
   round?: number | null;
   grandPrixName?: string | null;
-  weekendFormat?: 'normal' | 'sprint' | null;
+  weekendFormat?: "normal" | "sprint" | null;
   sessions: CircuitSession[];
+  history: TrackHistoryEntry[];
 }
 
 interface CircuitSession {
@@ -40,8 +46,9 @@ interface CircuitApiRow {
   season?: number | null;
   round?: number | null;
   grandPrixName?: string | null;
-  weekendFormat?: 'normal' | 'sprint' | null;
+  weekendFormat?: "normal" | "sprint" | null;
   sessions?: CircuitSession[];
+  history?: TrackHistoryEntry[];
 }
 
 interface SessionRow {
@@ -51,58 +58,60 @@ interface SessionRow {
 }
 
 type SessionField =
-  | 'practice_1'
-  | 'practice_2'
-  | 'practice_3'
-  | 'sprint_qualifying'
-  | 'qualifying'
-  | 'sprint'
-  | 'race';
+  | "practice_1"
+  | "practice_2"
+  | "practice_3"
+  | "sprint_qualifying"
+  | "qualifying"
+  | "sprint"
+  | "race";
 
 const SESSION_SEQUENCE: { key: SessionField; label: string }[] = [
-  { key: 'practice_1', label: 'Practice 1' },
-  { key: 'practice_2', label: 'Practice 2' },
-  { key: 'practice_3', label: 'Practice 3' },
-  { key: 'sprint_qualifying', label: 'Sprint Qualifying' },
-  { key: 'qualifying', label: 'Qualifying' },
-  { key: 'sprint', label: 'Sprint' },
-  { key: 'race', label: 'Race' },
+  { key: "practice_1", label: "Practice 1" },
+  { key: "practice_2", label: "Practice 2" },
+  { key: "practice_3", label: "Practice 3" },
+  { key: "sprint_qualifying", label: "Sprint Qualifying" },
+  { key: "qualifying", label: "Qualifying" },
+  { key: "sprint", label: "Sprint" },
+  { key: "race", label: "Race" },
 ];
 
-const AEST_TIME_ZONE = 'Australia/Brisbane';
-const AEST_DAY_FORMATTER = new Intl.DateTimeFormat('en-AU', {
+const AEST_TIME_ZONE = "Australia/Brisbane";
+const AEST_DAY_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
-  day: 'numeric',
-  month: 'short',
+  day: "numeric",
+  month: "short",
 });
-const AEST_TIME_FORMATTER = new Intl.DateTimeFormat('en-AU', {
+const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
-  hour: 'numeric',
-  minute: '2-digit',
+  hour: "numeric",
+  minute: "2-digit",
   hour12: false,
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
 
 // ─── Helpers ─────────────────────────────────────────────────────
-function parseTrackData(raw: string): { x: number; y: number; isCorner: boolean }[] {
+function parseTrackData(
+  raw: string,
+): { x: number; y: number; isCorner: boolean }[] {
   // Strip JS template-literal wrapper if present (`const trackData = \`...\`;`)
   let csv = raw;
   const wrapperMatch = raw.match(/`([\s\S]*)`/);
   if (wrapperMatch) csv = wrapperMatch[1];
 
-  const lines = csv.trim().split('\n');
+  const lines = csv.trim().split("\n");
   const points: { x: number; y: number; isCorner: boolean }[] = [];
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-    if (line.length === 0 || line.startsWith('#')) continue;
-    const parts = line.split(',');
+    if (line.length === 0 || line.startsWith("#")) continue;
+    const parts = line.split(",");
     if (parts.length >= 2) {
       const x = parseFloat(parts[0]);
       const y = parseFloat(parts[1]);
       if (!isNaN(x) && !isNaN(y)) {
         // 5th column (index 4) is is_corner flag produced by csv_reading.py
-        const isCorner = parts.length >= 5 ? parts[4].trim() === '1' : false;
+        const isCorner = parts.length >= 5 ? parts[4].trim() === "1" : false;
         points.push({ x, y, isCorner });
       }
     }
@@ -110,10 +119,14 @@ function parseTrackData(raw: string): { x: number; y: number; isCorner: boolean 
   return points;
 }
 
-function buildScaledPoints(rawPoints: { x: number; y: number }[]): THREE.Vector3[] {
-  let minX = Infinity, maxX = -Infinity;
-  let minY = Infinity, maxY = -Infinity;
-  rawPoints.forEach(p => {
+function buildScaledPoints(
+  rawPoints: { x: number; y: number }[],
+): THREE.Vector3[] {
+  let minX = Infinity,
+    maxX = -Infinity;
+  let minY = Infinity,
+    maxY = -Infinity;
+  rawPoints.forEach((p) => {
     if (p.x < minX) minX = p.x;
     if (p.x > maxX) maxX = p.x;
     if (p.y < minY) minY = p.y;
@@ -126,8 +139,9 @@ function buildScaledPoints(rawPoints: { x: number; y: number }[]): THREE.Vector3
   const scale = targetSize / maxRange;
   const centreX = (minX + maxX) / 2;
   const centreY = (minY + maxY) / 2;
-  return rawPoints.map(p =>
-    new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale)
+  return rawPoints.map(
+    (p) =>
+      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale),
   );
 }
 
@@ -135,9 +149,9 @@ function countryCodeToFlag(code: string): string {
   if (!/^[A-Za-z]{2}$/.test(code)) return code;
   return code
     .toUpperCase()
-    .split('')
+    .split("")
     .map((char) => String.fromCodePoint(127397 + char.charCodeAt(0)))
-    .join('');
+    .join("");
 }
 
 function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
@@ -155,6 +169,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     grandPrixName: row.grandPrixName ?? null,
     weekendFormat: row.weekendFormat ?? null,
     sessions: row.sessions ?? [],
+    history: row.history ?? [],
   };
 }
 
@@ -166,9 +181,10 @@ function parseSessionTime(session?: CircuitSession): Date | null {
   }
 
   if (!session.sessionDateAest || !session.sessionTimeAest) return null;
-  const normalizedTime = session.sessionTimeAest.length === 5
-    ? `${session.sessionTimeAest}:00`
-    : session.sessionTimeAest;
+  const normalizedTime =
+    session.sessionTimeAest.length === 5
+      ? `${session.sessionTimeAest}:00`
+      : session.sessionTimeAest;
   const asAest = new Date(`${session.sessionDateAest}T${normalizedTime}+10:00`);
   return Number.isNaN(asAest.getTime()) ? null : asAest;
 }
@@ -193,8 +209,10 @@ function getSessionRows(track: TrackMeta | null): SessionRow[] {
 
 function formatAestDayMonth(date: Date): string {
   const parts = AEST_DAY_FORMATTER.formatToParts(date);
-  const day = parts.find(p => p.type === 'day')?.value ?? '';
-  const month = (parts.find(p => p.type === 'month')?.value ?? '').replace('.', '').toUpperCase();
+  const day = parts.find((p) => p.type === "day")?.value ?? "";
+  const month = (parts.find((p) => p.type === "month")?.value ?? "")
+    .replace(".", "")
+    .toUpperCase();
   return `${day} ${month}`.trim();
 }
 
@@ -226,7 +244,7 @@ export default function CircuitHero() {
   });
 
   const [tracks, setTracks] = useState<TrackMeta[]>([]);
-  const [selectedTrack, setSelectedTrack] = useState('');
+  const [selectedTrack, setSelectedTrack] = useState("");
   const [loading, setLoading] = useState(true);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [scheduleLoading, setScheduleLoading] = useState(true);
@@ -239,7 +257,10 @@ export default function CircuitHero() {
       if (scrollRafRef.current) return;
       scrollRafRef.current = requestAnimationFrame(() => {
         const section = sectionRef.current;
-        if (!section) { scrollRafRef.current = null; return; }
+        if (!section) {
+          scrollRafRef.current = null;
+          return;
+        }
         const rect = section.getBoundingClientRect();
         const vh = window.innerHeight;
         // progress: 0 when hero fully visible, 1 when hero top reaches viewport top and beyond
@@ -248,9 +269,9 @@ export default function CircuitHero() {
         scrollRafRef.current = null;
       });
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       if (scrollRafRef.current) cancelAnimationFrame(scrollRafRef.current);
     };
   }, []);
@@ -263,7 +284,7 @@ export default function CircuitHero() {
     const container = containerRef.current;
     if (container) {
       // Remove only the canvas, not the overlay UI
-      const canvas = container.querySelector('canvas');
+      const canvas = container.querySelector("canvas");
       if (canvas) container.removeChild(canvas);
     }
     if (rendererRef.current) {
@@ -284,7 +305,7 @@ export default function CircuitHero() {
       50,
       container.clientWidth / container.clientHeight,
       0.1,
-      1000
+      1000,
     );
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -324,8 +345,11 @@ export default function CircuitHero() {
     const trackPoints = buildScaledPoints(rawPoints);
 
     // Compute scaling params (mirrors buildScaledPoints) for turn marker placement
-    let _minX = Infinity, _maxX = -Infinity, _minY = Infinity, _maxY = -Infinity;
-    rawPoints.forEach(p => {
+    let _minX = Infinity,
+      _maxX = -Infinity,
+      _minY = Infinity,
+      _maxY = -Infinity;
+    rawPoints.forEach((p) => {
       if (p.x < _minX) _minX = p.x;
       if (p.x > _maxX) _maxX = p.x;
       if (p.y < _minY) _minY = p.y;
@@ -338,18 +362,28 @@ export default function CircuitHero() {
     const TRACK_ELEVATION = 2.5;
 
     // Elevated curve for main track (raised above ground for 3D depth)
-    const elevatedPoints = trackPoints.map(p =>
-      new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
+    const elevatedPoints = trackPoints.map(
+      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z),
     );
-    const curve = new THREE.CatmullRomCurve3(elevatedPoints, true, 'catmullrom', 0.2);
+    const curve = new THREE.CatmullRomCurve3(
+      elevatedPoints,
+      true,
+      "catmullrom",
+      0.2,
+    );
 
     // Shadow/bottom edge sits just below the main track
     const SHADOW_Y = TRACK_ELEVATION - 1.4;
 
-    const shadowPoints = trackPoints.map(p =>
-      new THREE.Vector3(p.x, SHADOW_Y, p.z)
+    const shadowPoints = trackPoints.map(
+      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z),
     );
-    const shadowCurve = new THREE.CatmullRomCurve3(shadowPoints, true, 'catmullrom', 0.2);
+    const shadowCurve = new THREE.CatmullRomCurve3(
+      shadowPoints,
+      true,
+      "catmullrom",
+      0.2,
+    );
 
     const numSamples = Math.min(trackPoints.length * 2, 1200);
     const shadowSamples = Math.min(trackPoints.length, 600);
@@ -384,22 +418,31 @@ export default function CircuitHero() {
     }
 
     const wallGeo = new THREE.BufferGeometry();
-    wallGeo.setAttribute('position', new THREE.Float32BufferAttribute(wallPositions, 3));
-    wallGeo.setAttribute('uv', new THREE.Float32BufferAttribute(wallUvs, 2));
+    wallGeo.setAttribute(
+      "position",
+      new THREE.Float32BufferAttribute(wallPositions, 3),
+    );
+    wallGeo.setAttribute("uv", new THREE.Float32BufferAttribute(wallUvs, 2));
     wallGeo.setIndex(wallIndices);
     wallGeo.computeVertexNormals();
 
     // Dark semi-transparent wall
     const wallMat = new THREE.MeshBasicMaterial({
-      color: 0x330500, transparent: true, opacity: 0.22,
-      side: THREE.DoubleSide, depthWrite: false,
+      color: 0x330500,
+      transparent: true,
+      opacity: 0.22,
+      side: THREE.DoubleSide,
+      depthWrite: false,
     });
     scene.add(new THREE.Mesh(wallGeo, wallMat));
 
     // Slightly brighter inner wall for depth
     const wallGlowMat = new THREE.MeshBasicMaterial({
-      color: 0x441000, transparent: true, opacity: 0.10,
-      side: THREE.DoubleSide, depthWrite: false,
+      color: 0x441000,
+      transparent: true,
+      opacity: 0.1,
+      side: THREE.DoubleSide,
+      depthWrite: false,
       blending: THREE.AdditiveBlending,
     });
     scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
@@ -407,30 +450,45 @@ export default function CircuitHero() {
     // ── Shadow / bottom edge track ───────────────────────────────
     // Bottom edge core — mirrors the main track shape
     const shadowCoreMat = new THREE.MeshBasicMaterial({
-      color: 0x661100, transparent: true, opacity: 0.4,
-      blending: THREE.AdditiveBlending
+      color: 0x661100,
+      transparent: true,
+      opacity: 0.4,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(
-      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true), shadowCoreMat
-    ));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true),
+        shadowCoreMat,
+      ),
+    );
 
     // Soft glow around bottom edge
     const shadowMidMat = new THREE.MeshBasicMaterial({
-      color: 0x330500, transparent: true, opacity: 0.15,
-      blending: THREE.AdditiveBlending
+      color: 0x330500,
+      transparent: true,
+      opacity: 0.15,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(
-      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true), shadowMidMat
-    ));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true),
+        shadowMidMat,
+      ),
+    );
 
     // Faint outer glow on bottom edge
     const shadowOuterMat = new THREE.MeshBasicMaterial({
-      color: 0x220300, transparent: true, opacity: 0.06,
-      blending: THREE.AdditiveBlending
+      color: 0x220300,
+      transparent: true,
+      opacity: 0.06,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(
-      new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true), shadowOuterMat
-    ));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true),
+        shadowOuterMat,
+      ),
+    );
 
     // ── Main track (elevated top edge) ───────────────────────────
     // Solid track body
@@ -442,7 +500,7 @@ export default function CircuitHero() {
         emissiveIntensity: 1.8,
         shininess: 150,
         specular: 0xff8844,
-      })
+      }),
     );
     scene.add(trackMesh);
 
@@ -451,68 +509,98 @@ export default function CircuitHero() {
       color: 0xffcc88,
       transparent: true,
       opacity: 0.85,
-      blending: THREE.AdditiveBlending
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true), coreMat));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true),
+        coreMat,
+      ),
+    );
 
     // Tight glow layer 1 — close halo
     const glow1Mat = new THREE.MeshBasicMaterial({
-      color: 0xff3300, transparent: true, opacity: 0.35,
-      blending: THREE.AdditiveBlending
+      color: 0xff3300,
+      transparent: true,
+      opacity: 0.35,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true), glow1Mat));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true),
+        glow1Mat,
+      ),
+    );
 
     // Glow layer 2 — soft spread
     const glow2Mat = new THREE.MeshBasicMaterial({
-      color: 0xff1100, transparent: true, opacity: 0.15,
-      blending: THREE.AdditiveBlending
+      color: 0xff1100,
+      transparent: true,
+      opacity: 0.15,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true), glow2Mat));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true),
+        glow2Mat,
+      ),
+    );
 
     // Glow layer 3 — faint outer aura
     const glow3Mat = new THREE.MeshBasicMaterial({
-      color: 0xff0000, transparent: true, opacity: 0.06,
-      blending: THREE.AdditiveBlending
+      color: 0xff0000,
+      transparent: true,
+      opacity: 0.06,
+      blending: THREE.AdditiveBlending,
     });
-    scene.add(new THREE.Mesh(new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true), glow3Mat));
+    scene.add(
+      new THREE.Mesh(
+        new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true),
+        glow3Mat,
+      ),
+    );
 
     // ── Turn number markers ─────────────────────────────────────
     const MARKER_Y = TRACK_ELEVATION + 2.4;
 
     function makeTurnLabel(num: number): THREE.Sprite {
       const size = 128;
-      const canvas = document.createElement('canvas');
+      const canvas = document.createElement("canvas");
       canvas.width = size;
       canvas.height = size;
-      const ctx = canvas.getContext('2d')!;
+      const ctx = canvas.getContext("2d")!;
 
       // Outer glow halo
       ctx.beginPath();
       ctx.arc(size / 2, size / 2, 56, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(255, 34, 0, 0.12)';
+      ctx.fillStyle = "rgba(255, 34, 0, 0.12)";
       ctx.fill();
 
       // Solid background circle
       ctx.beginPath();
       ctx.arc(size / 2, size / 2, 38, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(12, 0, 0, 0.92)';
+      ctx.fillStyle = "rgba(12, 0, 0, 0.92)";
       ctx.fill();
-      ctx.strokeStyle = '#ff2200';
+      ctx.strokeStyle = "#ff2200";
       ctx.lineWidth = 4;
       ctx.stroke();
 
       // Turn number text
       const fontSize = num >= 10 ? 34 : 42;
-      ctx.fillStyle = '#ff6644';
+      ctx.fillStyle = "#ff6644";
       ctx.font = `bold ${fontSize}px Arial`;
-      ctx.textAlign = 'center';
-      ctx.textBaseline = 'middle';
-      ctx.shadowColor = '#ff3300';
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
+      ctx.shadowColor = "#ff3300";
       ctx.shadowBlur = 10;
       ctx.fillText(String(num), size / 2, size / 2 + 2);
 
       const texture = new THREE.CanvasTexture(canvas);
-      const mat = new THREE.SpriteMaterial({ map: texture, transparent: true, depthTest: false });
+      const mat = new THREE.SpriteMaterial({
+        map: texture,
+        transparent: true,
+        depthTest: false,
+      });
       const sprite = new THREE.Sprite(mat);
       sprite.scale.set(3.0, 3.0, 1);
       return sprite;
@@ -531,7 +619,9 @@ export default function CircuitHero() {
         // Small glowing dot at track level
         const dotGeo = new THREE.SphereGeometry(0.22, 8, 8);
         const dotMat = new THREE.MeshBasicMaterial({
-          color: 0xffaa00, transparent: true, opacity: 0.9,
+          color: 0xffaa00,
+          transparent: true,
+          opacity: 0.9,
           blending: THREE.AdditiveBlending,
         });
         const dot = new THREE.Mesh(dotGeo, dotMat);
@@ -548,7 +638,11 @@ export default function CircuitHero() {
     // Platform & grid (below shadow level — very subtle)
     const platform = new THREE.Mesh(
       new THREE.CircleGeometry(30, 64),
-      new THREE.MeshBasicMaterial({ color: 0x050000, transparent: true, opacity: 0.12 })
+      new THREE.MeshBasicMaterial({
+        color: 0x050000,
+        transparent: true,
+        opacity: 0.12,
+      }),
     );
     platform.rotation.x = -Math.PI / 2;
     platform.position.y = SHADOW_Y - 1.0;
@@ -556,12 +650,12 @@ export default function CircuitHero() {
 
     const grid = new THREE.GridHelper(60, 60, 0x220000, 0x0a0000);
     grid.position.y = SHADOW_Y - 0.99;
-    (grid.material as THREE.Material).opacity = 0.10;
+    (grid.material as THREE.Material).opacity = 0.1;
     (grid.material as THREE.Material).transparent = true;
     scene.add(grid);
 
     // ── Camera & controls ────────────────────────────────────────
-    const FIXED_PHI = Math.PI / 3;         // Much lower angle for side-on view (try values: /8 = very low, /10 = low, /12 = moderate, /15 = higher)
+    const FIXED_PHI = Math.PI / 3; // Much lower angle for side-on view (try values: /8 = very low, /10 = low, /12 = moderate, /15 = higher)
     const autoRotateSpeed = 0.002;
     const state = sceneStateRef.current;
     state.cameraAngleTheta = Math.PI / 4;
@@ -569,9 +663,15 @@ export default function CircuitHero() {
     state.autoRotate = true;
 
     function updateCamera() {
-      camera.position.x = state.cameraDistance * Math.sin(FIXED_PHI) * Math.cos(state.cameraAngleTheta);
+      camera.position.x =
+        state.cameraDistance *
+        Math.sin(FIXED_PHI) *
+        Math.cos(state.cameraAngleTheta);
       camera.position.y = state.cameraDistance * Math.cos(FIXED_PHI);
-      camera.position.z = state.cameraDistance * Math.sin(FIXED_PHI) * Math.sin(state.cameraAngleTheta);
+      camera.position.z =
+        state.cameraDistance *
+        Math.sin(FIXED_PHI) *
+        Math.sin(state.cameraAngleTheta);
       camera.lookAt(0, 1.8, 0);
     }
     updateCamera();
@@ -589,7 +689,9 @@ export default function CircuitHero() {
     };
     const onMouseUp = () => {
       state.isDragging = false;
-      setTimeout(() => { state.autoRotate = true; }, 2000);
+      setTimeout(() => {
+        state.autoRotate = true;
+      }, 2000);
     };
     const MAX_ZOOM_OUT = 50;
     const onWheel = (e: WheelEvent) => {
@@ -599,7 +701,10 @@ export default function CircuitHero() {
       }
       e.preventDefault();
       state.cameraDistance += e.deltaY * 0.05;
-      state.cameraDistance = Math.max(15, Math.min(MAX_ZOOM_OUT, state.cameraDistance));
+      state.cameraDistance = Math.max(
+        15,
+        Math.min(MAX_ZOOM_OUT, state.cameraDistance),
+      );
     };
 
     // Touch events
@@ -617,16 +722,18 @@ export default function CircuitHero() {
     };
     const onTouchEnd = () => {
       state.isDragging = false;
-      setTimeout(() => { state.autoRotate = true; }, 2000);
+      setTimeout(() => {
+        state.autoRotate = true;
+      }, 2000);
     };
 
-    renderer.domElement.addEventListener('mousedown', onMouseDown);
-    renderer.domElement.addEventListener('mousemove', onMouseMove);
-    renderer.domElement.addEventListener('mouseup', onMouseUp);
-    renderer.domElement.addEventListener('wheel', onWheel, { passive: false });
-    renderer.domElement.addEventListener('touchstart', onTouchStart);
-    renderer.domElement.addEventListener('touchmove', onTouchMove);
-    renderer.domElement.addEventListener('touchend', onTouchEnd);
+    renderer.domElement.addEventListener("mousedown", onMouseDown);
+    renderer.domElement.addEventListener("mousemove", onMouseMove);
+    renderer.domElement.addEventListener("mouseup", onMouseUp);
+    renderer.domElement.addEventListener("wheel", onWheel, { passive: false });
+    renderer.domElement.addEventListener("touchstart", onTouchStart);
+    renderer.domElement.addEventListener("touchmove", onTouchMove);
+    renderer.domElement.addEventListener("touchend", onTouchEnd);
 
     // ── Animation loop with enhanced dynamics ────────────────────
     function animate() {
@@ -635,17 +742,17 @@ export default function CircuitHero() {
       updateCamera();
 
       const t = Date.now() * 0.001;
-      
+
       // Subtle light pulsing
       pointLight1.intensity = 1.2 + Math.sin(t * 1.8) * 0.15;
       pointLight2.intensity = 0.6 + Math.sin(t * 2.3) * 0.08;
       pointLight3.intensity = 0.4 + Math.sin(t * 1.6) * 0.06;
       sideLight1.intensity = 0.5 + Math.sin(t * 2.7) * 0.08;
       sideLight2.intensity = 0.5 + Math.cos(t * 2.7) * 0.08;
-      
+
       // Pulsing track core
       coreMat.opacity = 0.8 + Math.sin(t * 3) * 0.1;
-      
+
       // Animated glow layers
       glow1Mat.opacity = 0.35 + Math.sin(t * 2.5) * 0.06;
       glow2Mat.opacity = 0.15 + Math.sin(t * 2.0) * 0.04;
@@ -655,10 +762,10 @@ export default function CircuitHero() {
       shadowCoreMat.opacity = 0.35 + Math.sin(t * 1.8) * 0.05;
       shadowMidMat.opacity = 0.18 + Math.sin(t * 1.5) * 0.03;
       shadowOuterMat.opacity = 0.08 + Math.sin(t * 1.2) * 0.02;
-      
+
       // Breathing effect on main track
       trackMesh.material.emissiveIntensity = 1.8 + Math.sin(t * 2.5) * 0.2;
-      
+
       renderer.render(scene, camera);
     }
 
@@ -668,52 +775,58 @@ export default function CircuitHero() {
       camera.updateProjectionMatrix();
       renderer.setSize(container.clientWidth, container.clientHeight);
     };
-    window.addEventListener('resize', onResize);
+    window.addEventListener("resize", onResize);
 
     animate();
 
     // Cleanup function for this specific scene instance
     return () => {
-      window.removeEventListener('resize', onResize);
-      renderer.domElement.removeEventListener('mousedown', onMouseDown);
-      renderer.domElement.removeEventListener('mousemove', onMouseMove);
-      renderer.domElement.removeEventListener('mouseup', onMouseUp);
-      renderer.domElement.removeEventListener('wheel', onWheel);
-      renderer.domElement.removeEventListener('touchstart', onTouchStart);
-      renderer.domElement.removeEventListener('touchmove', onTouchMove);
-      renderer.domElement.removeEventListener('touchend', onTouchEnd);
+      window.removeEventListener("resize", onResize);
+      renderer.domElement.removeEventListener("mousedown", onMouseDown);
+      renderer.domElement.removeEventListener("mousemove", onMouseMove);
+      renderer.domElement.removeEventListener("mouseup", onMouseUp);
+      renderer.domElement.removeEventListener("wheel", onWheel);
+      renderer.domElement.removeEventListener("touchstart", onTouchStart);
+      renderer.domElement.removeEventListener("touchmove", onTouchMove);
+      renderer.domElement.removeEventListener("touchend", onTouchEnd);
     };
   }, []);
 
   // Load track data
-  const loadTrack = useCallback(async (trackKey: string, sourceTracks?: TrackMeta[]) => {
-    const availableTracks = sourceTracks ?? tracksRef.current;
-    const meta = availableTracks.find((track) => track.key === trackKey);
-    if (!meta) return;
+  const loadTrack = useCallback(
+    async (trackKey: string, sourceTracks?: TrackMeta[]) => {
+      const availableTracks = sourceTracks ?? tracksRef.current;
+      const meta = availableTracks.find((track) => track.key === trackKey);
+      if (!meta) return;
 
-    setLoading(true);
-    teardownScene();
-    const currentLoadId = ++loadIdRef.current;
+      setLoading(true);
+      teardownScene();
+      const currentLoadId = ++loadIdRef.current;
 
-    try {
-      const response = await fetch(`/circuit_3d/TrackCoordinateJS/${meta.file}.js`, {
-        cache: 'no-store',
-      });
-      if (!response.ok) {
-        throw new Error(`Failed to load track data: ${meta.file}`);
-      }
-      const csvData = await response.text();
-      if (currentLoadId !== loadIdRef.current) return;
-      initTrackScene(csvData);
-      requestAnimationFrame(() => {
+      try {
+        const response = await fetch(
+          `/circuit_3d/TrackCoordinateJS/${meta.file}.js`,
+          {
+            cache: "no-store",
+          },
+        );
+        if (!response.ok) {
+          throw new Error(`Failed to load track data: ${meta.file}`);
+        }
+        const csvData = await response.text();
         if (currentLoadId !== loadIdRef.current) return;
+        initTrackScene(csvData);
+        requestAnimationFrame(() => {
+          if (currentLoadId !== loadIdRef.current) return;
+          setLoading(false);
+        });
+      } catch (error) {
+        console.error("[F1] Failed to load track file:", meta.file, error);
         setLoading(false);
-      });
-    } catch (error) {
-      console.error('[F1] Failed to load track file:', meta.file, error);
-      setLoading(false);
-    }
-  }, [teardownScene, initTrackScene]);
+      }
+    },
+    [teardownScene, initTrackScene],
+  );
 
   useEffect(() => {
     tracksRef.current = tracks;
@@ -736,7 +849,7 @@ export default function CircuitHero() {
         setTracks(mapped);
 
         if (mapped.length === 0) {
-          setScheduleError('No circuits found in database.');
+          setScheduleError("No circuits found in database.");
           setLoading(false);
           return;
         }
@@ -746,33 +859,36 @@ export default function CircuitHero() {
         loadTrack(initialTrack.key, mapped);
       })
       .catch((error) => {
-        console.error('[F1] Failed to load circuits from database:', error);
+        console.error("[F1] Failed to load circuits from database:", error);
         if (!active) return;
         tracksRef.current = [];
         setTracks([]);
-        let detail = '';
-        if (typeof error === 'object' && error !== null) {
+        let detail = "";
+        if (typeof error === "object" && error !== null) {
           const maybeAxios = error as {
             response?: { data?: unknown; status?: number };
             message?: string;
           };
-          if (typeof maybeAxios.response?.data === 'string') {
+          if (typeof maybeAxios.response?.data === "string") {
             detail = maybeAxios.response.data;
           } else if (
-            typeof maybeAxios.response?.data === 'object' &&
+            typeof maybeAxios.response?.data === "object" &&
             maybeAxios.response?.data !== null &&
-            'message' in (maybeAxios.response.data as Record<string, unknown>) &&
-            typeof (maybeAxios.response.data as Record<string, unknown>).message === 'string'
+            "message" in
+              (maybeAxios.response.data as Record<string, unknown>) &&
+            typeof (maybeAxios.response.data as Record<string, unknown>)
+              .message === "string"
           ) {
-            detail = (maybeAxios.response.data as Record<string, string>).message;
-          } else if (typeof maybeAxios.message === 'string') {
+            detail = (maybeAxios.response.data as Record<string, string>)
+              .message;
+          } else if (typeof maybeAxios.message === "string") {
             detail = maybeAxios.message;
           }
         }
         setScheduleError(
           detail
             ? `Unable to load circuits from database. ${detail}`
-            : 'Unable to load circuits from database.'
+            : "Unable to load circuits from database.",
         );
         setLoading(false);
       })
@@ -795,9 +911,12 @@ export default function CircuitHero() {
   }, []);
 
   const trackKeys = tracks.map((track) => track.key);
-  const selectedTrackMeta = tracks.find((track) => track.key === selectedTrack) ?? null;
+  const selectedTrackMeta =
+    tracks.find((track) => track.key === selectedTrack) ?? null;
   const sessionRows = getSessionRows(selectedTrackMeta);
-  const nextSessionIndex = sessionRows.findIndex((session) => session.startAt.getTime() > nowMs);
+  const nextSessionIndex = sessionRows.findIndex(
+    (session) => session.startAt.getTime() > nowMs,
+  );
 
   const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const key = e.target.value;
@@ -824,11 +943,11 @@ export default function CircuitHero() {
   };
 
   const handleScrollDown = () => {
-    const heroEl = containerRef.current?.closest('.circuit-hero-section');
+    const heroEl = containerRef.current?.closest(".circuit-hero-section");
     if (heroEl) {
       const nextSection = heroEl.nextElementSibling;
       if (nextSection) {
-        nextSection.scrollIntoView({ behavior: 'smooth' });
+        nextSection.scrollIntoView({ behavior: "smooth" });
       }
     }
   };
@@ -837,22 +956,24 @@ export default function CircuitHero() {
   const heroParallaxStyle: React.CSSProperties = {
     opacity: 1 - scrollProgress * 0.85,
     transform: `scale(${1 - scrollProgress * 0.08}) translateY(${scrollProgress * 30}px)`,
-    transition: 'none',
+    transition: "none",
   };
 
   const overlayOpacity = scrollProgress * 0.9;
 
   return (
     <section className="circuit-hero-section" ref={sectionRef}>
-      <div className="circuit-hero-container" ref={containerRef} style={heroParallaxStyle}>
+      <div
+        className="circuit-hero-container"
+        ref={containerRef}
+        style={heroParallaxStyle}
+      >
         {/* Loading indicator */}
-        {loading && (
-          <div className="circuit-loading">LOADING CIRCUIT...</div>
-        )}
+        {loading && <div className="circuit-loading">LOADING CIRCUIT...</div>}
 
         {!loading && !selectedTrackMeta && (
           <div className="circuit-loading">
-            {scheduleError ?? 'No circuit data available.'}
+            {scheduleError ?? "No circuit data available."}
           </div>
         )}
 
@@ -864,19 +985,27 @@ export default function CircuitHero() {
             <div className="circuit-stats">
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Length</span>
-                <span className="circuit-stat-value">{selectedTrackMeta.length}</span>
+                <span className="circuit-stat-value">
+                  {selectedTrackMeta.length}
+                </span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Laps</span>
-                <span className="circuit-stat-value">{selectedTrackMeta.laps}</span>
+                <span className="circuit-stat-value">
+                  {selectedTrackMeta.laps}
+                </span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Corners</span>
-                <span className="circuit-stat-value">{selectedTrackMeta.corners}</span>
+                <span className="circuit-stat-value">
+                  {selectedTrackMeta.corners}
+                </span>
               </div>
               <div className="circuit-stat-item">
                 <span className="circuit-stat-label">Distance</span>
-                <span className="circuit-stat-value">{selectedTrackMeta.distance}</span>
+                <span className="circuit-stat-value">
+                  {selectedTrackMeta.distance}
+                </span>
               </div>
             </div>
           </div>
@@ -887,10 +1016,13 @@ export default function CircuitHero() {
           <div className="circuit-schedule-panel">
             <div className="circuit-schedule-topbar">
               <span className="circuit-schedule-heading">Schedule</span>
-              <span className="circuit-schedule-flag">{selectedTrackMeta.flag}</span>
+              <span className="circuit-schedule-flag">
+                {selectedTrackMeta.flag}
+              </span>
             </div>
             <div className="circuit-schedule-race">
-              {selectedTrackMeta.grandPrixName ?? `${selectedTrackMeta.title} GP`}
+              {selectedTrackMeta.grandPrixName ??
+                `${selectedTrackMeta.title} GP`}
             </div>
             <div className="circuit-schedule-columns">
               <span>Event</span>
@@ -907,7 +1039,9 @@ export default function CircuitHero() {
             )}
 
             {!scheduleLoading && !scheduleError && sessionRows.length === 0 && (
-              <div className="circuit-schedule-empty">No session times available.</div>
+              <div className="circuit-schedule-empty">
+                No session times available.
+              </div>
             )}
 
             {!scheduleLoading && !scheduleError && sessionRows.length > 0 && (
@@ -917,13 +1051,18 @@ export default function CircuitHero() {
                   const isNext = nextSessionIndex === index;
                   const isPast = sessionStartMs <= nowMs;
                   const rowClassName = [
-                    'circuit-schedule-row',
-                    isNext ? 'is-next' : '',
-                    isPast ? 'is-past' : '',
-                  ].filter(Boolean).join(' ');
+                    "circuit-schedule-row",
+                    isNext ? "is-next" : "",
+                    isPast ? "is-past" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ");
 
                   return (
-                    <div key={`${session.key}-${sessionStartMs}`} className={rowClassName}>
+                    <div
+                      key={`${session.key}-${sessionStartMs}`}
+                      className={rowClassName}
+                    >
                       <span>{session.label}</span>
                       <span>{formatAestDayMonth(session.startAt)}</span>
                       <span>{formatAestTime(session.startAt)}</span>
@@ -940,13 +1079,39 @@ export default function CircuitHero() {
         {/* Prev / Next circuit nav arrows */}
         {trackKeys.length > 0 && (
           <>
-            <button className="circuit-nav-arrow circuit-nav-prev" onClick={handlePrevTrack} aria-label="Previous circuit">
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button
+              className="circuit-nav-arrow circuit-nav-prev"
+              onClick={handlePrevTrack}
+              aria-label="Previous circuit"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="15 18 9 12 15 6" />
               </svg>
             </button>
-            <button className="circuit-nav-arrow circuit-nav-next" onClick={handleNextTrack} aria-label="Next circuit">
-              <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <button
+              className="circuit-nav-arrow circuit-nav-next"
+              onClick={handleNextTrack}
+              aria-label="Next circuit"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                width="32"
+                height="32"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
                 <polyline points="9 6 15 12 9 18" />
               </svg>
             </button>
@@ -959,13 +1124,43 @@ export default function CircuitHero() {
           <span>SCROLL TO ZOOM</span>
         </div>
 
+        {/* Past winners panel */}
+        {!loading &&
+          selectedTrackMeta &&
+          selectedTrackMeta.history.length > 0 && (
+            <div className="circuit-history-panel">
+              <div className="circuit-history-topbar">
+                <span className="circuit-history-heading">Past Winners</span>
+                <span className="circuit-history-flag">
+                  {selectedTrackMeta.flag}
+                </span>
+              </div>
+              <div className="circuit-history-columns">
+                <span>Year</span>
+                <span>Winner</span>
+              </div>
+              <div className="circuit-history-list">
+                {selectedTrackMeta.history.map((entry) => (
+                  <div key={entry.year} className="circuit-history-row">
+                    <span className="circuit-history-year">{entry.year}</span>
+                    <span className="circuit-history-winner">
+                      {entry.winner}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
         {/* Track selector */}
         {trackKeys.length > 0 && (
           <div className="circuit-track-selector">
             <label>Select Circuit</label>
             <select value={selectedTrack} onChange={handleTrackChange}>
               {tracks.map((track) => (
-                <option key={track.key} value={track.key}>{track.title}</option>
+                <option key={track.key} value={track.key}>
+                  {track.title}
+                </option>
               ))}
             </select>
           </div>

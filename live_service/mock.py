@@ -23,14 +23,18 @@ DRIVERS = [
     {"num": "23", "tla": "ALB", "name": "Alexander ALBON",   "team": "Williams",         "color": "64C4FF", "tier": 3},
     {"num": "55", "tla": "SAI", "name": "Carlos SAINZ",      "team": "Williams",         "color": "64C4FF", "tier": 2},
     {"num": "10", "tla": "GAS", "name": "Pierre GASLY",      "team": "Alpine",           "color": "0093CC", "tier": 3},
-    {"num": "7",  "tla": "DOO", "name": "Jack DOOHAN",       "team": "Alpine",           "color": "0093CC", "tier": 3},
-    {"num": "27", "tla": "HUL", "name": "Nico HULKENBERG",   "team": "Kick Sauber",      "color": "52E252", "tier": 3},
-    {"num": "5",  "tla": "BOR", "name": "Gabriel BORTOLETO", "team": "Kick Sauber",      "color": "52E252", "tier": 3},
+    {"num": "43", "tla": "COL", "name": "Franco COLAPINTO",  "team": "Alpine",           "color": "0093CC", "tier": 3},
+    {"num": "27", "tla": "HUL", "name": "Nico HULKENBERG",   "team": "Audi",             "color": "999999", "tier": 3},
+    {"num": "5",  "tla": "BOR", "name": "Gabriel BORTOLETO", "team": "Audi",             "color": "999999", "tier": 3},
     {"num": "22", "tla": "TSU", "name": "Yuki TSUNODA",      "team": "Racing Bulls",     "color": "6692FF", "tier": 2},
     {"num": "6",  "tla": "HAD", "name": "Isack HADJAR",      "team": "Racing Bulls",     "color": "6692FF", "tier": 3},
     {"num": "31", "tla": "OCO", "name": "Esteban OCON",      "team": "Haas F1 Team",     "color": "B6BABD", "tier": 3},
     {"num": "87", "tla": "BEA", "name": "Oliver BEARMAN",    "team": "Haas F1 Team",     "color": "B6BABD", "tier": 3},
+    {"num": "11", "tla": "PER", "name": "Sergio Perez",      "team": "Cadillac F1 Team", "color": "C4A230", "tier": 3},
+    {"num": "77", "tla": "BOT", "name": "Valterri Bottas",   "team": "Cadillac F1 Team", "color": "C4A230", "tier": 3},
 ]
+
+COMPOUNDS = ["SOFT", "MEDIUM", "HARD"]
 
 BASE_SECTORS = [28.200, 34.800, 24.500]
 TIER_OFFSETS = {1: 0.0, 2: 0.25, 3: 0.50}
@@ -107,6 +111,8 @@ class DriverState:
         self.last_lap_time: float | None = None
         self.laps_completed = 0
         self.pit_exit_tick = start_tick
+        self.stint_index = 0
+        self.compound: str = random.choice(COMPOUNDS)
 
     def gen_sector_time(self, idx: int) -> float:
         base = BASE_SECTORS[idx]
@@ -132,6 +138,7 @@ class MockSession:
         dl: dict = {}
         td: dict = {}
         ts: dict = {}
+        ta: dict = {}
         pos: dict = {}
 
         for idx, ds in enumerate(self.drivers):
@@ -175,12 +182,16 @@ class MockSession:
                 "PersonalBestLapTime": {"Value": ""},
                 "BestSectors": [{"Value": ""}, {"Value": ""}, {"Value": ""}],
             }
+            ta[d["num"]] = {
+                "Stints": [{"Compound": ds.compound, "New": "true", "TotalLaps": 0, "StartLaps": 0}],
+            }
             pos[d["num"]] = {"X": round(self.track[0][0], 2), "Y": round(self.track[0][1], 2), "Z": 0, "Status": "OnTrack"}
 
         return {
             "DriverList": dl,
             "TimingData": {"Lines": td},
             "TimingStats": {"Lines": ts},
+            "TimingAppData": {"Lines": ta},
             "SessionInfo": {
                 "Meeting": {"Name": "Mock Grand Prix", "Circuit": {"ShortName": self.track_name}},
                 "Name": "Qualifying",
@@ -329,8 +340,19 @@ class MockSession:
                 ds.pit_exit_tick = self.tick + random.randint(PIT_WAIT_MIN, PIT_WAIT_MAX)
                 tu["InPit"] = True
                 pu = {"X": round(self.track[0][0], 2), "Y": round(self.track[0][1], 2), "Z": 0, "Status": "OnTrack"}
+                old_compound = ds.compound
+                ds.compound = random.choice([c for c in COMPOUNDS if c != old_compound])
+                ds.stint_index += 1
 
-        return self._pack(ds, tu, pu)
+        out = self._pack(ds, tu, pu)
+        if tu.get("InPit"):
+            out["TimingAppData"] = {"Lines": {ds.num: {
+                "Stints": {str(ds.stint_index): {
+                    "Compound": ds.compound, "New": "true",
+                    "TotalLaps": 0, "StartLaps": ds.laps_completed,
+                }},
+            }}}
+        return out
 
     @staticmethod
     def _pack(ds: DriverState, timing: dict, position: dict) -> dict:

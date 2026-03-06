@@ -146,12 +146,12 @@
   position: absolute;
   top: 32px;
   right: 40px;
-  width: min(460px, calc(100vw - 80px));
+  width: min(540px, calc(100vw - 80px));
   z-index: 12;
   border: 1px solid rgba(255, 0, 0, 0.2);
   background: rgba(18, 2, 2, 0.88);
   backdrop-filter: blur(6px);
-  padding: 14px 16px 10px;
+  padding: 18px 22px 14px;
   border-radius: 4px;
   box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
   transition: border-color 0.3s, box-shadow 0.3s;
@@ -171,7 +171,7 @@
 
 .circuit-schedule-heading {
   color: #888;
-  font-size: 11px;
+  font-size: 12px;
   letter-spacing: 2px;
   text-transform: uppercase;
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
@@ -179,30 +179,30 @@
 }
 
 .circuit-schedule-flag {
-  font-size: 22px;
+  font-size: 26px;
   filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
 }
 
 .circuit-schedule-race {
   color: #ff0000;
-  font-size: 16px;
+  font-size: 18px;
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
   font-weight: 900;
   letter-spacing: 1px;
   text-transform: uppercase;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
   text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
 }
 
 .circuit-schedule-columns {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 8px;
-  padding: 7px 0 6px;
+  gap: 10px;
+  padding: 9px 0 8px;
   border-top: 1px solid rgba(255, 0, 0, 0.15);
   border-bottom: 1px solid rgba(255, 0, 0, 0.15);
   color: #888;
-  font-size: 10px;
+  font-size: 11px;
   letter-spacing: 1.2px;
   text-transform: uppercase;
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
@@ -217,12 +217,12 @@
 .circuit-schedule-row {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr;
-  gap: 8px;
+  gap: 10px;
   align-items: center;
-  padding: 9px 0;
+  padding: 11px 0;
   border-bottom: 1px solid rgba(255, 0, 0, 0.1);
   color: rgba(255, 255, 255, 0.7);
-  font-size: 15px;
+  font-size: 16px;
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
   font-weight: 700;
   letter-spacing: 0.8px;
@@ -258,14 +258,106 @@
   text-transform: uppercase;
 }
 
+/* ─── Past Winners Panel ─────────────────────────────────────── */
+.circuit-history-panel {
+  position: absolute;
+  bottom: 100px;
+  right: 40px;
+  width: min(420px, calc(100vw - 80px));
+  z-index: 12;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  background: rgba(18, 2, 2, 0.88);
+  backdrop-filter: blur(6px);
+  padding: 18px 22px 14px;
+  border-radius: 4px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.circuit-history-panel:hover {
+  border-color: rgba(255, 0, 0, 0.4);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.15);
+}
+
+.circuit-history-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.circuit-history-heading {
+  color: #888;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.circuit-history-flag {
+  font-size: 26px;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+}
+
+.circuit-history-columns {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  padding: 9px 0 8px;
+  border-top: 1px solid rgba(255, 0, 0, 0.15);
+  border-bottom: 1px solid rgba(255, 0, 0, 0.15);
+  color: #888;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-weight: 700;
+}
+
+.circuit-history-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.circuit-history-row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.circuit-history-row:last-child {
+  border-bottom: none;
+}
+
+.circuit-history-year {
+  color: #ff0000;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.4);
+}
+
+.circuit-history-winner {
+  color: rgba(255, 255, 255, 0.7);
+}
+
 /* ─── Controls Hint ───────────────────────────────────────────── */
 .circuit-controls-hint {
   position: absolute;
   bottom: 40px;
-  right: 40px;
+  left: 50%;
+  transform: translateX(-50%);
   color: #666;
   font-size: 13px;
-  text-align: right;
+  text-align: center;
   letter-spacing: 1px;
   z-index: 10;
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
@@ -487,6 +579,20 @@
 
   .circuit-schedule-footnote {
     font-size: 10px;
+  }
+
+  .circuit-history-panel {
+    bottom: 80px;
+    right: 20px;
+    left: 20px;
+    width: auto;
+    padding: 14px 14px 10px;
+  }
+
+  .circuit-history-row {
+    font-size: 14px;
+    gap: 6px;
+    padding: 8px 0;
   }
 
   .circuit-track-selector {

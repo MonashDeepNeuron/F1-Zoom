@@ -21,9 +21,12 @@ export default function Live() {
 
   const onResizeMouseDown = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
+      e.preventDefault();
       isDraggingRef.current = true;
       dragStartXRef.current = e.clientX;
       dragStartWidthRef.current = sidebarWidth;
+      document.body.style.cursor = "col-resize";
+      document.body.style.userSelect = "none";
     },
     [sidebarWidth]
   );
@@ -32,13 +35,16 @@ export default function Live() {
     const handleMouseMove = (e: MouseEvent) => {
       if (!isDraggingRef.current) return;
       const delta = e.clientX - dragStartXRef.current;
-      const next = Math.max(260, Math.min(520, dragStartWidthRef.current + delta));
+      const maxW = Math.floor(window.innerWidth * 0.75);
+      const next = Math.max(320, Math.min(maxW, dragStartWidthRef.current + delta));
       setSidebarWidth(next);
     };
 
     const handleMouseUp = () => {
       if (!isDraggingRef.current) return;
       isDraggingRef.current = false;
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
     };
 
     window.addEventListener("mousemove", handleMouseMove);
@@ -85,7 +91,7 @@ export default function Live() {
 
       {hasActiveSession ? (
         <div className="live-content live-content-active">
-          <div className="live-left-pane" style={{ width: sidebarWidth }}>
+          <div className="live-left-pane" style={{ width: sidebarWidth, flexShrink: 0 }}>
             <LiveTimingTable />
           </div>
           <div

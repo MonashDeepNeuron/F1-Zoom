@@ -3,6 +3,7 @@ import type {
   DriverInfo,
   TimingDataDriver,
   TimingStatsDriver,
+  TimingAppDataDriver,
   CarPosition,
   SessionInfo,
   GapMode,
@@ -47,6 +48,7 @@ interface LiveTimingState {
   driverList: Record<string, DriverInfo>;
   timingData: Record<string, TimingDataDriver>;
   timingStats: Record<string, TimingStatsDriver>;
+  timingAppData: Record<string, TimingAppDataDriver>;
   positions: Record<string, CarPosition>;
   sessionInfo: SessionInfo | null;
   sessionStatus: string;
@@ -64,6 +66,7 @@ export const useLiveTimingStore = create<LiveTimingState>((set, get) => ({
   driverList: {},
   timingData: {},
   timingStats: {},
+  timingAppData: {},
   positions: {},
   sessionInfo: null,
   sessionStatus: "",
@@ -77,6 +80,7 @@ export const useLiveTimingStore = create<LiveTimingState>((set, get) => ({
       driverList: data.DriverList ?? {},
       timingData: data.TimingData?.Lines ?? {},
       timingStats: data.TimingStats?.Lines ?? {},
+      timingAppData: data.TimingAppData?.Lines ?? {},
       positions: data.Position?.Entries ?? {},
       sessionInfo: data.SessionInfo ?? null,
       sessionStatus: data.SessionStatus?.Status ?? "",
@@ -93,6 +97,8 @@ export const useLiveTimingStore = create<LiveTimingState>((set, get) => ({
       patch.timingData = deepMerge(s.timingData, data.TimingData.Lines);
     if (data.TimingStats?.Lines)
       patch.timingStats = deepMerge(s.timingStats, data.TimingStats.Lines);
+    if (data.TimingAppData?.Lines)
+      patch.timingAppData = deepMerge(s.timingAppData, data.TimingAppData.Lines);
     if (data.Position?.Entries)
       patch.positions = deepMerge(s.positions, data.Position.Entries);
     if (data.SessionInfo)

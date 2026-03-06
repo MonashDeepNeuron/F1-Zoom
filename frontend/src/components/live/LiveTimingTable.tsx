@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { useLiveTimingStore } from "../../stores/liveTimingStore";
 import DriverRow from "./DriverRow";
 
@@ -13,6 +14,27 @@ export default function LiveTimingTable() {
     return pa - pb;
   });
 
+  const fastestInTeam = useMemo(() => {
+    const teamBest: Record<string, { num: string; time: number }> = {};
+    for (const [num] of sorted) {
+      const driver = driverList[num];
+      const best = timingData[num]?.BestLapTime?.Value;
+      if (!driver?.TeamName || !best) continue;
+      const parts = best.split(":");
+      const secs = parts.length === 2
+        ? parseFloat(parts[0]) * 60 + parseFloat(parts[1])
+        : parseFloat(parts[0]);
+      if (isNaN(secs)) continue;
+      const existing = teamBest[driver.TeamName];
+      if (!existing || secs < existing.time) {
+        teamBest[driver.TeamName] = { num, time: secs };
+      }
+    }
+    const result = new Set<string>();
+    for (const v of Object.values(teamBest)) result.add(v.num);
+    return result;
+  }, [sorted, driverList, timingData]);
+
   return (
     <div className="timing-table-wrapper">
       <div className="timing-table-header">
@@ -25,8 +47,8 @@ export default function LiveTimingTable() {
         <div className="th-sector">S1</div>
         <div className="th-sector">S2</div>
         <div className="th-sector">S3</div>
-        <div className="th-time">LAST</div>
-        <div className="th-time">BEST</div>
+        <div className="th-time">LAP TIME</div>
+        <div className="th-tyre">TYRE</div>
       </div>
 
       <div className="timing-table-body">
@@ -37,6 +59,7 @@ export default function LiveTimingTable() {
             driver={driverList[num]}
             timing={data}
             gapMode={gapMode}
+            isFastestInTeam={fastestInTeam.has(num)}
           />
         ))}
       </div>

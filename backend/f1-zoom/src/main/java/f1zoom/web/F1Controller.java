@@ -124,6 +124,25 @@ public class F1Controller {
                 circuitsById.put(id, item);
             }
 
+            // Fetch track history (past winners) grouped by circuit_id
+            Map<Long, List<Map<String, Object>>> historyByCircuit = new LinkedHashMap<>();
+            try {
+                Map<String, String> historyParams = new LinkedHashMap<>();
+                historyParams.put("select", "circuit_id,year,winner");
+                historyParams.put("order", "year.desc");
+                JsonNode historyNode = supabaseGet("track_history", historyParams);
+
+                for (JsonNode row : historyNode) {
+                    long circuitId = row.path("circuit_id").asLong(-1);
+                    Map<String, Object> entry = new LinkedHashMap<>();
+                    entry.put("year", row.path("year").asInt());
+                    entry.put("winner", textOrNull(row, "winner"));
+                    historyByCircuit.computeIfAbsent(circuitId, k -> new ArrayList<>()).add(entry);
+                }
+            } catch (Exception ignored) {
+                // track_history table may not exist yet; silently continue with empty history
+            }
+
             Map<String, String> eventsParams = new LinkedHashMap<>();
             eventsParams.put("select",
                     "id,season,round,grand_prix_name,circuit_id,race_sessions(session_type,session_date_aest,session_time_aest)");
@@ -145,6 +164,7 @@ public class F1Controller {
                 row.put("round", event.path("round").asInt());
                 row.put("grandPrixName", textOrNull(event, "grand_prix_name"));
                 row.put("sessions", parseSessions(event.path("race_sessions")));
+                row.put("history", historyByCircuit.getOrDefault(circuitId, new ArrayList<>()));
 
                 result.add(row);
                 seenCircuitIds.add(circuitId);
@@ -157,6 +177,7 @@ public class F1Controller {
                     row.put("round", null);
                     row.put("grandPrixName", null);
                     row.put("sessions", new ArrayList<>());
+                    row.put("history", historyByCircuit.getOrDefault(entry.getKey(), new ArrayList<>()));
                     result.add(row);
                 }
             }

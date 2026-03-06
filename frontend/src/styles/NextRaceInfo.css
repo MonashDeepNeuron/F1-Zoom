@@ -107,3 +107,84 @@
   text-transform: uppercase;
   color: #888;
 }
+
+/* ─── Live Timing Button ─────────────────────────────────────── */
+.live-timing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  border-radius: 4px;
+  background: transparent;
+  color: #ff0000;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.live-timing-btn:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  color: #ff3333;
+  text-decoration: none;
+}
+
+.live-timing-btn-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.live-timing-btn:hover .live-timing-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Active / live state */
+.live-timing-btn.is-live {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: #ff0000;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  animation: liveBtnPulse 2s ease-in-out infinite;
+}
+
+.live-timing-btn.is-live:hover {
+  background: rgba(255, 0, 0, 0.25);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.4);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  animation: liveDotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 4px rgba(255, 0, 0, 0.4);
+  }
+}
+
+@keyframes liveBtnPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.4);
+  }
+}
