@@ -7,6 +7,12 @@ interface Pt {
   y: number;
 }
 
+interface PosSnapshot {
+  x: number;
+  y: number;
+  t: number;
+}
+
 function parseTrackData(raw: string): Pt[] {
   let csv = raw;
   const m = raw.match(/`([\s\S]*)`/);
@@ -89,11 +95,7 @@ export default function LiveTrackMap() {
   const targetProgressRef = useRef<Record<string, number>>({});
   const lastUpdateRef = useRef<Record<string, number>>({});
 
-  const rawTargetRef = useRef<Record<string, { x: number; y: number }>>({});
-  const rawTimestampRef = useRef<Record<string, number>>({});
-  const rawVelocityRef = useRef<Record<string, { vx: number; vy: number }>>({});
-  const displayPosRef = useRef<Record<string, { x: number; y: number }>>({});
-  const lastFrameRef = useRef<number>(0);
+  const posBufferRef = useRef<Record<string, { prev: PosSnapshot; curr: PosSnapshot }>>({});
 
   useEffect(() => {
     fetch("/circuit_3d/TrackCoordinateJS/Melbourne.js")
@@ -184,64 +186,32 @@ export default function LiveTrackMap() {
     const driverPositions: DriverPos[] = [];
 
     if (hasRawPositions) {
-      const VELOCITY_SMOOTHING = 0.35;
-      const MAX_EXTRAPOLATE_MS = 2000;
-      // Frame-rate independent smoothing: higher = snappier response to corrections
-      const CHASE_RATE = 10;
-
-      const dt = lastFrameRef.current ? (now - lastFrameRef.current) / 1000 : 0.016;
-      const alpha = 1 - Math.exp(-CHASE_RATE * dt);
+      const MAX_EXTRAPOLATE = 1.5;
 
       for (const [num, pos] of Object.entries(positions)) {
         const drv = driverList[num];
-        const prevTarget = rawTargetRef.current[num];
+        const buf = posBufferRef.current[num];
+        const snap: PosSnapshot = { x: pos.X, y: pos.Y, t: now };
 
-        if (!prevTarget || prevTarget.x !== pos.X || prevTarget.y !== pos.Y) {
-          const prevTimestamp = rawTimestampRef.current[num];
-          if (prevTimestamp !== undefined && prevTarget) {
-            const gap = now - prevTimestamp;
-            if (gap > 0) {
-              const newVx = (pos.X - prevTarget.x) / gap;
-              const newVy = (pos.Y - prevTarget.y) / gap;
-              const oldVel = rawVelocityRef.current[num];
-              if (oldVel) {
-                rawVelocityRef.current[num] = {
-                  vx: oldVel.vx * (1 - VELOCITY_SMOOTHING) + newVx * VELOCITY_SMOOTHING,
-                  vy: oldVel.vy * (1 - VELOCITY_SMOOTHING) + newVy * VELOCITY_SMOOTHING,
-                };
-              } else {
-                rawVelocityRef.current[num] = { vx: newVx, vy: newVy };
-              }
-            }
-          }
-
-          rawTargetRef.current[num] = { x: pos.X, y: pos.Y };
-          rawTimestampRef.current[num] = now;
+        if (!buf) {
+          posBufferRef.current[num] = { prev: snap, curr: snap };
+        } else if (buf.curr.x !== pos.X || buf.curr.y !== pos.Y) {
+          posBufferRef.current[num] = { prev: buf.curr, curr: snap };
         }
 
-        const target = rawTargetRef.current[num] ?? { x: pos.X, y: pos.Y };
-        const vel = rawVelocityRef.current[num];
-        const elapsed = Math.min(
-          now - (rawTimestampRef.current[num] ?? now),
-          MAX_EXTRAPOLATE_MS,
-        );
-
-        const predictedX = target.x + (vel?.vx ?? 0) * elapsed;
-        const predictedY = target.y + (vel?.vy ?? 0) * elapsed;
-
-        const display = displayPosRef.current[num];
-        let smoothX: number;
-        let smoothY: number;
-        if (display) {
-          smoothX = display.x + (predictedX - display.x) * alpha;
-          smoothY = display.y + (predictedY - display.y) * alpha;
+        const { prev, curr } = posBufferRef.current[num];
+        const interval = curr.t - prev.t;
+        let t: number;
+        if (interval > 0) {
+          t = Math.min((now - curr.t) / interval + 1, MAX_EXTRAPOLATE);
         } else {
-          smoothX = pos.X;
-          smoothY = pos.Y;
+          t = 1;
         }
-        displayPosRef.current[num] = { x: smoothX, y: smoothY };
 
-        const { cx: dx, cy: dy } = toC(smoothX, smoothY);
+        const lerpX = prev.x + (curr.x - prev.x) * t;
+        const lerpY = prev.y + (curr.y - prev.y) * t;
+
+        const { cx: dx, cy: dy } = toC(lerpX, lerpY);
         driverPositions.push({
           num,
           x: dx,
@@ -333,7 +303,6 @@ export default function LiveTrackMap() {
       ctx.fillText(dp.tla, labelX, labelY);
     }
 
-    lastFrameRef.current = now;
   }, []);
 
   useEffect(() => {

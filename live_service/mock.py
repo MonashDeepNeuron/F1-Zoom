@@ -41,12 +41,12 @@ TIER_OFFSETS = {1: 0.0, 2: 0.25, 3: 0.50}
 SEGMENTS_PER_SECTOR = 8
 SECTOR_BOUNDARIES = [0.0, 0.36, 0.68, 1.0]
 
-TICK_INTERVAL = 0.25
-FLYING_LAP_TICKS = 352
-OUT_LAP_TICKS = 440
-IN_LAP_TICKS = 380
-PIT_WAIT_MIN = 40
-PIT_WAIT_MAX = 160
+TICK_INTERVAL = 0.05
+FLYING_LAP_TICKS = 1760
+OUT_LAP_TICKS = 2200
+IN_LAP_TICKS = 1900
+PIT_WAIT_MIN = 200
+PIT_WAIT_MAX = 800
 
 STATUS_NONE = 0
 STATUS_YELLOW = 2048
@@ -156,7 +156,7 @@ class MockSession:
         self.track_name = track_name
         self.tick = 0
         self.drivers = [
-            DriverState(d, random.randint(4, 20) if i < 6 else random.randint(20, 60) if i < 12 else random.randint(60, 120))
+            DriverState(d, random.randint(20, 100) if i < 6 else random.randint(100, 300) if i < 12 else random.randint(300, 600))
             for i, d in enumerate(DRIVERS)
         ]
         self.overall_best_sectors: list[float | None] = [None, None, None]
@@ -451,7 +451,7 @@ class MockSession:
                 if upd:
                     combined = _deep_merge(combined, upd)
 
-            if self.tick % 4 == 0:
+            if self.tick % 20 == 0:
                 combined = _deep_merge(combined, self._rankings_update())
 
             if combined:
