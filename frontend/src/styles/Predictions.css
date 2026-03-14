@@ -1,0 +1,385 @@
+/* ─── Full Page Wrapper ──────────────────────────────────────── */
+.predictions-page {
+  width: 100%;
+  min-height: 100vh;
+  background: #111111;
+  overflow-x: hidden;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+}
+
+/* ─── Header ──────────────────────────────────────── */
+.predictions-header {
+  background: linear-gradient(135deg, #1a0505 0%, #111111 100%);
+  padding: 40px 0;
+  border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(255, 0, 0, 0.1);
+}
+
+.back-button {
+  display: inline-block;
+  color: #888;
+  text-decoration: none;
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  transition: color 0.3s ease;
+}
+
+.back-button:hover {
+  color: #ff0000;
+}
+
+.predictions-title {
+  color: #ff0000;
+  font-weight: 900;
+  font-size: 3rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  margin: 0;
+}
+
+.predictions-subtitle {
+  color: #888;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* ─── Content ──────────────────────────────────────── */
+.predictions-content {
+  padding: 60px 0;
+}
+
+/* ─── Loading & Error States ──────────────────────────────────────── */
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 100px 20px;
+  color: #888;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 3px solid rgba(255, 0, 0, 0.1);
+  border-top-color: #ff0000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.error-state p {
+  font-size: 1.2rem;
+  color: #ff0000;
+}
+
+/* ─── Race Info Card ──────────────────────────────────────── */
+.race-info-card {
+  background: radial-gradient(ellipse at top left, #1a0505 0%, #111111 100%);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+}
+
+.race-info-card .card-body {
+  padding: 40px;
+}
+
+.race-name {
+  color: #ffffff;
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.race-season {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 5px;
+  letter-spacing: 1px;
+}
+
+.winner-box {
+  padding: 20px;
+  background: rgba(255, 0, 0, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.winner-label {
+  display: block;
+  color: #888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.winner-name {
+  color: #ff0000;
+  font-size: 2.5rem;
+  font-weight: 900;
+  margin: 0;
+  text-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+  letter-spacing: 3px;
+}
+
+.winner-team {
+  color: #ccc;
+  font-size: 0.9rem;
+  margin-top: 5px;
+}
+
+.confidence-box {
+  padding: 20px;
+}
+
+.confidence-label {
+  display: block;
+  color: #888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.confidence-value {
+  color: #00ff00;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0;
+  text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+}
+
+.score-gap {
+  color: #888;
+  font-size: 0.85rem;
+  margin-top: 5px;
+}
+
+/* ─── Grid Prediction ──────────────────────────────────────── */
+.grid-prediction {
+  margin-bottom: 40px;
+}
+
+.section-title {
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 30px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid rgba(255, 0, 0, 0.3);
+}
+
+.drivers-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.driver-card {
+  background: linear-gradient(90deg, #1a1a1a 0%, #111111 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.driver-card:hover {
+  border-color: rgba(255, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.1);
+  transform: translateX(5px);
+}
+
+.driver-card .card-body {
+  padding: 20px;
+}
+
+.position-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.position-badge {
+  width: 50px;
+  height: 50px;
+  border: 3px solid;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 1.1rem;
+  color: #ffffff;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.driver-name {
+  color: #ffffff;
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.driver-team {
+  color: #888;
+  font-size: 0.85rem;
+  margin: 5px 0 0 0;
+  letter-spacing: 0.5px;
+}
+
+.grid-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.grid-label {
+  color: #888;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.grid-value {
+  color: #ffffff;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 3px;
+}
+
+.score-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.score-bar-bg {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+
+.score-bar-fill {
+  height: 100%;
+  transition: width 0.5s ease;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.score-value {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  min-width: 60px;
+  text-align: right;
+  font-family: 'Courier New', monospace;
+}
+
+/* ─── Model Info Card ──────────────────────────────────────── */
+.model-info-card {
+  background: radial-gradient(ellipse at bottom left, #1a0505 0%, #111111 100%);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+}
+
+.model-info-card .card-body {
+  padding: 40px;
+}
+
+.model-title {
+  color: #ff0000;
+  font-size: 1.3rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 15px;
+}
+
+.model-description {
+  color: #ccc;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 25px;
+}
+
+.model-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.stat-label {
+  color: #888;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.stat-value {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* ─── Responsive ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  .predictions-title {
+    font-size: 2rem;
+  }
+
+  .race-info-card .card-body {
+    padding: 20px;
+  }
+
+  .winner-name {
+    font-size: 1.8rem;
+  }
+
+  .confidence-value {
+    font-size: 1.5rem;
+  }
+
+  .driver-name {
+    font-size: 1rem;
+  }
+
+  .position-badge {
+    width: 40px;
+    height: 40px;
+    font-size: 0.9rem;
+  }
+
+  .score-value {
+    min-width: 50px;
+    font-size: 0.8rem;
+  }
+}

@@ -190,13 +190,33 @@ public class F1Controller {
     }
 
     // 8. AI Prediction model for Next Race winner endpoint
-    // AI prediction - placeholder
     @GetMapping("/predictions/next-race")
     public Map<String, Object> getNextRacePrediction() {
-        Map<String, Object> response = new HashMap<>();
-        response.put("status", "model_in_progress");
-        response.put("predictedWinner", "TBD");
-        return response;
+        try {
+            // Call Python FastAPI prediction service
+            RestTemplate restTemplate = new RestTemplate();
+            String pythonServiceUrl = "http://localhost:8000/predict/next-race";
+            
+            ResponseEntity<Map> response = restTemplate.getForEntity(
+                pythonServiceUrl, 
+                Map.class
+            );
+            
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                return response.getBody();
+            } else {
+                throw new Exception("Prediction service returned non-2xx status");
+            }
+            
+        } catch (Exception e) {
+            // Fallback response if Python service is unavailable
+            Map<String, Object> fallback = new HashMap<>();
+            fallback.put("status", "service_unavailable");
+            fallback.put("predictedWinner", "TBD");
+            fallback.put("confidence", "N/A");
+            fallback.put("message", "Prediction service is not running. Start it with: python prediction_service.py");
+            return fallback;
+        }
     }
 
     private JsonNode supabaseGet(String table, Map<String, String> queryParams) throws Exception {

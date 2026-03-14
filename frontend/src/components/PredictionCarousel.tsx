@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Carousel } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { getPrediction, getLastRace } from '../services/api';
 import ParticleDriver from './ParticleDriver';
 import "../styles/PredictionCarousel.css";
@@ -43,6 +44,9 @@ return (
                                 <h3>{nextRacePrediction.predictedWinner || 'TBD'}</h3>
                                 <p>Confidence: {nextRacePrediction.confidence || 'N/A'}</p>
                                 <p className="status">{nextRacePrediction.status}</p>
+                                <Link to="/predictions" className="view-full-button">
+                                    View Full Predictions &rarr;
+                                </Link>
                             </>
                         ): (<p>Loading prediction...</p>
                         )}

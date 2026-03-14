@@ -22,3 +22,6 @@ export const getCircuitsBySeason = (season: number) =>
 
 export const getPrediction = () =>
   axios.get(`${API_BASE}/predictions/next-race`);
+
+export const getFullPrediction = () =>
+  axios.get(`${API_BASE}/predictions/next-race`);
