@@ -4,7 +4,7 @@
   min-height: 100vh;
   background: #111111;
   overflow-x: hidden;
-  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
 }
 
 /* ─── Header ──────────────────────────────────────── */
@@ -293,7 +293,7 @@
   font-weight: 700;
   min-width: 60px;
   text-align: right;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
 }
 
 /* ─── Model Info Card ──────────────────────────────────────── */

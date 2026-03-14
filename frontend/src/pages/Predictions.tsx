@@ -51,7 +51,7 @@ function Predictions() {
 
   const getScoreBarWidth = (score: number, maxScore: number) => {
     if (maxScore <= 0) return "0%";
-    const normalized = ((score - (-25)) / (maxScore - (-25))) * 100;
+    const normalized = ((score - -25) / (maxScore - -25)) * 100;
     return `${Math.max(0, Math.min(100, normalized))}%`;
   };
 
@@ -63,9 +63,7 @@ function Predictions() {
           <Link to="/" className="back-button">
             &larr; Back to Home
           </Link>
-          <h1 className="predictions-title">
-            Race Prediction Results
-          </h1>
+          <h1 className="predictions-title">Race Prediction Results</h1>
           <p className="predictions-subtitle">
             LightGBM Machine Learning Model
           </p>
@@ -101,7 +99,9 @@ function Predictions() {
                     <Col md={4} className="text-center">
                       <div className="winner-box">
                         <span className="winner-label">Predicted Winner</span>
-                        <h2 className="winner-name">{prediction.predictedWinner}</h2>
+                        <h2 className="winner-name">
+                          {prediction.predictedWinner}
+                        </h2>
                         {prediction.winnerTeam && (
                           <p className="winner-team">{prediction.winnerTeam}</p>
                         )}
@@ -110,8 +110,12 @@ function Predictions() {
                     <Col md={4} className="text-end">
                       <div className="confidence-box">
                         <span className="confidence-label">Confidence</span>
-                        <h2 className="confidence-value">{prediction.confidence}</h2>
-                        <p className="score-gap">Score Gap: {prediction.scoreGap.toFixed(2)}</p>
+                        <h2 className="confidence-value">
+                          {prediction.confidence}
+                        </h2>
+                        <p className="score-gap">
+                          Score Gap: {prediction.scoreGap.toFixed(2)}
+                        </p>
                       </div>
                     </Col>
                   </Row>
@@ -121,20 +125,22 @@ function Predictions() {
               {/* Full Grid Prediction */}
               <div className="grid-prediction">
                 <h2 className="section-title">Complete Grid Prediction</h2>
-                
+
                 <div className="drivers-grid">
                   {prediction.top10.map((driver) => {
                     const maxScore = prediction.top10[0]?.score || 20;
-                    
+
                     return (
                       <Card key={driver.position} className="driver-card">
                         <Card.Body>
                           <Row className="align-items-center">
                             {/* Position */}
                             <Col xs={2} className="position-col">
-                              <div 
+                              <div
                                 className="position-badge"
-                                style={{ borderColor: getPositionColor(driver.position) }}
+                                style={{
+                                  borderColor: getPositionColor(driver.position)
+                                }}
                               >
                                 P{driver.position}
                               </div>
@@ -165,11 +171,14 @@ function Predictions() {
                                   <div
                                     className="score-bar-fill"
                                     style={{
-                                      width: getScoreBarWidth(driver.score, maxScore),
+                                      width: getScoreBarWidth(
+                                        driver.score,
+                                        maxScore
+                                      ),
                                       backgroundColor:
                                         driver.score > 0
                                           ? "#ff0000"
-                                          : "rgba(255, 255, 255, 0.2)",
+                                          : "rgba(255, 255, 255, 0.2)"
                                     }}
                                   ></div>
                                 </div>
@@ -191,11 +200,12 @@ function Predictions() {
                 <Card.Body>
                   <h3 className="model-title">About the Model</h3>
                   <p className="model-description">
-                    Predictions generated using LightGBM Ranker with 2000 estimators, 
-                    trained on historical F1 race data including qualifying performance, 
-                    driver history, track characteristics, and pace analysis. The model 
-                    uses 46 features including grid position, qualifying times, historical 
-                    performance metrics, and track-specific data.
+                    Predictions generated using LightGBM Ranker with 2000
+                    estimators, trained on historical F1 race data including
+                    qualifying performance, driver history, track
+                    characteristics, and pace analysis. The model uses 46
+                    features including grid position, qualifying times,
+                    historical performance metrics, and track-specific data.
                   </p>
                   <div className="model-stats">
                     <div className="stat-item">
@@ -204,7 +214,9 @@ function Predictions() {
                     </div>
                     <div className="stat-item">
                       <span className="stat-label">Top Features</span>
-                      <span className="stat-value">Position Gain, Grid Position, Pace Score</span>
+                      <span className="stat-value">
+                        Position Gain, Grid Position, Pace Score
+                      </span>
                     </div>
                   </div>
                 </Card.Body>

@@ -5,10 +5,10 @@ FastAPI-based microservice for serving LightGBM race predictions.
 ## Architecture
 
 ```
-Frontend (React) 
+Frontend (React)
     ↓
 Spring Boot Backend (Port 8080)
-    ↓ 
+    ↓
 FastAPI Python Service (Port 8000)
     ↓
 LightGBM Model
@@ -30,6 +30,7 @@ python lightgbm_model.py
 ```
 
 This will:
+
 - Train the model on historical data
 - Save `f1_ranker_model.pkl` (trained model)
 - Save `latest_predictions.csv` (current predictions)
@@ -45,6 +46,7 @@ The service will start on `http://localhost:8000`
 ### 4. Verify It's Running
 
 Open your browser and go to:
+
 - http://localhost:8000 (health check)
 - http://localhost:8000/docs (interactive API docs)
 - http://localhost:8000/predict/next-race (prediction endpoint)
@@ -56,6 +58,7 @@ Open your browser and go to:
 Returns predictions for the next race including predicted winner and top 10.
 
 **Response:**
+
 ```json
 {
   "status": "model_ready",
@@ -131,6 +134,7 @@ Test the full stack:
 ### "Service Unavailable" Error
 
 Make sure the FastAPI service is running on port 8000:
+
 ```bash
 curl http://localhost:8000/health
 ```
@@ -138,6 +142,7 @@ curl http://localhost:8000/health
 ### "No Predictions" Response
 
 Train the model first:
+
 ```bash
 python lightgbm_model.py
 ```
@@ -145,6 +150,7 @@ python lightgbm_model.py
 ### Port Already in Use
 
 Kill the process using port 8000:
+
 ```bash
 lsof -ti:8000 | xargs kill -9
 ```

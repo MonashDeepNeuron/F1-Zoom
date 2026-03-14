@@ -196,18 +196,17 @@ public class F1Controller {
             // Call Python FastAPI prediction service
             RestTemplate restTemplate = new RestTemplate();
             String pythonServiceUrl = "http://localhost:8000/predict/next-race";
-            
+
             ResponseEntity<Map> response = restTemplate.getForEntity(
-                pythonServiceUrl, 
-                Map.class
-            );
-            
+                    pythonServiceUrl,
+                    Map.class);
+
             if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
                 return response.getBody();
             } else {
                 throw new Exception("Prediction service returned non-2xx status");
             }
-            
+
         } catch (Exception e) {
             // Fallback response if Python service is unavailable
             Map<String, Object> fallback = new HashMap<>();
