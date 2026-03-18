@@ -1,33 +1,21 @@
-driver_to_number = {
-    "VER": 1,
-    "PER": 11,
-    "HAM": 44,
-    "RUS": 63,
-    "LEC": 16,
-    "SAI": 55,
-    "NOR": 4,
-    "PIA": 81,
-    "ALO": 14,
-    "STR": 18,
-    "OCO": 31,
-    "GAS": 10,
-    "ALB": 23,
-    "SAR": 2,
-    "BOT": 77,
-    "ZHO": 24,
-    "MAG": 20,
-    "HUL": 27,
-    "TSU": 22,
-    "RIC": 3,
-    "BOR": 5,
-    "COL": 43
-}
+"""
+Thin wrapper kept for backward-compatibility with notebooks that do:
+    from driver_to_number import driver_to_number
+All data now lives in data_pipeline/config/driver_teams.json.
+"""
 
-def get_number_from_driver(driver_code: str) -> int:
-    return driver_to_number.get(driver_code, -1)
+import os
+import sys
 
-def get_driver_from_number(driver_number: int) -> str:
-    for driver, number in driver_to_number.items():
-        if number == driver_number:
-            return driver
-    return "Unknown Driver"
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config'))
+from driver_config import get_driver_numbers, get_number_from_driver, get_driver_from_number
+
+driver_to_number = get_driver_numbers(season=2025)
+
+
+def get_number_from_driver_code(driver_code: str) -> int:
+    return get_number_from_driver(driver_code, season=2025)
+
+
+def get_driver_from_number_code(driver_number: int) -> str:
+    return get_driver_from_number(driver_number, season=2025)

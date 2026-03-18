@@ -1,26 +1,13 @@
-driver_to_team = {
-    "VER": "Red Bull",
-    "PER": "Red Bull",
-    "HAM": "Mercedes",
-    "RUS": "Mercedes",
-    "LEC": "Ferrari",
-    "SAI": "Ferrari",
-    "NOR": "McLaren",
-    "PIA": "McLaren",
-    "ALO": "Aston Martin",
-    "STR": "Aston Martin",
-    "OCO": "Alpine",
-    "GAS": "Alpine",
-    "ALB": "Williams",
-    "SAR": "Williams",
-    "BOT": "Sauber",
-    "ZHO": "Sauber",
-    "MAG": "Haas",
-    "HUL": "Haas",
-    "TSU": "RB",
-    "RIC": "RB",
-    "BOR": "Sauber"
-}
+"""
+Thin wrapper kept for backward-compatibility with notebooks that do:
+    from driver_to_team import driver_to_team
+All data now lives in data_pipeline/config/driver_teams.json.
+"""
 
-def get_team_from_driver(driver_code: str) -> str:
-    return driver_to_team.get(driver_code, "Unknown Team")
+import os
+import sys
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config'))
+from driver_config import get_driver_teams, get_team_from_driver
+
+driver_to_team = get_driver_teams(season=2025)

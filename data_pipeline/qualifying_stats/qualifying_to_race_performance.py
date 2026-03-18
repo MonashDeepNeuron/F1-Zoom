@@ -5,10 +5,18 @@ from __future__ import annotations
 
 import fastf1
 import os
+import sys
 import pandas as pd
 import numpy as np
 from typing import Dict, Optional, Tuple
 import time
+
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config'))
+from driver_config import (
+    get_team_from_driver as _cfg_get_team,
+    get_driver_from_number,
+    is_sprint_weekend,
+)
 
 # Define column order for output CSV
 columns = [
@@ -40,72 +48,9 @@ def get_round_from_race_name(race_name: str, season: int) -> int:
     return 1
 
 def get_team_from_driver(driver_code: str, season: int, race_name: str) -> str:
-    # Cache the round number 
+    """Resolve team via shared config, converting race_name to a round number."""
     race_number = get_round_from_race_name(race_name, season)
-    
-    # 2024 teams
-    if season == 2024:
-        teams_2024 = {
-            "VER": "Red Bull", "PER": "Red Bull",
-            "HAM": "Mercedes", "RUS": "Mercedes",
-            "LEC": "Ferrari", "SAI": "Ferrari",
-            "BEA": "Ferrari" if race_number == 2 else "Haas",
-            "NOR": "McLaren", "PIA": "McLaren",
-            "ALO": "Aston Martin", "STR": "Aston Martin",
-            "GAS": "Alpine", "OCO": "Alpine", "DOO": "Alpine",
-            "ALB": "Williams",
-            "SAR": "Williams" if race_number <= 15 else None,
-            "COL": "Williams" if race_number >= 16 else None,
-            "BOT": "Sauber", "ZHO": "Sauber",
-            "MAG": "Haas", "HUL": "Haas",
-            "TSU": "RB",
-            "RIC": "RB" if race_number <= 18 else None,
-            "LAW": "RB" if race_number >= 19 else None,
-        }
-        return teams_2024.get(driver_code, "Unknown Team")
-    
-    # 2025 teams
-    elif season == 2025:
-        teams_2025 = {
-            "VER": "Red Bull",
-            "LAW": "Red Bull" if race_number <= 2 else "RB",  # Swapped at round 3
-            "TSU": "RB" if race_number <= 2 else "Red Bull",  # Swapped at round 3
-            "HAM": "Ferrari", "LEC": "Ferrari",
-            "RUS": "Mercedes", "ANT": "Mercedes",
-            "NOR": "McLaren", "PIA": "McLaren",
-            "ALO": "Aston Martin", "STR": "Aston Martin",
-            "GAS": "Alpine",
-            "DOO": "Alpine" if race_number <= 6 else None,  # First 6 races
-            "COL": "Alpine" if race_number >= 7 else None,  # From Imola (round 7)
-            "ALB": "Williams", "SAI": "Williams",
-            "BEA": "Haas", "OCO": "Haas",
-            "HUL": "Sauber", "BOR": "Sauber",
-            "HAD": "RB",  # Full season
-        }
-        return teams_2025.get(driver_code, "Unknown Team")
-    
-    return "Unknown Team"
-
-def get_driver_from_number(driver_number: int) -> str:
-    driver_to_number = {
-        "VER": 1, "NOR": 4, "SAI": 55, "PIA": 81, "ALO": 14,
-        "RUS": 63, "HAM": 44, "LEC": 16, "STR": 18, "TSU": 22,
-        "ALB": 23, "HUL": 27, "GAS": 10, "OCO": 31, "PER": 11,
-        "RIC": 3, "SAR": 2, "BOT": 77, "ZHO": 24, "MAG": 20,
-        "ANT": 12, "BEA": 87, "DOO": 7, "COL": 43, "LAW": 30,
-        "BOR": 5, "HAD": 6
-    }
-    
-    if driver_number not in driver_to_number.values() and driver_number == 38 or driver_number not in driver_to_number.values() and driver_number == 50:
-        return "BEA"
-    
-    if driver_number not in driver_to_number.values() and driver_number == 61:
-        return "DOO"
-    
-    for driver, number in driver_to_number.items():
-        if number == driver_number:
-            return driver
-    return "Unknown"
+    return _cfg_get_team(driver_code, season=season, race_number=race_number)
 
 def format_lap_time(lap_time) -> str:
     """Format Timedelta lap time as M:SS.mmm (e.g., 1:33.648). Returns np.nan if input is NaN/None."""
@@ -125,22 +70,16 @@ def lap_time_to_seconds(lap_time) -> float:
     return lap_time.total_seconds()
 
 
-def sprint_or_standard_weekend(race_name: str) -> bool:
-    # return True if it is a sprint weekend
-    
-    sprint_weekend_race_names = ['Shanghai', 'Miami', 'Spa-Francorchamps', 'Austin', 'Sao Paulo', 'Lusail']
-    
-    if race_name in sprint_weekend_race_names:
-        return True
-    else:
-        return False
+def sprint_or_standard_weekend(race_name: str, season: int = 2025) -> bool:
+    """Return True if *race_name* is a sprint weekend (delegates to shared config)."""
+    return is_sprint_weekend(race_name, season=season)
 
 
 def free_practice_performance(year: int, race_name: str) -> pd.DataFrame:
     
     rows = []
     
-    if not sprint_or_standard_weekend(race_name):
+    if not sprint_or_standard_weekend(race_name, year):
         # get all free practice data
         
         print("This is a STANDARD WEEKEND")
@@ -252,7 +191,7 @@ def qualifying_performance(year: int, race_name: str) -> pd.DataFrame:
     
     rows = []
     
-    if not sprint_or_standard_weekend(race_name):
+    if not sprint_or_standard_weekend(race_name, year):
         
         # only a standard qualifying
         qualifying_session = fastf1.get_session(year, race_name, "Qualifying")
@@ -412,7 +351,7 @@ def race_performance(year: int, race_name: str) -> pd.DataFrame:
     
     rows = []
     
-    if not sprint_or_standard_weekend(race_name):
+    if not sprint_or_standard_weekend(race_name, year):
         
         # only a standard race
         race_session = fastf1.get_session(year, race_name, "Race")
