@@ -1,4 +1,7 @@
-# pip install lightgbm scikit-learn pandas numpy
+# pip install lightgbm scikit-learn pandas numpy supabase
+
+import argparse
+import os
 
 import pandas as pd
 import numpy as np
@@ -10,13 +13,22 @@ from lightgbm import LGBMRanker
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
-# Get the script's directory and build absolute path
+
+parser = argparse.ArgumentParser(description="F1 Race Prediction Model")
+parser.add_argument("--season", type=int, default=2025)
+parser.add_argument("--race-name", type=str, default="Yas Marina Circuit")
+parser.add_argument(
+    "--from-supabase", action="store_true",
+    help="Load training data from Supabase instead of CSV",
+)
+args = parser.parse_args()
+
 SCRIPT_DIR = Path(__file__).parent.resolve()
 DATA_PATH = SCRIPT_DIR / "../../data_pipeline/car_data/Car_Tyre_CSV/master_combined_data.csv"
-DATA_PATH = DATA_PATH.resolve()  # Convert to absolute path
+DATA_PATH = DATA_PATH.resolve()
 
-PRED_SEASON = 2025
-PRED_RACE_NAME = "Yas Marina Circuit"
+PRED_SEASON = args.season
+PRED_RACE_NAME = args.race_name
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -107,12 +119,146 @@ def add_driver_history_features(df):
     return df
 
 
+def load_training_data_from_supabase():
+    """
+    Load training data from Supabase instead of CSV.
+
+    Returns a DataFrame whose column names match the CSV format so the
+    existing COLUMN_MAPPING works without changes.
+    """
+    from supabase import create_client
+
+    client = create_client(
+        os.environ["SUPABASE_URL"],
+        os.environ["SUPABASE_SERVICE_ROLE_KEY"],
+    )
+
+    result = (
+        client.table("driver_race_entries")
+        .select(
+            "*, "
+            "drivers(driver_code), "
+            "teams(team_name), "
+            "races(season, round, race_name, gp_name, "
+            "  tracks(track_score, track_avg_overtakes, "
+            "    track_sc_pct, track_vsc_pct, track_red_pct))"
+        )
+        .limit(5000)
+        .execute()
+    )
+
+    rows = []
+    for entry in result.data:
+        drv = entry.get("drivers") or {}
+        team = entry.get("teams") or {}
+        race = entry.get("races") or {}
+        track = race.get("tracks") or {}
+
+        rows.append({
+            # Identifiers
+            "season": race.get("season"),
+            "race_name": race.get("race_name"),
+            "gp_name": race.get("gp_name"),
+            "driver": drv.get("driver_code"),
+            "team_x": team.get("team_name"),
+            # Track
+            "track_score": track.get("track_score"),
+            "track_avg_overtakes": track.get("track_avg_overtakes"),
+            "track_sc_pct": track.get("track_sc_pct"),
+            "track_vsc_pct": track.get("track_vsc_pct"),
+            "track_red_pct": track.get("track_red_pct"),
+            # Practice
+            "fp1_pos": entry.get("fp1_pos"),
+            "fp1_time_fastest_lap": entry.get("fp1_time_fastest_lap"),
+            "fp2_pos": entry.get("fp2_pos"),
+            "fp2_time_fastest_lap": entry.get("fp2_time_fastest_lap"),
+            "fp3_pos": entry.get("fp3_pos"),
+            "fp3_time_fastest_lap": entry.get("fp3_time_fastest_lap"),
+            # Qualifying (DB snake_case → CSV mixed-case)
+            "Qualifying_Final_Grid_Position": entry.get("qualifying_final_grid_pos"),
+            "Q1_time_seconds": entry.get("q1_time_seconds"),
+            "Q2_time_seconds": entry.get("q2_time_seconds"),
+            "Q3_time_seconds": entry.get("q3_time_seconds"),
+            "Q1_position": entry.get("q1_position"),
+            "Q2_position": entry.get("q2_position"),
+            "Q3_position": entry.get("q3_position"),
+            # Race
+            "Race_Finishing_Position": entry.get("race_finish_pos"),
+            "race_status": entry.get("race_status"),
+            # Pace metrics
+            "driver_avg_pace": entry.get("driver_avg_pace"),
+            "driver_clean_air_pace": entry.get("driver_clean_air_pace"),
+            "driver_grid_avg_pace": entry.get("driver_grid_avg_pace"),
+            "driver_pace_delta_to_grid": entry.get("driver_pace_delta_to_grid"),
+            "driver_pace_zscore_vs_grid": entry.get("driver_pace_zscore_vs_grid"),
+            "driver_pace_score_vs_grid": entry.get("driver_pace_score_vs_grid"),
+            "driver_pace_score_0_100": entry.get("driver_pace_score_0_100"),
+            # Speed metrics
+            "driver_top_speed": entry.get("driver_top_speed"),
+            "driver_corner_speed": entry.get("driver_corner_speed"),
+            "driver_top_speed_rank": entry.get("driver_top_speed_rank"),
+            "driver_corner_speed_rank": entry.get("driver_corner_speed_rank"),
+            "driver_drag_index": entry.get("driver_drag_index"),
+            # Historical averages
+            "avg_race_pos_3_races": entry.get("avg_race_pos_3_races"),
+            "avg_race_pos_5_races": entry.get("avg_race_pos_5_races"),
+            "avg_race_pos_7_races": entry.get("avg_race_pos_7_races"),
+            "position_gain_from_quali_to_race": entry.get("position_gain_from_quali_to_race"),
+        })
+
+    return pd.DataFrame(rows)
+
+
+def upsert_predictions_to_supabase(results_df, season, race_name):
+    """Upsert prediction results to the Supabase predictions table."""
+    from supabase import create_client
+
+    client = create_client(
+        os.environ["SUPABASE_URL"],
+        os.environ["SUPABASE_SERVICE_ROLE_KEY"],
+    )
+
+    event_result = (
+        client.table("race_events")
+        .select("id")
+        .eq("season", season)
+        .eq("grand_prix_name", race_name)
+        .limit(1)
+        .execute()
+    )
+    if not event_result.data:
+        print(f"WARNING: No race_event for {season} '{race_name}' — skipping Supabase upsert")
+        return
+
+    race_event_id = event_result.data[0]["id"]
+
+    prediction_rows = []
+    for _, row in results_df.iterrows():
+        prediction_rows.append({
+            "race_event_id": race_event_id,
+            "driver_code": row["driver"],
+            "team": row["team"],
+            "predicted_position": int(row["predicted_position"]),
+            "prediction_score": float(row["prediction_score"]),
+            "grid_position": int(row["grid_pos"]) if pd.notna(row.get("grid_pos")) else None,
+        })
+
+    client.table("predictions").upsert(
+        prediction_rows, on_conflict="race_event_id,driver_code",
+    ).execute()
+    print(f"✓ Predictions upserted to Supabase for {season} {race_name}")
+
+
 # ============================================================================
 # LOAD AND PREPARE DATA
 # ============================================================================
 
-print("Loading data...")
-df_raw = pd.read_csv(DATA_PATH, low_memory=False)
+if args.from_supabase:
+    print("Loading data from Supabase...")
+    df_raw = load_training_data_from_supabase()
+else:
+    print("Loading data from CSV...")
+    df_raw = pd.read_csv(DATA_PATH, low_memory=False)
 
 print(f"Raw data shape: {df_raw.shape}")
 print(f"Columns: {list(df_raw.columns)}\n")
@@ -434,6 +580,9 @@ if df_predict.shape[0] > 0:
     predictions_output = SCRIPT_DIR / "latest_predictions.csv"
     results_with_race_info.to_csv(predictions_output, index=False)
     print(f"\n✓ Predictions saved to {predictions_output}")
+    
+    if args.from_supabase:
+        upsert_predictions_to_supabase(results, PRED_SEASON, PRED_RACE_NAME)
     
 else:
     print("No prediction data available. Please check your season and race name.")
