@@ -11,6 +11,7 @@ Run from the project root:
 from __future__ import annotations
 
 import logging
+import time
 from functools import lru_cache
 
 import numpy as np
@@ -257,6 +258,10 @@ _HANDLERS = {
 }
 
 
+MAX_RETRIES = 3
+RETRY_BACKOFF_SECONDS = 30
+
+
 def process_session(session: dict) -> None:
     """Dispatch a single pending session to the appropriate handler."""
     session_type = session["session_type"]
@@ -277,6 +282,30 @@ def process_session(session: dict) -> None:
     log.info("Done: %d %s %s", season, gp_name, session_type)
 
 
+def _process_with_retry(session: dict) -> None:
+    """Try processing a session up to MAX_RETRIES times with backoff."""
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            process_session(session)
+            return
+        except Exception:
+            if attempt == MAX_RETRIES:
+                log.exception(
+                    "Failed session %s after %d attempts — giving up",
+                    session, MAX_RETRIES,
+                )
+            else:
+                wait = RETRY_BACKOFF_SECONDS * attempt
+                log.warning(
+                    "Attempt %d/%d failed for %s %s %s — retrying in %ds",
+                    attempt, MAX_RETRIES,
+                    session.get("season"), session.get("grand_prix_name"),
+                    session.get("session_type"), wait,
+                    exc_info=True,
+                )
+                time.sleep(wait)
+
+
 def main() -> None:
     pending = get_pending_sessions()
 
@@ -286,11 +315,15 @@ def main() -> None:
 
     log.info("Found %d pending session(s)", len(pending))
 
+    succeeded, failed = 0, 0
     for session in pending:
         try:
-            process_session(session)
+            _process_with_retry(session)
+            succeeded += 1
         except Exception:
-            log.exception("Failed to process session %s", session)
+            failed += 1
+
+    log.info("Pipeline complete: %d succeeded, %d failed", succeeded, failed)
 
 
 if __name__ == "__main__":

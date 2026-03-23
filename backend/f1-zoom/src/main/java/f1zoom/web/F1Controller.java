@@ -2,10 +2,6 @@ package f1zoom.web;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -145,7 +141,7 @@ public class F1Controller {
 
             Map<String, String> eventsParams = new LinkedHashMap<>();
             eventsParams.put("select",
-                    "id,season,round,grand_prix_name,circuit_id,race_sessions(session_type,session_date_aest,session_time_aest)");
+                    "id,season,round,grand_prix_name,circuit_id,race_sessions(session_type,session_start_utc)");
             eventsParams.put("season", "eq." + season);
             eventsParams.put("order", "round.asc");
             JsonNode eventsNode = supabaseGet("race_events", eventsParams);
@@ -276,32 +272,13 @@ public class F1Controller {
         });
 
         for (JsonNode session : rawSessions) {
-            String sessionType = textOrNull(session, "session_type");
-            String sessionDateAest = textOrNull(session, "session_date_aest");
-            String sessionTimeAest = textOrNull(session, "session_time_aest");
-
             Map<String, Object> item = new LinkedHashMap<>();
-            item.put("sessionType", sessionType);
-            item.put("sessionDateAest", sessionDateAest);
-            item.put("sessionTimeAest", sessionTimeAest);
-            item.put("sessionStartUtc", buildSessionStartUtc(sessionDateAest, sessionTimeAest));
+            item.put("sessionType", textOrNull(session, "session_type"));
+            item.put("sessionStartUtc", textOrNull(session, "session_start_utc"));
             sessions.add(item);
         }
 
         return sessions;
-    }
-
-    private String buildSessionStartUtc(String dateAest, String timeAest) {
-        if (dateAest == null || dateAest.isBlank() || timeAest == null || timeAest.isBlank()) {
-            return null;
-        }
-        try {
-            LocalDate date = LocalDate.parse(dateAest);
-            LocalTime time = LocalTime.parse(timeAest);
-            return ZonedDateTime.of(date, time, ZoneId.of("Australia/Brisbane")).toInstant().toString();
-        } catch (Exception ignored) {
-            return null;
-        }
     }
 
     private String textOrNull(JsonNode node, String field) {

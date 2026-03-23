@@ -5,8 +5,6 @@ from typing import Optional
 
 from .supabase_client import get_client
 
-AEST = timezone(timedelta(hours=10))
-
 
 # ---------------------------------------------------------------------------
 # Pending-session detection
@@ -15,7 +13,7 @@ AEST = timezone(timedelta(hours=10))
 def get_pending_sessions() -> list[dict]:
     """Find sessions that ended >2 h ago but haven't been fetched."""
     client = get_client()
-    cutoff = datetime.now(AEST) - timedelta(hours=2)
+    cutoff = datetime.now(timezone.utc) - timedelta(hours=2)
     result = client.rpc(
         "get_pending_sessions", {"cutoff": cutoff.isoformat()}
     ).execute()
@@ -37,11 +35,11 @@ def mark_session_fetched(session_id: int) -> None:
 # FK resolution helpers
 # ---------------------------------------------------------------------------
 
-def resolve_race_id(season: int, round_num: int) -> Optional[str]:
-    """Look up ``races.id`` (UUID) for a given season + round."""
+def resolve_race_id(season: int, round_num: int) -> Optional[int]:
+    """Look up ``race_events.id`` for a given season + round."""
     client = get_client()
     result = (
-        client.table("races")
+        client.table("race_events")
         .select("id")
         .eq("season", season)
         .eq("round", round_num)

@@ -2,9 +2,9 @@ name: F1 Data Pipeline
 
 on:
   schedule:
-    # Every 2 hours on Thu, Fri, Sat, Sun (race weekend days, UTC)
+    # Every 2 hours, every day — F1 sessions can fall on any day of the week
     # FastF1 data is usually available ~1-2 h after session ends
-    - cron: "0 */2 * * 0,4,5,6"
+    - cron: "0 */2 * * *"
   workflow_dispatch:
     # Manual trigger from the GitHub Actions UI
 

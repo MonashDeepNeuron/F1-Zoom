@@ -13,6 +13,7 @@ Transformation logic is extracted from:
 from __future__ import annotations
 
 import logging
+from pathlib import Path
 from typing import Optional
 
 import fastf1
@@ -25,6 +26,10 @@ from data_pipeline.config.driver_config import (
 )
 
 logger = logging.getLogger(__name__)
+
+_CACHE_DIR = Path(__file__).resolve().parents[2] / "cache"
+_CACHE_DIR.mkdir(exist_ok=True)
+fastf1.Cache.enable_cache(str(_CACHE_DIR))
 
 SESSION_TYPE_MAP = {
     "practice_1": "FP1",

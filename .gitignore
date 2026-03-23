@@ -12,6 +12,9 @@ venv/
 .env.*
 !.env.example
 
+# FastF1 cache
+cache/
+
 # live_service virtual env (avoids 1500+ site-packages files)
 live_service/.f1-dash/
 
