@@ -3,6 +3,7 @@ from py_compile import main
 
 import fastf1
 import os
+import sys
 import pandas as pd
 import numpy as np
 import requests
@@ -11,80 +12,12 @@ from typing import List, Optional
 from datetime import timedelta
 import time
 
-driver_to_number = {
-    "VER": 1, "NOR": 4, "SAI": 55, "PIA": 81, "ALO": 14,
-    "RUS": 63, "HAM": 44, "LEC": 16, "STR": 18, "TSU": 22,
-    "ALB": 23, "HUL": 27, "GAS": 10, "OCO": 31, "PER": 11,
-    "RIC": 3, "SAR": 2, "BOT": 77, "ZHO": 24, "MAG": 20,
-    "ANT": 12, "BEA": 87, "DOO": 7, "COL": 43, "LAW": 30,
-    "BOR": 5, "HAD": 6
-}
-
-# Season and race-aware team mapping
-def get_team_from_driver(driver_code: str, season: int, race_number: int = 1) -> str:
-    """
-    Get team for a driver based on season and race number.
-    
-    Args:
-        driver_code: Three-letter driver code
-        season: Year (2024 or 2025)
-        race_number: Race number in the season (1-24)
-    """
-    # 2024 teams
-    if season == 2024:
-        teams_2024 = {
-            "VER": "Red Bull", "PER": "Red Bull",
-            "HAM": "Mercedes", "RUS": "Mercedes",
-            "LEC": "Ferrari", "SAI": "Ferrari",
-            "BEA": "Ferrari" if race_number == 2 else "Haas",
-            "NOR": "McLaren", "PIA": "McLaren",
-            "ALO": "Aston Martin", "STR": "Aston Martin",
-            "GAS": "Alpine", "OCO": "Alpine", "DOO": "Alpine",
-            "ALB": "Williams",
-            "SAR": "Williams" if race_number <= 15 else None,
-            "COL": "Williams" if race_number >= 16 else None,
-            "BOT": "Sauber", "ZHO": "Sauber",
-            "MAG": "Haas", "HUL": "Haas",
-            "TSU": "RB",
-            "RIC": "RB" if race_number <= 18 else None,
-            "LAW": "RB" if race_number >= 19 else None,
-            "DOO": "Alpine",
-        }
-        return teams_2024.get(driver_code, "Unknown Team")
-    
-    # 2025 teams
-    elif season == 2025:
-        teams_2025 = {
-            "VER": "Red Bull",
-            "LAW": "Red Bull" if race_number <= 2 else "RB",  # Swapped at round 3
-            "TSU": "RB" if race_number <= 2 else "Red Bull",  # Swapped at round 3
-            "HAM": "Ferrari", "LEC": "Ferrari",
-            "RUS": "Mercedes", "ANT": "Mercedes",
-            "NOR": "McLaren", "PIA": "McLaren",
-            "ALO": "Aston Martin", "STR": "Aston Martin",
-            "GAS": "Alpine",
-            "DOO": "Alpine" if race_number <= 6 else None,  # First 6 races
-            "COL": "Alpine" if race_number >= 7 else None,  # From Imola (round 7)
-            "ALB": "Williams", "SAI": "Williams",
-            "BEA": "Haas", "OCO": "Haas",
-            "HUL": "Sauber", "BOR": "Sauber",
-            "HAD": "RB",  # Full season
-        }
-        return teams_2025.get(driver_code, "Unknown Team")
-    
-    return "Unknown Team"
-
-def get_driver_from_number(driver_number: int) -> str:
-    if driver_number not in driver_to_number.values() and driver_number == 38 or driver_number not in driver_to_number.values() and driver_number == 50:
-        return "BEA"
-    
-    if driver_number not in driver_to_number.values() and driver_number == 61:
-        return "DOO"
-    
-    for driver, number in driver_to_number.items():
-        if number == driver_number:
-            return driver
-    return "Unknown"
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'config'))
+from driver_config import (
+    get_team_from_driver,
+    get_driver_from_number,
+    get_driver_numbers,
+)
 
 columns = [
     "season", "race_name", "team", "driver",
@@ -306,8 +239,8 @@ class LapDataLoader:
             # now we are storing the data for each drivers laps
             driver_laps = laps[laps['driver_number'] == driver_number].copy()
             
-            driver_code = get_driver_from_number(driver_number) 
-            team_name = get_team_from_driver(driver_code, race_number=race_index, season=season)
+            driver_code = get_driver_from_number(driver_number, season=season)
+            team_name = get_team_from_driver(driver_code, season=season, race_number=race_index)
             driver_name = driver_code
             
             
