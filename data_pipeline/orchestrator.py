@@ -19,6 +19,7 @@ import pandas as pd
 
 from data_pipeline.db.queries import (
     get_pending_sessions,
+    get_recent_finish_positions,
     mark_session_fetched,
     resolve_driver_id,
     resolve_race_id,
@@ -27,9 +28,9 @@ from data_pipeline.db.queries import (
     upsert_laps,
 )
 from data_pipeline.fetchers.session_fetcher import (
+    fetch_full_weekend,
     fetch_lap_data,
     fetch_qualifying_times,
-    fetch_race_results,
     fetch_session_results,
 )
 
@@ -43,6 +44,26 @@ PRACTICE_PREFIX = {
     "practice_1": "fp1",
     "practice_2": "fp2",
     "practice_3": "fp3",
+}
+
+INTEGER_ENTRY_FIELDS = {
+    "fp1_pos",
+    "fp2_pos",
+    "fp3_pos",
+    "qualifying_pos",
+    "qualifying_final_grid_pos",
+    "q1_position",
+    "q2_position",
+    "q3_position",
+    "sprint_qualifying_final_grid_pos",
+    "sq1_position",
+    "sq2_position",
+    "sq3_position",
+    "race_finish_pos",
+    "position_gain_from_quali_to_race",
+    "sprint_finish_pos",
+    "driver_top_speed_rank",
+    "driver_corner_speed_rank",
 }
 
 
@@ -78,6 +99,18 @@ def _clean(val):
     if hasattr(val, "item"):
         return val.item()
     return val
+
+
+def _clean_entry_value(field: str, value):
+    cleaned = _clean(value)
+    if cleaned is None:
+        return None
+    if field in INTEGER_ENTRY_FIELDS:
+        try:
+            return int(float(cleaned))
+        except (TypeError, ValueError):
+            return None
+    return cleaned
 
 
 def _base_entry(driver_code: str, team: str, season: int, round_num: int) -> dict:
@@ -134,7 +167,7 @@ def _process_qualifying(session: dict) -> None:
         for col in row.index:
             if col in ("driver_code", "team"):
                 continue
-            cleaned = _clean(row[col])
+            cleaned = _clean_entry_value(col, row[col])
             if cleaned is not None:
                 entry[col] = cleaned
 
@@ -170,16 +203,18 @@ def _process_sprint_qualifying(session: dict) -> None:
 
 
 def _process_race(session: dict) -> None:
-    """Race → upsert race results + detailed lap data."""
+    """Race → upsert full weekend snapshot + detailed lap data."""
     season = session["season"]
     gp_name = session["grand_prix_name"]
+    round_num = session["round"]
 
-    race_df = fetch_race_results(season, gp_name)
+    weekend_df = fetch_full_weekend(season, gp_name)
 
     entry_id_map: dict[str, str] = {}
-    for _, row in race_df.iterrows():
+    driver_id_map: dict[str, str] = {}
+    for _, row in weekend_df.iterrows():
         entry = _base_entry(
-            row["driver_code"], row["team"], season, session["round"],
+            row["driver_code"], row["team"], season, round_num,
         )
         if not entry["race_id"] or not entry["driver_id"]:
             continue
@@ -187,15 +222,41 @@ def _process_race(session: dict) -> None:
         for col in row.index:
             if col in ("driver_code", "team"):
                 continue
-            cleaned = _clean(row[col])
+            cleaned = _clean_entry_value(col, row[col])
             if cleaned is not None:
                 entry[col] = cleaned
 
         result = upsert_driver_race_entry(entry)
         if result:
             entry_id_map[row["driver_code"]] = result["id"]
+            driver_id_map[row["driver_code"]] = entry["driver_id"]
 
-    log.info("Upserted %d race entries", len(entry_id_map))
+    log.info("Upserted %d full weekend entries", len(entry_id_map))
+
+    history_by_driver = get_recent_finish_positions(
+        list(driver_id_map.values()), season, round_num,
+    )
+    enriched = 0
+    for driver_code, driver_id in driver_id_map.items():
+        finishes = history_by_driver.get(driver_id, [])
+        rolling_updates = {}
+        for window in (3, 5, 7):
+            recent = finishes[:window]
+            if recent:
+                rolling_updates[f"avg_race_pos_{window}_races"] = sum(recent) / len(recent)
+
+        if not rolling_updates:
+            continue
+
+        upsert_driver_race_entry({
+            "race_id": _race_id(season, round_num),
+            "driver_id": driver_id,
+            **rolling_updates,
+        })
+        enriched += 1
+
+    if enriched:
+        log.info("Backfilled rolling finish averages for %d drivers", enriched)
 
     # Lap-by-lap data
     laps_df = fetch_lap_data(season, gp_name)

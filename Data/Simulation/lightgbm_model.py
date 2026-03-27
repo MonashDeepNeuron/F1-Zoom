@@ -32,14 +32,17 @@ parser.add_argument(
     "--season-filter", type=int, default=None,
     help="Restrict training data to a single season (e.g. 2026)",
 )
+parser.add_argument(
+    "--auto", action="store_true",
+    help="Auto-detect the next upcoming race from Supabase (implies --from-supabase)",
+)
 args = parser.parse_args()
 
 SCRIPT_DIR = Path(__file__).parent.resolve()
 DATA_PATH = SCRIPT_DIR / "../../data_pipeline/car_data/Car_Tyre_CSV/master_combined_data.csv"
 DATA_PATH = DATA_PATH.resolve()
 
-PRED_SEASON = args.season
-PRED_RACE_NAME = args.race_name
+# Resolved after helper functions are defined (see bottom of CONFIGURATION block)
 
 # ============================================================================
 # HELPER FUNCTIONS
@@ -314,6 +317,178 @@ def upsert_predictions_to_supabase(results_df, season, race_name):
     print(f"✓ Predictions upserted to Supabase for {season} {race_name}")
 
 
+def get_next_race_from_supabase():
+    """
+    Find the next upcoming race that hasn't been processed by the data pipeline.
+    Returns (season, grand_prix_name) or raises RuntimeError if none found.
+    """
+    from supabase import create_client
+    from datetime import datetime, timezone
+
+    client = create_client(
+        os.environ["SUPABASE_URL"],
+        os.environ["SUPABASE_SERVICE_ROLE_KEY"],
+    )
+
+    now_utc = datetime.now(timezone.utc).isoformat()
+
+    result = (
+        client.table("race_sessions")
+        .select("session_start_utc, race_events(season, round, grand_prix_name)")
+        .eq("session_type", "race")
+        .eq("data_fetched", False)
+        .gte("session_start_utc", now_utc)
+        .order("session_start_utc", desc=False)
+        .limit(1)
+        .execute()
+    )
+
+    if not result.data:
+        raise RuntimeError(
+            "No upcoming unfetched race sessions found in Supabase. "
+            "Check that race_sessions is populated for the current season."
+        )
+
+    session = result.data[0]
+    race_event = session.get("race_events") or {}
+    season = race_event.get("season")
+    gp_name = race_event.get("grand_prix_name")
+
+    if not season or not gp_name:
+        raise RuntimeError(f"Incomplete race_events data in result: {session}")
+
+    return int(season), gp_name
+
+
+def load_race_entries_from_supabase(season: int, race_name: str):
+    """
+    Load driver_race_entries for a specific race (by season + grand_prix_name).
+    Returns a DataFrame in the same format as load_training_data_from_supabase(),
+    or an empty DataFrame if no entries exist yet.
+
+    Used as a fallback when the prediction race has no rows in the main training
+    load (e.g., qualifying data was fetched after the training query ran).
+    """
+    from supabase import create_client
+
+    client = create_client(
+        os.environ["SUPABASE_URL"],
+        os.environ["SUPABASE_SERVICE_ROLE_KEY"],
+    )
+
+    event_result = (
+        client.table("race_events")
+        .select("id, season, round, grand_prix_name")
+        .eq("season", season)
+        .eq("grand_prix_name", race_name)
+        .limit(1)
+        .execute()
+    )
+
+    if not event_result.data:
+        return pd.DataFrame()
+
+    race_event = event_result.data[0]
+    race_event_id = race_event["id"]
+
+    result = (
+        client.table("driver_race_entries")
+        .select("*, drivers(driver_code), teams(team_name)")
+        .eq("race_id", race_event_id)
+        .execute()
+    )
+
+    if not result.data:
+        return pd.DataFrame()
+
+    rows = []
+    for entry in result.data:
+        drv = entry.get("drivers") or {}
+        team = entry.get("teams") or {}
+
+        rows.append({
+            "season": race_event["season"],
+            "race_name": race_event["grand_prix_name"],
+            "gp_name": race_event["grand_prix_name"],
+            "round": race_event["round"],
+            "driver": drv.get("driver_code"),
+            "team_x": team.get("team_name"),
+            "fp1_pos": entry.get("fp1_pos"),
+            "fp1_time_fastest_lap": entry.get("fp1_time_fastest_lap"),
+            "fp2_pos": entry.get("fp2_pos"),
+            "fp2_time_fastest_lap": entry.get("fp2_time_fastest_lap"),
+            "fp3_pos": entry.get("fp3_pos"),
+            "fp3_time_fastest_lap": entry.get("fp3_time_fastest_lap"),
+            "Qualifying_Final_Grid_Position": entry.get("qualifying_final_grid_pos"),
+            "Q1_time_seconds": entry.get("q1_time_seconds"),
+            "Q2_time_seconds": entry.get("q2_time_seconds"),
+            "Q3_time_seconds": entry.get("q3_time_seconds"),
+            "Q1_position": entry.get("q1_position"),
+            "Q2_position": entry.get("q2_position"),
+            "Q3_position": entry.get("q3_position"),
+            "Race_Finishing_Position": entry.get("race_finish_pos"),
+            "race_status": entry.get("race_status"),
+            "driver_avg_pace": entry.get("driver_avg_pace"),
+            "driver_clean_air_pace": entry.get("driver_clean_air_pace"),
+            "driver_grid_avg_pace": entry.get("driver_grid_avg_pace"),
+            "driver_pace_delta_to_grid": entry.get("driver_pace_delta_to_grid"),
+            "driver_pace_zscore_vs_grid": entry.get("driver_pace_zscore_vs_grid"),
+            "driver_pace_score_vs_grid": entry.get("driver_pace_score_vs_grid"),
+            "driver_pace_score_0_100": entry.get("driver_pace_score_0_100"),
+            "driver_top_speed": entry.get("driver_top_speed"),
+            "driver_corner_speed": entry.get("driver_corner_speed"),
+            "driver_top_speed_rank": entry.get("driver_top_speed_rank"),
+            "driver_corner_speed_rank": entry.get("driver_corner_speed_rank"),
+            "driver_drag_index": entry.get("driver_drag_index"),
+            "avg_race_pos_3_races": entry.get("avg_race_pos_3_races"),
+            "avg_race_pos_5_races": entry.get("avg_race_pos_5_races"),
+            "avg_race_pos_7_races": entry.get("avg_race_pos_7_races"),
+            "position_gain_from_quali_to_race": entry.get("position_gain_from_quali_to_race"),
+        })
+
+    return pd.DataFrame(rows)
+
+
+def add_driver_history_features_single_race(pred_df, history_df):
+    """
+    Carry forward the most recent history columns from history_df into pred_df.
+    Used when pred_df rows weren't present during the main add_driver_history_features()
+    call (e.g., targeted fetch or placeholder creation).
+    """
+    hist_cols = [
+        "hist_finish_roll3", "hist_finish_roll5",
+        "hist_grid_roll3", "hist_grid_roll5",
+        "hist_q3_roll3", "hist_q3_roll5",
+    ]
+    for drv in pred_df["driver"].unique():
+        drv_history = history_df[history_df["driver"] == drv].sort_values("race_id")
+        if drv_history.empty:
+            continue
+        last = drv_history.iloc[-1]
+        idx = pred_df["driver"] == drv
+        pred_df.loc[idx, "hist_finish_lag1"] = last.get("race_finish_pos")
+        pred_df.loc[idx, "hist_grid_lag1"] = last.get("grid_pos")
+        for col in hist_cols:
+            if col in drv_history.columns:
+                vals = drv_history[col].dropna()
+                if len(vals):
+                    pred_df.loc[idx, col] = vals.iloc[-1]
+    return pred_df
+
+
+# ============================================================================
+# RESOLVE PRED_SEASON / PRED_RACE_NAME (after helpers are defined)
+# ============================================================================
+
+if args.auto:
+    args.from_supabase = True
+    PRED_SEASON, PRED_RACE_NAME = get_next_race_from_supabase()
+    print(f"Auto-detected next race: {PRED_SEASON} {PRED_RACE_NAME}")
+else:
+    PRED_SEASON = args.season
+    PRED_RACE_NAME = args.race_name
+
+
 # ============================================================================
 # LOAD AND PREPARE DATA
 # ============================================================================
@@ -331,7 +506,13 @@ else:
 print(f"Raw data shape: {df_raw.shape}")
 print(f"Columns: {list(df_raw.columns)}\n")
 
-# Create unique race identifier
+# Sort chronologically before creating race_id so that rolling history features
+# flow in the correct calendar order (round 1 → round 2 → ...).
+# The "round" column is populated when loading from Supabase.
+if "round" in df_raw.columns:
+    df_raw = df_raw.sort_values(["season", "round"], na_position="last").reset_index(drop=True)
+
+# Create unique race identifier (insertion order = chronological order after sort)
 race_key = df_raw[["season", "race_name"]].astype(str).agg(" | ".join, axis=1)
 df_raw["race_key"] = race_key
 df_raw["race_id"] = pd.factorize(df_raw["race_key"], sort=False)[0]
@@ -484,34 +665,46 @@ mask_predict = (
 df_predict = df_driver_race[mask_predict].copy()
 df_train = df_driver_race[~mask_predict].copy()
 
-# If the prediction race has no data yet (future race), create placeholder entries
+# If the prediction race has no data yet, try two levels of fallback.
 if df_predict.shape[0] == 0 and args.from_supabase:
-    print(f"No existing data for {PRED_SEASON} {PRED_RACE_NAME} — creating entries from roster...")
-    placeholder = create_prediction_entries_from_supabase(PRED_SEASON, PRED_RACE_NAME)
-    if not placeholder.empty:
-        placeholder = placeholder.rename(columns=COLUMN_MAPPING)
-        placeholder["race_key"] = f"{PRED_SEASON} | {PRED_RACE_NAME}"
-        placeholder["race_id"] = df_driver_race["race_id"].max() + 1
+    next_race_id = df_driver_race["race_id"].max() + 1
 
-        # Carry forward historical features from training data
-        for drv in placeholder["driver"].unique():
-            drv_history = df_driver_race[df_driver_race["driver"] == drv].sort_values("race_id")
-            if drv_history.empty:
-                continue
-            last = drv_history.iloc[-1]
-            idx = placeholder["driver"] == drv
-            placeholder.loc[idx, "hist_finish_lag1"] = last.get("race_finish_pos")
-            placeholder.loc[idx, "hist_grid_lag1"] = last.get("grid_pos")
-            for col in ["hist_finish_roll3", "hist_finish_roll5",
-                        "hist_grid_roll3", "hist_grid_roll5",
-                        "hist_q3_roll3", "hist_q3_roll5"]:
-                if col in drv_history.columns:
-                    vals = drv_history[col].dropna()
-                    if len(vals):
-                        placeholder.loc[idx, col] = vals.iloc[-1]
+    # Level 1: Targeted Supabase fetch — qualifying/FP may have been fetched
+    # after the main training query ran, so entries exist but weren't captured.
+    print(f"No entries for {PRED_SEASON} {PRED_RACE_NAME} in main load — "
+          f"attempting targeted Supabase fetch...")
+    targeted = load_race_entries_from_supabase(PRED_SEASON, PRED_RACE_NAME)
 
-        df_predict = placeholder
-        print(f"Created {len(df_predict)} placeholder entries")
+    if not targeted.empty:
+        print(f"Found {len(targeted)} entries via targeted fetch "
+              f"(qualifying/FP data present, race not run yet)")
+        available_targeted = [c for c in COLUMN_MAPPING.keys() if c in targeted.columns]
+        targeted = targeted[available_targeted].copy()
+        targeted = targeted.rename(columns=COLUMN_MAPPING)
+        for col in time_columns:
+            if col in targeted.columns:
+                targeted[col] = targeted[col].apply(time_to_seconds)
+        for col in numeric_columns + ["race_finish_pos"]:
+            if col in targeted.columns:
+                targeted[col] = pd.to_numeric(targeted[col], errors="coerce")
+        targeted["race_key"] = f"{PRED_SEASON} | {PRED_RACE_NAME}"
+        targeted["race_id"] = next_race_id
+        targeted = add_driver_history_features_single_race(targeted, df_driver_race)
+        df_predict = targeted
+        print(f"Using {len(df_predict)} entries with real qualifying/FP data")
+
+    else:
+        # Level 2: No entries at all — qualifying hasn't happened yet.
+        # Create empty placeholder entries from the season roster.
+        print(f"No entries found — creating placeholder entries from roster...")
+        placeholder = create_prediction_entries_from_supabase(PRED_SEASON, PRED_RACE_NAME)
+        if not placeholder.empty:
+            placeholder = placeholder.rename(columns=COLUMN_MAPPING)
+            placeholder["race_key"] = f"{PRED_SEASON} | {PRED_RACE_NAME}"
+            placeholder["race_id"] = next_race_id
+            placeholder = add_driver_history_features_single_race(placeholder, df_driver_race)
+            df_predict = placeholder
+            print(f"Created {len(df_predict)} placeholder entries (no qualifying data yet)")
 
 # Remove rows without valid finish position from training
 df_train = df_train.dropna(subset=["race_finish_pos"]).copy()
@@ -595,9 +788,11 @@ for col in categorical_features:
         X_train[col] = X_train[col].astype("category")
         X_predict[col] = X_predict[col].astype("category")
 
-# Create ranking labels (higher is better)
-# Convert finish position (1=best) to relevance score (20=best)
-y_train = (21 - df_train["race_finish_pos"]).astype(int)
+# Create ranking labels (higher is better).
+# Use each race's own classified field size instead of assuming 20 drivers,
+# so 22-car grids don't produce negative labels for P21/P22.
+race_max_finish = df_train.groupby("race_id")["race_finish_pos"].transform("max")
+y_train = (race_max_finish + 1 - df_train["race_finish_pos"]).clip(lower=0).astype(int)
 
 # Group sizes for ranking (one group per race)
 train_groups = df_train.groupby("race_id").size().values
@@ -676,11 +871,16 @@ if df_predict.shape[0] > 0:
     results = results.sort_values("prediction_score", ascending=False).reset_index(drop=True)
     results["predicted_position"] = np.arange(1, len(results) + 1)
     
+    include_grid_pos = (
+        "grid_pos" in results.columns and results["grid_pos"].notna().any()
+    )
+
     # Reorder columns for display
-    results = results[[
-        "predicted_position", "driver", "team", 
-        "grid_pos", "prediction_score"
-    ]]
+    display_cols = ["predicted_position", "driver", "team"]
+    if include_grid_pos:
+        display_cols.append("grid_pos")
+    display_cols.append("prediction_score")
+    results = results[display_cols]
     
     print("=" * 85)
     print(f"PREDICTED RACE RESULTS: {PRED_SEASON} {PRED_RACE_NAME}")

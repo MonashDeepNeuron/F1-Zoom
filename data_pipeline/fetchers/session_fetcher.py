@@ -94,6 +94,29 @@ def _td_to_seconds(td) -> Optional[float]:
     return td.total_seconds()
 
 
+def _select_valid_race_laps(driver_laps: pd.DataFrame) -> pd.DataFrame:
+    """
+    Keep the laps that are most useful for driver-level race metrics.
+
+    This intentionally errs on the side of filling data rather than leaving
+    columns empty: we exclude obviously invalid / in-out laps, but otherwise
+    keep accurate timed laps even if the race had interruptions.
+    """
+    if driver_laps.empty:
+        return driver_laps
+
+    valid = driver_laps.copy()
+    if "LapTime" in valid.columns:
+        valid = valid[valid["LapTime"].notna()]
+    if "IsAccurate" in valid.columns:
+        valid = valid[valid["IsAccurate"] != False]  # noqa: E712
+    if "PitOutTime" in valid.columns:
+        valid = valid[valid["PitOutTime"].isna()]
+    if "PitInTime" in valid.columns:
+        valid = valid[valid["PitInTime"].isna()]
+    return valid
+
+
 def _extract_q_round(results: pd.DataFrame, q_col: str):
     """
     For a qualifying round column (``Q1`` / ``Q2`` / ``Q3``), return two dicts:
@@ -108,6 +131,41 @@ def _extract_q_round(results: pd.DataFrame, q_col: str):
     }
     sec_dict = dict(zip(subset["Abbreviation"], subset["_sec"]))
     return pos_dict, sec_dict
+
+
+def _estimate_corner_speed(session, driver_code: str, lap_numbers: list[int]) -> Optional[float]:
+    """
+    Estimate a driver's corner speed from telemetry on a small sample of laps.
+
+    We use the minimum speed below ~150 km/h on each sampled lap as a proxy for
+    slow-corner speed, then average those minima.
+    """
+    if not lap_numbers:
+        return None
+
+    driver_laps = session.laps.pick_driver(driver_code)
+    if driver_laps.empty:
+        return None
+
+    corner_mins: list[float] = []
+    for lap_number in lap_numbers[:5]:
+        lap = driver_laps[driver_laps["LapNumber"] == lap_number]
+        if lap.empty:
+            continue
+        try:
+            telemetry = lap.iloc[0].get_telemetry()
+        except Exception:
+            continue
+        if telemetry is None or telemetry.empty or "Speed" not in telemetry.columns:
+            continue
+
+        corner_speeds = telemetry["Speed"][telemetry["Speed"] < 150]
+        if len(corner_speeds) > 0:
+            corner_mins.append(float(corner_speeds.min()))
+
+    if not corner_mins:
+        return None
+    return float(np.mean(corner_mins))
 
 
 def _resolve_track_status(session, lap_time_utc: pd.Timestamp) -> str:
@@ -366,6 +424,103 @@ def fetch_race_results(season: int, gp_name: str) -> pd.DataFrame:
     return df
 
 
+def fetch_race_analysis_metrics(season: int, gp_name: str) -> pd.DataFrame:
+    """
+    Derive driver-level race metrics directly from FastF1.
+
+    This fills the analysis-oriented columns in ``driver_race_entries`` that
+    would otherwise stay null after a race fetch.
+    """
+    session = _load_session(season, gp_name, "race")
+    laps = session.laps
+
+    if laps.empty:
+        logger.warning("No race laps for %s %s analysis metrics", season, gp_name)
+        return pd.DataFrame()
+
+    rows = []
+    for driver_code in sorted(laps["Driver"].dropna().unique()):
+        driver_laps = _select_valid_race_laps(laps.pick_driver(driver_code))
+        if driver_laps.empty:
+            rows.append({"driver_code": driver_code})
+            continue
+
+        lap_seconds = driver_laps["LapTime"].apply(_td_to_seconds).dropna()
+        avg_pace = float(lap_seconds.mean()) if len(lap_seconds) > 0 else None
+
+        clean_air_pace = None
+        if "DriverAhead" in driver_laps.columns:
+            clean_laps = driver_laps[
+                driver_laps["DriverAhead"].isna()
+                | (driver_laps["DriverAhead"].astype(str).str.strip() == "")
+            ]
+            clean_lap_seconds = clean_laps["LapTime"].apply(_td_to_seconds).dropna()
+            if len(clean_lap_seconds) > 0:
+                clean_air_pace = float(clean_lap_seconds.mean())
+
+        top_speed = None
+        if "SpeedST" in driver_laps.columns:
+            speed_trap = pd.to_numeric(driver_laps["SpeedST"], errors="coerce").dropna()
+            if len(speed_trap) > 0:
+                top_speed = float(speed_trap.max())
+
+        lap_numbers = (
+            pd.to_numeric(driver_laps["LapNumber"], errors="coerce")
+            .dropna()
+            .sort_values()
+            .astype(int)
+            .tolist()
+        )
+        corner_speed = _estimate_corner_speed(session, driver_code, lap_numbers)
+
+        rows.append({
+            "driver_code": driver_code,
+            "driver_avg_pace": avg_pace,
+            "driver_clean_air_pace": clean_air_pace,
+            "driver_top_speed": top_speed,
+            "driver_corner_speed": corner_speed,
+        })
+
+    df = pd.DataFrame(rows)
+    if df.empty:
+        return df
+
+    avg_pace_series = pd.to_numeric(df.get("driver_avg_pace"), errors="coerce")
+    grid_avg_pace = float(avg_pace_series.mean()) if avg_pace_series.notna().any() else None
+    grid_std_pace = float(avg_pace_series.std()) if avg_pace_series.notna().sum() > 1 else None
+
+    df["driver_grid_avg_pace"] = grid_avg_pace
+    df["driver_pace_delta_to_grid"] = avg_pace_series - grid_avg_pace if grid_avg_pace is not None else np.nan
+
+    if grid_std_pace and not np.isnan(grid_std_pace) and grid_std_pace > 0:
+        df["driver_pace_zscore_vs_grid"] = df["driver_pace_delta_to_grid"] / grid_std_pace
+        df["driver_pace_score_vs_grid"] = -df["driver_pace_zscore_vs_grid"]
+    else:
+        df["driver_pace_zscore_vs_grid"] = np.nan
+        df["driver_pace_score_vs_grid"] = np.nan
+
+    if avg_pace_series.notna().any():
+        df["driver_pace_score_0_100"] = 100 * (
+            1 - avg_pace_series.rank(pct=True, ascending=True)
+        )
+    else:
+        df["driver_pace_score_0_100"] = np.nan
+
+    top_speed_series = pd.to_numeric(df.get("driver_top_speed"), errors="coerce")
+    corner_speed_series = pd.to_numeric(df.get("driver_corner_speed"), errors="coerce")
+    df["driver_top_speed_rank"] = top_speed_series.rank(ascending=False, method="min")
+    df["driver_corner_speed_rank"] = corner_speed_series.rank(ascending=False, method="min")
+    df["driver_drag_index"] = (
+        df["driver_top_speed_rank"] - df["driver_corner_speed_rank"]
+    )
+
+    logger.info(
+        "fetch_race_analysis_metrics  %s %s  → %d drivers",
+        season, gp_name, len(df),
+    )
+    return df
+
+
 def fetch_lap_data(season: int, gp_name: str) -> pd.DataFrame:
     """
     Fetch lap-by-lap telemetry for the race session.
@@ -418,13 +573,14 @@ def fetch_full_weekend(season: int, gp_name: str) -> pd.DataFrame:
     one row per driver — matching the ``driver_race_entries`` schema.
 
     Columns include practice positions, qualifying times, race results,
-    and derived metrics (qualifying_pos, position_gain_from_quali_to_race).
+    and best-effort derived race metrics from FastF1.
     """
     logger.info("fetch_full_weekend  %s %s  — starting", season, gp_name)
 
     practice_df = fetch_practice_results(season, gp_name)
     qualifying_df = fetch_qualifying_times(season, gp_name)
     race_df = fetch_race_results(season, gp_name)
+    analysis_df = fetch_race_analysis_metrics(season, gp_name)
 
     merged = practice_df.copy()
 
@@ -435,6 +591,9 @@ def fetch_full_weekend(season: int, gp_name: str) -> pd.DataFrame:
     if not race_df.empty:
         race_cols = race_df.drop(columns=["team"], errors="ignore")
         merged = merged.merge(race_cols, on="driver_code", how="outer")
+
+    if not analysis_df.empty:
+        merged = merged.merge(analysis_df, on="driver_code", how="outer")
 
     # Back-fill team from qualifying/race if practice didn't cover a driver
     if merged["team"].isna().any():

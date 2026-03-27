@@ -9,17 +9,37 @@ from __future__ import annotations
 
 import json
 import os
+import unicodedata
 from functools import lru_cache
 from typing import Dict, Optional
 
 
 _CONFIG_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "driver_teams.json")
 
+_RACE_NAME_ALIASES = {
+    "chinese grand prix": "shanghai",
+    "miami grand prix": "miami",
+    "austrian grand prix": "spielberg",
+    "british grand prix": "silverstone",
+    "belgian grand prix": "spa-francorchamps",
+    "united states grand prix": "austin",
+    "sao paulo grand prix": "sao paulo",
+    "qatar grand prix": "lusail",
+    "canadian grand prix": "montreal",
+    "dutch grand prix": "zandvoort",
+    "singapore grand prix": "singapore",
+}
+
 
 @lru_cache(maxsize=1)
 def _load_config() -> dict:
     with open(_CONFIG_PATH) as f:
         return json.load(f)
+
+
+def _normalize_name(value: str) -> str:
+    text = unicodedata.normalize("NFKD", value).encode("ascii", "ignore").decode("ascii")
+    return " ".join(text.strip().lower().split())
 
 
 def get_team_from_driver(driver_code: str, season: int, race_number: int = 1) -> str:
@@ -87,7 +107,10 @@ def is_sprint_weekend(race_name: str, season: int = 2025) -> bool:
     """Return True if *race_name* is a sprint weekend in the given season."""
     config = _load_config()
     sprint_races = config.get("sprint_weekends", {}).get(str(season), [])
-    return race_name in sprint_races
+    normalized_sprints = {_normalize_name(name) for name in sprint_races}
+    normalized_race = _normalize_name(race_name)
+    alias = _RACE_NAME_ALIASES.get(normalized_race)
+    return normalized_race in normalized_sprints or alias in normalized_sprints
 
 
 def get_driver_numbers(season: int = 2025) -> Dict[str, int]:
