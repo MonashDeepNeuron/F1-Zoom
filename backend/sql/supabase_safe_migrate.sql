@@ -111,15 +111,35 @@ ALTER TABLE public.race_sessions
 ALTER TABLE public.race_sessions
   ADD COLUMN IF NOT EXISTS session_end_utc timestamptz;
 
-UPDATE public.race_sessions
-SET session_start_utc =
-  (session_date_aest + session_time_aest)::timestamp AT TIME ZONE COALESCE(c.timezone_name, 'Australia/Melbourne')
-FROM public.race_events re
-JOIN public.circuits c ON c.id = re.circuit_id
-WHERE race_sessions.race_event_id = re.id
-  AND race_sessions.session_start_utc IS NULL
-  AND race_sessions.session_date_aest IS NOT NULL
-  AND race_sessions.session_time_aest IS NOT NULL;
+DO $$
+BEGIN
+  IF EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'race_sessions'
+      AND column_name = 'session_date_aest'
+  ) AND EXISTS (
+    SELECT 1
+    FROM information_schema.columns
+    WHERE table_schema = 'public'
+      AND table_name = 'race_sessions'
+      AND column_name = 'session_time_aest'
+  ) THEN
+    EXECUTE $sql$
+      UPDATE public.race_sessions rs
+      SET session_start_utc =
+        (rs.session_date_aest + rs.session_time_aest)::timestamp
+        AT TIME ZONE COALESCE(c.timezone_name, 'Australia/Melbourne')
+      FROM public.race_events re
+      JOIN public.circuits c ON c.id = re.circuit_id
+      WHERE rs.race_event_id = re.id
+        AND rs.session_start_utc IS NULL
+        AND rs.session_date_aest IS NOT NULL
+        AND rs.session_time_aest IS NOT NULL
+    $sql$;
+  END IF;
+END $$;
 
 UPDATE public.race_sessions
 SET session_end_utc =
@@ -132,7 +152,9 @@ WHERE session_start_utc IS NOT NULL
   AND session_end_utc IS NULL;
 
 ALTER TABLE public.race_sessions
-  DROP COLUMN IF EXISTS session_date_aest,
+  DROP COLUMN IF EXISTS session_date_aest;
+
+ALTER TABLE public.race_sessions
   DROP COLUMN IF EXISTS session_time_aest;
 
 -- Replace session_type constraint to current allowed values.

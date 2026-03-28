@@ -114,15 +114,35 @@ alter table public.race_sessions
 alter table public.race_sessions
   add column if not exists session_end_utc timestamptz;
 
-update public.race_sessions
-set session_start_utc =
-  (session_date_aest + session_time_aest)::timestamp at time zone coalesce(c.timezone_name, 'Australia/Melbourne')
-from public.race_events re
-join public.circuits c on c.id = re.circuit_id
-where race_sessions.race_event_id = re.id
-  and race_sessions.session_start_utc is null
-  and race_sessions.session_date_aest is not null
-  and race_sessions.session_time_aest is not null;
+do $$
+begin
+  if exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'race_sessions'
+      and column_name = 'session_date_aest'
+  ) and exists (
+    select 1
+    from information_schema.columns
+    where table_schema = 'public'
+      and table_name = 'race_sessions'
+      and column_name = 'session_time_aest'
+  ) then
+    execute $sql$
+      update public.race_sessions rs
+      set session_start_utc =
+        (rs.session_date_aest + rs.session_time_aest)::timestamp
+        at time zone coalesce(c.timezone_name, 'Australia/Melbourne')
+      from public.race_events re
+      join public.circuits c on c.id = re.circuit_id
+      where rs.race_event_id = re.id
+        and rs.session_start_utc is null
+        and rs.session_date_aest is not null
+        and rs.session_time_aest is not null
+    $sql$;
+  end if;
+end $$;
 
 update public.race_sessions
 set session_end_utc =
@@ -135,7 +155,9 @@ where session_start_utc is not null
   and session_end_utc is null;
 
 alter table public.race_sessions
-  drop column if exists session_date_aest,
+  drop column if exists session_date_aest;
+
+alter table public.race_sessions
   drop column if exists session_time_aest;
 
 alter table public.race_sessions
