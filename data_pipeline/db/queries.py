@@ -6,6 +6,22 @@ from typing import Optional
 from .supabase_client import get_client
 
 
+TEAM_NAME_ALIASES = {
+    "Haas F1 Team": "Haas",
+    "Oracle Red Bull Racing": "Red Bull Racing",
+    "Red Bull": "Red Bull Racing",
+    "RB": "Racing Bulls",
+    "RB F1 Team": "Racing Bulls",
+    "Visa Cash App RB": "Racing Bulls",
+    "Visa Cash App Racing Bulls F1 Team": "Racing Bulls",
+    "Kick Sauber": "Audi",
+    "Stake F1 Team Kick Sauber": "Audi",
+    "Sauber": "Audi",
+    "Aston Martin Aramco": "Aston Martin",
+    "Aston Martin Aramco Mercedes": "Aston Martin",
+}
+
+
 # ---------------------------------------------------------------------------
 # Pending-session detection
 # ---------------------------------------------------------------------------
@@ -64,16 +80,29 @@ def resolve_driver_id(driver_code: str) -> Optional[str]:
 
 def resolve_team_id(team_name: str, season: int) -> Optional[str]:
     """Look up ``teams.id`` (UUID) for a team name + season."""
+    if not team_name:
+        return None
+
     client = get_client()
-    result = (
-        client.table("teams")
-        .select("id")
-        .eq("team_name", team_name)
-        .eq("season", season)
-        .limit(1)
-        .execute()
-    )
-    return result.data[0]["id"] if result.data else None
+
+    candidates = [team_name]
+    alias = TEAM_NAME_ALIASES.get(team_name)
+    if alias and alias not in candidates:
+        candidates.append(alias)
+
+    for candidate in candidates:
+        result = (
+            client.table("teams")
+            .select("id")
+            .eq("team_name", candidate)
+            .eq("season", season)
+            .limit(1)
+            .execute()
+        )
+        if result.data:
+            return result.data[0]["id"]
+
+    return None
 
 
 # ---------------------------------------------------------------------------
