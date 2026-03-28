@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS public.circuits (
   title         text NOT NULL,
   subtitle      text NOT NULL,
   flag          text NOT NULL,
+  timezone_name text NOT NULL,
   weekend_format text NOT NULL CHECK (weekend_format IN ('normal', 'sprint')),
   length_km     numeric(6,3) NOT NULL,
   laps          integer NOT NULL,
@@ -37,6 +38,7 @@ CREATE TABLE IF NOT EXISTS public.race_sessions (
   race_event_id    bigint NOT NULL REFERENCES public.race_events(id) ON DELETE CASCADE,
   session_type     text NOT NULL,
   session_start_utc timestamptz NOT NULL,
+  session_end_utc  timestamptz NOT NULL,
   created_at       timestamptz NOT NULL DEFAULT now(),
   UNIQUE (race_event_id, session_type)
 );
@@ -44,6 +46,39 @@ CREATE TABLE IF NOT EXISTS public.race_sessions (
 -- ── 2. Backward-compatible column / constraint migrations ─────
 
 -- Add weekend_format if it was missing from an older circuits table.
+ALTER TABLE public.circuits
+  ADD COLUMN IF NOT EXISTS timezone_name text;
+
+UPDATE public.circuits
+SET timezone_name = CASE code
+  WHEN 'Melbourne' THEN 'Australia/Melbourne'
+  WHEN 'Shanghai' THEN 'Asia/Shanghai'
+  WHEN 'Suzuka' THEN 'Asia/Tokyo'
+  WHEN 'Sakhir' THEN 'Asia/Bahrain'
+  WHEN 'Jeddah' THEN 'Asia/Riyadh'
+  WHEN 'Miami' THEN 'America/New_York'
+  WHEN 'Montreal' THEN 'America/Toronto'
+  WHEN 'Monaco' THEN 'Europe/Monaco'
+  WHEN 'Catalunya' THEN 'Europe/Madrid'
+  WHEN 'Austria' THEN 'Europe/Vienna'
+  WHEN 'Silverstone' THEN 'Europe/London'
+  WHEN 'Spa' THEN 'Europe/Brussels'
+  WHEN 'Hungary' THEN 'Europe/Budapest'
+  WHEN 'Zandvoort' THEN 'Europe/Amsterdam'
+  WHEN 'Monza' THEN 'Europe/Rome'
+  WHEN 'Madrid' THEN 'Europe/Madrid'
+  WHEN 'Baku' THEN 'Asia/Baku'
+  WHEN 'Singapore' THEN 'Asia/Singapore'
+  WHEN 'Austin' THEN 'America/Chicago'
+  WHEN 'MexicoCity' THEN 'America/Mexico_City'
+  WHEN 'SaoPaulo' THEN 'America/Sao_Paulo'
+  WHEN 'LasVegas' THEN 'America/Los_Angeles'
+  WHEN 'Qatar' THEN 'Asia/Qatar'
+  WHEN 'YasMarina' THEN 'Asia/Dubai'
+  ELSE timezone_name
+END
+WHERE timezone_name IS NULL;
+
 ALTER TABLE public.circuits
   ADD COLUMN IF NOT EXISTS weekend_format text;
 
@@ -61,6 +96,9 @@ ALTER TABLE public.circuits
 ALTER TABLE public.circuits
   ALTER COLUMN weekend_format SET NOT NULL;
 
+ALTER TABLE public.circuits
+  ALTER COLUMN timezone_name SET NOT NULL;
+
 -- Remove deprecated sprint_shootout sessions (safe: they no longer exist
 -- as a valid session_type and should not be present).
 DELETE FROM public.race_sessions
@@ -70,12 +108,28 @@ WHERE session_type = 'sprint_shootout';
 ALTER TABLE public.race_sessions
   ADD COLUMN IF NOT EXISTS session_start_utc timestamptz;
 
+ALTER TABLE public.race_sessions
+  ADD COLUMN IF NOT EXISTS session_end_utc timestamptz;
+
 UPDATE public.race_sessions
 SET session_start_utc =
-  (session_date_aest + session_time_aest)::timestamp AT TIME ZONE 'Australia/Melbourne'
-WHERE session_start_utc IS NULL
-  AND session_date_aest IS NOT NULL
-  AND session_time_aest IS NOT NULL;
+  (session_date_aest + session_time_aest)::timestamp AT TIME ZONE COALESCE(c.timezone_name, 'Australia/Melbourne')
+FROM public.race_events re
+JOIN public.circuits c ON c.id = re.circuit_id
+WHERE race_sessions.race_event_id = re.id
+  AND race_sessions.session_start_utc IS NULL
+  AND race_sessions.session_date_aest IS NOT NULL
+  AND race_sessions.session_time_aest IS NOT NULL;
+
+UPDATE public.race_sessions
+SET session_end_utc =
+  session_start_utc +
+    CASE session_type
+      WHEN 'race' THEN INTERVAL '2 hours'
+      ELSE INTERVAL '1 hour'
+    END
+WHERE session_start_utc IS NOT NULL
+  AND session_end_utc IS NULL;
 
 ALTER TABLE public.race_sessions
   DROP COLUMN IF EXISTS session_date_aest,
@@ -105,38 +159,39 @@ ALTER TABLE public.race_sessions
 -- ── 3. Circuits upsert (2026 calendar) ───────────────────────
 
 INSERT INTO public.circuits (
-  code, file_slug, title, subtitle, flag, weekend_format, length_km, laps, corners, distance_km
+  code, file_slug, title, subtitle, flag, timezone_name, weekend_format, length_km, laps, corners, distance_km
 )
 VALUES
-  ('Melbourne',  'Melbourne',  'MELBOURNE',  'ALBERT PARK CIRCUIT',                 'AU', 'normal', 5.278, 58, 16, 306.124),
-  ('Shanghai',   'Shanghai',   'SHANGHAI',   'SHANGHAI INTERNATIONAL CIRCUIT',      'CN', 'sprint', 5.451, 56, 16, 305.066),
-  ('Suzuka',     'Suzuka',     'SUZUKA',     'SUZUKA INTERNATIONAL RACING COURSE',  'JP', 'normal', 5.807, 53, 18, 307.471),
-  ('Sakhir',     'Sakhir',     'SAKHIR',     'BAHRAIN INTERNATIONAL CIRCUIT',       'BH', 'normal', 5.412, 57, 15, 308.238),
-  ('Jeddah',     'Jeddah',     'JEDDAH',     'JEDDAH CORNICHE CIRCUIT',             'SA', 'normal', 6.174, 50, 27, 308.450),
-  ('Miami',      'Miami',      'MIAMI',      'MIAMI INTERNATIONAL AUTODROME',       'US', 'sprint', 5.412, 57, 19, 308.326),
-  ('Montreal',   'Montreal',   'MONTREAL',   'CIRCUIT GILLES-VILLENEUVE',           'CA', 'sprint', 4.361, 70, 14, 305.270),
-  ('Monaco',     'Monaco',     'MONACO',     'CIRCUIT DE MONACO',                   'MC', 'normal', 3.337, 78, 19, 260.286),
-  ('Catalunya',  'Catalunya',  'BARCELONA',  'CIRCUIT DE BARCELONA-CATALUNYA',      'ES', 'normal', 4.657, 66, 16, 307.236),
-  ('Austria',    'Austria',    'AUSTRIA',    'RED BULL RING',                       'AT', 'normal', 4.318, 71, 10, 306.452),
-  ('Silverstone','Silverstone','SILVERSTONE','SILVERSTONE CIRCUIT',                 'GB', 'sprint', 5.891, 52, 18, 306.198),
-  ('Spa',        'Spa',        'SPA',        'CIRCUIT DE SPA-FRANCORCHAMPS',        'BE', 'normal', 7.004, 44, 19, 308.052),
-  ('Hungary',    'Hungary',    'HUNGARY',    'HUNGARORING',                         'HU', 'normal', 4.381, 70, 14, 306.630),
-  ('Zandvoort',  'Zandvoort',  'ZANDVOORT',  'CIRCUIT ZANDVOORT',                   'NL', 'sprint', 4.259, 72, 14, 306.587),
-  ('Monza',      'Monza',      'MONZA',      'AUTODROMO NAZIONALE MONZA',           'IT', 'normal', 5.793, 53, 11, 306.720),
-  ('Madrid',     'Madrid',     'MADRID',     'MADRING',                             'ES', 'normal', 5.470, 56, 22, 306.320),
-  ('Baku',       'Baku',       'BAKU',       'BAKU CITY CIRCUIT',                   'AZ', 'normal', 6.003, 51, 20, 306.049),
-  ('Singapore',  'Singapore',  'SINGAPORE',  'MARINA BAY STREET CIRCUIT',           'SG', 'sprint', 4.940, 62, 19, 306.143),
-  ('Austin',     'Austin',     'AUSTIN',     'CIRCUIT OF THE AMERICAS',             'US', 'normal', 5.513, 56, 20, 308.405),
-  ('MexicoCity', 'MexicoCity', 'MEXICO CITY','AUTODROMO HERMANOS RODRIGUEZ',        'MX', 'normal', 4.304, 71, 17, 305.354),
-  ('SaoPaulo',   'SaoPaulo',   'SAO PAULO',  'AUTODROMO JOSE CARLOS PACE',          'BR', 'normal', 4.309, 71, 15, 305.879),
-  ('LasVegas',   'LasVegas',   'LAS VEGAS',  'LAS VEGAS STRIP CIRCUIT',             'US', 'normal', 6.201, 50, 17, 309.958),
-  ('Qatar',      'Qatar',      'QATAR',      'LUSAIL INTERNATIONAL CIRCUIT',        'QA', 'normal', 5.419, 57, 16, 308.611),
-  ('YasMarina',  'YasMarina',  'YAS MARINA', 'YAS MARINA CIRCUIT',                  'AE', 'normal', 5.281, 58, 16, 306.183)
+  ('Melbourne',  'Melbourne',  'MELBOURNE',  'ALBERT PARK CIRCUIT',                 'AU', 'Australia/Melbourne', 'normal', 5.278, 58, 16, 306.124),
+  ('Shanghai',   'Shanghai',   'SHANGHAI',   'SHANGHAI INTERNATIONAL CIRCUIT',      'CN', 'Asia/Shanghai',       'sprint', 5.451, 56, 16, 305.066),
+  ('Suzuka',     'Suzuka',     'SUZUKA',     'SUZUKA INTERNATIONAL RACING COURSE',  'JP', 'Asia/Tokyo',          'normal', 5.807, 53, 18, 307.471),
+  ('Sakhir',     'Sakhir',     'SAKHIR',     'BAHRAIN INTERNATIONAL CIRCUIT',       'BH', 'Asia/Bahrain',        'normal', 5.412, 57, 15, 308.238),
+  ('Jeddah',     'Jeddah',     'JEDDAH',     'JEDDAH CORNICHE CIRCUIT',             'SA', 'Asia/Riyadh',         'normal', 6.174, 50, 27, 308.450),
+  ('Miami',      'Miami',      'MIAMI',      'MIAMI INTERNATIONAL AUTODROME',       'US', 'America/New_York',    'sprint', 5.412, 57, 19, 308.326),
+  ('Montreal',   'Montreal',   'MONTREAL',   'CIRCUIT GILLES-VILLENEUVE',           'CA', 'America/Toronto',     'sprint', 4.361, 70, 14, 305.270),
+  ('Monaco',     'Monaco',     'MONACO',     'CIRCUIT DE MONACO',                   'MC', 'Europe/Monaco',       'normal', 3.337, 78, 19, 260.286),
+  ('Catalunya',  'Catalunya',  'BARCELONA',  'CIRCUIT DE BARCELONA-CATALUNYA',      'ES', 'Europe/Madrid',       'normal', 4.657, 66, 16, 307.236),
+  ('Austria',    'Austria',    'AUSTRIA',    'RED BULL RING',                       'AT', 'Europe/Vienna',       'normal', 4.318, 71, 10, 306.452),
+  ('Silverstone','Silverstone','SILVERSTONE','SILVERSTONE CIRCUIT',                 'GB', 'Europe/London',       'sprint', 5.891, 52, 18, 306.198),
+  ('Spa',        'Spa',        'SPA',        'CIRCUIT DE SPA-FRANCORCHAMPS',        'BE', 'Europe/Brussels',     'normal', 7.004, 44, 19, 308.052),
+  ('Hungary',    'Hungary',    'HUNGARY',    'HUNGARORING',                         'HU', 'Europe/Budapest',     'normal', 4.381, 70, 14, 306.630),
+  ('Zandvoort',  'Zandvoort',  'ZANDVOORT',  'CIRCUIT ZANDVOORT',                   'NL', 'Europe/Amsterdam',    'sprint', 4.259, 72, 14, 306.587),
+  ('Monza',      'Monza',      'MONZA',      'AUTODROMO NAZIONALE MONZA',           'IT', 'Europe/Rome',         'normal', 5.793, 53, 11, 306.720),
+  ('Madrid',     'Madrid',     'MADRID',     'MADRING',                             'ES', 'Europe/Madrid',       'normal', 5.470, 56, 22, 306.320),
+  ('Baku',       'Baku',       'BAKU',       'BAKU CITY CIRCUIT',                   'AZ', 'Asia/Baku',           'normal', 6.003, 51, 20, 306.049),
+  ('Singapore',  'Singapore',  'SINGAPORE',  'MARINA BAY STREET CIRCUIT',           'SG', 'Asia/Singapore',      'sprint', 4.940, 62, 19, 306.143),
+  ('Austin',     'Austin',     'AUSTIN',     'CIRCUIT OF THE AMERICAS',             'US', 'America/Chicago',     'normal', 5.513, 56, 20, 308.405),
+  ('MexicoCity', 'MexicoCity', 'MEXICO CITY','AUTODROMO HERMANOS RODRIGUEZ',        'MX', 'America/Mexico_City', 'normal', 4.304, 71, 17, 305.354),
+  ('SaoPaulo',   'SaoPaulo',   'SAO PAULO',  'AUTODROMO JOSE CARLOS PACE',          'BR', 'America/Sao_Paulo',   'normal', 4.309, 71, 15, 305.879),
+  ('LasVegas',   'LasVegas',   'LAS VEGAS',  'LAS VEGAS STRIP CIRCUIT',             'US', 'America/Los_Angeles', 'normal', 6.201, 50, 17, 309.958),
+  ('Qatar',      'Qatar',      'QATAR',      'LUSAIL INTERNATIONAL CIRCUIT',        'QA', 'Asia/Qatar',          'normal', 5.419, 57, 16, 308.611),
+  ('YasMarina',  'YasMarina',  'YAS MARINA', 'YAS MARINA CIRCUIT',                  'AE', 'Asia/Dubai',          'normal', 5.281, 58, 16, 306.183)
 ON CONFLICT (code) DO UPDATE SET
   file_slug     = EXCLUDED.file_slug,
   title         = EXCLUDED.title,
   subtitle      = EXCLUDED.subtitle,
   flag          = EXCLUDED.flag,
+  timezone_name = EXCLUDED.timezone_name,
   weekend_format = EXCLUDED.weekend_format,
   length_km     = EXCLUDED.length_km,
   laps          = EXCLUDED.laps,
@@ -184,14 +239,19 @@ ON CONFLICT (season, round) DO UPDATE SET
   grand_prix_name = EXCLUDED.grand_prix_name,
   circuit_id      = EXCLUDED.circuit_id;
 
--- ── 5. Race sessions upsert (2026, times as UTC) ─────────────
--- All times were entered in Australia/Melbourne local time.
+-- ── 5. Race sessions upsert (2026, stored in UTC) ────────────
+-- All listed times are in the circuit's local timezone.
 
-INSERT INTO public.race_sessions (race_event_id, session_type, session_start_utc)
+INSERT INTO public.race_sessions (race_event_id, session_type, session_start_utc, session_end_utc)
 SELECT
   e.id,
   s.session_type,
-  s.session_start_local::timestamp AT TIME ZONE 'Australia/Melbourne'
+  s.session_start_local::timestamp AT TIME ZONE c.timezone_name,
+  (s.session_start_local::timestamp AT TIME ZONE c.timezone_name) +
+    CASE s.session_type
+      WHEN 'race' THEN INTERVAL '2 hours'
+      ELSE INTERVAL '1 hour'
+    END
 FROM (
   VALUES
     (1,  'practice_1',        '2026-03-06 12:30'),
@@ -318,8 +378,11 @@ FROM (
 JOIN public.race_events e
   ON e.season = 2026
  AND e.round  = s.round
+JOIN public.circuits c
+  ON c.id = e.circuit_id
 ON CONFLICT (race_event_id, session_type) DO UPDATE SET
-  session_start_utc = EXCLUDED.session_start_utc;
+  session_start_utc = EXCLUDED.session_start_utc,
+  session_end_utc = EXCLUDED.session_end_utc;
 
 -- ── 6. Track history table and upsert ────────────────────────
 
@@ -668,7 +731,7 @@ RETURNS TABLE (
   JOIN race_events re ON re.id = rs.race_event_id
   JOIN circuits    c  ON c.id  = re.circuit_id
   WHERE rs.data_fetched = false
-    AND rs.session_start_utc < cutoff
+    AND rs.session_end_utc < cutoff
   ORDER BY rs.session_start_utc;
 $$ LANGUAGE sql;
 
