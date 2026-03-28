@@ -94,6 +94,22 @@ def _td_to_seconds(td) -> Optional[float]:
     return td.total_seconds()
 
 
+def _resolve_team_name(
+    driver_code: str,
+    reported_team: Optional[str],
+    season: int,
+    round_num: int,
+) -> Optional[str]:
+    """
+    Prefer our config-backed team naming so Supabase team lookups stay stable
+    even when FastF1 uses vendor/full-brand variants.
+    """
+    configured_team = get_team_from_driver(driver_code, season, round_num)
+    if configured_team and configured_team != "Unknown Team":
+        return configured_team
+    return reported_team
+
+
 def _select_valid_race_laps(driver_laps: pd.DataFrame) -> pd.DataFrame:
     """
     Keep the laps that are most useful for driver-level race metrics.
@@ -214,20 +230,40 @@ def fetch_session_results(
     Returns a DataFrame with columns:
         driver_code, team, position, fastest_lap, status
     """
+    round_num = _get_round_number(season, gp_name)
     session = _load_session(season, gp_name, session_type)
     results = session.results
+
+    practice_positions: dict[str, int] = {}
+    practice_times: dict[str, object] = {}
+    if session_type.startswith("practice_"):
+        quicklaps = session.laps.pick_quicklaps()
+        if not quicklaps.empty:
+            fastest = quicklaps.groupby("Driver")["LapTime"].min().sort_values()
+            practice_positions = {
+                driver_code: pos
+                for pos, (driver_code, _) in enumerate(fastest.items(), start=1)
+            }
+            practice_times = fastest.to_dict()
 
     rows = []
     for _, row in results.iterrows():
         dc = row["Abbreviation"]
         driv_laps = session.laps.pick_driver(dc)
-        fl = driv_laps["LapTime"].min() if len(driv_laps) > 0 else None
+        fallback_fl = driv_laps["LapTime"].min() if len(driv_laps) > 0 else None
+        reported_team = row.get("TeamName") if pd.notna(row.get("TeamName")) else None
+
+        position = int(row["Position"]) if pd.notna(row["Position"]) else None
+        fastest_lap = _format_lap_time(fallback_fl)
+        if session_type.startswith("practice_"):
+            position = practice_positions.get(dc, position)
+            fastest_lap = _format_lap_time(practice_times.get(dc)) or fastest_lap
 
         rows.append({
             "driver_code": dc,
-            "team": row["TeamName"],
-            "position": int(row["Position"]) if pd.notna(row["Position"]) else None,
-            "fastest_lap": _format_lap_time(fl),
+            "team": _resolve_team_name(dc, reported_team, season, round_num),
+            "position": position,
+            "fastest_lap": fastest_lap,
             "status": row.get("Status") if pd.notna(row.get("Status")) else None,
         })
 
@@ -305,6 +341,7 @@ def fetch_qualifying_times(season: int, gp_name: str) -> pd.DataFrame:
         sq1_time_seconds, sq1_position, sq1_fastest_lap, …
     """
     sprint = is_sprint_weekend(gp_name, season)
+    round_num = _get_round_number(season, gp_name)
 
     q_session = _load_session(season, gp_name, "qualifying")
     q_results = q_session.results.sort_values("Position").reset_index(drop=True)
@@ -343,7 +380,12 @@ def fetch_qualifying_times(season: int, gp_name: str) -> pd.DataFrame:
         dc = row["Abbreviation"]
         entry = {
             "driver_code": dc,
-            "team": row["TeamName"],
+            "team": _resolve_team_name(
+                dc,
+                row.get("TeamName") if pd.notna(row.get("TeamName")) else None,
+                season,
+                round_num,
+            ),
             "qualifying_final_grid_pos": (
                 int(row["Position"]) if pd.notna(row["Position"]) else None
             ),
@@ -379,6 +421,7 @@ def fetch_race_results(season: int, gp_name: str) -> pd.DataFrame:
         (sprint only) sprint_finish_pos, sprint_fastest_lap
     """
     sprint = is_sprint_weekend(gp_name, season)
+    round_num = _get_round_number(season, gp_name)
 
     race_session = _load_session(season, gp_name, "race")
     race_results = race_session.results
@@ -406,7 +449,12 @@ def fetch_race_results(season: int, gp_name: str) -> pd.DataFrame:
 
         entry = {
             "driver_code": dc,
-            "team": row["TeamName"],
+            "team": _resolve_team_name(
+                dc,
+                row.get("TeamName") if pd.notna(row.get("TeamName")) else None,
+                season,
+                round_num,
+            ),
             "race_finish_pos": (
                 int(row["Position"]) if pd.notna(row["Position"]) else None
             ),
