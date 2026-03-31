@@ -36,9 +36,16 @@ function parseTrackData(raw: string): Pt[] {
  * Sectors have variable segment counts (e.g. 9, 5, 10 for Melbourne = 24 total).
  * Returns { highest: absolute index of last completed segment, total: total segments }.
  */
-function getSegmentProgress(
-  sectors: Sector[] | Record<string, Sector>
-): { highest: number; total: number } {
+function getSegmentProgress(sectors: Sector[] | Record<string, Sector>): {
+  highest: number;
+  total: number;
+} {
+  const isSegmentOrNull = (value: unknown): value is Segment | null => {
+    if (value === null) return true;
+    if (typeof value !== "object" || value === null) return false;
+    return "Status" in value;
+  };
+
   const sectorEntries: [number, Sector][] = Array.isArray(sectors)
     ? sectors.map((s, i) => [i, s])
     : Object.entries(sectors)
@@ -52,11 +59,13 @@ function getSegmentProgress(
   for (const [, sector] of sectorEntries) {
     if (!sector?.Segments) continue;
 
-    const segs: (Segment | null)[] = Array.isArray(sector.Segments)
-      ? sector.Segments
-      : Object.entries(sector.Segments)
-          .sort(([a], [b]) => parseInt(a) - parseInt(b))
-          .map(([, v]) => v);
+    const segs: (Segment | null)[] = (
+      Array.isArray(sector.Segments)
+        ? sector.Segments
+        : Object.entries(sector.Segments)
+            .sort(([a], [b]) => parseInt(a) - parseInt(b))
+            .map(([, v]) => v)
+    ).filter(isSegmentOrNull);
 
     for (let g = 0; g < segs.length; g++) {
       const seg = segs[g];
@@ -81,7 +90,7 @@ function interpolateTrack(pts: Pt[], progress: number): Pt {
   if (i >= n - 1) return pts[n - 1];
   return {
     x: pts[i].x + frac * (pts[i + 1].x - pts[i].x),
-    y: pts[i].y + frac * (pts[i + 1].y - pts[i].y),
+    y: pts[i].y + frac * (pts[i + 1].y - pts[i].y)
   };
 }
 
@@ -95,7 +104,9 @@ export default function LiveTrackMap() {
   const targetProgressRef = useRef<Record<string, number>>({});
   const lastUpdateRef = useRef<Record<string, number>>({});
 
-  const posBufferRef = useRef<Record<string, { prev: PosSnapshot; curr: PosSnapshot }>>({});
+  const posBufferRef = useRef<
+    Record<string, { prev: PosSnapshot; curr: PosSnapshot }>
+  >({});
 
   useEffect(() => {
     fetch("/circuit_3d/TrackCoordinateJS/Melbourne.js")
@@ -158,7 +169,7 @@ export default function LiveTrackMap() {
 
     const toC = (x: number, y: number) => ({
       cx: (x - cx) * scale + w / 2,
-      cy: (y - cy) * scale + h / 2,
+      cy: (y - cy) * scale + h / 2
     });
 
     // draw track glow
@@ -182,7 +193,13 @@ export default function LiveTrackMap() {
     const hasRawPositions = Object.keys(positions).length > 0;
     const smoothMs = 350;
 
-    type DriverPos = { num: string; x: number; y: number; color: string; tla: string };
+    type DriverPos = {
+      num: string;
+      x: number;
+      y: number;
+      color: string;
+      tla: string;
+    };
     const driverPositions: DriverPos[] = [];
 
     if (hasRawPositions) {
@@ -217,16 +234,21 @@ export default function LiveTrackMap() {
           x: dx,
           y: dy,
           color: `#${drv?.TeamColour ?? "ffffff"}`,
-          tla: drv?.Tla ?? num,
+          tla: drv?.Tla ?? num
         });
       }
     } else {
       // derive positions from microsector data
-      for (const [num, td] of Object.entries(timingData) as [string, TimingDataDriver][]) {
+      for (const [num, td] of Object.entries(timingData) as [
+        string,
+        TimingDataDriver
+      ][]) {
         if (td.InPit || td.Retired) continue;
         if (!td.Sectors) continue;
 
-        const { highest: seg, total: totalSegs } = getSegmentProgress(td.Sectors);
+        const { highest: seg, total: totalSegs } = getSegmentProgress(
+          td.Sectors
+        );
         if (seg < 0) continue;
 
         const progress = Math.min((seg + 1) / totalSegs, 0.9999);
@@ -261,7 +283,7 @@ export default function LiveTrackMap() {
           x: dx,
           y: dy,
           color: `#${drv?.TeamColour ?? "ffffff"}`,
-          tla: drv?.Tla ?? num,
+          tla: drv?.Tla ?? num
         });
       }
     }
@@ -302,7 +324,6 @@ export default function LiveTrackMap() {
       ctx.fillStyle = "rgba(255,255,255,0.96)";
       ctx.fillText(dp.tla, labelX, labelY);
     }
-
   }, []);
 
   useEffect(() => {
