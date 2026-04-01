@@ -13,6 +13,54 @@ interface PosSnapshot {
   t: number;
 }
 
+const TRACK_FILE_ALIASES: Record<string, string> = {
+  albertpark: "Melbourne",
+  australiangrandprix: "Melbourne",
+  melbourne: "Melbourne",
+  suzuka: "Suzuka",
+  suzukacircuit: "Suzuka",
+  japanesegrandprix: "Suzuka",
+  shanghai: "Shanghai",
+  chinesegp: "Shanghai",
+  chinesegrandprix: "Shanghai",
+  sakhir: "Sakhir",
+  bahraininternationalcircuit: "Sakhir",
+  bahraingrandprix: "Sakhir",
+  catalunya: "Catalunya",
+  barcelona: "Catalunya",
+  "circuitdebarcelona-catalunya": "Catalunya",
+  montreal: "Montreal",
+  gillesvilleneuve: "Montreal",
+  silverstone: "Silverstone",
+  monza: "Monza",
+  spafrancorchamps: "Spa",
+  spa: "Spa",
+  zandvoort: "Zandvoort",
+  austin: "Austin",
+  cota: "Austin",
+  circuitoftheamericas: "Austin",
+  mexicocity: "MexicoCity",
+  autodromohermanosrodriguez: "MexicoCity",
+  saopaulo: "SaoPaulo",
+  interlagos: "SaoPaulo",
+  yasmarina: "YasMarina",
+  abudhabi: "YasMarina",
+};
+
+function normalizeTrackKey(value?: string | null): string {
+  return (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function resolveTrackFileName(shortName?: string | null, meetingName?: string | null): string {
+  const candidates = [
+    shortName,
+    meetingName,
+  ].map((value) => TRACK_FILE_ALIASES[normalizeTrackKey(value)]);
+
+  const resolved = candidates.find(Boolean);
+  return resolved ?? "Melbourne";
+}
+
 function parseTrackData(raw: string): Pt[] {
   let csv = raw;
   const m = raw.match(/`([\s\S]*)`/);
@@ -99,24 +147,38 @@ export default function LiveTrackMap() {
   const trackRef = useRef<Pt[]>([]);
   const sizeRef = useRef({ w: 0, h: 0 });
   const [loaded, setLoaded] = useState(false);
+  const sessionInfo = useLiveTimingStore((s) => s.sessionInfo);
 
   const prevProgressRef = useRef<Record<string, number>>({});
   const targetProgressRef = useRef<Record<string, number>>({});
   const lastUpdateRef = useRef<Record<string, number>>({});
+  const displayProgressRef = useRef<Record<string, number>>({});
 
   const posBufferRef = useRef<
     Record<string, { prev: PosSnapshot; curr: PosSnapshot }>
   >({});
 
   useEffect(() => {
-    fetch("/circuit_3d/TrackCoordinateJS/Melbourne.js")
+    const trackFile = resolveTrackFileName(
+      sessionInfo?.Meeting?.Circuit?.ShortName,
+      sessionInfo?.Meeting?.Name,
+    );
+    let cancelled = false;
+
+    setLoaded(false);
+    fetch(`/circuit_3d/TrackCoordinateJS/${trackFile}.js`)
       .then((r) => r.text())
       .then((data) => {
+        if (cancelled) return;
         trackRef.current = parseTrackData(data);
         setLoaded(true);
       })
       .catch(console.error);
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionInfo?.Meeting?.Circuit?.ShortName, sessionInfo?.Meeting?.Name]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -192,6 +254,7 @@ export default function LiveTrackMap() {
     // estimated from microsector progress (live F1 where Position data unavailable)
     const hasRawPositions = Object.keys(positions).length > 0;
     const smoothMs = 350;
+    const extrapolateMs = 2400;
 
     type DriverPos = {
       num: string;
@@ -256,7 +319,7 @@ export default function LiveTrackMap() {
         // smooth animation between segment steps
         const prev = targetProgressRef.current[num];
         if (prev === undefined || prev !== progress) {
-          prevProgressRef.current[num] = prev ?? progress;
+          prevProgressRef.current[num] = displayProgressRef.current[num] ?? prev ?? progress;
           targetProgressRef.current[num] = progress;
           lastUpdateRef.current[num] = now;
         }
@@ -271,8 +334,16 @@ export default function LiveTrackMap() {
         if (delta < -0.5) delta += 1;
         if (delta > 0.5) delta -= 1;
         let interp = fromP + delta * t;
+        if (t >= 1) {
+          const idleMs = Math.max(now - start - smoothMs, 0);
+          const segmentSize = 1 / totalSegs;
+          const drift =
+            Math.min(idleMs / extrapolateMs, 1) * segmentSize * 0.85;
+          interp += drift;
+        }
         if (interp < 0) interp += 1;
         if (interp >= 1) interp -= 1;
+        displayProgressRef.current[num] = interp;
 
         const trackPt = interpolateTrack(pts, interp);
         const { cx: dx, cy: dy } = toC(trackPt.x, trackPt.y);

@@ -17,6 +17,36 @@ try:
 except ImportError:
     pass
 
+DRIVER_TEAM_FALLBACK = {
+    "RUS": "Mercedes", "ANT": "Mercedes",
+    "LEC": "Ferrari", "HAM": "Ferrari",
+    "NOR": "McLaren", "PIA": "McLaren",
+    "OCO": "Haas", "BEA": "Haas",
+    "VER": "Red Bull Racing", "TSU": "Red Bull Racing",
+    "LAW": "Racing Bulls", "HAD": "Racing Bulls", "LIN": "Racing Bulls",
+    "GAS": "Alpine", "COL": "Alpine",
+    "HUL": "Audi", "BOR": "Audi",
+    "SAI": "Williams", "ALB": "Williams",
+    "PER": "Cadillac", "BOT": "Cadillac",
+    "ALO": "Aston Martin", "STR": "Aston Martin",
+}
+
+TEAM_NAME_ALIASES = {
+    "Haas F1 Team": "Haas",
+    "Oracle Red Bull Racing": "Red Bull Racing",
+    "Red Bull": "Red Bull Racing",
+    "RB": "Racing Bulls",
+    "RB F1 Team": "Racing Bulls",
+    "Visa Cash App RB": "Racing Bulls",
+    "Visa Cash App Racing Bulls F1 Team": "Racing Bulls",
+    "Kick Sauber": "Audi",
+    "Stake F1 Team Kick Sauber": "Audi",
+    "Sauber": "Audi",
+    "Cadillac F1 Team": "Cadillac",
+    "Aston Martin Aramco": "Aston Martin",
+    "Aston Martin Aramco Mercedes": "Aston Martin",
+}
+
 # ============================================================================
 # CONFIGURATION
 # ============================================================================
@@ -71,6 +101,22 @@ def time_to_seconds(time_value):
     minutes = float(match.group(1)) if match.group(1) else 0.0
     seconds = float(match.group(2))
     return 60.0 * minutes + seconds
+
+
+def canonicalize_team_name(team_name):
+    if pd.isna(team_name):
+        return np.nan
+    team_str = str(team_name).strip()
+    if not team_str:
+        return np.nan
+    return TEAM_NAME_ALIASES.get(team_str, team_str)
+
+
+def resolve_team_name(driver_code, team_name):
+    canonical = canonicalize_team_name(team_name)
+    if pd.notna(canonical):
+        return canonical
+    return DRIVER_TEAM_FALLBACK.get(driver_code)
 
 
 def add_driver_history_features(df):
@@ -178,7 +224,7 @@ def load_training_data_from_supabase(season_filter: int | None = None):
             "gp_name": gp_name,
             "round": race.get("round"),
             "driver": drv.get("driver_code"),
-            "team_x": team.get("team_name"),
+            "team_x": resolve_team_name(drv.get("driver_code"), team.get("team_name")),
             # Practice
             "fp1_pos": entry.get("fp1_pos"),
             "fp1_time_fastest_lap": entry.get("fp1_time_fastest_lap"),
@@ -245,23 +291,9 @@ def create_prediction_entries_from_supabase(season: int, race_name: str):
     driver_codes = [d["driver_code"] for d in drivers_result.data]
     team_names = [t["team_name"] for t in teams_result.data]
 
-    DRIVER_TEAM_MAP = {
-        "RUS": "Mercedes", "ANT": "Mercedes",
-        "LEC": "Ferrari", "HAM": "Ferrari",
-        "NOR": "McLaren", "PIA": "McLaren",
-        "OCO": "Haas", "BEA": "Haas",
-        "VER": "Red Bull Racing", "HAD": "Red Bull Racing",
-        "LAW": "Racing Bulls", "LIN": "Racing Bulls",
-        "GAS": "Alpine", "COL": "Alpine",
-        "HUL": "Audi", "BOR": "Audi",
-        "SAI": "Williams", "ALB": "Williams",
-        "PER": "Cadillac", "BOT": "Cadillac",
-        "ALO": "Aston Martin", "STR": "Aston Martin",
-    }
-
     rows = []
     for code in driver_codes:
-        team = DRIVER_TEAM_MAP.get(code)
+        team = DRIVER_TEAM_FALLBACK.get(code)
         if team is None or team not in team_names:
             continue
         rows.append({
@@ -305,7 +337,7 @@ def upsert_predictions_to_supabase(results_df, season, race_name):
         prediction_rows.append({
             "race_event_id": race_event_id,
             "driver_code": row["driver"],
-            "team": row["team"],
+            "team": resolve_team_name(row["driver"], row.get("team")),
             "predicted_position": int(row["predicted_position"]),
             "prediction_score": float(row["prediction_score"]),
             "grid_position": int(grid_pos) if pd.notna(grid_pos) else None,
@@ -412,7 +444,7 @@ def load_race_entries_from_supabase(season: int, race_name: str):
             "gp_name": race_event["grand_prix_name"],
             "round": race_event["round"],
             "driver": drv.get("driver_code"),
-            "team_x": team.get("team_name"),
+            "team_x": resolve_team_name(drv.get("driver_code"), team.get("team_name")),
             "fp1_pos": entry.get("fp1_pos"),
             "fp1_time_fastest_lap": entry.get("fp1_time_fastest_lap"),
             "fp2_pos": entry.get("fp2_pos"),
@@ -585,6 +617,12 @@ COLUMN_MAPPING = {
 available_columns = [col for col in COLUMN_MAPPING.keys() if col in df_raw.columns]
 df = df_raw[available_columns + ["race_key", "race_id"]].copy()
 df = df.rename(columns=COLUMN_MAPPING)
+
+if "team" in df.columns:
+    df["team"] = df.apply(
+        lambda row: resolve_team_name(row.get("driver"), row.get("team")),
+        axis=1,
+    )
 
 print(f"Available columns after mapping: {len(available_columns)}")
 print(f"Mapped columns: {[COLUMN_MAPPING[col] for col in available_columns]}")
@@ -865,6 +903,10 @@ if df_predict.shape[0] > 0:
     results = df_predict[result_cols].copy()
     if "grid_pos" not in results.columns:
         results["grid_pos"] = np.nan
+    results["team"] = results.apply(
+        lambda row: resolve_team_name(row["driver"], row.get("team")),
+        axis=1,
+    )
     results["prediction_score"] = prediction_scores
     
     # Rank by prediction score (higher = better predicted finish)
