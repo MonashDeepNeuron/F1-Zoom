@@ -27,7 +27,7 @@ DRIVERS = [
     {"num": "27", "tla": "HUL", "name": "Nico HULKENBERG",   "team": "Audi",             "color": "999999", "tier": 3},
     {"num": "5",  "tla": "BOR", "name": "Gabriel BORTOLETO", "team": "Audi",             "color": "999999", "tier": 3},
     {"num": "22", "tla": "TSU", "name": "Yuki TSUNODA",      "team": "Racing Bulls",     "color": "6692FF", "tier": 2},
-    {"num": "6",  "tla": "HAD", "name": "Isack HADJAR",      "team": "Racing Bulls",     "color": "6692FF", "tier": 3},
+    {"num": "6",  "tla": "HAD", "name": "Isack HADJAR",      "team": "Red Bull Racing",  "color": "6692FF", "tier": 3},
     {"num": "31", "tla": "OCO", "name": "Esteban OCON",      "team": "Haas F1 Team",     "color": "B6BABD", "tier": 3},
     {"num": "87", "tla": "BEA", "name": "Oliver BEARMAN",    "team": "Haas F1 Team",     "color": "B6BABD", "tier": 3},
     {"num": "11", "tla": "PER", "name": "Sergio Perez",      "team": "Cadillac F1 Team", "color": "C4A230", "tier": 3},

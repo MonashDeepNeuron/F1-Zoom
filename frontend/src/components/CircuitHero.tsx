@@ -15,6 +15,7 @@ interface TrackMeta {
   title: string;
   subtitle: string;
   flag: string;
+  lengthKm: number;
   length: string;
   laps: number;
   corners: number;
@@ -90,6 +91,10 @@ const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
+const BASE_TRACK_TARGET_SIZE = 25;
+const MIN_TRACK_TARGET_SIZE = 18;
+const MAX_TRACK_TARGET_SIZE = 32;
+const REFERENCE_TRACK_LENGTH_KM = 5.4;
 
 // ─── Helpers ─────────────────────────────────────────────────────
 function parseTrackData(
@@ -119,9 +124,29 @@ function parseTrackData(
   return points;
 }
 
-function buildScaledPoints(
+function getTrackTargetSize(lengthKm?: number | null): number {
+  if (!lengthKm || !Number.isFinite(lengthKm)) return BASE_TRACK_TARGET_SIZE;
+
+  // Use a square-root curve so longer tracks still read larger, without
+  // letting the visual size swing too wildly across the calendar.
+  const scaledSize =
+    BASE_TRACK_TARGET_SIZE *
+    Math.sqrt(lengthKm / REFERENCE_TRACK_LENGTH_KM);
+
+  return Math.max(
+    MIN_TRACK_TARGET_SIZE,
+    Math.min(MAX_TRACK_TARGET_SIZE, scaledSize),
+  );
+}
+
+function getTrackLayout(
   rawPoints: { x: number; y: number }[],
-): THREE.Vector3[] {
+  lengthKm?: number | null,
+): {
+  centreX: number;
+  centreY: number;
+  scale: number;
+} {
   let minX = Infinity,
     maxX = -Infinity;
   let minY = Infinity,
@@ -132,13 +157,23 @@ function buildScaledPoints(
     if (p.y < minY) minY = p.y;
     if (p.y > maxY) maxY = p.y;
   });
-  const rangeX = maxX - minX;
-  const rangeY = maxY - minY;
-  const maxRange = Math.max(rangeX, rangeY);
-  const targetSize = 25;
-  const scale = targetSize / maxRange;
-  const centreX = (minX + maxX) / 2;
-  const centreY = (minY + maxY) / 2;
+
+  const maxRange = Math.max(maxX - minX, maxY - minY, 1);
+  const targetSize = getTrackTargetSize(lengthKm);
+
+  return {
+    centreX: (minX + maxX) / 2,
+    centreY: (minY + maxY) / 2,
+    scale: targetSize / maxRange,
+  };
+}
+
+function buildScaledPoints(
+  rawPoints: { x: number; y: number }[],
+  lengthKm?: number | null,
+): THREE.Vector3[] {
+  const { centreX, centreY, scale } = getTrackLayout(rawPoints, lengthKm);
+
   return rawPoints.map(
     (p) =>
       new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale),
@@ -161,6 +196,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     title: row.title,
     subtitle: row.subtitle,
     flag: countryCodeToFlag(row.flag),
+    lengthKm: row.lengthKm,
     length: `${Number(row.lengthKm).toFixed(3)} KM`,
     laps: row.laps,
     corners: row.corners,
@@ -311,7 +347,7 @@ export default function CircuitHero() {
     }
   }, []);
 
-  const initTrackScene = useCallback((csvData: string) => {
+  const initTrackScene = useCallback((csvData: string, trackMeta?: TrackMeta) => {
     const container = containerRef.current;
     if (!container) return;
 
@@ -360,22 +396,8 @@ export default function CircuitHero() {
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
-    const trackPoints = buildScaledPoints(rawPoints);
-
-    // Compute scaling params (mirrors buildScaledPoints) for turn marker placement
-    let _minX = Infinity,
-      _maxX = -Infinity,
-      _minY = Infinity,
-      _maxY = -Infinity;
-    rawPoints.forEach((p) => {
-      if (p.x < _minX) _minX = p.x;
-      if (p.x > _maxX) _maxX = p.x;
-      if (p.y < _minY) _minY = p.y;
-      if (p.y > _maxY) _maxY = p.y;
-    });
-    const _scale = 25 / Math.max(_maxX - _minX, _maxY - _minY);
-    const _centreX = (_minX + _maxX) / 2;
-    const _centreY = (_minY + _maxY) / 2;
+    const layout = getTrackLayout(rawPoints, trackMeta?.lengthKm);
+    const trackPoints = buildScaledPoints(rawPoints, trackMeta?.lengthKm);
 
     const TRACK_ELEVATION = 2.5;
 
@@ -631,8 +653,8 @@ export default function CircuitHero() {
       // Turn entry: is_corner transitions from false → true
       if (curr.isCorner && (!prev || !prev.isCorner)) {
         turnNum++;
-        const sx = (curr.x - _centreX) * _scale;
-        const sz = (curr.y - _centreY) * _scale;
+        const sx = (curr.x - layout.centreX) * layout.scale;
+        const sz = (curr.y - layout.centreY) * layout.scale;
 
         // Small glowing dot at track level
         const dotGeo = new THREE.SphereGeometry(0.22, 8, 8);
@@ -833,7 +855,7 @@ export default function CircuitHero() {
         }
         const csvData = await response.text();
         if (currentLoadId !== loadIdRef.current) return;
-        initTrackScene(csvData);
+        initTrackScene(csvData, meta);
         requestAnimationFrame(() => {
           if (currentLoadId !== loadIdRef.current) return;
           setLoading(false);
