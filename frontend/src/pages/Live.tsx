@@ -13,6 +13,7 @@ export default function Live() {
   const connected = useLiveTimingStore((s) => s.connected);
   const sessionInfo = useLiveTimingStore((s) => s.sessionInfo);
   const sessionStatus = useLiveTimingStore((s) => s.sessionStatus);
+  const timingData = useLiveTimingStore((s) => s.timingData);
 
   const [sidebarWidth, setSidebarWidth] = useState<number>(360);
   const isDraggingRef = useRef(false);
@@ -56,10 +57,10 @@ export default function Live() {
     };
   }, []);
 
-  const hasActiveSession =
+  const hasSessionData =
     connected &&
     !!sessionInfo &&
-    sessionStatus !== "Finished" &&
+    Object.keys(timingData).length > 0 &&
     sessionStatus !== "Inactive";
 
   return (
@@ -89,7 +90,7 @@ export default function Live() {
         </div>
       </header>
 
-      {hasActiveSession ? (
+      {hasSessionData ? (
         <div className="live-content live-content-active">
           <div className="live-left-pane" style={{ width: sidebarWidth, flexShrink: 0 }}>
             <LiveTimingTable />

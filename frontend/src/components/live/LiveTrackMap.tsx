@@ -13,6 +13,54 @@ interface PosSnapshot {
   t: number;
 }
 
+const TRACK_FILE_ALIASES: Record<string, string> = {
+  albertpark: "Melbourne",
+  australiangrandprix: "Melbourne",
+  melbourne: "Melbourne",
+  suzuka: "Suzuka",
+  suzukacircuit: "Suzuka",
+  japanesegrandprix: "Suzuka",
+  shanghai: "Shanghai",
+  chinesegp: "Shanghai",
+  chinesegrandprix: "Shanghai",
+  sakhir: "Sakhir",
+  bahraininternationalcircuit: "Sakhir",
+  bahraingrandprix: "Sakhir",
+  catalunya: "Catalunya",
+  barcelona: "Catalunya",
+  "circuitdebarcelona-catalunya": "Catalunya",
+  montreal: "Montreal",
+  gillesvilleneuve: "Montreal",
+  silverstone: "Silverstone",
+  monza: "Monza",
+  spafrancorchamps: "Spa",
+  spa: "Spa",
+  zandvoort: "Zandvoort",
+  austin: "Austin",
+  cota: "Austin",
+  circuitoftheamericas: "Austin",
+  mexicocity: "MexicoCity",
+  autodromohermanosrodriguez: "MexicoCity",
+  saopaulo: "SaoPaulo",
+  interlagos: "SaoPaulo",
+  yasmarina: "YasMarina",
+  abudhabi: "YasMarina",
+};
+
+function normalizeTrackKey(value?: string | null): string {
+  return (value ?? "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+}
+
+function resolveTrackFileName(shortName?: string | null, meetingName?: string | null): string {
+  const candidates = [
+    shortName,
+    meetingName,
+  ].map((value) => TRACK_FILE_ALIASES[normalizeTrackKey(value)]);
+
+  const resolved = candidates.find(Boolean);
+  return resolved ?? "Melbourne";
+}
+
 function parseTrackData(raw: string): Pt[] {
   let csv = raw;
   const m = raw.match(/`([\s\S]*)`/);
@@ -36,9 +84,16 @@ function parseTrackData(raw: string): Pt[] {
  * Sectors have variable segment counts (e.g. 9, 5, 10 for Melbourne = 24 total).
  * Returns { highest: absolute index of last completed segment, total: total segments }.
  */
-function getSegmentProgress(
-  sectors: Sector[] | Record<string, Sector>
-): { highest: number; total: number } {
+function getSegmentProgress(sectors: Sector[] | Record<string, Sector>): {
+  highest: number;
+  total: number;
+} {
+  const isSegmentOrNull = (value: unknown): value is Segment | null => {
+    if (value === null) return true;
+    if (typeof value !== "object" || value === null) return false;
+    return "Status" in value;
+  };
+
   const sectorEntries: [number, Sector][] = Array.isArray(sectors)
     ? sectors.map((s, i) => [i, s])
     : Object.entries(sectors)
@@ -52,11 +107,13 @@ function getSegmentProgress(
   for (const [, sector] of sectorEntries) {
     if (!sector?.Segments) continue;
 
-    const segs: (Segment | null)[] = Array.isArray(sector.Segments)
-      ? sector.Segments
-      : Object.entries(sector.Segments)
-          .sort(([a], [b]) => parseInt(a) - parseInt(b))
-          .map(([, v]) => v);
+    const segs: (Segment | null)[] = (
+      Array.isArray(sector.Segments)
+        ? sector.Segments
+        : Object.entries(sector.Segments)
+            .sort(([a], [b]) => parseInt(a) - parseInt(b))
+            .map(([, v]) => v)
+    ).filter(isSegmentOrNull);
 
     for (let g = 0; g < segs.length; g++) {
       const seg = segs[g];
@@ -81,7 +138,7 @@ function interpolateTrack(pts: Pt[], progress: number): Pt {
   if (i >= n - 1) return pts[n - 1];
   return {
     x: pts[i].x + frac * (pts[i + 1].x - pts[i].x),
-    y: pts[i].y + frac * (pts[i + 1].y - pts[i].y),
+    y: pts[i].y + frac * (pts[i + 1].y - pts[i].y)
   };
 }
 
@@ -90,22 +147,38 @@ export default function LiveTrackMap() {
   const trackRef = useRef<Pt[]>([]);
   const sizeRef = useRef({ w: 0, h: 0 });
   const [loaded, setLoaded] = useState(false);
+  const sessionInfo = useLiveTimingStore((s) => s.sessionInfo);
 
   const prevProgressRef = useRef<Record<string, number>>({});
   const targetProgressRef = useRef<Record<string, number>>({});
   const lastUpdateRef = useRef<Record<string, number>>({});
+  const displayProgressRef = useRef<Record<string, number>>({});
 
-  const posBufferRef = useRef<Record<string, { prev: PosSnapshot; curr: PosSnapshot }>>({});
+  const posBufferRef = useRef<
+    Record<string, { prev: PosSnapshot; curr: PosSnapshot }>
+  >({});
 
   useEffect(() => {
-    fetch("/circuit_3d/TrackCoordinateJS/Melbourne.js")
+    const trackFile = resolveTrackFileName(
+      sessionInfo?.Meeting?.Circuit?.ShortName,
+      sessionInfo?.Meeting?.Name,
+    );
+    let cancelled = false;
+
+    setLoaded(false);
+    fetch(`/circuit_3d/TrackCoordinateJS/${trackFile}.js`)
       .then((r) => r.text())
       .then((data) => {
+        if (cancelled) return;
         trackRef.current = parseTrackData(data);
         setLoaded(true);
       })
       .catch(console.error);
-  }, []);
+
+    return () => {
+      cancelled = true;
+    };
+  }, [sessionInfo?.Meeting?.Circuit?.ShortName, sessionInfo?.Meeting?.Name]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -158,7 +231,7 @@ export default function LiveTrackMap() {
 
     const toC = (x: number, y: number) => ({
       cx: (x - cx) * scale + w / 2,
-      cy: (y - cy) * scale + h / 2,
+      cy: (y - cy) * scale + h / 2
     });
 
     // draw track glow
@@ -181,8 +254,15 @@ export default function LiveTrackMap() {
     // estimated from microsector progress (live F1 where Position data unavailable)
     const hasRawPositions = Object.keys(positions).length > 0;
     const smoothMs = 350;
+    const extrapolateMs = 2400;
 
-    type DriverPos = { num: string; x: number; y: number; color: string; tla: string };
+    type DriverPos = {
+      num: string;
+      x: number;
+      y: number;
+      color: string;
+      tla: string;
+    };
     const driverPositions: DriverPos[] = [];
 
     if (hasRawPositions) {
@@ -217,16 +297,21 @@ export default function LiveTrackMap() {
           x: dx,
           y: dy,
           color: `#${drv?.TeamColour ?? "ffffff"}`,
-          tla: drv?.Tla ?? num,
+          tla: drv?.Tla ?? num
         });
       }
     } else {
       // derive positions from microsector data
-      for (const [num, td] of Object.entries(timingData) as [string, TimingDataDriver][]) {
+      for (const [num, td] of Object.entries(timingData) as [
+        string,
+        TimingDataDriver
+      ][]) {
         if (td.InPit || td.Retired) continue;
         if (!td.Sectors) continue;
 
-        const { highest: seg, total: totalSegs } = getSegmentProgress(td.Sectors);
+        const { highest: seg, total: totalSegs } = getSegmentProgress(
+          td.Sectors
+        );
         if (seg < 0) continue;
 
         const progress = Math.min((seg + 1) / totalSegs, 0.9999);
@@ -234,7 +319,7 @@ export default function LiveTrackMap() {
         // smooth animation between segment steps
         const prev = targetProgressRef.current[num];
         if (prev === undefined || prev !== progress) {
-          prevProgressRef.current[num] = prev ?? progress;
+          prevProgressRef.current[num] = displayProgressRef.current[num] ?? prev ?? progress;
           targetProgressRef.current[num] = progress;
           lastUpdateRef.current[num] = now;
         }
@@ -249,8 +334,16 @@ export default function LiveTrackMap() {
         if (delta < -0.5) delta += 1;
         if (delta > 0.5) delta -= 1;
         let interp = fromP + delta * t;
+        if (t >= 1) {
+          const idleMs = Math.max(now - start - smoothMs, 0);
+          const segmentSize = 1 / totalSegs;
+          const drift =
+            Math.min(idleMs / extrapolateMs, 1) * segmentSize * 0.85;
+          interp += drift;
+        }
         if (interp < 0) interp += 1;
         if (interp >= 1) interp -= 1;
+        displayProgressRef.current[num] = interp;
 
         const trackPt = interpolateTrack(pts, interp);
         const { cx: dx, cy: dy } = toC(trackPt.x, trackPt.y);
@@ -261,7 +354,7 @@ export default function LiveTrackMap() {
           x: dx,
           y: dy,
           color: `#${drv?.TeamColour ?? "ffffff"}`,
-          tla: drv?.Tla ?? num,
+          tla: drv?.Tla ?? num
         });
       }
     }
@@ -302,7 +395,6 @@ export default function LiveTrackMap() {
       ctx.fillStyle = "rgba(255,255,255,0.96)";
       ctx.fillText(dp.tla, labelX, labelY);
     }
-
   }, []);
 
   useEffect(() => {

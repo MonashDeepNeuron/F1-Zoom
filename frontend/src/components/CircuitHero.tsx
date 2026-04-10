@@ -196,6 +196,24 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
   };
 }
 
+function withLocalTrackVariants(tracks: TrackMeta[]): TrackMeta[] {
+  const hasMelbourne2 = tracks.some((track) => track.key === "Melbourne2");
+  if (hasMelbourne2) return tracks;
+
+  const melbourne = tracks.find((track) => track.key === "Melbourne");
+  if (!melbourne) return tracks;
+
+  const melbourne2: TrackMeta = {
+    ...melbourne,
+    key: "Melbourne2",
+    file: "Melbourne2",
+    title: "MELBOURNE 2",
+    subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)",
+  };
+
+  return [melbourne, melbourne2, ...tracks.filter((track) => track.key !== "Melbourne")];
+}
+
 function parseSessionTime(session?: CircuitSession): Date | null {
   if (!session) return null;
   if (session.sessionStartUtc) {
@@ -880,9 +898,11 @@ export default function CircuitHero() {
       .then((res) => {
         if (!active) return;
         const rows: CircuitApiRow[] = Array.isArray(res.data) ? res.data : [];
-        const mapped = rows
+        const mapped = withLocalTrackVariants(
+          rows
           .map(mapApiCircuitToTrack)
-          .sort((a, b) => (a.round ?? 999) - (b.round ?? 999));
+          .sort((a, b) => (a.round ?? 999) - (b.round ?? 999)),
+        );
 
         tracksRef.current = mapped;
         setTracks(mapped);

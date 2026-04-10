@@ -1,4 +1,4 @@
-var trackData = `
+const trackData = `
 # # x_m,y_m,w_tr_right_m,w_tr_left_m,is_corner
 -0.473164,0.749307,5.894,5.830,0
 -3.182628,-3.451582,5.889,5.830,0
@@ -932,5 +932,3 @@ var trackData = `
 4.946397,9.150687,5.903,5.829,0
 2.236507,4.950065,5.898,5.830,0
 `;
-
-window.__onTrackData(trackData);
