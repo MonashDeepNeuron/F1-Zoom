@@ -1,23 +1,23 @@
 predicted_position,driver,team,prediction_score,season,race_name
-1,ALB,Williams,-1.0949087815354173,2026,Japanese Grand Prix
-2,ALO,Aston Martin,-1.0949087815354173,2026,Japanese Grand Prix
-3,STR,Aston Martin,-1.0949087815354173,2026,Japanese Grand Prix
-4,SAI,Williams,-1.0949087815354173,2026,Japanese Grand Prix
-5,RUS,Mercedes,-1.0949087815354173,2026,Japanese Grand Prix
-6,PIA,McLaren,-1.0949087815354173,2026,Japanese Grand Prix
-7,PER,Cadillac,-1.0949087815354173,2026,Japanese Grand Prix
-8,OCO,Haas,-1.0949087815354173,2026,Japanese Grand Prix
-9,NOR,McLaren,-1.0949087815354173,2026,Japanese Grand Prix
-10,LIN,Racing Bulls,-1.0949087815354173,2026,Japanese Grand Prix
-11,LEC,Ferrari,-1.0949087815354173,2026,Japanese Grand Prix
-12,LAW,Racing Bulls,-1.0949087815354173,2026,Japanese Grand Prix
-13,HUL,Audi,-1.0949087815354173,2026,Japanese Grand Prix
-14,HAM,Ferrari,-1.0949087815354173,2026,Japanese Grand Prix
-15,HAD,Red Bull Racing,-1.0949087815354173,2026,Japanese Grand Prix
-16,GAS,Alpine,-1.0949087815354173,2026,Japanese Grand Prix
-17,COL,Alpine,-1.0949087815354173,2026,Japanese Grand Prix
-18,BOT,Cadillac,-1.0949087815354173,2026,Japanese Grand Prix
-19,BOR,Audi,-1.0949087815354173,2026,Japanese Grand Prix
-20,BEA,Haas,-1.0949087815354173,2026,Japanese Grand Prix
-21,ANT,Mercedes,-1.0949087815354173,2026,Japanese Grand Prix
-22,VER,Red Bull Racing,-1.0949087815354173,2026,Japanese Grand Prix
+1,RUS,Mercedes,-1.2761470177076675,2026,Bahrain Grand Prix
+2,LEC,Ferrari,-1.2761470177076675,2026,Bahrain Grand Prix
+3,PIA,McLaren,-1.2761470177076675,2026,Bahrain Grand Prix
+4,ANT,Mercedes,-1.2761470177076675,2026,Bahrain Grand Prix
+5,COL,Alpine,-1.3949983617215256,2026,Bahrain Grand Prix
+6,ALO,Aston Martin,-1.3949983617215256,2026,Bahrain Grand Prix
+7,BOT,Cadillac,-1.3949983617215256,2026,Bahrain Grand Prix
+8,PER,Cadillac,-1.3949983617215256,2026,Bahrain Grand Prix
+9,ALB,Williams,-1.3949983617215256,2026,Bahrain Grand Prix
+10,SAI,Williams,-1.3949983617215256,2026,Bahrain Grand Prix
+11,BOR,Audi,-1.3949983617215256,2026,Bahrain Grand Prix
+12,HUL,Audi,-1.3949983617215256,2026,Bahrain Grand Prix
+13,LIN,Racing Bulls,-1.3949983617215256,2026,Bahrain Grand Prix
+14,GAS,Alpine,-1.3949983617215256,2026,Bahrain Grand Prix
+15,LAW,Racing Bulls,-1.3949983617215256,2026,Bahrain Grand Prix
+16,HAD,Racing Bulls,-1.3949983617215256,2026,Bahrain Grand Prix
+17,VER,Red Bull Racing,-1.3949983617215256,2026,Bahrain Grand Prix
+18,BEA,Haas,-1.3949983617215256,2026,Bahrain Grand Prix
+19,OCO,Haas,-1.3949983617215256,2026,Bahrain Grand Prix
+20,NOR,McLaren,-1.3949983617215256,2026,Bahrain Grand Prix
+21,HAM,Ferrari,-1.3949983617215256,2026,Bahrain Grand Prix
+22,STR,Aston Martin,-1.3949983617215256,2026,Bahrain Grand Prix

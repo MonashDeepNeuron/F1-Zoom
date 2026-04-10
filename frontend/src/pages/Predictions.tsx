@@ -8,8 +8,18 @@ interface Driver {
   position: number;
   driver: string;
   team: string | null;
-  gridPosition: number;
+  gridPosition: number | null;
   score: number;
+}
+
+interface AiInsight {
+  predictedWinner: string | null;
+  modelName: string | null;
+  summary: string | null;
+  keyReasons: string[];
+  contenders: string[];
+  caveats: string[];
+  generatedAt: string | null;
 }
 
 interface PredictionData {
@@ -21,6 +31,7 @@ interface PredictionData {
   top10: Driver[];
   raceName: string;
   season: number;
+  aiInsight?: AiInsight;
 }
 
 function Predictions() {
@@ -121,6 +132,55 @@ function Predictions() {
                   </Row>
                 </Card.Body>
               </Card>
+
+              {prediction.aiInsight?.summary && (
+                <Card className="ai-insight-card">
+                  <Card.Body>
+                    <div className="ai-insight-kicker">AI Insight</div>
+                    <h2 className="ai-insight-title">
+                      Why {prediction.predictedWinner} is favoured
+                    </h2>
+                    <p className="ai-insight-summary">
+                      {prediction.aiInsight.summary}
+                    </p>
+
+                    <div className="ai-insight-lists">
+                      {prediction.aiInsight.keyReasons.length > 0 && (
+                        <div className="ai-insight-list">
+                          <h3>Key reasons</h3>
+                          <ul>
+                            {prediction.aiInsight.keyReasons.map((reason) => (
+                              <li key={reason}>{reason}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {prediction.aiInsight.contenders.length > 0 && (
+                        <div className="ai-insight-list">
+                          <h3>Closest threats</h3>
+                          <ul>
+                            {prediction.aiInsight.contenders.map((contender) => (
+                              <li key={contender}>{contender}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+
+                      {prediction.aiInsight.caveats.length > 0 && (
+                        <div className="ai-insight-list">
+                          <h3>Watch-outs</h3>
+                          <ul>
+                            {prediction.aiInsight.caveats.map((caveat) => (
+                              <li key={caveat}>{caveat}</li>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
+                  </Card.Body>
+                </Card>
+              )}
 
               {/* Full Grid Prediction */}
               <div className="grid-prediction">

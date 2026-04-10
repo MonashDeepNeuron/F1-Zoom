@@ -281,6 +281,12 @@ public class F1Controller {
             result.put("top10", top10);
             result.put("raceName", raceName);
             result.put("season", season);
+
+            Map<String, Object> aiInsight = getPredictionInsight(raceEventId);
+            if (aiInsight != null) {
+                result.put("aiInsight", aiInsight);
+            }
+
             return result;
 
         } catch (Exception e) {
@@ -291,6 +297,42 @@ public class F1Controller {
             fallback.put("message", "Failed to load predictions: " + e.getMessage());
             return fallback;
         }
+    }
+
+    private Map<String, Object> getPredictionInsight(Long raceEventId) {
+        try {
+            Map<String, String> insightParams = new LinkedHashMap<>();
+            insightParams.put(
+                    "select",
+                    "predicted_winner,model_name,summary,key_reasons,contenders,caveats,generated_at");
+            insightParams.put("race_event_id", "eq." + raceEventId);
+            insightParams.put("limit", "1");
+
+            JsonNode insightNode = supabaseGet("prediction_insights", insightParams);
+            if (!insightNode.isArray() || insightNode.size() == 0) {
+                return null;
+            }
+
+            JsonNode insight = insightNode.get(0);
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("predictedWinner", textOrNull(insight, "predicted_winner"));
+            result.put("modelName", textOrNull(insight, "model_name"));
+            result.put("summary", textOrNull(insight, "summary"));
+            result.put("keyReasons", jsonValueOrEmptyList(insight.path("key_reasons")));
+            result.put("contenders", jsonValueOrEmptyList(insight.path("contenders")));
+            result.put("caveats", jsonValueOrEmptyList(insight.path("caveats")));
+            result.put("generatedAt", textOrNull(insight, "generated_at"));
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Object jsonValueOrEmptyList(JsonNode node) {
+        if (node == null || node.isMissingNode() || node.isNull()) {
+            return List.of();
+        }
+        return objectMapper.convertValue(node, Object.class);
     }
 
     private JsonNode supabaseGet(String table, Map<String, String> queryParams) throws Exception {

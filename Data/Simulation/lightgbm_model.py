@@ -2,6 +2,7 @@
 
 import argparse
 import os
+import sys
 
 import pandas as pd
 import numpy as np
@@ -10,10 +11,13 @@ import joblib
 from pathlib import Path
 from lightgbm import LGBMRanker
 
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.append(str(PROJECT_ROOT))
+
 try:
     from dotenv import load_dotenv
-    _PROJECT_ROOT = Path(__file__).resolve().parents[2]
-    load_dotenv(_PROJECT_ROOT / ".env")
+    load_dotenv(PROJECT_ROOT / ".env")
 except ImportError:
     pass
 
@@ -953,6 +957,12 @@ if df_predict.shape[0] > 0:
     
     if args.from_supabase:
         upsert_predictions_to_supabase(results, PRED_SEASON, PRED_RACE_NAME)
+        try:
+            from data_pipeline.ai_insights import generate_prediction_insight
+
+            generate_prediction_insight(results, PRED_SEASON, PRED_RACE_NAME)
+        except Exception as exc:
+            print(f"AI insight skipped after prediction upsert: {exc}")
     
 else:
     print("No prediction data available. Please check your season and race name.")
