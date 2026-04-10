@@ -16,6 +16,7 @@ interface TrackMeta {
   subtitle: string;
   flag: string;
   lengthKm: number;
+  countryCode: string;
   length: string;
   laps: number;
   corners: number;
@@ -96,7 +97,28 @@ const MIN_TRACK_TARGET_SIZE = 18;
 const MAX_TRACK_TARGET_SIZE = 32;
 const REFERENCE_TRACK_LENGTH_KM = 5.4;
 
+const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
+  Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
+  Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
+  Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
+  MexicoCity:  { primary: "#003d22", glow: "#006644", core: "#ce1126", text: "#ff3333" }, // MX – dark green track, bright red text, medium green glow
+  Montreal:    { primary: "#7a0011", glow: "#aa2244", core: "#ffffff", text: "#ff3333" }, // CA – dark red track, bright red text, medium red glow
+  Monza:       { primary: "#003d22", glow: "#007744", core: "#ff3333", text: "#ff3333" }, // IT – dark green track, bright red text, medium green glow
+  Sakhir:      { primary: "#8b0000", glow: "#aa2244", core: "#ffffff", text: "#ffffff" }, // BH – dark red track, white text, medium red glow
+  SaoPaulo:    { primary: "#004d22", glow: "#007744", core: "#ffdd00", text: "#ffdd00" }, // BR – dark green track, bright yellow text, medium green glow
+  Shanghai:    { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // CN – dark red track, bright yellow text, medium red glow
+  Silverstone: { primary: "#001a4d", glow: "#1a5599", core: "#ffffff", text: "#ff3333" }, // GB – dark blue track, bright red text, medium blue glow
+  Spa:         { primary: "#9d8a1a", glow: "#cc9944", core: "#ff3333", text: "#ff3333" }, // BE – dark yellow track, bright red text, medium yellow glow
+  Suzuka:      { primary: "#660022", glow: "#aa3333", core: "#fb0000", text: "#f37979" }, // JP – dark red track, white text, medium red glow
+  YasMarina:   { primary: "#003d22", glow: "#dd3333", core: "#ffffff", text: "#ff3333" }, // AE – dark green track, bright red text, muted red glow
+  Zandvoort:   { primary: "#001a4d", glow: "#553333", core: "#ffffff", text: "#ff3333" }, // NL – dark blue track, bright red text, muted brown/red glow
+  DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
+};
+
 // ─── Helpers ─────────────────────────────────────────────────────
+function hexToNumber(hex: string): number {
+  return parseInt(hex.replace("#", ""), 16);
+}
 function parseTrackData(
   raw: string,
 ): { x: number; y: number; isCorner: boolean }[] {
@@ -197,6 +219,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     subtitle: row.subtitle,
     flag: countryCodeToFlag(row.flag),
     lengthKm: row.lengthKm,
+    countryCode: row.flag.toUpperCase(),
     length: `${Number(row.lengthKm).toFixed(3)} KM`,
     laps: row.laps,
     corners: row.corners,
@@ -347,7 +370,9 @@ export default function CircuitHero() {
     }
   }, []);
 
-  const initTrackScene = useCallback((csvData: string, trackMeta?: TrackMeta) => {
+  const initTrackScene = useCallback((csvData: string, fileSlug?: string) => {
+    const theme = CIRCUIT_THEME[fileSlug ?? ""] ?? CIRCUIT_THEME.DEFAULT;
+    const accentColor = theme.text;
     const container = containerRef.current;
     if (!container) return;
 
@@ -372,12 +397,12 @@ export default function CircuitHero() {
     scene.add(new THREE.AmbientLight(0xffffff, 0.08));
 
     // Overhead key light
-    const pointLight1 = new THREE.PointLight(0xff2200, 1.2, 60);
+    const pointLight1 = new THREE.PointLight(hexToNumber(theme.primary), 1.2, 60);
     pointLight1.position.set(0, 25, 0);
     scene.add(pointLight1);
 
     // Accent fills for subtle depth
-    const pointLight2 = new THREE.PointLight(0xff3300, 0.6, 50);
+    const pointLight2 = new THREE.PointLight(hexToNumber(theme.glow), 0.6, 50);
     pointLight2.position.set(20, 15, 20);
     scene.add(pointLight2);
 
@@ -490,10 +515,12 @@ export default function CircuitHero() {
     // ── Shadow / bottom edge track ───────────────────────────────
     // Bottom edge core — mirrors the main track shape
     const shadowCoreMat = new THREE.MeshBasicMaterial({
-      color: 0x661100,
+      color: hexToNumber(theme.glow),
       transparent: true,
       opacity: 0.4,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -508,6 +535,8 @@ export default function CircuitHero() {
       transparent: true,
       opacity: 0.15,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -522,6 +551,8 @@ export default function CircuitHero() {
       transparent: true,
       opacity: 0.06,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -535,9 +566,9 @@ export default function CircuitHero() {
     const trackMesh = new THREE.Mesh(
       new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true),
       new THREE.MeshPhongMaterial({
-        color: 0xff2200,
-        emissive: 0xff3300,
-        emissiveIntensity: 1.8,
+        color: hexToNumber(theme.primary),
+        emissive: hexToNumber(theme.primary),
+        emissiveIntensity: 0.6,
         shininess: 150,
         specular: 0xff8844,
       }),
@@ -546,10 +577,12 @@ export default function CircuitHero() {
 
     // Bright inner core — thin hot centre
     const coreMat = new THREE.MeshBasicMaterial({
-      color: 0xffcc88,
+      color: theme.core,
       transparent: true,
       opacity: 0.85,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -560,10 +593,12 @@ export default function CircuitHero() {
 
     // Tight glow layer 1 — close halo
     const glow1Mat = new THREE.MeshBasicMaterial({
-      color: 0xff3300,
+      color: hexToNumber(theme.glow),
       transparent: true,
       opacity: 0.35,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -574,10 +609,12 @@ export default function CircuitHero() {
 
     // Glow layer 2 — soft spread
     const glow2Mat = new THREE.MeshBasicMaterial({
-      color: 0xff1100,
+      color: hexToNumber(theme.primary),
       transparent: true,
       opacity: 0.15,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -588,10 +625,12 @@ export default function CircuitHero() {
 
     // Glow layer 3 — faint outer aura
     const glow3Mat = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
+      color: hexToNumber(theme.primary),
       transparent: true,
       opacity: 0.06,
       blending: THREE.AdditiveBlending,
+      depthTest: false,
+      depthWrite: false,
     });
     scene.add(
       new THREE.Mesh(
@@ -603,7 +642,7 @@ export default function CircuitHero() {
     // ── Turn number markers ─────────────────────────────────────
     const MARKER_Y = TRACK_ELEVATION + 2.4;
 
-    function makeTurnLabel(num: number): THREE.Sprite {
+    function makeTurnLabel(num: number, textColor: string): THREE.Sprite {
       const size = 128;
       const canvas = document.createElement("canvas");
       canvas.width = size;
@@ -621,18 +660,16 @@ export default function CircuitHero() {
       ctx.arc(size / 2, size / 2, 38, 0, Math.PI * 2);
       ctx.fillStyle = "rgba(12, 0, 0, 0.92)";
       ctx.fill();
-      ctx.strokeStyle = "#ff2200";
+      ctx.strokeStyle = textColor;
       ctx.lineWidth = 4;
       ctx.stroke();
 
       // Turn number text
       const fontSize = num >= 10 ? 34 : 42;
-      ctx.fillStyle = "#ff6644";
+      ctx.fillStyle = textColor;
       ctx.font = `bold ${fontSize}px Arial`;
       ctx.textAlign = "center";
       ctx.textBaseline = "middle";
-      ctx.shadowColor = "#ff3300";
-      ctx.shadowBlur = 10;
       ctx.fillText(String(num), size / 2, size / 2 + 2);
 
       const texture = new THREE.CanvasTexture(canvas);
@@ -642,7 +679,7 @@ export default function CircuitHero() {
         depthTest: false,
       });
       const sprite = new THREE.Sprite(mat);
-      sprite.scale.set(3.0, 3.0, 1);
+      sprite.scale.set(2.0, 2.0, 1);
       return sprite;
     }
 
@@ -663,13 +700,15 @@ export default function CircuitHero() {
           transparent: true,
           opacity: 0.9,
           blending: THREE.AdditiveBlending,
+          depthTest: false,
+          depthWrite: false,
         });
         const dot = new THREE.Mesh(dotGeo, dotMat);
         dot.position.set(sx, TRACK_ELEVATION + 0.35, sz);
         scene.add(dot);
 
         // Numbered label sprite floating above the track
-        const label = makeTurnLabel(turnNum);
+        const label = makeTurnLabel(turnNum, accentColor);
         label.position.set(sx, MARKER_Y, sz);
         scene.add(label);
       }
@@ -855,7 +894,7 @@ export default function CircuitHero() {
         }
         const csvData = await response.text();
         if (currentLoadId !== loadIdRef.current) return;
-        initTrackScene(csvData, meta);
+        initTrackScene(csvData, meta.file);
         requestAnimationFrame(() => {
           if (currentLoadId !== loadIdRef.current) return;
           setLoading(false);
@@ -1002,13 +1041,31 @@ export default function CircuitHero() {
   };
 
   const overlayOpacity = scrollProgress * 0.9;
+  const accentColor = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.text ?? CIRCUIT_THEME.DEFAULT.text;
+  const themeGlow = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.glow ?? CIRCUIT_THEME.DEFAULT.glow;
+  
+  // Convert hex glow color to rgba for text-shadow
+  const glowR = (themeGlow >> 16) & 255;
+  const glowG = (themeGlow >> 8) & 255;
+  const glowB = themeGlow & 255;
+  
+  const containerStyle: React.CSSProperties = {
+    ...heroParallaxStyle,
+    '--accent-color': accentColor,
+    '--glow-shadow-1': `rgba(${glowR}, ${glowG}, ${glowB}, 0.8)`,
+    '--glow-shadow-2': `rgba(${glowR}, ${glowG}, ${glowB}, 0.5)`,
+    '--glow-shadow-3': `rgba(${glowR}, ${glowG}, ${glowB}, 0.3)`,
+    '--glow-shadow-bright-1': `rgba(${glowR}, ${glowG}, ${glowB}, 1)`,
+    '--glow-shadow-bright-2': `rgba(${glowR}, ${glowG}, ${glowB}, 0.7)`,
+    '--glow-shadow-bright-3': `rgba(${glowR}, ${glowG}, ${glowB}, 0.5)`,
+  } as React.CSSProperties;
 
   return (
     <section className="circuit-hero-section" ref={sectionRef}>
       <div
         className="circuit-hero-container"
         ref={containerRef}
-        style={heroParallaxStyle}
+        style={containerStyle}
       >
         {/* Loading indicator */}
         {loading && <div className="circuit-loading">LOADING CIRCUIT...</div>}
@@ -1022,7 +1079,9 @@ export default function CircuitHero() {
         {/* Info panel */}
         {!loading && selectedTrackMeta && (
           <div className="circuit-info-panel">
-            <h1 className="circuit-title">{selectedTrackMeta.title}</h1>
+            <h1 className="circuit-title">
+              {selectedTrackMeta.title}
+            </h1>
             <div className="circuit-subtitle">{selectedTrackMeta.subtitle}</div>
             <div className="circuit-stats">
               <div className="circuit-stat-item">

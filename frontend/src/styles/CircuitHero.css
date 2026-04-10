@@ -74,15 +74,15 @@
 
 .circuit-title {
   font-size: 56px;
-  color: #ff0000;
+  color: var(--accent-color, #ff0000);
   margin-bottom: 5px;
   letter-spacing: 3px;
   font-weight: 900;
   text-transform: uppercase;
   text-shadow: 
-    0 0 20px rgba(255, 0, 0, 0.8),
-    0 0 40px rgba(255, 0, 0, 0.5),
-    0 0 60px rgba(255, 0, 0, 0.3);
+    0 0 20px var(--glow-shadow-1, rgba(255, 0, 0, 0.8)),
+    0 0 40px var(--glow-shadow-2, rgba(255, 0, 0, 0.5)),
+    0 0 60px var(--glow-shadow-3, rgba(255, 0, 0, 0.3));
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
   animation: titleGlow 3s ease-in-out infinite;
 }
@@ -90,15 +90,15 @@
 @keyframes titleGlow {
   0%, 100% {
     text-shadow: 
-      0 0 20px rgba(255, 0, 0, 0.8),
-      0 0 40px rgba(255, 0, 0, 0.5),
-      0 0 60px rgba(255, 0, 0, 0.3);
+      0 0 20px var(--glow-shadow-1, rgba(255, 0, 0, 0.8)),
+      0 0 40px var(--glow-shadow-2, rgba(255, 0, 0, 0.5)),
+      0 0 60px var(--glow-shadow-3, rgba(255, 0, 0, 0.3));
   }
   50% {
     text-shadow: 
-      0 0 30px rgba(255, 0, 0, 1),
-      0 0 60px rgba(255, 0, 0, 0.7),
-      0 0 90px rgba(255, 0, 0, 0.5);
+      0 0 30px var(--glow-shadow-bright-1, rgba(255, 0, 0, 1)),
+      0 0 60px var(--glow-shadow-bright-2, rgba(255, 0, 0, 0.7)),
+      0 0 90px var(--glow-shadow-bright-3, rgba(255, 0, 0, 0.5));
   }
 }
 
@@ -133,11 +133,11 @@
 
 .circuit-stat-value {
   font-size: 28px;
-  color: #ff0000;
+  color: var(--accent-color, #ff0000);
   font-weight: 900;
   text-shadow: 
-    0 0 10px rgba(255, 0, 0, 0.6),
-    0 0 20px rgba(255, 0, 0, 0.3);
+    0 0 10px var(--glow-shadow-1, rgba(255, 0, 0, 0.8)),
+    0 0 20px var(--glow-shadow-2, rgba(255, 0, 0, 0.5));
   font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
 }
 
