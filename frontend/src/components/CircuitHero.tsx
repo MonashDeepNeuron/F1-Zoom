@@ -15,6 +15,7 @@ interface TrackMeta {
   title: string;
   subtitle: string;
   flag: string;
+  lengthKm: number;
   countryCode: string;
   length: string;
   laps: number;
@@ -105,6 +106,28 @@ const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
+const BASE_TRACK_TARGET_SIZE = 25;
+const MIN_TRACK_TARGET_SIZE = 18;
+const MAX_TRACK_TARGET_SIZE = 32;
+const REFERENCE_TRACK_LENGTH_KM = 5.4;
+
+const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
+  Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
+  Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
+  Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
+  MexicoCity:  { primary: "#003d22", glow: "#006644", core: "#ce1126", text: "#ff3333" }, // MX – dark green track, bright red text, medium green glow
+  Montreal:    { primary: "#7a0011", glow: "#aa2244", core: "#ffffff", text: "#ff3333" }, // CA – dark red track, bright red text, medium red glow
+  Monza:       { primary: "#003d22", glow: "#007744", core: "#ff3333", text: "#ff3333" }, // IT – dark green track, bright red text, medium green glow
+  Sakhir:      { primary: "#8b0000", glow: "#aa2244", core: "#ffffff", text: "#ffffff" }, // BH – dark red track, white text, medium red glow
+  SaoPaulo:    { primary: "#004d22", glow: "#007744", core: "#ffdd00", text: "#ffdd00" }, // BR – dark green track, bright yellow text, medium green glow
+  Shanghai:    { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // CN – dark red track, bright yellow text, medium red glow
+  Silverstone: { primary: "#001a4d", glow: "#1a5599", core: "#ffffff", text: "#ff3333" }, // GB – dark blue track, bright red text, medium blue glow
+  Spa:         { primary: "#9d8a1a", glow: "#cc9944", core: "#ff3333", text: "#ff3333" }, // BE – dark yellow track, bright red text, medium yellow glow
+  Suzuka:      { primary: "#660022", glow: "#aa3333", core: "#fb0000", text: "#f37979" }, // JP – dark red track, white text, medium red glow
+  YasMarina:   { primary: "#003d22", glow: "#dd3333", core: "#ffffff", text: "#ff3333" }, // AE – dark green track, bright red text, muted red glow
+  Zandvoort:   { primary: "#001a4d", glow: "#553333", core: "#ffffff", text: "#ff3333" }, // NL – dark blue track, bright red text, muted brown/red glow
+  DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
+};
 
 const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
   Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
@@ -168,13 +191,23 @@ function buildScaledPoints(
     if (p.y < minY) minY = p.y;
     if (p.y > maxY) maxY = p.y;
   });
-  const rangeX = maxX - minX;
-  const rangeY = maxY - minY;
-  const maxRange = Math.max(rangeX, rangeY);
-  const targetSize = 25;
-  const scale = targetSize / maxRange;
-  const centreX = (minX + maxX) / 2;
-  const centreY = (minY + maxY) / 2;
+
+  const maxRange = Math.max(maxX - minX, maxY - minY, 1);
+  const targetSize = getTrackTargetSize(lengthKm);
+
+  return {
+    centreX: (minX + maxX) / 2,
+    centreY: (minY + maxY) / 2,
+    scale: targetSize / maxRange,
+  };
+}
+
+function buildScaledPoints(
+  rawPoints: { x: number; y: number }[],
+  lengthKm?: number | null,
+): THREE.Vector3[] {
+  const { centreX, centreY, scale } = getTrackLayout(rawPoints, lengthKm);
+
   return rawPoints.map(
     (p) =>
       new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale)
@@ -442,22 +475,8 @@ export default function CircuitHero() {
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
-    const trackPoints = buildScaledPoints(rawPoints);
-
-    // Compute scaling params (mirrors buildScaledPoints) for turn marker placement
-    let _minX = Infinity,
-      _maxX = -Infinity,
-      _minY = Infinity,
-      _maxY = -Infinity;
-    rawPoints.forEach((p) => {
-      if (p.x < _minX) _minX = p.x;
-      if (p.x > _maxX) _maxX = p.x;
-      if (p.y < _minY) _minY = p.y;
-      if (p.y > _maxY) _maxY = p.y;
-    });
-    const _scale = 25 / Math.max(_maxX - _minX, _maxY - _minY);
-    const _centreX = (_minX + _maxX) / 2;
-    const _centreY = (_minY + _maxY) / 2;
+    const layout = getTrackLayout(rawPoints, track.Meta?.lengthKm);
+    const trackPoints = buildScaledPoints(rawPoints, trackMeta?.lengthKm);
 
     const TRACK_ELEVATION = 2.5;
 
@@ -725,8 +744,8 @@ export default function CircuitHero() {
       // Turn entry: is_corner transitions from false → true
       if (curr.isCorner && (!prev || !prev.isCorner)) {
         turnNum++;
-        const sx = (curr.x - _centreX) * _scale;
-        const sz = (curr.y - _centreY) * _scale;
+        const sx = (curr.x - layout.centreX) * layout.scale;
+        const sz = (curr.y - layout.centreY) * layout.scale;
 
         // Small glowing dot at track level
         const dotGeo = new THREE.SphereGeometry(0.22, 8, 8);
