@@ -38,10 +38,13 @@ interface RaceLocation {
 }
 
 export default function RaceCalendarMap() {
+  const defaultCenter: [number, number] = [10, 20];
   const [races, setRaces] = useState<RaceLocation[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hoveredRace, setHoveredRace] = useState<RaceLocation | null>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number]>(defaultCenter);
+  const [mapZoom, setMapZoom] = useState(1);
 
   useEffect(() => {
     const fetchCalendar = async () => {
@@ -78,6 +81,14 @@ export default function RaceCalendarMap() {
         );
 
         setRaces(locations);
+        const nextRace = locations.find((race) => race.isNext);
+        if (nextRace) {
+          setMapCenter(nextRace.coordinates);
+          setMapZoom(2.2);
+        } else {
+          setMapCenter(defaultCenter);
+          setMapZoom(1);
+        }
         setLoading(false);
       } catch (err) {
         console.error("Error fetching race calendar:", err);
@@ -126,11 +137,17 @@ export default function RaceCalendarMap() {
           projection="geoMercator"
           projectionConfig={{
             scale: 140,
-            center: [10, 20]
+            center: mapCenter
           }}
           className="race-calendar-map"
         >
-          <ZoomableGroup center={[10, 20]} zoom={1}>
+          <ZoomableGroup
+            center={mapCenter}
+            zoom={mapZoom}
+            minZoom={1}
+            maxZoom={4}
+            disablePanning
+          >
             <Geographies geography={geoUrl}>
               {({ geographies }) =>
                 geographies.map((geo) => (
