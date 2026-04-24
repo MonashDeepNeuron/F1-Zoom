@@ -17,7 +17,6 @@ interface TrackMeta {
   flag: string;
   lengthKm: number;
   countryCode: string;
-  lengthKm: number;
   length: string;
   laps: number;
   corners: number;
@@ -90,20 +89,20 @@ const SESSION_SEQUENCE: { key: SessionField; label: string }[] = [
   { key: "sprint_qualifying", label: "Sprint Qualifying" },
   { key: "qualifying", label: "Qualifying" },
   { key: "sprint", label: "Sprint" },
-  { key: "race", label: "Race" },
+  { key: "race", label: "Race" }
 ];
 
 const AEST_TIME_ZONE = "Australia/Brisbane";
 const AEST_DAY_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
   day: "numeric",
-  month: "short",
+  month: "short"
 });
 const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
   hour: "numeric",
   minute: "2-digit",
-  hour12: false,
+  hour12: false
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
@@ -130,12 +129,30 @@ const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: strin
   DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
 };
 
+const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
+  Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
+  Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
+  Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
+  MexicoCity:  { primary: "#003d22", glow: "#006644", core: "#ce1126", text: "#ff3333" }, // MX – dark green track, bright red text, medium green glow
+  Montreal:    { primary: "#7a0011", glow: "#aa2244", core: "#ffffff", text: "#ff3333" }, // CA – dark red track, bright red text, medium red glow
+  Monza:       { primary: "#003d22", glow: "#007744", core: "#ff3333", text: "#ff3333" }, // IT – dark green track, bright red text, medium green glow
+  Sakhir:      { primary: "#8b0000", glow: "#aa2244", core: "#ffffff", text: "#ffffff" }, // BH – dark red track, white text, medium red glow
+  SaoPaulo:    { primary: "#004d22", glow: "#007744", core: "#ffdd00", text: "#ffdd00" }, // BR – dark green track, bright yellow text, medium green glow
+  Shanghai:    { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // CN – dark red track, bright yellow text, medium red glow
+  Silverstone: { primary: "#001a4d", glow: "#1a5599", core: "#ffffff", text: "#ff3333" }, // GB – dark blue track, bright red text, medium blue glow
+  Spa:         { primary: "#9d8a1a", glow: "#cc9944", core: "#ff3333", text: "#ff3333" }, // BE – dark yellow track, bright red text, medium yellow glow
+  Suzuka:      { primary: "#660022", glow: "#aa3333", core: "#fb0000", text: "#f37979" }, // JP – dark red track, white text, medium red glow
+  YasMarina:   { primary: "#003d22", glow: "#dd3333", core: "#ffffff", text: "#ff3333" }, // AE – dark green track, bright red text, muted red glow
+  Zandvoort:   { primary: "#001a4d", glow: "#553333", core: "#ffffff", text: "#ff3333" }, // NL – dark blue track, bright red text, muted brown/red glow
+  DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
+};
+
 // ─── Helpers ─────────────────────────────────────────────────────
 function hexToNumber(hex: string): number {
   return parseInt(hex.replace("#", ""), 16);
 }
 function parseTrackData(
-  raw: string,
+  raw: string
 ): { x: number; y: number; isCorner: boolean }[] {
   // Strip JS template-literal wrapper if present (`const trackData = \`...\`;`)
   let csv = raw;
@@ -161,29 +178,9 @@ function parseTrackData(
   return points;
 }
 
-function getTrackTargetSize(lengthKm?: number | null): number {
-  if (!lengthKm || !Number.isFinite(lengthKm)) return BASE_TRACK_TARGET_SIZE;
-
-  // Use a square-root curve so longer tracks still read larger, without
-  // letting the visual size swing too wildly across the calendar.
-  const scaledSize =
-    BASE_TRACK_TARGET_SIZE *
-    Math.sqrt(lengthKm / REFERENCE_TRACK_LENGTH_KM);
-
-  return Math.max(
-    MIN_TRACK_TARGET_SIZE,
-    Math.min(MAX_TRACK_TARGET_SIZE, scaledSize),
-  );
-}
-
-function getTrackLayout(
-  rawPoints: { x: number; y: number }[],
-  lengthKm?: number | null,
-): {
-  centreX: number;
-  centreY: number;
-  scale: number;
-} {
+function buildScaledPoints(
+  rawPoints: { x: number; y: number }[]
+): THREE.Vector3[] {
   let minX = Infinity,
     maxX = -Infinity;
   let minY = Infinity,
@@ -213,7 +210,7 @@ function buildScaledPoints(
 
   return rawPoints.map(
     (p) =>
-      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale),
+      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale)
   );
 }
 
@@ -233,9 +230,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     title: row.title,
     subtitle: row.subtitle,
     flag: countryCodeToFlag(row.flag),
-    lengthKm: row.lengthKm,
     countryCode: row.flag.toUpperCase(),
-    lengthKm: row.lengthKm,
     length: `${Number(row.lengthKm).toFixed(3)} KM`,
     laps: row.laps,
     corners: row.corners,
@@ -299,10 +294,14 @@ function withLocalTrackVariants(tracks: TrackMeta[]): TrackMeta[] {
     key: "Melbourne2",
     file: "Melbourne2",
     title: "MELBOURNE 2",
-    subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)",
+    subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)"
   };
 
-  return [melbourne, melbourne2, ...tracks.filter((track) => track.key !== "Melbourne")];
+  return [
+    melbourne,
+    melbourne2,
+    ...tracks.filter((track) => track.key !== "Melbourne")
+  ];
 }
 
 function parseSessionTime(session?: CircuitSession): Date | null {
@@ -372,7 +371,7 @@ export default function CircuitHero() {
     autoRotate: true,
     prevX: 0,
     cameraAngleTheta: Math.PI / 4,
-    cameraDistance: 30,
+    cameraDistance: 30
   });
 
   const [tracks, setTracks] = useState<TrackMeta[]>([]);
@@ -439,7 +438,7 @@ export default function CircuitHero() {
       50,
       container.clientWidth / container.clientHeight,
       0.1,
-      1000,
+      1000
     );
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -476,37 +475,33 @@ export default function CircuitHero() {
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
-<<<<<<< HEAD
-    const layout = getTrackLayout(rawPoints, trackMeta?.lengthKm);
-=======
     const layout = getTrackLayout(rawPoints, track.Meta?.lengthKm);
->>>>>>> 7e20ec1 (Additional files)
     const trackPoints = buildScaledPoints(rawPoints, trackMeta?.lengthKm);
 
     const TRACK_ELEVATION = 2.5;
 
     // Elevated curve for main track (raised above ground for 3D depth)
     const elevatedPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z),
+      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
     );
     const curve = new THREE.CatmullRomCurve3(
       elevatedPoints,
       true,
       "catmullrom",
-      0.2,
+      0.2
     );
 
     // Shadow/bottom edge sits just below the main track
     const SHADOW_Y = TRACK_ELEVATION - 1.4;
 
     const shadowPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z),
+      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z)
     );
     const shadowCurve = new THREE.CatmullRomCurve3(
       shadowPoints,
       true,
       "catmullrom",
-      0.2,
+      0.2
     );
 
     const numSamples = Math.min(trackPoints.length * 2, 1200);
@@ -544,7 +539,7 @@ export default function CircuitHero() {
     const wallGeo = new THREE.BufferGeometry();
     wallGeo.setAttribute(
       "position",
-      new THREE.Float32BufferAttribute(wallPositions, 3),
+      new THREE.Float32BufferAttribute(wallPositions, 3)
     );
     wallGeo.setAttribute("uv", new THREE.Float32BufferAttribute(wallUvs, 2));
     wallGeo.setIndex(wallIndices);
@@ -556,7 +551,7 @@ export default function CircuitHero() {
       transparent: true,
       opacity: 0.22,
       side: THREE.DoubleSide,
-      depthWrite: false,
+      depthWrite: false
     });
     scene.add(new THREE.Mesh(wallGeo, wallMat));
 
@@ -567,7 +562,7 @@ export default function CircuitHero() {
       opacity: 0.1,
       side: THREE.DoubleSide,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.AdditiveBlending
     });
     scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
 
@@ -584,8 +579,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true),
-        shadowCoreMat,
-      ),
+        shadowCoreMat
+      )
     );
 
     // Soft glow around bottom edge
@@ -600,8 +595,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true),
-        shadowMidMat,
-      ),
+        shadowMidMat
+      )
     );
 
     // Faint outer glow on bottom edge
@@ -616,8 +611,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true),
-        shadowOuterMat,
-      ),
+        shadowOuterMat
+      )
     );
 
     // ── Main track (elevated top edge) ───────────────────────────
@@ -629,8 +624,8 @@ export default function CircuitHero() {
         emissive: hexToNumber(theme.primary),
         emissiveIntensity: 0.6,
         shininess: 150,
-        specular: 0xff8844,
-      }),
+        specular: 0xff8844
+      })
     );
     scene.add(trackMesh);
 
@@ -646,8 +641,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true),
-        coreMat,
-      ),
+        coreMat
+      )
     );
 
     // Tight glow layer 1 — close halo
@@ -662,8 +657,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true),
-        glow1Mat,
-      ),
+        glow1Mat
+      )
     );
 
     // Glow layer 2 — soft spread
@@ -678,8 +673,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true),
-        glow2Mat,
-      ),
+        glow2Mat
+      )
     );
 
     // Glow layer 3 — faint outer aura
@@ -694,8 +689,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true),
-        glow3Mat,
-      ),
+        glow3Mat
+      )
     );
 
     // ── Turn number markers ─────────────────────────────────────
@@ -735,7 +730,7 @@ export default function CircuitHero() {
       const mat = new THREE.SpriteMaterial({
         map: texture,
         transparent: true,
-        depthTest: false,
+        depthTest: false
       });
       const sprite = new THREE.Sprite(mat);
       sprite.scale.set(2.0, 2.0, 1);
@@ -779,8 +774,8 @@ export default function CircuitHero() {
       new THREE.MeshBasicMaterial({
         color: 0x050000,
         transparent: true,
-        opacity: 0.12,
-      }),
+        opacity: 0.12
+      })
     );
     platform.rotation.x = -Math.PI / 2;
     platform.position.y = SHADOW_Y - 1.0;
@@ -841,7 +836,7 @@ export default function CircuitHero() {
       state.cameraDistance += e.deltaY * 0.05;
       state.cameraDistance = Math.max(
         15,
-        Math.min(MAX_ZOOM_OUT, state.cameraDistance),
+        Math.min(MAX_ZOOM_OUT, state.cameraDistance)
       );
     };
 
@@ -945,8 +940,8 @@ export default function CircuitHero() {
         const response = await fetch(
           `/circuit_3d/TrackCoordinateJS/${meta.file}.js`,
           {
-            cache: "no-store",
-          },
+            cache: "no-store"
+          }
         );
         if (!response.ok) {
           throw new Error(`Failed to load track data: ${meta.file}`);
@@ -963,7 +958,7 @@ export default function CircuitHero() {
         setLoading(false);
       }
     },
-    [teardownScene, initTrackScene],
+    [teardownScene, initTrackScene]
   );
 
   useEffect(() => {
@@ -997,8 +992,8 @@ export default function CircuitHero() {
         const rows: CircuitApiRow[] = Array.isArray(circuitsRes.data) ? circuitsRes.data : [];
         const mapped = withLocalTrackVariants(
           rows
-          .map(mapApiCircuitToTrack)
-          .sort((a, b) => (a.round ?? 999) - (b.round ?? 999)),
+            .map(mapApiCircuitToTrack)
+            .sort((a, b) => (a.round ?? 999) - (b.round ?? 999))
         );
 
         tracksRef.current = mapped;
@@ -1049,7 +1044,7 @@ export default function CircuitHero() {
         setScheduleError(
           detail
             ? `Unable to load circuits from database. ${detail}`
-            : "Unable to load circuits from database.",
+            : "Unable to load circuits from database."
         );
         setLoading(false);
       })
@@ -1076,7 +1071,7 @@ export default function CircuitHero() {
     tracks.find((track) => track.key === selectedTrack) ?? null;
   const sessionRows = getSessionRows(selectedTrackMeta);
   const nextSessionIndex = sessionRows.findIndex(
-    (session) => session.startAt.getTime() > nowMs,
+    (session) => session.startAt.getTime() > nowMs
   );
 
   const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -1117,7 +1112,7 @@ export default function CircuitHero() {
   const heroParallaxStyle: React.CSSProperties = {
     opacity: 1 - scrollProgress * 0.85,
     transform: `scale(${1 - scrollProgress * 0.08}) translateY(${scrollProgress * 30}px)`,
-    transition: "none",
+    transition: "none"
   };
 
   const overlayOpacity = scrollProgress * 0.9;
@@ -1234,7 +1229,7 @@ export default function CircuitHero() {
                   const rowClassName = [
                     "circuit-schedule-row",
                     isNext ? "is-next" : "",
-                    isPast ? "is-past" : "",
+                    isPast ? "is-past" : ""
                   ]
                     .filter(Boolean)
                     .join(" ");
