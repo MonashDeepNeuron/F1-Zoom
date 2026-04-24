@@ -88,20 +88,20 @@ const SESSION_SEQUENCE: { key: SessionField; label: string }[] = [
   { key: "sprint_qualifying", label: "Sprint Qualifying" },
   { key: "qualifying", label: "Qualifying" },
   { key: "sprint", label: "Sprint" },
-  { key: "race", label: "Race" },
+  { key: "race", label: "Race" }
 ];
 
 const AEST_TIME_ZONE = "Australia/Brisbane";
 const AEST_DAY_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
   day: "numeric",
-  month: "short",
+  month: "short"
 });
 const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
   timeZone: AEST_TIME_ZONE,
   hour: "numeric",
   minute: "2-digit",
-  hour12: false,
+  hour12: false
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
@@ -129,7 +129,7 @@ function hexToNumber(hex: string): number {
   return parseInt(hex.replace("#", ""), 16);
 }
 function parseTrackData(
-  raw: string,
+  raw: string
 ): { x: number; y: number; isCorner: boolean }[] {
   // Strip JS template-literal wrapper if present (`const trackData = \`...\`;`)
   let csv = raw;
@@ -156,7 +156,7 @@ function parseTrackData(
 }
 
 function buildScaledPoints(
-  rawPoints: { x: number; y: number }[],
+  rawPoints: { x: number; y: number }[]
 ): THREE.Vector3[] {
   let minX = Infinity,
     maxX = -Infinity;
@@ -177,7 +177,7 @@ function buildScaledPoints(
   const centreY = (minY + maxY) / 2;
   return rawPoints.map(
     (p) =>
-      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale),
+      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale)
   );
 }
 
@@ -261,10 +261,14 @@ function withLocalTrackVariants(tracks: TrackMeta[]): TrackMeta[] {
     key: "Melbourne2",
     file: "Melbourne2",
     title: "MELBOURNE 2",
-    subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)",
+    subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)"
   };
 
-  return [melbourne, melbourne2, ...tracks.filter((track) => track.key !== "Melbourne")];
+  return [
+    melbourne,
+    melbourne2,
+    ...tracks.filter((track) => track.key !== "Melbourne")
+  ];
 }
 
 function parseSessionTime(session?: CircuitSession): Date | null {
@@ -334,7 +338,7 @@ export default function CircuitHero() {
     autoRotate: true,
     prevX: 0,
     cameraAngleTheta: Math.PI / 4,
-    cameraDistance: 30,
+    cameraDistance: 30
   });
 
   const [tracks, setTracks] = useState<TrackMeta[]>([]);
@@ -401,7 +405,7 @@ export default function CircuitHero() {
       50,
       container.clientWidth / container.clientHeight,
       0.1,
-      1000,
+      1000
     );
 
     const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -459,26 +463,26 @@ export default function CircuitHero() {
 
     // Elevated curve for main track (raised above ground for 3D depth)
     const elevatedPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z),
+      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
     );
     const curve = new THREE.CatmullRomCurve3(
       elevatedPoints,
       true,
       "catmullrom",
-      0.2,
+      0.2
     );
 
     // Shadow/bottom edge sits just below the main track
     const SHADOW_Y = TRACK_ELEVATION - 1.4;
 
     const shadowPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z),
+      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z)
     );
     const shadowCurve = new THREE.CatmullRomCurve3(
       shadowPoints,
       true,
       "catmullrom",
-      0.2,
+      0.2
     );
 
     const numSamples = Math.min(trackPoints.length * 2, 1200);
@@ -516,7 +520,7 @@ export default function CircuitHero() {
     const wallGeo = new THREE.BufferGeometry();
     wallGeo.setAttribute(
       "position",
-      new THREE.Float32BufferAttribute(wallPositions, 3),
+      new THREE.Float32BufferAttribute(wallPositions, 3)
     );
     wallGeo.setAttribute("uv", new THREE.Float32BufferAttribute(wallUvs, 2));
     wallGeo.setIndex(wallIndices);
@@ -528,7 +532,7 @@ export default function CircuitHero() {
       transparent: true,
       opacity: 0.22,
       side: THREE.DoubleSide,
-      depthWrite: false,
+      depthWrite: false
     });
     scene.add(new THREE.Mesh(wallGeo, wallMat));
 
@@ -539,7 +543,7 @@ export default function CircuitHero() {
       opacity: 0.1,
       side: THREE.DoubleSide,
       depthWrite: false,
-      blending: THREE.AdditiveBlending,
+      blending: THREE.AdditiveBlending
     });
     scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
 
@@ -556,8 +560,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true),
-        shadowCoreMat,
-      ),
+        shadowCoreMat
+      )
     );
 
     // Soft glow around bottom edge
@@ -572,8 +576,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true),
-        shadowMidMat,
-      ),
+        shadowMidMat
+      )
     );
 
     // Faint outer glow on bottom edge
@@ -588,8 +592,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true),
-        shadowOuterMat,
-      ),
+        shadowOuterMat
+      )
     );
 
     // ── Main track (elevated top edge) ───────────────────────────
@@ -601,8 +605,8 @@ export default function CircuitHero() {
         emissive: hexToNumber(theme.primary),
         emissiveIntensity: 0.6,
         shininess: 150,
-        specular: 0xff8844,
-      }),
+        specular: 0xff8844
+      })
     );
     scene.add(trackMesh);
 
@@ -618,8 +622,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true),
-        coreMat,
-      ),
+        coreMat
+      )
     );
 
     // Tight glow layer 1 — close halo
@@ -634,8 +638,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true),
-        glow1Mat,
-      ),
+        glow1Mat
+      )
     );
 
     // Glow layer 2 — soft spread
@@ -650,8 +654,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true),
-        glow2Mat,
-      ),
+        glow2Mat
+      )
     );
 
     // Glow layer 3 — faint outer aura
@@ -666,8 +670,8 @@ export default function CircuitHero() {
     scene.add(
       new THREE.Mesh(
         new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true),
-        glow3Mat,
-      ),
+        glow3Mat
+      )
     );
 
     // ── Turn number markers ─────────────────────────────────────
@@ -707,7 +711,7 @@ export default function CircuitHero() {
       const mat = new THREE.SpriteMaterial({
         map: texture,
         transparent: true,
-        depthTest: false,
+        depthTest: false
       });
       const sprite = new THREE.Sprite(mat);
       sprite.scale.set(2.0, 2.0, 1);
@@ -751,8 +755,8 @@ export default function CircuitHero() {
       new THREE.MeshBasicMaterial({
         color: 0x050000,
         transparent: true,
-        opacity: 0.12,
-      }),
+        opacity: 0.12
+      })
     );
     platform.rotation.x = -Math.PI / 2;
     platform.position.y = SHADOW_Y - 1.0;
@@ -813,7 +817,7 @@ export default function CircuitHero() {
       state.cameraDistance += e.deltaY * 0.05;
       state.cameraDistance = Math.max(
         15,
-        Math.min(MAX_ZOOM_OUT, state.cameraDistance),
+        Math.min(MAX_ZOOM_OUT, state.cameraDistance)
       );
     };
 
@@ -917,8 +921,8 @@ export default function CircuitHero() {
         const response = await fetch(
           `/circuit_3d/TrackCoordinateJS/${meta.file}.js`,
           {
-            cache: "no-store",
-          },
+            cache: "no-store"
+          }
         );
         if (!response.ok) {
           throw new Error(`Failed to load track data: ${meta.file}`);
@@ -935,7 +939,7 @@ export default function CircuitHero() {
         setLoading(false);
       }
     },
-    [teardownScene, initTrackScene],
+    [teardownScene, initTrackScene]
   );
 
   useEffect(() => {
@@ -969,8 +973,8 @@ export default function CircuitHero() {
         const rows: CircuitApiRow[] = Array.isArray(circuitsRes.data) ? circuitsRes.data : [];
         const mapped = withLocalTrackVariants(
           rows
-          .map(mapApiCircuitToTrack)
-          .sort((a, b) => (a.round ?? 999) - (b.round ?? 999)),
+            .map(mapApiCircuitToTrack)
+            .sort((a, b) => (a.round ?? 999) - (b.round ?? 999))
         );
 
         tracksRef.current = mapped;
@@ -1021,7 +1025,7 @@ export default function CircuitHero() {
         setScheduleError(
           detail
             ? `Unable to load circuits from database. ${detail}`
-            : "Unable to load circuits from database.",
+            : "Unable to load circuits from database."
         );
         setLoading(false);
       })
@@ -1048,7 +1052,7 @@ export default function CircuitHero() {
     tracks.find((track) => track.key === selectedTrack) ?? null;
   const sessionRows = getSessionRows(selectedTrackMeta);
   const nextSessionIndex = sessionRows.findIndex(
-    (session) => session.startAt.getTime() > nowMs,
+    (session) => session.startAt.getTime() > nowMs
   );
 
   const handleTrackChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -1089,7 +1093,7 @@ export default function CircuitHero() {
   const heroParallaxStyle: React.CSSProperties = {
     opacity: 1 - scrollProgress * 0.85,
     transform: `scale(${1 - scrollProgress * 0.08}) translateY(${scrollProgress * 30}px)`,
-    transition: "none",
+    transition: "none"
   };
 
   const overlayOpacity = scrollProgress * 0.9;
@@ -1206,7 +1210,7 @@ export default function CircuitHero() {
                   const rowClassName = [
                     "circuit-schedule-row",
                     isNext ? "is-next" : "",
-                    isPast ? "is-past" : "",
+                    isPast ? "is-past" : ""
                   ]
                     .filter(Boolean)
                     .join(" ");
