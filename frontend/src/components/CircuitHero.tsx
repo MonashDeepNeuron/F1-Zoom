@@ -129,24 +129,6 @@ const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: strin
   DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
 };
 
-const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
-  Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
-  Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
-  Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
-  MexicoCity:  { primary: "#003d22", glow: "#006644", core: "#ce1126", text: "#ff3333" }, // MX – dark green track, bright red text, medium green glow
-  Montreal:    { primary: "#7a0011", glow: "#aa2244", core: "#ffffff", text: "#ff3333" }, // CA – dark red track, bright red text, medium red glow
-  Monza:       { primary: "#003d22", glow: "#007744", core: "#ff3333", text: "#ff3333" }, // IT – dark green track, bright red text, medium green glow
-  Sakhir:      { primary: "#8b0000", glow: "#aa2244", core: "#ffffff", text: "#ffffff" }, // BH – dark red track, white text, medium red glow
-  SaoPaulo:    { primary: "#004d22", glow: "#007744", core: "#ffdd00", text: "#ffdd00" }, // BR – dark green track, bright yellow text, medium green glow
-  Shanghai:    { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // CN – dark red track, bright yellow text, medium red glow
-  Silverstone: { primary: "#001a4d", glow: "#1a5599", core: "#ffffff", text: "#ff3333" }, // GB – dark blue track, bright red text, medium blue glow
-  Spa:         { primary: "#9d8a1a", glow: "#cc9944", core: "#ff3333", text: "#ff3333" }, // BE – dark yellow track, bright red text, medium yellow glow
-  Suzuka:      { primary: "#660022", glow: "#aa3333", core: "#fb0000", text: "#f37979" }, // JP – dark red track, white text, medium red glow
-  YasMarina:   { primary: "#003d22", glow: "#dd3333", core: "#ffffff", text: "#ff3333" }, // AE – dark green track, bright red text, muted red glow
-  Zandvoort:   { primary: "#001a4d", glow: "#553333", core: "#ffffff", text: "#ff3333" }, // NL – dark blue track, bright red text, muted brown/red glow
-  DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
-};
-
 // ─── Helpers ─────────────────────────────────────────────────────
 function hexToNumber(hex: string): number {
   return parseInt(hex.replace("#", ""), 16);
@@ -178,9 +160,16 @@ function parseTrackData(
   return points;
 }
 
-function buildScaledPoints(
-  rawPoints: { x: number; y: number }[]
-): THREE.Vector3[] {
+function getTrackTargetSize(lengthKm?: number | null): number {
+  if (!lengthKm || !Number.isFinite(lengthKm)) return BASE_TRACK_TARGET_SIZE;
+  const targetSize = BASE_TRACK_TARGET_SIZE * Math.sqrt(lengthKm / REFERENCE_TRACK_LENGTH_KM);
+  return Math.min(MAX_TRACK_TARGET_SIZE, Math.max(MIN_TRACK_TARGET_SIZE, targetSize));
+}
+
+function getTrackLayout(
+  rawPoints: { x: number; y: number }[],
+  lengthKm?: number | null,
+): { centreX: number; centreY: number; scale: number } {
   let minX = Infinity,
     maxX = -Infinity;
   let minY = Infinity,
@@ -230,6 +219,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     title: row.title,
     subtitle: row.subtitle,
     flag: countryCodeToFlag(row.flag),
+    lengthKm: row.lengthKm,
     countryCode: row.flag.toUpperCase(),
     length: `${Number(row.lengthKm).toFixed(3)} KM`,
     laps: row.laps,
@@ -424,7 +414,7 @@ export default function CircuitHero() {
     }
   }, []);
 
-  const initTrackScene = useCallback((csvData: string, fileSlug?: string) => {
+  const initTrackScene = useCallback((csvData: string, fileSlug?: string, lengthKm?: number | null) => {
     const theme = CIRCUIT_THEME[fileSlug ?? ""] ?? CIRCUIT_THEME.DEFAULT;
     const accentColor = theme.text;
     const container = containerRef.current;
@@ -475,8 +465,8 @@ export default function CircuitHero() {
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
-    const layout = getTrackLayout(rawPoints, track.Meta?.lengthKm);
-    const trackPoints = buildScaledPoints(rawPoints, trackMeta?.lengthKm);
+    const layout = getTrackLayout(rawPoints, lengthKm);
+    const trackPoints = buildScaledPoints(rawPoints, lengthKm);
 
     const TRACK_ELEVATION = 2.5;
 
@@ -948,7 +938,7 @@ export default function CircuitHero() {
         }
         const csvData = await response.text();
         if (currentLoadId !== loadIdRef.current) return;
-        initTrackScene(csvData, meta.file);
+        initTrackScene(csvData, meta.file, meta.lengthKm);
         requestAnimationFrame(() => {
           if (currentLoadId !== loadIdRef.current) return;
           setLoading(false);
@@ -1117,7 +1107,7 @@ export default function CircuitHero() {
 
   const overlayOpacity = scrollProgress * 0.9;
   const accentColor = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.text ?? CIRCUIT_THEME.DEFAULT.text;
-  const themeGlow = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.glow ?? CIRCUIT_THEME.DEFAULT.glow;
+  const themeGlow = hexToNumber(CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.glow ?? CIRCUIT_THEME.DEFAULT.glow);
   
   // Convert hex glow color to rgba for text-shadow
   const glowR = (themeGlow >> 16) & 255;
