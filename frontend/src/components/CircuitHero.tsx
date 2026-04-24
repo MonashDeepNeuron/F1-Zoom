@@ -17,6 +17,7 @@ interface TrackMeta {
   flag: string;
   lengthKm: number;
   countryCode: string;
+  lengthKm: number;
   length: string;
   laps: number;
   corners: number;
@@ -234,6 +235,7 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     flag: countryCodeToFlag(row.flag),
     lengthKm: row.lengthKm,
     countryCode: row.flag.toUpperCase(),
+    lengthKm: row.lengthKm,
     length: `${Number(row.lengthKm).toFixed(3)} KM`,
     laps: row.laps,
     corners: row.corners,
@@ -474,7 +476,11 @@ export default function CircuitHero() {
 
     // ── Build track geometry ─────────────────────────────────────
     const rawPoints = parseTrackData(csvData);
+<<<<<<< HEAD
     const layout = getTrackLayout(rawPoints, trackMeta?.lengthKm);
+=======
+    const layout = getTrackLayout(rawPoints, track.Meta?.lengthKm);
+>>>>>>> 7e20ec1 (Additional files)
     const trackPoints = buildScaledPoints(rawPoints, trackMeta?.lengthKm);
 
     const TRACK_ELEVATION = 2.5;
