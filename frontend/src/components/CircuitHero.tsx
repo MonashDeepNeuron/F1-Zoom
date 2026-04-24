@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import * as THREE from "three";
-import { getCircuitsBySeason } from "../services/api";
+import { getCircuitsBySeason, getNextRace } from "../services/api";
 import "../styles/CircuitHero.css";
 
 // ─── Track Metadata ──────────────────────────────────────────────
@@ -50,6 +50,20 @@ interface CircuitApiRow {
   weekendFormat?: "normal" | "sprint" | null;
   sessions?: CircuitSession[];
   history?: TrackHistoryEntry[];
+}
+
+interface NextRaceApiRace {
+  raceName?: string;
+  round?: string;
+  date?: string;
+  Circuit?: {
+    circuitId?: string;
+    circuitName?: string;
+    Location?: {
+      locality?: string;
+      country?: string;
+    };
+  };
 }
 
 interface SessionRow {
@@ -194,6 +208,45 @@ function mapApiCircuitToTrack(row: CircuitApiRow): TrackMeta {
     sessions: row.sessions ?? [],
     history: row.history ?? [],
   };
+}
+
+function normalizeForMatch(value?: string | null): string {
+  if (!value) return "";
+  return value.toLowerCase().replace(/[^a-z0-9]/g, "");
+}
+
+function pickInitialTrack(tracks: TrackMeta[], nextRace?: NextRaceApiRace | null): TrackMeta | null {
+  if (tracks.length === 0) return null;
+  if (!nextRace) return tracks[0];
+
+  const raceNameNorm = normalizeForMatch(nextRace.raceName);
+  const circuitNameNorm = normalizeForMatch(nextRace.Circuit?.circuitName);
+  const circuitIdNorm = normalizeForMatch(nextRace.Circuit?.circuitId);
+  const localityNorm = normalizeForMatch(nextRace.Circuit?.Location?.locality);
+
+  const byName = tracks.find((track) => {
+    const titleNorm = normalizeForMatch(track.title);
+    const gpNameNorm = normalizeForMatch(track.grandPrixName);
+    const keyNorm = normalizeForMatch(track.key);
+    const subtitleNorm = normalizeForMatch(track.subtitle);
+
+    return (
+      (raceNameNorm && (gpNameNorm === raceNameNorm || titleNorm.includes(raceNameNorm) || raceNameNorm.includes(gpNameNorm))) ||
+      (circuitNameNorm && subtitleNorm.includes(circuitNameNorm)) ||
+      (circuitIdNorm && (keyNorm === circuitIdNorm || titleNorm.includes(circuitIdNorm) || subtitleNorm.includes(circuitIdNorm))) ||
+      (localityNorm && (titleNorm.includes(localityNorm) || subtitleNorm.includes(localityNorm)))
+    );
+  });
+
+  if (byName) return byName;
+
+  const nextRound = Number(nextRace.round);
+  if (Number.isFinite(nextRound)) {
+    const byRound = tracks.find((track) => track.round === nextRound);
+    if (byRound) return byRound;
+  }
+
+  return tracks[0];
 }
 
 function withLocalTrackVariants(tracks: TrackMeta[]): TrackMeta[] {
@@ -894,10 +947,26 @@ export default function CircuitHero() {
     setScheduleLoading(true);
     setScheduleError(null);
 
-    getCircuitsBySeason(DEFAULT_SEASON)
-      .then((res) => {
+    getNextRace()
+      .catch(() => null)
+      .then((nextRaceRes) => {
+        const nextRace: NextRaceApiRace | null =
+          nextRaceRes?.data?.MRData?.RaceTable?.Races?.[0] ?? null;
+        const nextRaceSeason = nextRace?.date
+          ? new Date(nextRace.date).getUTCFullYear()
+          : NaN;
+        const seasonToLoad = Number.isFinite(nextRaceSeason)
+          ? nextRaceSeason
+          : DEFAULT_SEASON;
+
+        return getCircuitsBySeason(seasonToLoad).then((circuitsRes) => ({
+          circuitsRes,
+          nextRace,
+        }));
+      })
+      .then(({ circuitsRes, nextRace }) => {
         if (!active) return;
-        const rows: CircuitApiRow[] = Array.isArray(res.data) ? res.data : [];
+        const rows: CircuitApiRow[] = Array.isArray(circuitsRes.data) ? circuitsRes.data : [];
         const mapped = withLocalTrackVariants(
           rows
           .map(mapApiCircuitToTrack)
@@ -913,7 +982,12 @@ export default function CircuitHero() {
           return;
         }
 
-        const initialTrack = mapped[0];
+        const initialTrack = pickInitialTrack(mapped, nextRace);
+        if (!initialTrack) {
+          setScheduleError("No circuits found in database.");
+          setLoading(false);
+          return;
+        }
         setSelectedTrack(initialTrack.key);
         loadTrack(initialTrack.key, mapped);
       })
