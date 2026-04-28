@@ -111,7 +111,9 @@ const MIN_TRACK_TARGET_SIZE = 18;
 const MAX_TRACK_TARGET_SIZE = 32;
 const REFERENCE_TRACK_LENGTH_KM = 5.4;
 
-const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: string; text: string }> = {
+type CircuitTheme = { primary: string; glow: string; core: string; text: string };
+
+const CIRCUIT_THEME: Record<string, CircuitTheme> = {
   Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
   Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
   Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
@@ -133,6 +135,21 @@ const CIRCUIT_THEME: Record<string, { primary: string; glow: string; core: strin
 function hexToNumber(hex: string): number {
   return parseInt(hex.replace("#", ""), 16);
 }
+
+function hexToRgb(hex: string): { r: number; g: number; b: number } {
+  const value = hexToNumber(hex);
+  return {
+    r: (value >> 16) & 255,
+    g: (value >> 8) & 255,
+    b: value & 255
+  };
+}
+
+function themeRgba(hex: string, alpha: number): string {
+  const { r, g, b } = hexToRgb(hex);
+  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
 function parseTrackData(
   raw: string
 ): { x: number; y: number; isCorner: boolean }[] {
@@ -1106,23 +1123,31 @@ export default function CircuitHero() {
   };
 
   const overlayOpacity = scrollProgress * 0.9;
-  const accentColor = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.text ?? CIRCUIT_THEME.DEFAULT.text;
-  const themeGlow = hexToNumber(CIRCUIT_THEME[selectedTrackMeta?.file ?? ""]?.glow ?? CIRCUIT_THEME.DEFAULT.glow);
-  
-  // Convert hex glow color to rgba for text-shadow
-  const glowR = (themeGlow >> 16) & 255;
-  const glowG = (themeGlow >> 8) & 255;
-  const glowB = themeGlow & 255;
+  const selectedTheme = CIRCUIT_THEME[selectedTrackMeta?.file ?? ""] ?? CIRCUIT_THEME.DEFAULT;
+  const accentColor = selectedTheme.text;
+  const { r: glowR, g: glowG, b: glowB } = hexToRgb(selectedTheme.glow);
   
   const containerStyle: React.CSSProperties = {
     ...heroParallaxStyle,
     '--accent-color': accentColor,
+    '--theme-core-color': selectedTheme.core,
+    '--theme-primary-color': selectedTheme.primary,
+    '--theme-glow-color': selectedTheme.glow,
     '--glow-shadow-1': `rgba(${glowR}, ${glowG}, ${glowB}, 0.8)`,
     '--glow-shadow-2': `rgba(${glowR}, ${glowG}, ${glowB}, 0.5)`,
     '--glow-shadow-3': `rgba(${glowR}, ${glowG}, ${glowB}, 0.3)`,
     '--glow-shadow-bright-1': `rgba(${glowR}, ${glowG}, ${glowB}, 1)`,
     '--glow-shadow-bright-2': `rgba(${glowR}, ${glowG}, ${glowB}, 0.7)`,
     '--glow-shadow-bright-3': `rgba(${glowR}, ${glowG}, ${glowB}, 0.5)`,
+    '--theme-panel-bg': `linear-gradient(135deg, ${themeRgba(selectedTheme.primary, 0.24)}, ${themeRgba(selectedTheme.glow, 0.08)}), rgba(6, 4, 7, 0.88)`,
+    '--theme-control-bg': `linear-gradient(135deg, ${themeRgba(selectedTheme.primary, 0.28)}, ${themeRgba(selectedTheme.glow, 0.1)}), rgba(6, 4, 7, 0.88)`,
+    '--theme-border-soft': themeRgba(selectedTheme.text, 0.22),
+    '--theme-border': themeRgba(selectedTheme.text, 0.42),
+    '--theme-border-strong': themeRgba(selectedTheme.text, 0.78),
+    '--theme-row-border': themeRgba(selectedTheme.text, 0.13),
+    '--theme-row-border-strong': themeRgba(selectedTheme.text, 0.18),
+    '--theme-shadow': themeRgba(selectedTheme.glow, 0.14),
+    '--theme-shadow-strong': themeRgba(selectedTheme.glow, 0.32),
   } as React.CSSProperties;
 
   return (
@@ -1322,13 +1347,15 @@ export default function CircuitHero() {
         {trackKeys.length > 0 && (
           <div className="circuit-track-selector">
             <label>Select Circuit</label>
-            <select value={selectedTrack} onChange={handleTrackChange}>
-              {tracks.map((track) => (
-                <option key={track.key} value={track.key}>
-                  {track.title}
-                </option>
-              ))}
-            </select>
+            <div className="circuit-track-select-wrap">
+              <select value={selectedTrack} onChange={handleTrackChange}>
+                {tracks.map((track) => (
+                  <option key={track.key} value={track.key}>
+                    {track.title}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
         )}
       </div>
