@@ -160,6 +160,22 @@ function parseTrackData(
 
   const lines = csv.trim().split("\n");
   const points: { x: number; y: number; isCorner: boolean }[] = [];
+  let isCornerIdx: number | null = null;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i].trim();
+    if (!line.startsWith("#")) continue;
+    const headerLine = line.replace(/^#\s*/, "");
+    const cols = headerLine.split(",").map((c) => c.trim());
+    if (cols.length < 2) continue;
+
+    const idxApex = cols.findIndex((c) => c === "is_corner_apex");
+    const idxLegacy = cols.findIndex((c) => c === "is_corner");
+    isCornerIdx =
+      idxApex >= 0 ? idxApex : idxLegacy >= 0 ? idxLegacy : null;
+    break;
+  }
+
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
     if (line.length === 0 || line.startsWith("#")) continue;
@@ -168,8 +184,8 @@ function parseTrackData(
       const x = parseFloat(parts[0]);
       const y = parseFloat(parts[1]);
       if (!isNaN(x) && !isNaN(y)) {
-        // 5th column (index 4) is is_corner flag produced by csv_reading.py
-        const isCorner = parts.length >= 5 ? parts[4].trim() === "1" : false;
+        const idx = isCornerIdx ?? 4;
+        const isCorner = parts.length > idx ? parts[idx].trim() === "1" : false;
         points.push({ x, y, isCorner });
       }
     }
