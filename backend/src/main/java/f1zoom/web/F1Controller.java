@@ -185,33 +185,154 @@ public class F1Controller {
         }
     }
 
-    // 8. AI Prediction model for Next Race winner endpoint
+    // 8. AI Prediction model for Next Race winner endpoint (reads from Supabase)
     @GetMapping("/predictions/next-race")
     public Map<String, Object> getNextRacePrediction() {
         try {
-            // Call Python FastAPI prediction service
-            RestTemplate restTemplate = new RestTemplate();
-            String pythonServiceUrl = "http://localhost:8000/predict/next-race";
+            // Find the next upcoming race event (earliest race session in the future)
+            Map<String, String> eventParams = new LinkedHashMap<>();
+            eventParams.put("select",
+                    "id,season,grand_prix_name,race_sessions!inner(session_type,session_start_utc)");
+            eventParams.put("race_sessions.session_type", "eq.race");
+            eventParams.put("race_sessions.session_start_utc", "gte." + java.time.Instant.now().toString());
+            eventParams.put("order", "round.asc");
+            eventParams.put("limit", "1");
+            JsonNode eventsNode = supabaseGet("race_events", eventParams);
 
-            ResponseEntity<Map> response = restTemplate.getForEntity(
-                    pythonServiceUrl,
-                    Map.class);
+            Long raceEventId = null;
+            String raceName = "Next Race";
+            int season = java.time.Year.now().getValue();
 
-            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
-                return response.getBody();
-            } else {
-                throw new Exception("Prediction service returned non-2xx status");
+            if (eventsNode.isArray() && eventsNode.size() > 0) {
+                JsonNode event = eventsNode.get(0);
+                raceEventId = event.path("id").asLong();
+                raceName = textOrNull(event, "grand_prix_name");
+                season = event.path("season").asInt(season);
             }
 
+            if (raceEventId == null) {
+                // No upcoming race — try the most recent race event with predictions
+                Map<String, String> latestParams = new LinkedHashMap<>();
+                latestParams.put("select", "race_event_id");
+                latestParams.put("order", "race_event_id.desc");
+                latestParams.put("limit", "1");
+                JsonNode latestNode = supabaseGet("predictions", latestParams);
+                if (latestNode.isArray() && latestNode.size() > 0) {
+                    raceEventId = latestNode.get(0).path("race_event_id").asLong();
+                }
+            }
+
+            if (raceEventId == null) {
+                Map<String, Object> noPredictions = new LinkedHashMap<>();
+                noPredictions.put("status", "no_predictions");
+                noPredictions.put("predictedWinner", "TBD");
+                noPredictions.put("confidence", "N/A");
+                noPredictions.put("message", "No predictions available yet");
+                return noPredictions;
+            }
+
+            // Fetch predictions for this race event
+            Map<String, String> predParams = new LinkedHashMap<>();
+            predParams.put("select", "driver_code,team,predicted_position,prediction_score,grid_position");
+            predParams.put("race_event_id", "eq." + raceEventId);
+            predParams.put("order", "predicted_position.asc");
+            JsonNode predsNode = supabaseGet("predictions", predParams);
+
+            if (!predsNode.isArray() || predsNode.size() == 0) {
+                Map<String, Object> noPredictions = new LinkedHashMap<>();
+                noPredictions.put("status", "no_predictions");
+                noPredictions.put("predictedWinner", "TBD");
+                noPredictions.put("confidence", "N/A");
+                noPredictions.put("message", "No predictions available for " + raceName);
+                return noPredictions;
+            }
+
+            JsonNode winner = predsNode.get(0);
+            double winnerScore = winner.path("prediction_score").asDouble();
+            double secondScore = predsNode.size() > 1 ? predsNode.get(1).path("prediction_score").asDouble() : 0;
+            double scoreGap = winnerScore - secondScore;
+
+            String confidence;
+            if (scoreGap > 10) confidence = "95%";
+            else if (scoreGap > 7) confidence = "90%";
+            else if (scoreGap > 5) confidence = "85%";
+            else if (scoreGap > 3) confidence = "75%";
+            else confidence = "65%";
+
+            List<Map<String, Object>> top10 = new ArrayList<>();
+            int limit = Math.min(predsNode.size(), 10);
+            for (int i = 0; i < limit; i++) {
+                JsonNode p = predsNode.get(i);
+                Map<String, Object> entry = new LinkedHashMap<>();
+                entry.put("position", p.path("predicted_position").asInt());
+                entry.put("driver", textOrNull(p, "driver_code"));
+                entry.put("team", textOrNull(p, "team"));
+                entry.put("gridPosition", p.path("grid_position").isNull() ? null : p.path("grid_position").asInt());
+                entry.put("score", Math.round(p.path("prediction_score").asDouble() * 100.0) / 100.0);
+                top10.add(entry);
+            }
+
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("status", "model_ready");
+            result.put("predictedWinner", textOrNull(winner, "driver_code"));
+            result.put("winnerTeam", textOrNull(winner, "team"));
+            result.put("confidence", confidence);
+            result.put("scoreGap", Math.round(scoreGap * 100.0) / 100.0);
+            result.put("top10", top10);
+            result.put("raceName", raceName);
+            result.put("season", season);
+
+            Map<String, Object> aiInsight = getPredictionInsight(raceEventId);
+            if (aiInsight != null) {
+                result.put("aiInsight", aiInsight);
+            }
+
+            return result;
+
         } catch (Exception e) {
-            // Fallback response if Python service is unavailable
             Map<String, Object> fallback = new HashMap<>();
-            fallback.put("status", "service_unavailable");
+            fallback.put("status", "error");
             fallback.put("predictedWinner", "TBD");
             fallback.put("confidence", "N/A");
-            fallback.put("message", "Prediction service is not running. Start it with: python prediction_service.py");
+            fallback.put("message", "Failed to load predictions: " + e.getMessage());
             return fallback;
         }
+    }
+
+    private Map<String, Object> getPredictionInsight(Long raceEventId) {
+        try {
+            Map<String, String> insightParams = new LinkedHashMap<>();
+            insightParams.put(
+                    "select",
+                    "predicted_winner,model_name,summary,key_reasons,contenders,caveats,generated_at");
+            insightParams.put("race_event_id", "eq." + raceEventId);
+            insightParams.put("limit", "1");
+
+            JsonNode insightNode = supabaseGet("prediction_insights", insightParams);
+            if (!insightNode.isArray() || insightNode.size() == 0) {
+                return null;
+            }
+
+            JsonNode insight = insightNode.get(0);
+            Map<String, Object> result = new LinkedHashMap<>();
+            result.put("predictedWinner", textOrNull(insight, "predicted_winner"));
+            result.put("modelName", textOrNull(insight, "model_name"));
+            result.put("summary", textOrNull(insight, "summary"));
+            result.put("keyReasons", jsonValueOrEmptyList(insight.path("key_reasons")));
+            result.put("contenders", jsonValueOrEmptyList(insight.path("contenders")));
+            result.put("caveats", jsonValueOrEmptyList(insight.path("caveats")));
+            result.put("generatedAt", textOrNull(insight, "generated_at"));
+            return result;
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
+    private Object jsonValueOrEmptyList(JsonNode node) {
+        if (node == null || node.isMissingNode() || node.isNull()) {
+            return List.of();
+        }
+        return objectMapper.convertValue(node, Object.class);
     }
 
     private JsonNode supabaseGet(String table, Map<String, String> queryParams) throws Exception {

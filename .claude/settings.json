@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git push:*)",
+      "Bash(git rm:*)",
+      "Bash(find /Users/amarpritsingh/dev/F1-Zoom -name *schedule* -o -name *cron* -o -name *celery* -o -name *task*)",
+      "Bash(find /Users/amarpritsingh/dev/F1-Zoom -name *.yml -o -name *.yaml -o -name docker* -o -name Makefile)",
+      "Bash(grep -E \"\\\\.\\(tsx|ts|jsx|js\\)$\")"
+    ]
+  }
+}

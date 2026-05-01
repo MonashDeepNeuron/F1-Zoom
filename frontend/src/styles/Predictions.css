@@ -167,6 +167,88 @@
   margin-top: 5px;
 }
 
+/* ─── AI Insight Card ──────────────────────────────────────── */
+.ai-insight-card {
+  background: linear-gradient(135deg, #141414 0%, #090909 100%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  margin-bottom: 40px;
+  box-shadow: 0 0 24px rgba(255, 0, 0, 0.08);
+}
+
+.ai-insight-card .card-body {
+  padding: 34px;
+}
+
+.ai-insight-kicker {
+  color: #ff3b3b;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+
+.ai-insight-title {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+}
+
+.ai-insight-summary {
+  color: #d8d8d8;
+  font-size: 1rem;
+  line-height: 1.75;
+  margin-bottom: 28px;
+  max-width: 980px;
+}
+
+.ai-insight-lists {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.ai-insight-list h3 {
+  color: #ffffff;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+
+.ai-insight-list ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ai-insight-list li {
+  color: #bbbbbb;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  padding-left: 16px;
+  position: relative;
+}
+
+.ai-insight-list li::before {
+  background: #ff0000;
+  border-radius: 50%;
+  content: "";
+  height: 6px;
+  left: 0;
+  position: absolute;
+  top: 0.7em;
+  width: 6px;
+}
+
 /* ─── Grid Prediction ──────────────────────────────────────── */
 .grid-prediction {
   margin-bottom: 40px;
@@ -358,6 +440,18 @@
 
   .race-info-card .card-body {
     padding: 20px;
+  }
+
+  .ai-insight-card .card-body {
+    padding: 24px;
+  }
+
+  .ai-insight-lists {
+    grid-template-columns: 1fr;
+  }
+
+  .ai-insight-title {
+    font-size: 1.25rem;
   }
 
   .winner-name {

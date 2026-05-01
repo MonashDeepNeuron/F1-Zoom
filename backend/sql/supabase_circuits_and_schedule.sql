@@ -616,6 +616,24 @@ CREATE TABLE IF NOT EXISTS public.predictions (
   UNIQUE (race_event_id, driver_code)
 );
 
+CREATE TABLE IF NOT EXISTS public.prediction_insights (
+  id bigserial PRIMARY KEY,
+  race_event_id bigint NOT NULL REFERENCES public.race_events(id) ON DELETE CASCADE,
+  predicted_winner text NOT NULL,
+  model_name text NOT NULL,
+  input_hash text NOT NULL,
+  summary text NOT NULL,
+  key_reasons jsonb NOT NULL DEFAULT '[]'::jsonb,
+  contenders jsonb NOT NULL DEFAULT '[]'::jsonb,
+  caveats jsonb NOT NULL DEFAULT '[]'::jsonb,
+  generated_at timestamptz NOT NULL DEFAULT now(),
+  created_at timestamptz NOT NULL DEFAULT now(),
+  UNIQUE (race_event_id)
+);
+
+CREATE INDEX IF NOT EXISTS prediction_insights_input_hash_idx
+  ON public.prediction_insights (input_hash);
+
 -- ── Pipeline tables (drop + recreate to ensure correct types) ────────
 -- Laps depends on driver_race_entries, so drop in reverse dependency order.
 DROP TABLE IF EXISTS public.laps CASCADE;
