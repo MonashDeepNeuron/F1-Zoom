@@ -72,7 +72,7 @@ cover/
 *_cache/
 fastf1_http_cache/
 # Data files
-*.csv
+
 data_cache/*.ff1pkl
 *.ff1pkl
 # Env files
