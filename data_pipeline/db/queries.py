@@ -181,3 +181,19 @@ def get_recent_finish_positions(
         history[driver_id] = [finish for _, _, finish in rows]
 
     return history
+
+def get_circuit_turn_count(circuit_name: str) -> Optional[int]:
+    """Look up the number of turns for a circuit by name."""
+    try:
+        client = get_client()
+        result = (
+            client.table("circuits")
+            .select("corners")
+            .ilike("file_slug", circuit_name)
+            .limit(1)
+            .execute()
+        )
+        return result.data[0]["corners"] if result.data else None
+    except Exception as e:
+        print(f"Error fetching turn count for circuit '{circuit_name}': {e}")
+        return None
