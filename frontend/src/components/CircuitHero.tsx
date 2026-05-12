@@ -1,6 +1,8 @@
 import { useRef, useEffect, useState, useCallback } from "react";
 import * as THREE from "three";
 import { getCircuitsBySeason, getNextRace } from "../services/api";
+import { buildCircuitScene } from "../three/buildCircuitScene";
+import { CIRCUIT_THEME, hexToRgb, themeRgba } from "../three/trackScene";
 import "../styles/CircuitHero.css";
 
 // ─── Track Metadata ──────────────────────────────────────────────
@@ -106,135 +108,6 @@ const AEST_TIME_FORMATTER = new Intl.DateTimeFormat("en-AU", {
 });
 
 const DEFAULT_SEASON = new Date().getFullYear();
-const BASE_TRACK_TARGET_SIZE = 25;
-const MIN_TRACK_TARGET_SIZE = 18;
-const MAX_TRACK_TARGET_SIZE = 32;
-const REFERENCE_TRACK_LENGTH_KM = 5.4;
-
-type CircuitTheme = { primary: string; glow: string; core: string; text: string };
-
-const CIRCUIT_THEME: Record<string, CircuitTheme> = {
-  Melbourne:   { primary: "#228B22", glow: "#bbaa00", core: "#228B22", text: "#ffdd00" }, // AU – dark green track, bright gold text, muted gold glow
-  Austin:      { primary: "#001a4d", glow: "#1a5599", core: "#ff4444", text: "#ff3333" }, // US – dark blue track, bright red text, medium blue glow
-  Catalunya:   { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // ES – dark red track, bright yellow text, medium red glow
-  MexicoCity:  { primary: "#003d22", glow: "#006644", core: "#ce1126", text: "#ff3333" }, // MX – dark green track, bright red text, medium green glow
-  Montreal:    { primary: "#7a0011", glow: "#aa2244", core: "#ffffff", text: "#ff3333" }, // CA – dark red track, bright red text, medium red glow
-  Monza:       { primary: "#003d22", glow: "#007744", core: "#ff3333", text: "#ff3333" }, // IT – dark green track, bright red text, medium green glow
-  Sakhir:      { primary: "#8b0000", glow: "#aa2244", core: "#ffffff", text: "#ffffff" }, // BH – dark red track, white text, medium red glow
-  SaoPaulo:    { primary: "#004d22", glow: "#007744", core: "#ffdd00", text: "#ffdd00" }, // BR – dark green track, bright yellow text, medium green glow
-  Shanghai:    { primary: "#8b0000", glow: "#aa3333", core: "#ffdd00", text: "#ffdd00" }, // CN – dark red track, bright yellow text, medium red glow
-  Silverstone: { primary: "#001a4d", glow: "#1a5599", core: "#ffffff", text: "#ff3333" }, // GB – dark blue track, bright red text, medium blue glow
-  Spa:         { primary: "#9d8a1a", glow: "#cc9944", core: "#ff3333", text: "#ff3333" }, // BE – dark yellow track, bright red text, medium yellow glow
-  Suzuka:      { primary: "#660022", glow: "#aa3333", core: "#fb0000", text: "#f37979" }, // JP – dark red track, white text, medium red glow
-  YasMarina:   { primary: "#003d22", glow: "#dd3333", core: "#ffffff", text: "#ff3333" }, // AE – dark green track, bright red text, muted red glow
-  Zandvoort:   { primary: "#001a4d", glow: "#553333", core: "#ffffff", text: "#ff3333" }, // NL – dark blue track, bright red text, muted brown/red glow
-  DEFAULT:     { primary: "#aa1100", glow: "#dd3333", core: "#ffcc88", text: "#ff2200" }, // dark red track, bright red text, muted red glow
-};
-
-// ─── Helpers ─────────────────────────────────────────────────────
-function hexToNumber(hex: string): number {
-  return parseInt(hex.replace("#", ""), 16);
-}
-
-function hexToRgb(hex: string): { r: number; g: number; b: number } {
-  const value = hexToNumber(hex);
-  return {
-    r: (value >> 16) & 255,
-    g: (value >> 8) & 255,
-    b: value & 255
-  };
-}
-
-function themeRgba(hex: string, alpha: number): string {
-  const { r, g, b } = hexToRgb(hex);
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}
-
-function parseTrackData(
-  raw: string
-): { x: number; y: number; isCorner: boolean }[] {
-  // Strip JS template-literal wrapper if present (`const trackData = \`...\`;`)
-  let csv = raw;
-  const wrapperMatch = raw.match(/`([\s\S]*)`/);
-  if (wrapperMatch) csv = wrapperMatch[1];
-
-  const lines = csv.trim().split("\n");
-  const points: { x: number; y: number; isCorner: boolean }[] = [];
-  let isCornerIdx: number | null = null;
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (!line.startsWith("#")) continue;
-    const headerLine = line.replace(/^#\s*/, "");
-    const cols = headerLine.split(",").map((c) => c.trim());
-    if (cols.length < 2) continue;
-
-    const idxApex = cols.findIndex((c) => c === "is_corner_apex");
-    const idxLegacy = cols.findIndex((c) => c === "is_corner");
-    isCornerIdx =
-      idxApex >= 0 ? idxApex : idxLegacy >= 0 ? idxLegacy : null;
-    break;
-  }
-
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i].trim();
-    if (line.length === 0 || line.startsWith("#")) continue;
-    const parts = line.split(",");
-    if (parts.length >= 2) {
-      const x = parseFloat(parts[0]);
-      const y = parseFloat(parts[1]);
-      if (!isNaN(x) && !isNaN(y)) {
-        const idx = isCornerIdx ?? 4;
-        const isCorner = parts.length > idx ? parts[idx].trim() === "1" : false;
-        points.push({ x, y, isCorner });
-      }
-    }
-  }
-  return points;
-}
-
-function getTrackTargetSize(lengthKm?: number | null): number {
-  if (!lengthKm || !Number.isFinite(lengthKm)) return BASE_TRACK_TARGET_SIZE;
-  const targetSize = BASE_TRACK_TARGET_SIZE * Math.sqrt(lengthKm / REFERENCE_TRACK_LENGTH_KM);
-  return Math.min(MAX_TRACK_TARGET_SIZE, Math.max(MIN_TRACK_TARGET_SIZE, targetSize));
-}
-
-function getTrackLayout(
-  rawPoints: { x: number; y: number }[],
-  lengthKm?: number | null,
-): { centreX: number; centreY: number; scale: number } {
-  let minX = Infinity,
-    maxX = -Infinity;
-  let minY = Infinity,
-    maxY = -Infinity;
-  rawPoints.forEach((p) => {
-    if (p.x < minX) minX = p.x;
-    if (p.x > maxX) maxX = p.x;
-    if (p.y < minY) minY = p.y;
-    if (p.y > maxY) maxY = p.y;
-  });
-
-  const maxRange = Math.max(maxX - minX, maxY - minY, 1);
-  const targetSize = getTrackTargetSize(lengthKm);
-
-  return {
-    centreX: (minX + maxX) / 2,
-    centreY: (minY + maxY) / 2,
-    scale: targetSize / maxRange,
-  };
-}
-
-function buildScaledPoints(
-  rawPoints: { x: number; y: number }[],
-  lengthKm?: number | null,
-): THREE.Vector3[] {
-  const { centreX, centreY, scale } = getTrackLayout(rawPoints, lengthKm);
-
-  return rawPoints.map(
-    (p) =>
-      new THREE.Vector3((p.x - centreX) * scale, 0, (p.y - centreY) * scale)
-  );
-}
 
 function countryCodeToFlag(code: string): string {
   if (!/^[A-Za-z]{2}$/.test(code)) return code;
@@ -448,14 +321,8 @@ export default function CircuitHero() {
   }, []);
 
   const initTrackScene = useCallback((csvData: string, fileSlug?: string, lengthKm?: number | null) => {
-    const theme = CIRCUIT_THEME[fileSlug ?? ""] ?? CIRCUIT_THEME.DEFAULT;
-    const accentColor = theme.text;
     const container = containerRef.current;
     if (!container) return;
-
-    const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-    scene.fog = new THREE.Fog(0x000000, 30, 100);
 
     const camera = new THREE.PerspectiveCamera(
       50,
@@ -470,345 +337,15 @@ export default function CircuitHero() {
     container.appendChild(renderer.domElement);
     rendererRef.current = renderer;
 
-    // ── Lighting (subtle — most colour comes from emissive materials) ──
-    scene.add(new THREE.AmbientLight(0xffffff, 0.08));
-
-    // Overhead key light
-    const pointLight1 = new THREE.PointLight(hexToNumber(theme.primary), 1.2, 60);
-    pointLight1.position.set(0, 25, 0);
-    scene.add(pointLight1);
-
-    // Accent fills for subtle depth
-    const pointLight2 = new THREE.PointLight(hexToNumber(theme.glow), 0.6, 50);
-    pointLight2.position.set(20, 15, 20);
-    scene.add(pointLight2);
-
-    const pointLight3 = new THREE.PointLight(0xff4400, 0.4, 40);
-    pointLight3.position.set(-20, 12, -20);
-    scene.add(pointLight3);
-
-    // Gentle side lights
-    const sideLight1 = new THREE.PointLight(0xff1100, 0.5, 50);
-    sideLight1.position.set(25, 10, 0);
-    scene.add(sideLight1);
-
-    const sideLight2 = new THREE.PointLight(0xff1100, 0.5, 50);
-    sideLight2.position.set(-25, 10, 0);
-    scene.add(sideLight2);
-
-    // ── Build track geometry ─────────────────────────────────────
-    const rawPoints = parseTrackData(csvData);
-    const layout = getTrackLayout(rawPoints, lengthKm);
-    const trackPoints = buildScaledPoints(rawPoints, lengthKm);
-
-    const TRACK_ELEVATION = 2.5;
-
-    // Elevated curve for main track (raised above ground for 3D depth)
-    const elevatedPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, TRACK_ELEVATION, p.z)
-    );
-    const curve = new THREE.CatmullRomCurve3(
-      elevatedPoints,
-      true,
-      "catmullrom",
-      0.2
-    );
-
-    // Shadow/bottom edge sits just below the main track
-    const SHADOW_Y = TRACK_ELEVATION - 1.4;
-
-    const shadowPoints = trackPoints.map(
-      (p) => new THREE.Vector3(p.x, SHADOW_Y, p.z)
-    );
-    const shadowCurve = new THREE.CatmullRomCurve3(
-      shadowPoints,
-      true,
-      "catmullrom",
-      0.2
-    );
-
-    const numSamples = Math.min(trackPoints.length * 2, 1200);
-    const shadowSamples = Math.min(trackPoints.length, 600);
-
-    // ── Connecting wall (ribbon between top track and bottom edge) ──
-    const wallSegments = 500;
-    const wallPositions: number[] = [];
-    const wallUvs: number[] = [];
-    const wallIndices: number[] = [];
-
-    for (let i = 0; i <= wallSegments; i++) {
-      const t = i / wallSegments;
-      const topPt = curve.getPointAt(t);
-      const u = t;
-
-      // Top vertex (at main track level)
-      wallPositions.push(topPt.x, topPt.y, topPt.z);
-      wallUvs.push(u, 1);
-
-      // Bottom vertex (at shadow level)
-      wallPositions.push(topPt.x, SHADOW_Y, topPt.z);
-      wallUvs.push(u, 0);
-    }
-
-    for (let i = 0; i < wallSegments; i++) {
-      const tl = i * 2;
-      const bl = i * 2 + 1;
-      const tr = (i + 1) * 2;
-      const br = (i + 1) * 2 + 1;
-      wallIndices.push(tl, bl, tr);
-      wallIndices.push(tr, bl, br);
-    }
-
-    const wallGeo = new THREE.BufferGeometry();
-    wallGeo.setAttribute(
-      "position",
-      new THREE.Float32BufferAttribute(wallPositions, 3)
-    );
-    wallGeo.setAttribute("uv", new THREE.Float32BufferAttribute(wallUvs, 2));
-    wallGeo.setIndex(wallIndices);
-    wallGeo.computeVertexNormals();
-
-    // Dark semi-transparent wall
-    const wallMat = new THREE.MeshBasicMaterial({
-      color: 0x330500,
-      transparent: true,
-      opacity: 0.22,
-      side: THREE.DoubleSide,
-      depthWrite: false
+    // Build the canonical circuit scene (track + glow layers + turn markers
+    // + grid + lights + per-frame breathing) via the shared helper so the
+    // landing intro and the hero render identically.
+    const built = buildCircuitScene({
+      csvText: csvData,
+      themeKey: fileSlug ?? null,
+      lengthKm: lengthKm ?? null,
     });
-    scene.add(new THREE.Mesh(wallGeo, wallMat));
-
-    // Slightly brighter inner wall for depth
-    const wallGlowMat = new THREE.MeshBasicMaterial({
-      color: 0x441000,
-      transparent: true,
-      opacity: 0.1,
-      side: THREE.DoubleSide,
-      depthWrite: false,
-      blending: THREE.AdditiveBlending
-    });
-    scene.add(new THREE.Mesh(wallGeo, wallGlowMat));
-
-    // ── Shadow / bottom edge track ───────────────────────────────
-    // Bottom edge core — mirrors the main track shape
-    const shadowCoreMat = new THREE.MeshBasicMaterial({
-      color: hexToNumber(theme.glow),
-      transparent: true,
-      opacity: 0.4,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.12, 8, true),
-        shadowCoreMat
-      )
-    );
-
-    // Soft glow around bottom edge
-    const shadowMidMat = new THREE.MeshBasicMaterial({
-      color: 0x330500,
-      transparent: true,
-      opacity: 0.15,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.35, 8, true),
-        shadowMidMat
-      )
-    );
-
-    // Faint outer glow on bottom edge
-    const shadowOuterMat = new THREE.MeshBasicMaterial({
-      color: 0x220300,
-      transparent: true,
-      opacity: 0.06,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(shadowCurve, shadowSamples, 0.7, 6, true),
-        shadowOuterMat
-      )
-    );
-
-    // ── Main track (elevated top edge) ───────────────────────────
-    // Solid track body
-    const trackMesh = new THREE.Mesh(
-      new THREE.TubeGeometry(curve, numSamples, 0.15, 12, true),
-      new THREE.MeshPhongMaterial({
-        color: hexToNumber(theme.primary),
-        emissive: hexToNumber(theme.primary),
-        emissiveIntensity: 0.6,
-        shininess: 150,
-        specular: 0xff8844
-      })
-    );
-    scene.add(trackMesh);
-
-    // Bright inner core — thin hot centre
-    const coreMat = new THREE.MeshBasicMaterial({
-      color: theme.core,
-      transparent: true,
-      opacity: 0.85,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(curve, numSamples, 0.06, 8, true),
-        coreMat
-      )
-    );
-
-    // Tight glow layer 1 — close halo
-    const glow1Mat = new THREE.MeshBasicMaterial({
-      color: hexToNumber(theme.glow),
-      transparent: true,
-      opacity: 0.35,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(curve, numSamples, 0.28, 10, true),
-        glow1Mat
-      )
-    );
-
-    // Glow layer 2 — soft spread
-    const glow2Mat = new THREE.MeshBasicMaterial({
-      color: hexToNumber(theme.primary),
-      transparent: true,
-      opacity: 0.15,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(curve, numSamples, 0.5, 8, true),
-        glow2Mat
-      )
-    );
-
-    // Glow layer 3 — faint outer aura
-    const glow3Mat = new THREE.MeshBasicMaterial({
-      color: hexToNumber(theme.primary),
-      transparent: true,
-      opacity: 0.06,
-      blending: THREE.AdditiveBlending,
-      depthTest: false,
-      depthWrite: false,
-    });
-    scene.add(
-      new THREE.Mesh(
-        new THREE.TubeGeometry(curve, numSamples, 0.85, 8, true),
-        glow3Mat
-      )
-    );
-
-    // ── Turn number markers ─────────────────────────────────────
-    const MARKER_Y = TRACK_ELEVATION + 2.4;
-
-    function makeTurnLabel(num: number, textColor: string): THREE.Sprite {
-      const size = 128;
-      const canvas = document.createElement("canvas");
-      canvas.width = size;
-      canvas.height = size;
-      const ctx = canvas.getContext("2d")!;
-
-      // Outer glow halo
-      ctx.beginPath();
-      ctx.arc(size / 2, size / 2, 56, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(255, 34, 0, 0.12)";
-      ctx.fill();
-
-      // Solid background circle
-      ctx.beginPath();
-      ctx.arc(size / 2, size / 2, 38, 0, Math.PI * 2);
-      ctx.fillStyle = "rgba(12, 0, 0, 0.92)";
-      ctx.fill();
-      ctx.strokeStyle = textColor;
-      ctx.lineWidth = 4;
-      ctx.stroke();
-
-      // Turn number text
-      const fontSize = num >= 10 ? 34 : 42;
-      ctx.fillStyle = textColor;
-      ctx.font = `bold ${fontSize}px Arial`;
-      ctx.textAlign = "center";
-      ctx.textBaseline = "middle";
-      ctx.fillText(String(num), size / 2, size / 2 + 2);
-
-      const texture = new THREE.CanvasTexture(canvas);
-      const mat = new THREE.SpriteMaterial({
-        map: texture,
-        transparent: true,
-        depthTest: false
-      });
-      const sprite = new THREE.Sprite(mat);
-      sprite.scale.set(2.0, 2.0, 1);
-      return sprite;
-    }
-
-    let turnNum = 0;
-    for (let i = 0; i < rawPoints.length; i++) {
-      const curr = rawPoints[i];
-      const prev = i > 0 ? rawPoints[i - 1] : null;
-      // Turn entry: is_corner transitions from false → true
-      if (curr.isCorner && (!prev || !prev.isCorner)) {
-        turnNum++;
-        const sx = (curr.x - layout.centreX) * layout.scale;
-        const sz = (curr.y - layout.centreY) * layout.scale;
-
-        // Small glowing dot at track level
-        const dotGeo = new THREE.SphereGeometry(0.22, 8, 8);
-        const dotMat = new THREE.MeshBasicMaterial({
-          color: 0xffaa00,
-          transparent: true,
-          opacity: 0.9,
-          blending: THREE.AdditiveBlending,
-          depthTest: false,
-          depthWrite: false,
-        });
-        const dot = new THREE.Mesh(dotGeo, dotMat);
-        dot.position.set(sx, TRACK_ELEVATION + 0.35, sz);
-        scene.add(dot);
-
-        // Numbered label sprite floating above the track
-        const label = makeTurnLabel(turnNum, accentColor);
-        label.position.set(sx, MARKER_Y, sz);
-        scene.add(label);
-      }
-    }
-
-    // Platform & grid (below shadow level — very subtle)
-    const platform = new THREE.Mesh(
-      new THREE.CircleGeometry(30, 64),
-      new THREE.MeshBasicMaterial({
-        color: 0x050000,
-        transparent: true,
-        opacity: 0.12
-      })
-    );
-    platform.rotation.x = -Math.PI / 2;
-    platform.position.y = SHADOW_Y - 1.0;
-    scene.add(platform);
-
-    const grid = new THREE.GridHelper(60, 60, 0x220000, 0x0a0000);
-    grid.position.y = SHADOW_Y - 0.99;
-    (grid.material as THREE.Material).opacity = 0.1;
-    (grid.material as THREE.Material).transparent = true;
-    scene.add(grid);
+    const { scene, tick: tickScene } = built;
 
     // ── Camera & controls ────────────────────────────────────────
     const FIXED_PHI = Math.PI / 3; // Much lower angle for side-on view (try values: /8 = very low, /10 = low, /12 = moderate, /15 = higher)
@@ -897,30 +434,7 @@ export default function CircuitHero() {
       if (state.autoRotate) state.cameraAngleTheta += autoRotateSpeed;
       updateCamera();
 
-      const t = Date.now() * 0.001;
-
-      // Subtle light pulsing
-      pointLight1.intensity = 1.2 + Math.sin(t * 1.8) * 0.15;
-      pointLight2.intensity = 0.6 + Math.sin(t * 2.3) * 0.08;
-      pointLight3.intensity = 0.4 + Math.sin(t * 1.6) * 0.06;
-      sideLight1.intensity = 0.5 + Math.sin(t * 2.7) * 0.08;
-      sideLight2.intensity = 0.5 + Math.cos(t * 2.7) * 0.08;
-
-      // Pulsing track core
-      coreMat.opacity = 0.8 + Math.sin(t * 3) * 0.1;
-
-      // Animated glow layers
-      glow1Mat.opacity = 0.35 + Math.sin(t * 2.5) * 0.06;
-      glow2Mat.opacity = 0.15 + Math.sin(t * 2.0) * 0.04;
-      glow3Mat.opacity = 0.06 + Math.sin(t * 1.5) * 0.02;
-
-      // Animate shadow reflection layers
-      shadowCoreMat.opacity = 0.35 + Math.sin(t * 1.8) * 0.05;
-      shadowMidMat.opacity = 0.18 + Math.sin(t * 1.5) * 0.03;
-      shadowOuterMat.opacity = 0.08 + Math.sin(t * 1.2) * 0.02;
-
-      // Breathing effect on main track
-      trackMesh.material.emissiveIntensity = 1.8 + Math.sin(t * 2.5) * 0.2;
+      tickScene(Date.now() * 0.001);
 
       renderer.render(scene, camera);
     }
@@ -945,6 +459,7 @@ export default function CircuitHero() {
       renderer.domElement.removeEventListener("touchstart", onTouchStart);
       renderer.domElement.removeEventListener("touchmove", onTouchMove);
       renderer.domElement.removeEventListener("touchend", onTouchEnd);
+      built.dispose();
     };
   }, []);
 

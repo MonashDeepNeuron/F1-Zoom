@@ -1,0 +1,229 @@
+/* ─── Overlay shell ─────────────────────────────────────────────── */
+.landing-intro-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #000;
+  overflow: hidden;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  color: #f5f5f5;
+  opacity: 0;
+  transition: opacity 320ms ease-out;
+  pointer-events: auto;
+}
+
+.landing-intro-overlay.is-visible {
+  opacity: 1;
+}
+
+.landing-intro-overlay.is-hidden {
+  opacity: 0;
+}
+
+/* The Three.js canvas is appended into this container and stretched. */
+.landing-intro-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 1;
+  transition: opacity var(--landing-intro-video-fade, 700ms) ease-in-out;
+}
+
+.landing-intro-canvas > canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ─── Motion blur layer ─────────────────────────────────────────── */
+.landing-intro-motion-blur {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  --landing-intro-blur: 0px;
+  --landing-intro-blur-opacity: 0;
+  backdrop-filter: blur(var(--landing-intro-blur));
+  -webkit-backdrop-filter: blur(var(--landing-intro-blur));
+  opacity: var(--landing-intro-blur-opacity);
+  mix-blend-mode: screen;
+  transition: none;
+}
+
+/* ─── End-video cross-fade ──────────────────────────────────────── */
+.landing-intro-video-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--landing-intro-video-fade, 700ms) ease-in-out;
+}
+
+.landing-intro-video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #000;
+}
+
+.landing-intro-overlay.phase-video .landing-intro-video-stage {
+  opacity: 1;
+}
+
+.landing-intro-overlay.phase-video .landing-intro-canvas {
+  opacity: 0;
+}
+
+.landing-intro-overlay.phase-video .landing-intro-motion-blur {
+  opacity: 0;
+  transition: opacity var(--landing-intro-video-fade, 700ms) ease-in-out;
+}
+
+/* ─── End-game cross-fade ───────────────────────────────────────── */
+.landing-intro-game-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: #000;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--landing-intro-video-fade, 700ms) ease-in-out;
+}
+
+.landing-intro-overlay.phase-game .landing-intro-game-stage {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.landing-intro-overlay.phase-game .landing-intro-canvas {
+  opacity: 0;
+}
+
+.landing-intro-overlay.phase-game .landing-intro-motion-blur {
+  opacity: 0;
+  transition: opacity var(--landing-intro-video-fade, 700ms) ease-in-out;
+}
+
+.landing-intro-overlay.phase-game .landing-intro-skip,
+.landing-intro-overlay.phase-game .landing-intro-circuit-label {
+  display: none;
+}
+
+/* ─── Skip button ───────────────────────────────────────────────── */
+.landing-intro-skip {
+  position: absolute;
+  top: 24px;
+  right: 28px;
+  z-index: 2;
+  padding: 10px 18px;
+  background: rgba(10, 0, 0, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 4px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    background 180ms ease-out,
+    border-color 180ms ease-out,
+    transform 120ms ease-out;
+}
+
+.landing-intro-skip:hover,
+.landing-intro-skip:focus-visible {
+  background: rgba(60, 0, 0, 0.7);
+  border-color: #ffffff;
+  outline: none;
+  transform: translateX(-2px);
+}
+
+.landing-intro-skip span {
+  margin-left: 6px;
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* ─── Circuit name watermark ────────────────────────────────────── */
+.landing-intro-circuit-label {
+  position: absolute;
+  left: 28px;
+  bottom: 24px;
+  z-index: 2;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  text-shadow: 0 0 12px rgba(0, 0, 0, 0.8);
+}
+
+/* ─── Status / error message ────────────────────────────────────── */
+.landing-intro-status {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  padding: 14px 22px;
+  font-size: 0.9rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.85);
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 4px;
+  pointer-events: none;
+}
+
+.landing-intro-status-error {
+  color: #ff8a7a;
+  border-color: rgba(255, 80, 60, 0.45);
+}
+
+/* ─── Audio prompt (autoplay blocked) ───────────────────────────── */
+.landing-intro-audio-prompt {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  padding: 10px 22px;
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 180ms ease-out;
+}
+
+.landing-intro-audio-prompt:hover,
+.landing-intro-audio-prompt:focus-visible {
+  background: rgba(80, 0, 0, 0.7);
+  outline: none;
+}
+
+/* ─── Reduced motion ────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .landing-intro-overlay {
+    transition: none;
+  }
+  .landing-intro-motion-blur {
+    display: none;
+  }
+}

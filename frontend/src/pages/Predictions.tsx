@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Container, Row, Col, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { getFullPrediction } from "../services/api";
+import TopNav from "../components/TopNav";
 import "../styles/Predictions.css";
 
 interface Driver {
@@ -68,6 +69,7 @@ function Predictions() {
 
   return (
     <div className="predictions-page">
+      <TopNav variant="solid" />
       {/* Header */}
       <header className="predictions-header">
         <Container>

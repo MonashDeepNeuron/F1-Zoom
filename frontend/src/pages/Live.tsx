@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import LiveTrackMap from "../components/live/LiveTrackMap";
 import LiveTimingTable from "../components/live/LiveTimingTable";
 import NextRaceInfo from "../components/NextRaceInfo";
+import TopNav from "../components/TopNav";
 import { useSocket } from "../hooks/useSocket";
 import { useLiveTimingStore } from "../stores/liveTimingStore";
 import "../styles/Live.css";
@@ -65,6 +66,7 @@ export default function Live() {
 
   return (
     <div className="live-page">
+      <TopNav variant="solid" />
       <header className="live-header">
         <div className="live-header-left">
           <Link to="/" className="live-back-link">
