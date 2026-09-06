@@ -1,0 +1,23 @@
+predicted_position,driver,team,grid_pos,prediction_score,season,race_name
+1,RUS,Mercedes,1.0,-4.715743346208248,2026,Barcelona-Catalunya
+2,HAM,Ferrari,2.0,-11.275924692823448,2026,Barcelona-Catalunya
+3,LEC,Ferrari,10.0,-12.109845762846675,2026,Barcelona-Catalunya
+4,ANT,Mercedes,3.0,-12.201338661032157,2026,Barcelona-Catalunya
+5,NOR,McLaren,4.0,-13.761376548995928,2026,Barcelona-Catalunya
+6,HAD,Red Bull Racing,6.0,-13.827081061316038,2026,Barcelona-Catalunya
+7,VER,Red Bull Racing,5.0,-13.832922060056028,2026,Barcelona-Catalunya
+8,PIA,McLaren,7.0,-13.855283633125866,2026,Barcelona-Catalunya
+9,LAW,Racing Bulls,8.0,-14.890290674297333,2026,Barcelona-Catalunya
+10,HUL,Audi,9.0,-14.932142210376663,2026,Barcelona-Catalunya
+11,GAS,Alpine,14.0,-15.206344784747142,2026,Barcelona-Catalunya
+12,COL,Alpine,13.0,-15.458617653142248,2026,Barcelona-Catalunya
+13,BEA,Haas,15.0,-15.468957201932785,2026,Barcelona-Catalunya
+14,BOR,Audi,12.0,-15.488631501293264,2026,Barcelona-Catalunya
+15,SAI,Williams,16.0,-15.538847708554421,2026,Barcelona-Catalunya
+16,LIN,Racing Bulls,11.0,-15.854887664879138,2026,Barcelona-Catalunya
+17,PER,Cadillac,19.0,-16.78043510532197,2026,Barcelona-Catalunya
+18,STR,Aston Martin,21.0,-16.8881938468769,2026,Barcelona-Catalunya
+19,BOT,Cadillac,20.0,-17.0415520842535,2026,Barcelona-Catalunya
+20,OCO,Haas,17.0,-17.093836961448083,2026,Barcelona-Catalunya
+21,ALB,Williams,18.0,-17.220358104421493,2026,Barcelona-Catalunya
+22,ALO,Aston Martin,22.0,-17.29573287737846,2026,Barcelona-Catalunya

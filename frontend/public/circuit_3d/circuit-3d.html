@@ -1,0 +1,1026 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>F1 Circuit - 3D Track Visualization</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Formula1", "Arial Black", Arial, sans-serif;
+        background: #000000;
+        color: #ffffff;
+        overflow: hidden;
+      }
+
+      #container {
+        width: 100%;
+        height: 100vh;
+        position: relative;
+        background: radial-gradient(
+          ellipse at center,
+          #1a0000 0%,
+          #000000 100%
+        );
+      }
+
+      #canvas-container {
+        width: 100%;
+        height: 100%;
+      }
+
+      .info-panel {
+        position: absolute;
+        top: 40px;
+        left: 40px;
+        z-index: 10;
+        color: white;
+      }
+
+      .info-panel h1 {
+        font-size: 56px;
+        color: #ffff00;
+        margin-bottom: 5px;
+        letter-spacing: 3px;
+        font-weight: 900;
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(255, 255, 0, 0.8);
+      }
+
+      .info-panel .subtitle {
+        font-size: 18px;
+        color: #ffffff;
+        margin-bottom: 20px;
+        letter-spacing: 2px;
+        opacity: 0.9;
+      }
+
+      .info-panel .stats {
+        display: flex;
+        gap: 40px;
+        margin-top: 20px;
+      }
+
+      .stat-item {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .stat-label {
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 5px;
+      }
+
+      .stat-value {
+        font-size: 28px;
+        color: #ffff00;
+        font-weight: 900;
+        text-shadow: 0 0 10px rgba(255, 255, 0, 0.6);
+      }
+
+      .controls-hint {
+        position: absolute;
+        bottom: 40px;
+        right: 40px;
+        color: #666;
+        font-size: 13px;
+        text-align: right;
+        letter-spacing: 1px;
+      }
+
+      .controls-hint span {
+        display: block;
+        margin: 5px 0;
+      }
+
+      .loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #ff0000;
+        font-size: 28px;
+        font-weight: bold;
+        text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+      }
+
+      .country-flag {
+        position: absolute;
+        top: 40px;
+        right: 40px;
+        font-size: 48px;
+        opacity: 0.8;
+      }
+
+      /* Track selector styles */
+      .track-selector {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .track-selector label {
+        font-size: 11px;
+        color: #888;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+      }
+
+      .track-selector select {
+        background: rgba(20, 0, 0, 0.85);
+        color: #ff0000;
+        border: 1px solid rgba(255, 0, 0, 0.4);
+        padding: 10px 16px;
+        font-size: 16px;
+        font-family: "Formula1", "Arial Black", Arial, sans-serif;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        cursor: pointer;
+        border-radius: 4px;
+        outline: none;
+        min-width: 260px;
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M0 0l6 8 6-8z' fill='%23ff0000'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 14px center;
+        background-size: 12px;
+        transition:
+          border-color 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .track-selector select:hover {
+        border-color: rgba(255, 0, 0, 0.8);
+        box-shadow: 0 0 15px rgba(255, 0, 0, 0.3);
+      }
+
+      .track-selector select:focus {
+        border-color: #ff0000;
+        box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+      }
+
+      .track-selector select option {
+        background: #0a0000;
+        color: #ff0000;
+        padding: 8px;
+      }
+
+      /* Circuit nav arrows */
+      .circuit-nav-arrow {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 25;
+        background: rgba(10, 0, 0, 0.6);
+        border: 1px solid rgba(255, 0, 0, 0.3);
+        color: #ff0000;
+        width: 52px;
+        height: 52px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        backdrop-filter: blur(4px);
+      }
+
+      .circuit-nav-arrow:hover {
+        background: rgba(255, 0, 0, 0.15);
+        border-color: #ff0000;
+        box-shadow:
+          0 0 20px rgba(255, 0, 0, 0.4),
+          0 0 40px rgba(255, 0, 0, 0.15);
+        color: #ff3333;
+        transform: translateY(-50%) scale(1.1);
+      }
+
+      .circuit-nav-arrow:active {
+        transform: translateY(-50%) scale(0.95);
+      }
+
+      .circuit-nav-prev {
+        left: 24px;
+      }
+
+      .circuit-nav-next {
+        right: 24px;
+      }
+
+      .circuit-nav-arrow svg {
+        width: 32px;
+        height: 32px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="container">
+      <div class="loading" id="loading">LOADING CIRCUIT...</div>
+
+      <div class="info-panel" style="display: none" id="info-panel">
+        <h1 id="track-title">MELBOURNE</h1>
+        <div class="subtitle" id="track-subtitle">ALBERT PARK CIRCUIT</div>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-label">Length</span>
+            <span class="stat-value" id="stat-length">5.278 KM</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Laps</span>
+            <span class="stat-value" id="stat-laps">58</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Corners</span>
+            <span class="stat-value" id="stat-corners">14</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Distance</span>
+            <span class="stat-value" id="stat-distance">306.124 KM</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="country-flag" id="country-flag"></div>
+
+      <div class="controls-hint">
+        <span>CLICK + DRAG TO ROTATE</span>
+        <span>SCROLL TO ZOOM</span>
+      </div>
+
+      <button
+        class="circuit-nav-arrow circuit-nav-prev"
+        id="nav-prev"
+        aria-label="Previous circuit"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <button
+        class="circuit-nav-arrow circuit-nav-next"
+        id="nav-next"
+        aria-label="Next circuit"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <polyline points="9 6 15 12 9 18" />
+        </svg>
+      </button>
+
+      <div class="track-selector">
+        <label>Select Circuit</label>
+        <select id="track-select"></select>
+      </div>
+
+      <div id="canvas-container"></div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script>
+      // ─── Track Metadata ──────────────────────────────────────────────
+      const TRACKS = {
+        Melbourne: {
+          file: "Melbourne",
+          title: "MELBOURNE (ORIGINAL)",
+          subtitle: "ALBERT PARK CIRCUIT",
+          flag: "\u{1F1E6}\u{1F1FA}",
+          length: "5.278 KM",
+          laps: 58,
+          corners: 16,
+          distance: "306.124 KM",
+          trackColor: 0x00aa00,
+          labelColor: 0xffdd00
+        },
+        Melbourne2: {
+          file: "Melbourne2",
+          title: "MELBOURNE 2",
+          subtitle: "ALBERT PARK CIRCUIT (FASTF1 V2)",
+          flag: "\u{1F1E6}\u{1F1FA}",
+          length: "5.278 KM",
+          laps: 58,
+          corners: 16,
+          distance: "306.124 KM",
+          trackColor: 0x00cc66,
+          labelColor: 0x9dff00
+        },
+        Austin: {
+          file: "Austin",
+          title: "AUSTIN",
+          subtitle: "CIRCUIT OF THE AMERICAS",
+          flag: "\u{1F1FA}\u{1F1F8}",
+          length: "5.513 KM",
+          laps: 56,
+          corners: 20,
+          distance: "308.405 KM",
+          trackColor: 0xdd0000,
+          labelColor: 0xffffff
+        },
+        Catalunya: {
+          file: "Catalunya",
+          title: "BARCELONA",
+          subtitle: "CIRCUIT DE BARCELONA-CATALUNYA",
+          flag: "\u{1F1EA}\u{1F1F8}",
+          length: "4.657 KM",
+          laps: 66,
+          corners: 16,
+          distance: "307.236 KM",
+          trackColor: 0xc80000,
+          labelColor: 0x004d98
+        },
+        MexicoCity: {
+          file: "MexicoCity",
+          title: "MEXICO CITY",
+          subtitle: "AUT\u00d3DROMO HERMANOS RODR\u00cdGUEZ",
+          flag: "\u{1F1F2}\u{1F1FD}",
+          length: "4.304 KM",
+          laps: 71,
+          corners: 17,
+          distance: "305.354 KM",
+          trackColor: 0x00aa00,
+          labelColor: 0xeac102
+        },
+        Montreal: {
+          file: "Montreal",
+          title: "MONTREAL",
+          subtitle: "CIRCUIT GILLES-VILLENEUVE",
+          flag: "\u{1F1E8}\u{1F1E6}",
+          length: "4.361 KM",
+          laps: 70,
+          corners: 14,
+          distance: "305.270 KM",
+          trackColor: 0xffffff,
+          labelColor: 0xd80621
+        },
+        Monza: {
+          file: "Monza",
+          title: "MONZA",
+          subtitle: "AUTODROMO NAZIONALE MONZA",
+          flag: "\u{1F1EE}\u{1F1F9}",
+          length: "5.793 KM",
+          laps: 53,
+          corners: 11,
+          distance: "306.720 KM",
+          trackColor: 0x800009,
+          labelColor: 0xf94f5b
+        },
+        Sakhir: {
+          file: "Sakhir",
+          title: "SAKHIR",
+          subtitle: "BAHRAIN INTERNATIONAL CIRCUIT",
+          flag: "\u{1F1E7}\u{1F1ED}",
+          length: "5.412 KM",
+          laps: 57,
+          corners: 15,
+          distance: "308.238 KM",
+          trackColor: 0xffffff,
+          labelColor: 0xda680f
+        },
+        SaoPaulo: {
+          file: "SaoPaulo",
+          title: "S\u00c3O PAULO",
+          subtitle: "AUT\u00d3DROMO JOS\u00c9 CARLOS PACE",
+          flag: "\u{1F1E7}\u{1F1F7}",
+          length: "4.309 KM",
+          laps: 71,
+          corners: 15,
+          distance: "305.879 KM",
+          trackColor: 0xfedd00,
+          labelColor: 0x009739
+        },
+        Shanghai: {
+          file: "Shanghai",
+          title: "SHANGHAI",
+          subtitle: "SHANGHAI INTERNATIONAL CIRCUIT",
+          flag: "\u{1F1E8}\u{1F1F3}",
+          length: "5.451 KM",
+          laps: 56,
+          corners: 16,
+          distance: "305.066 KM",
+          trackColor: 0xffde00,
+          labelColor: 0xee1c25
+        },
+        Silverstone: {
+          file: "Silverstone",
+          title: "SILVERSTONE",
+          subtitle: "SILVERSTONE CIRCUIT",
+          flag: "\u{1F1EC}\u{1F1E7}",
+          length: "5.891 KM",
+          laps: 52,
+          corners: 18,
+          distance: "306.198 KM",
+          trackColor: 0x012169,
+          labelColor: 0xffffff
+        },
+        Spa: {
+          file: "Spa",
+          title: "SPA",
+          subtitle: "CIRCUIT DE SPA-FRANCORCHAMPS",
+          flag: "\u{1F1E7}\u{1F1EA}",
+          length: "7.004 KM",
+          laps: 44,
+          corners: 19,
+          distance: "308.052 KM",
+          trackColor: 0xff8800,
+          labelColor: 0xffffff
+        },
+        Suzuka: {
+          file: "Suzuka",
+          title: "SUZUKA",
+          subtitle: "SUZUKA INTERNATIONAL RACING COURSE",
+          flag: "\u{1F1EF}\u{1F1F5}",
+          length: "5.807 KM",
+          laps: 53,
+          corners: 18,
+          distance: "307.471 KM",
+          trackColor: 0xdd0000,
+          labelColor: 0xffffff
+        },
+        YasMarina: {
+          file: "YasMarina",
+          title: "YAS MARINA",
+          subtitle: "YAS MARINA CIRCUIT",
+          flag: "\u{1F1E6}\u{1F1EA}",
+          length: "5.281 KM",
+          laps: 58,
+          corners: 16,
+          distance: "306.183 KM",
+          trackColor: 0x990000,
+          labelColor: 0xffff00
+        },
+        Zandvoort: {
+          file: "Zandvoort",
+          title: "ZANDVOORT",
+          subtitle: "CIRCUIT ZANDVOORT",
+          flag: "\u{1F1F3}\u{1F1F1}",
+          length: "4.259 KM",
+          laps: 72,
+          corners: 14,
+          distance: "306.587 KM",
+          trackColor: 0xff6600,
+          labelColor: 0xffffff
+        }
+      };
+
+      // ─── State ───────────────────────────────────────────────────────
+      let currentRenderer = null;
+      let currentAnimationId = null;
+
+      // ─── Populate Track Selector ─────────────────────────────────────
+      const selectEl = document.getElementById("track-select");
+      Object.keys(TRACKS).forEach((key) => {
+        const opt = document.createElement("option");
+        opt.value = key;
+        opt.textContent = TRACKS[key].title;
+        selectEl.appendChild(opt);
+      });
+
+      selectEl.addEventListener("change", () => {
+        loadTrack(selectEl.value);
+      });
+
+      // ─── Nav Arrow Handlers ──────────────────────────────────────────
+      const trackKeysArr = Object.keys(TRACKS);
+
+      document.getElementById("nav-prev").addEventListener("click", () => {
+        const idx = trackKeysArr.indexOf(selectEl.value);
+        const prevIdx = (idx - 1 + trackKeysArr.length) % trackKeysArr.length;
+        const key = trackKeysArr[prevIdx];
+        selectEl.value = key;
+        loadTrack(key);
+      });
+
+      document.getElementById("nav-next").addEventListener("click", () => {
+        const idx = trackKeysArr.indexOf(selectEl.value);
+        const nextIdx = (idx + 1) % trackKeysArr.length;
+        const key = trackKeysArr[nextIdx];
+        selectEl.value = key;
+        loadTrack(key);
+      });
+
+      // ─── Update Info Panel ───────────────────────────────────────────
+      function updateInfoPanel(trackKey) {
+        const meta = TRACKS[trackKey];
+        if (!meta) return;
+        document.getElementById("track-title").textContent = meta.title;
+        document.getElementById("track-subtitle").textContent = meta.subtitle;
+        document.getElementById("stat-length").textContent = meta.length;
+        document.getElementById("stat-laps").textContent = meta.laps;
+        document.getElementById("stat-corners").textContent = meta.corners;
+        document.getElementById("stat-distance").textContent = meta.distance;
+        document.getElementById("country-flag").textContent = meta.flag;
+
+        // Convert label color from hex number to CSS hex string
+        const labelHex = "#" + meta.labelColor.toString(16).padStart(6, "0");
+
+        // Extract RGB values for text-shadow
+        const labelColor = new THREE.Color(meta.labelColor);
+        const r = Math.round(labelColor.r * 255);
+        const g = Math.round(labelColor.g * 255);
+        const b = Math.round(labelColor.b * 255);
+
+        // Update title color
+        document.getElementById("track-title").style.color = labelHex;
+        document.getElementById("track-title").style.textShadow =
+          `0 0 20px rgba(${r}, ${g}, ${b}, 0.8)`;
+
+        // Update all stat values color
+        const statElements = document.querySelectorAll(".stat-value");
+        statElements.forEach((el) => {
+          el.style.color = labelHex;
+          el.style.textShadow = `0 0 10px rgba(${r}, ${g}, ${b}, 0.6)`;
+        });
+      }
+
+      // ─── Dynamic Track Loader (JSONP-style callback) ─────────────────
+      // Each JS file calls window.__onTrackData(csvString) when it runs.
+      // This avoids global-variable clashes AND works with file:// protocol.
+      function loadTrack(trackKey) {
+        const meta = TRACKS[trackKey];
+        if (!meta) return;
+
+        // Show loading
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("loading").textContent = "LOADING CIRCUIT...";
+        document.getElementById("info-panel").style.display = "none";
+
+        // Tear down previous scene
+        teardownScene();
+
+        // Remove any previously injected track script
+        const oldScript = document.getElementById("track-data-script");
+        if (oldScript) oldScript.remove();
+
+        // Register a one-shot callback that the JS file will invoke
+        window.__onTrackData = function (csvData) {
+          console.log(
+            "[F1] Received track data for",
+            trackKey,
+            "— points:",
+            csvData.trim().split("\\n").length
+          );
+          updateInfoPanel(trackKey);
+          initTrackScene(csvData, meta);
+        };
+
+        // Inject the <script> tag — works with both http:// and file://
+        const script = document.createElement("script");
+        script.id = "track-data-script";
+        script.src = "./TrackCoordinateJS/" + meta.file + ".js";
+        script.onerror = function () {
+          console.error("[F1] Failed to load track file:", meta.file);
+          document.getElementById("loading").textContent =
+            "FAILED TO LOAD CIRCUIT";
+        };
+        document.body.appendChild(script);
+      }
+
+      // ─── Teardown Previous Scene ─────────────────────────────────────
+      function teardownScene() {
+        if (currentAnimationId) {
+          cancelAnimationFrame(currentAnimationId);
+          currentAnimationId = null;
+        }
+        const container = document.getElementById("canvas-container");
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
+        if (currentRenderer) {
+          currentRenderer.dispose();
+          currentRenderer = null;
+        }
+      }
+
+      // ─── Parse CSV Track Data ────────────────────────────────────────
+      function parseTrackData(csv) {
+        const lines = csv.trim().split("\n");
+        const points = [];
+
+        for (let i = 1; i < lines.length; i++) {
+          // Skip header
+          const line = lines[i].trim();
+          if (line.length === 0) continue;
+
+          const parts = line.split(",");
+          if (parts.length >= 2) {
+            const x = parseFloat(parts[0]);
+            const y = parseFloat(parts[1]);
+            if (!isNaN(x) && !isNaN(y)) {
+              points.push({ x, y });
+            }
+          }
+        }
+
+        return points;
+      }
+
+      // ─── Auto-scale & Centre ─────────────────────────────────────────
+      function buildScaledPoints(rawPoints) {
+        // Compute bounding box
+        let minX = Infinity,
+          maxX = -Infinity;
+        let minY = Infinity,
+          maxY = -Infinity;
+        rawPoints.forEach((p) => {
+          if (p.x < minX) minX = p.x;
+          if (p.x > maxX) maxX = p.x;
+          if (p.y < minY) minY = p.y;
+          if (p.y > maxY) maxY = p.y;
+        });
+
+        const rangeX = maxX - minX;
+        const rangeY = maxY - minY;
+        const maxRange = Math.max(rangeX, rangeY);
+
+        // Scale so the longest dimension fits within ~25 scene units
+        const targetSize = 25;
+        const scale = targetSize / maxRange;
+
+        const centreX = (minX + maxX) / 2;
+        const centreY = (minY + maxY) / 2;
+
+        return rawPoints.map(
+          (p) =>
+            new THREE.Vector3(
+              (p.x - centreX) * scale,
+              0,
+              (p.y - centreY) * scale
+            )
+        );
+      }
+
+      // ─── Init 3D Scene ───────────────────────────────────────────────
+      function initTrackScene(csvData, trackMeta) {
+        // Use track color or default to red
+        const trackColor = trackMeta?.trackColor || 0xff0000;
+        const labelColor = trackMeta?.labelColor || 0xffff00;
+        const dimTrackColor = trackColor * 0.5; // Darken for secondary layers
+
+        const scene = new THREE.Scene();
+        scene.background = new THREE.Color(0x000000);
+        scene.fog = new THREE.Fog(0x000000, 30, 100);
+
+        const container = document.getElementById("canvas-container");
+        const camera = new THREE.PerspectiveCamera(
+          50,
+          container.clientWidth / container.clientHeight,
+          0.1,
+          1000
+        );
+
+        const renderer = new THREE.WebGLRenderer({
+          antialias: true,
+          alpha: true
+        });
+        renderer.setSize(container.clientWidth, container.clientHeight);
+        renderer.setPixelRatio(window.devicePixelRatio);
+        container.appendChild(renderer.domElement);
+        currentRenderer = renderer;
+
+        // ── Lighting ─────────────────────────────────────────────────
+        scene.add(new THREE.AmbientLight(0xffffff, 0.2));
+
+        const pointLight1 = new THREE.PointLight(trackColor, 2, 80);
+        pointLight1.position.set(0, 25, 0);
+        scene.add(pointLight1);
+
+        const pointLight2 = new THREE.PointLight(trackColor, 1.2, 60);
+        pointLight2.position.set(20, 15, 20);
+        scene.add(pointLight2);
+
+        const pointLight3 = new THREE.PointLight(0xffffff, 0.8, 50);
+        pointLight3.position.set(-20, 12, -20);
+        scene.add(pointLight3);
+
+        // ── Build track geometry ─────────────────────────────────────
+        const rawPoints = parseTrackData(csvData);
+        const trackPoints = buildScaledPoints(rawPoints);
+
+        const curve = new THREE.CatmullRomCurve3(
+          trackPoints,
+          true,
+          "catmullrom",
+          0.2
+        );
+        const numSamples = Math.min(trackPoints.length * 2, 1200);
+
+        // Main track – uses country color
+        const trackMesh = new THREE.Mesh(
+          new THREE.TubeGeometry(curve, numSamples, 0.18, 16, true),
+          new THREE.MeshPhongMaterial({
+            color: trackColor,
+            emissive: trackColor,
+            emissiveIntensity: 1.5,
+            shininess: 150,
+            specular: labelColor
+          })
+        );
+        scene.add(trackMesh);
+
+        // Hot bright inner core for luminosity
+        const coreMat = new THREE.MeshBasicMaterial({
+          color: labelColor,
+          transparent: true,
+          opacity: 0.9,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 0.1, 12, true),
+            coreMat
+          )
+        );
+
+        // Glow layers – progressively larger and softer for neon bloom
+        const glow1Mat = new THREE.MeshBasicMaterial({
+          color: trackColor,
+          transparent: true,
+          opacity: 0.7,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 0.3, 12, true),
+            glow1Mat
+          )
+        );
+
+        const glow2Mat = new THREE.MeshBasicMaterial({
+          color: trackColor,
+          transparent: true,
+          opacity: 0.5,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 0.5, 12, true),
+            glow2Mat
+          )
+        );
+
+        const glow3Mat = new THREE.MeshBasicMaterial({
+          color: trackColor,
+          transparent: true,
+          opacity: 0.3,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 0.75, 12, true),
+            glow3Mat
+          )
+        );
+
+        const glow4Mat = new THREE.MeshBasicMaterial({
+          color: trackColor,
+          transparent: true,
+          opacity: 0.15,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 1.2, 12, true),
+            glow4Mat
+          )
+        );
+
+        const glow5Mat = new THREE.MeshBasicMaterial({
+          color: trackColor,
+          transparent: true,
+          opacity: 0.06,
+          blending: THREE.AdditiveBlending
+        });
+        scene.add(
+          new THREE.Mesh(
+            new THREE.TubeGeometry(curve, numSamples, 2.0, 8, true),
+            glow5Mat
+          )
+        );
+
+        // Turn markers - use corner data from CSV
+        const markerGeo = new THREE.SphereGeometry(0.15, 16, 16);
+        const markerMat = new THREE.MeshPhongMaterial({
+          color: labelColor,
+          emissive: labelColor,
+          emissiveIntensity: 1.5,
+          shininess: 100
+        });
+
+        // Filter for corner points and map to scaled positions
+        const cornerIndices = rawPoints
+          .map((p, idx) => (p.isCorner === 1 ? idx : -1))
+          .filter((idx) => idx !== -1);
+        const markersToDisplay =
+          cornerIndices.length > 0
+            ? cornerIndices.map((idx) => trackPoints[idx])
+            : trackPoints.filter(
+                (_, i) =>
+                  i % Math.max(1, Math.floor(trackPoints.length / 14)) === 0
+              );
+
+        // Function to create number texture with label color
+        function createNumberTexture(number) {
+          const canvas = document.createElement("canvas");
+          canvas.width = 128;
+          canvas.height = 128;
+          const ctx = canvas.getContext("2d");
+          ctx.fillStyle = "#000000";
+          ctx.fillRect(0, 0, 128, 128);
+
+          // Convert labelColor number to hex string safely
+          const hexColor = "#" + labelColor.toString(16).padStart(6, "0");
+          ctx.fillStyle = hexColor;
+          ctx.font = "bold 80px Arial";
+          ctx.textAlign = "center";
+          ctx.textBaseline = "middle";
+          ctx.fillText(number.toString(), 64, 64);
+          const texture = new THREE.CanvasTexture(canvas);
+          return texture;
+        }
+
+        const labels = [];
+        markersToDisplay.forEach((markerPos, idx) => {
+          const marker = new THREE.Mesh(markerGeo, markerMat);
+          marker.position.copy(markerPos);
+          marker.position.y = 0.25;
+          scene.add(marker);
+
+          const glowSphere = new THREE.Mesh(
+            new THREE.SphereGeometry(0.25, 16, 16),
+            new THREE.MeshBasicMaterial({
+              color: labelColor,
+              transparent: true,
+              opacity: 0.4,
+              blending: THREE.AdditiveBlending
+            })
+          );
+          glowSphere.position.copy(marker.position);
+          scene.add(glowSphere);
+
+          // Add numbered label
+          const labelGeo = new THREE.PlaneGeometry(0.35, 0.35);
+          const labelMat = new THREE.MeshBasicMaterial({
+            map: createNumberTexture(idx + 1),
+            transparent: true,
+            blending: THREE.AdditiveBlending
+          });
+          const label = new THREE.Mesh(labelGeo, labelMat);
+          label.position.copy(marker.position);
+          label.position.y += 0.3;
+          scene.add(label);
+          labels.push(label);
+        });
+
+        // Platform & grid
+        const platform = new THREE.Mesh(
+          new THREE.CircleGeometry(30, 64),
+          new THREE.MeshBasicMaterial({
+            color: 0x0a0000,
+            transparent: true,
+            opacity: 0.3
+          })
+        );
+        platform.rotation.x = -Math.PI / 2;
+        platform.position.y = -0.2;
+        scene.add(platform);
+
+        const grid = new THREE.GridHelper(60, 60, 0x330000, 0x110000);
+        grid.position.y = -0.19;
+        grid.material.opacity = 0.2;
+        grid.material.transparent = true;
+        scene.add(grid);
+
+        // ── Camera & controls (X-axis rotation only) ─────────────────
+        const FIXED_PHI = Math.PI / 9; // Lower angle for side-on view
+        let cameraAngleTheta = Math.PI / 4; // Horizontal orbit angle
+        let cameraDistance = 35;
+        let isDragging = false;
+        let autoRotate = true;
+        const autoRotateSpeed = 0.0015;
+        let prevX = 0;
+
+        function updateCamera() {
+          camera.position.x =
+            cameraDistance * Math.sin(FIXED_PHI) * Math.cos(cameraAngleTheta);
+          camera.position.y = cameraDistance * Math.cos(FIXED_PHI);
+          camera.position.z =
+            cameraDistance * Math.sin(FIXED_PHI) * Math.sin(cameraAngleTheta);
+          camera.lookAt(0, 0, 0);
+        }
+        updateCamera();
+
+        // Mouse events
+        renderer.domElement.addEventListener("mousedown", (e) => {
+          isDragging = true;
+          autoRotate = false;
+          prevX = e.clientX;
+        });
+        renderer.domElement.addEventListener("mousemove", (e) => {
+          if (!isDragging) return;
+          cameraAngleTheta -= (e.clientX - prevX) * 0.01;
+          prevX = e.clientX;
+        });
+        renderer.domElement.addEventListener("mouseup", () => {
+          isDragging = false;
+          setTimeout(() => {
+            autoRotate = true;
+          }, 2000);
+        });
+        renderer.domElement.addEventListener("wheel", (e) => {
+          e.preventDefault();
+          cameraDistance += e.deltaY * 0.05;
+          cameraDistance = Math.max(15, Math.min(50, cameraDistance));
+        });
+
+        // Touch events
+        renderer.domElement.addEventListener("touchstart", (e) => {
+          if (e.touches.length === 1) {
+            isDragging = true;
+            autoRotate = false;
+            prevX = e.touches[0].clientX;
+          }
+        });
+        renderer.domElement.addEventListener("touchmove", (e) => {
+          if (!isDragging || e.touches.length !== 1) return;
+          cameraAngleTheta -= (e.touches[0].clientX - prevX) * 0.01;
+          prevX = e.touches[0].clientX;
+        });
+        renderer.domElement.addEventListener("touchend", () => {
+          isDragging = false;
+          setTimeout(() => {
+            autoRotate = true;
+          }, 2000);
+        });
+
+        // ── Animation loop ───────────────────────────────────────────
+        function animate() {
+          currentAnimationId = requestAnimationFrame(animate);
+
+          if (autoRotate) cameraAngleTheta += autoRotateSpeed;
+          updateCamera();
+
+          // Keep labels facing camera
+          labels.forEach((label) => {
+            label.lookAt(camera.position);
+          });
+
+          const t = Date.now() * 0.001;
+          pointLight1.intensity = 2.5 + Math.sin(t * 1.5) * 0.5;
+          pointLight2.intensity = 1.5 + Math.sin(t * 2) * 0.3;
+          glow1Mat.opacity = 0.7 + Math.sin(t * 3) * 0.12;
+          glow2Mat.opacity = 0.5 + Math.sin(t * 2.5) * 0.1;
+          glow3Mat.opacity = 0.3 + Math.sin(t * 2) * 0.06;
+          glow4Mat.opacity = 0.15 + Math.sin(t * 1.8) * 0.04;
+
+          renderer.render(scene, camera);
+        }
+
+        // Handle resize
+        const onResize = () => {
+          camera.aspect = container.clientWidth / container.clientHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(container.clientWidth, container.clientHeight);
+        };
+        window.addEventListener("resize", onResize);
+
+        // Hide loading, show info
+        setTimeout(() => {
+          document.getElementById("loading").style.display = "none";
+          document.getElementById("info-panel").style.display = "block";
+        }, 400);
+
+        animate();
+      }
+
+      // ─── Boot ────────────────────────────────────────────────────────
+      // Default to Melbourne on first load
+      loadTrack("Melbourne");
+    </script>
+  </body>
+</html>

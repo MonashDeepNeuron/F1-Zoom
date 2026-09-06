@@ -1,0 +1,190 @@
+.next-race-card {
+  height: 100%;
+  min-height: 380px;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.1);
+  border: 1px solid rgba(255, 0, 0, 0.2);
+  border-radius: 4px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background: radial-gradient(ellipse at bottom, #140505 0%, #111111 100%);
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.next-race-card:hover {
+  border-color: rgba(255, 0, 0, 0.5);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.2);
+}
+
+.next-race-card .card-header {
+  background: rgba(255, 0, 0, 0.08);
+  color: white;
+  border-radius: 4px 4px 0 0;
+  flex-shrink: 0;
+  padding: 20px;
+  border-bottom: 1px solid rgba(255, 0, 0, 0.2);
+}
+
+.next-race-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.next-race-card h3 {
+  margin: 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: #888;
+  font-weight: 700;
+}
+
+.next-race-card h4 {
+  color: #ff0000;
+  font-weight: 900;
+  margin-bottom: 15px;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.6);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.next-race-card p {
+  margin: 8px 0;
+  color: #ccc;
+  letter-spacing: 0.5px;
+}
+
+.location {
+  color: #666;
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.next-race-countdown {
+  margin-top: 16px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.next-race-countdown-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #aaa;
+  margin-bottom: 8px;
+}
+
+.next-race-countdown-timer {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.next-race-countdown-unit {
+  min-width: 52px;
+  padding: 6px 8px;
+  border-radius: 6px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  text-align: center;
+}
+
+.next-race-countdown-value {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.next-race-countdown-unit-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #888;
+}
+
+/* ─── Live Timing Button ─────────────────────────────────────── */
+.live-timing-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 12px 28px;
+  border: 1px solid rgba(255, 0, 0, 0.4);
+  border-radius: 4px;
+  background: transparent;
+  color: #ff0000;
+  font-family: 'Titillium Web', 'Arial Black', Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.live-timing-btn:hover {
+  background: rgba(255, 0, 0, 0.1);
+  border-color: #ff0000;
+  box-shadow: 0 0 20px rgba(255, 0, 0, 0.3);
+  color: #ff3333;
+  text-decoration: none;
+}
+
+.live-timing-btn-arrow {
+  font-size: 16px;
+  transition: transform 0.3s ease;
+}
+
+.live-timing-btn:hover .live-timing-btn-arrow {
+  transform: translateX(4px);
+}
+
+/* Active / live state */
+.live-timing-btn.is-live {
+  background: rgba(255, 0, 0, 0.15);
+  border-color: #ff0000;
+  box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  animation: liveBtnPulse 2s ease-in-out infinite;
+}
+
+.live-timing-btn.is-live:hover {
+  background: rgba(255, 0, 0, 0.25);
+  box-shadow: 0 0 35px rgba(255, 0, 0, 0.4);
+}
+
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff0000;
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  animation: liveDotPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes liveDotPulse {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 8px rgba(255, 0, 0, 0.8);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 4px rgba(255, 0, 0, 0.4);
+  }
+}
+
+@keyframes liveBtnPulse {
+  0%, 100% {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 0.25);
+  }
+  50% {
+    box-shadow: 0 0 35px rgba(255, 0, 0, 0.4);
+  }
+}

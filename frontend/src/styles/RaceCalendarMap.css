@@ -1,0 +1,286 @@
+/* ─── Race Calendar Map Section ───────────────────────────────── */
+.race-calendar-container {
+  width: 100%;
+  padding: 60px 40px;
+  background: radial-gradient(ellipse at center, #1a0505 0%, #111111 100%);
+  border-top: 2px solid rgba(255, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Title & Subtitle ────────────────────────────────────────── */
+.race-calendar-title {
+  font-size: 48px;
+  color: #ff0000;
+  text-align: center;
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+  font-weight: 900;
+  text-transform: uppercase;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+}
+
+.race-calendar-subtitle {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+  margin-bottom: 40px;
+  letter-spacing: 2px;
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+}
+
+/* ─── Loading & Error States ──────────────────────────────────── */
+.race-calendar-loading,
+.race-calendar-error {
+  text-align: center;
+  color: #ff0000;
+  font-size: 24px;
+  font-weight: bold;
+  padding: 100px 0;
+  text-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+}
+
+.race-calendar-error {
+  color: #ff6666;
+}
+
+/* ─── Map Wrapper ──────────────────────────────────────────────── */
+.race-calendar-map-wrapper {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid rgba(255, 0, 0, 0.3);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.2);
+}
+
+.race-calendar-map {
+  width: 100%;
+  height: 600px;
+  background: transparent;
+}
+
+/* ─── Race Markers ─────────────────────────────────────────────── */
+.race-marker {
+  transition: all 0.3s ease;
+}
+
+.race-marker:hover .race-pin {
+  transform: scale(1.3);
+}
+
+.race-pin {
+  transition: all 0.3s ease;
+}
+
+/* Pulse animation for next race marker */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(2);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(3);
+  }
+}
+
+.next-race .pulse-ring {
+  animation: pulse 2s ease-out infinite;
+}
+
+/* ─── Race Labels ──────────────────────────────────────────────── */
+.race-label {
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.next-race-label {
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+  }
+  to {
+    text-shadow:
+      0 0 20px rgba(255, 0, 0, 1),
+      0 0 30px rgba(255, 0, 0, 0.8);
+  }
+}
+
+/* ─── Tooltip ──────────────────────────────────────────────────── */
+.race-tooltip {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(0, 0, 0, 0.95);
+  border: 2px solid #ff0000;
+  border-radius: 8px;
+  padding: 20px;
+  min-width: 250px;
+  box-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+  z-index: 1000;
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.race-tooltip-round {
+  font-size: 12px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.race-tooltip-name {
+  font-size: 20px;
+  color: #ff0000;
+  font-weight: bold;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.race-tooltip-location {
+  font-size: 14px;
+  color: #ffffff;
+  margin-bottom: 8px;
+  letter-spacing: 0.5px;
+}
+
+.race-tooltip-date {
+  font-size: 13px;
+  color: #cccccc;
+  margin-bottom: 10px;
+}
+
+.race-tooltip-badge {
+  display: inline-block;
+  background: #ff0000;
+  color: #ffffff;
+  padding: 4px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  margin-top: 8px;
+  box-shadow: 0 0 15px rgba(255, 0, 0, 0.6);
+}
+
+/* ─── Legend ───────────────────────────────────────────────────── */
+.race-calendar-legend {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 30px;
+  font-family: "Titillium Web", "Arial Black", Arial, sans-serif;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #ffffff;
+  font-size: 14px;
+  letter-spacing: 1px;
+}
+
+.legend-pin {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.5);
+}
+
+.next-race-pin {
+  background: #ff0000;
+  border: 2px solid #ffffff;
+  animation: pulse-legend 2s ease-in-out infinite;
+}
+
+@keyframes pulse-legend {
+  0%,
+  100% {
+    box-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 0, 0, 1);
+  }
+}
+
+.regular-pin {
+  background: #cc0000;
+  border: 1px solid #ff0000;
+}
+
+.past-pin {
+  background: #660000;
+  border: 1px solid #880000;
+  opacity: 0.6;
+}
+
+/* ─── Responsive Design ────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .race-calendar-container {
+    padding: 40px 20px;
+  }
+
+  .race-calendar-title {
+    font-size: 32px;
+  }
+
+  .race-calendar-subtitle {
+    font-size: 14px;
+  }
+
+  .race-calendar-map {
+    height: 400px;
+  }
+
+  .race-tooltip {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+    min-width: auto;
+    padding: 15px;
+  }
+
+  .race-calendar-legend {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .race-calendar-map {
+    height: 300px;
+  }
+
+  .race-calendar-title {
+    font-size: 24px;
+  }
+}
