@@ -17,6 +17,13 @@ import logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
+# Make the repository root importable so the strategy/ package (and the shared
+# data_pipeline Supabase client it uses) resolves when this service is launched
+# from Data/Simulation. Mirrors the bootstrap in lightgbm_model.py.
+_REPO_ROOT = Path(__file__).resolve().parents[2]
+if str(_REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(_REPO_ROOT))
+
 app = FastAPI(
     title="F1 Race Prediction API",
     description="LightGBM-based race prediction service",
@@ -34,6 +41,13 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Mount the pre-race Strategy Report endpoints (POST/GET /strategy/next-race).
+# This is the only wiring the strategy feature adds to the existing service; it
+# does not touch the prediction/ranking flow above.
+from strategy.router import router as strategy_router  # noqa: E402
+
+app.include_router(strategy_router)
 
 # Model and data paths
 BASE_DIR = Path(__file__).parent.resolve()
